@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Trackster</title>
+	<title>Tackster</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
 	<link href="/framework/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	
+
 	<!-- Style Sheets -->
 	<link href="/shared/css/base.css" rel="stylesheet" type="text/css">
 	<link href="/shared/css/home.css" rel="stylesheet" type="text/css">
@@ -15,7 +15,7 @@
 	<script src="/framework/bootstrap/assets/js/html5shiv.js"></script>
 	<script src="/framework/bootstrap/assets/js/respond.min.js"></script>
 	<![endif]-->
-	
+
 	<!-- JavaScript -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
