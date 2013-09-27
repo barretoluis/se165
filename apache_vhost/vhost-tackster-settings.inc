@@ -5,6 +5,13 @@
 	AllowOverride None
 </Directory>
 
+<Directory /includes>
+	AllowOverride None
+
+	Order deny,allow
+	Deny from all
+</Directory>
+
 <IfModule !php5_module>
 	<Directory />
 		Options FollowSymLinks -Indexes -Includes -ExecCGI None
