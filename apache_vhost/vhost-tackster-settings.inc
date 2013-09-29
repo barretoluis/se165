@@ -5,12 +5,10 @@
 	AllowOverride None
 </Directory>
 
-<Directory /includes>
-	AllowOverride None
-
+<Location /includes/>
 	Order deny,allow
 	Deny from all
-</Directory>
+</Location>
 
 <IfModule !php5_module>
 	<Directory />
