@@ -4,8 +4,8 @@ class DataBase
 	private $mysqli;
         private $result;
         private $returnSet = array();
-	public function __construct($h = "localhost", $u = "movinguru", 
-                                    $p = "Movinguru2011", $n = "movinguruv2")
+	public function __construct($h = "localhost", $u = "tackster", 
+                                    $p = "4tackster2use", $n = "db_tackster")
 	{
                  $this->mysqli = mysqli_connect($h, $u, $p, $n);
                  if(!$this->mysqli)
