@@ -123,7 +123,7 @@ else
 
       <!-- NAVBAR
       ================================================== -->
-        <div class="navbar navbar-fixed-top"> 
+        <div class="navbar"> 
           <div class="navbar-inner">
             <div class="container-fluid" style = "padding: 5px 0 5px 0;">
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
