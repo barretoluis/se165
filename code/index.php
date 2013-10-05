@@ -67,7 +67,7 @@
       .form-signup-home dl.form button{
         margin-left: 222px;
         width: 80px;
-      }
+      } 
     </style> 
 
     <?php
