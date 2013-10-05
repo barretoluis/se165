@@ -1,52 +1,40 @@
-<?php
-require_once 'includes/user.php';
-session_Start();
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-$userObj = new user();
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$email = $_POST['email'];
-$gender = $_POST['sex'];
-$password = $_POST['pwd'];
-$password2 = $_POST['pwd2'];
-$userArray = array('fname'=>$fname,
-                   'lname'=>$lname,
-                   'email'=>$email,
-                   'password'=>$password,
-                   'gender'=>$gender,
-                   'source' => 'S');
-$userObj->createUSer($userArray);
-
-echo "<p>Register Page</p>";
-
-echo "<p>$fname</p>";
-echo "<p>$lname</p>";
-echo "<p>$email</p>";
-echo "<p>$gender</p>";
-echo "<p>$password</p>";
-echo "<p>$password2</p>";
-
-
-
-
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
     <title>Sign Up</title>
 	
 	<!-- styles -->
-    <link rel="stylesheet" type="text/css" href="/shared/css/signUpStyle.css" />
+    <link rel="stylesheet" type="text/css" href="/shared/css/registerStyle.css" />
     <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"/>
     <link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../framework/bootstrap/css/bootstrap-theme.min.css" type="text/css">
 
+    <?php
+       /* require_once 'includes/user.php';
+        session_Start();
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
+        $userObj = new user();
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $userArray = array('username'=>$username,
+                           'email'=>$email,
+                           'password'=>$password,
+                           'source' => 'S');
+        $userObj->createUSer($userArray);
+
+        echo "<p>Register Page</p>";
+
+        echo "<p>$username</p>";
+        echo "<p>$email</p>";
+        echo "<p>$password</p>";
+        /*
+         * To change this template, choose Tools | Templates
+         * and open the template in the editor.
+         */
+    ?>
 	
 </head>
 <body>

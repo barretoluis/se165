@@ -1,11 +1,3 @@
-<?php
-require_once 'includes/user.php';
-$userObj = new user();
-session_start();
-$email = $_POST['email'];
-$pwd = $_POST['password'];
-$userObj->logInUser($email, $pwd);
-?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -15,6 +7,15 @@ $userObj->logInUser($email, $pwd);
     <link rel="stylesheet" type="text/css" href="/shared/css/loginStyle.css" />
     <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"/>
     <link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
+    
+    <?php
+       /* require_once 'includes/user.php';
+        $userObj = new user();
+        session_start();
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $userObj->logInUser($username, $password);*/
+    ?>
 </head>
 <body>
 
