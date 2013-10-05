@@ -1,55 +1,8 @@
-<?php
-session_start();
-require_once 'includes/faceBookApi.php';
-require_once 'includes/mandrillApi.php';
-require_once 'includes/user.php';
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-$faceBookObj = new faceBookApi();
-$userObj = new user();
-$registered = FALSE;
-$exists = $faceBookObj->setUserState();
-$logout = '<a href="'.$faceBookObj->getLogOutUrl().'">;
-                    <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
-                    
-//$_SESSION['logoutURL'] = $fbButton;
-if($exists)
-{
-    $fbButton = '<a href="'.$faceBookObj->getLogOutUrl().'">;
-                    <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
-    $_SESSION['logoutURL'] = $fbButton;
-    $fbinfo = $faceBookObj->getUserProfile();
-    $registered = $userObj->searchUser($fbinfo['email']);
-    $_SESSION['profile'] = $fbinfo;
-    if (!$registered)
-    {
-        $userArray = array('fname'=>$fbinfo['first_name'],
-                       'lname'=>$fbinfo['last_name'],
-                       'email'=>$fbinfo['email'],
-                       'password' =>'',
-                       'gender'=>$fbinfo['gender'],
-                       'source'=>'F');
-        $userObj->createUser($userArray);
-        header('Location:dashboard.php');
-    }
-    else
-    {
-        header('Location:dashboard.php');
-    }
-}
-else
-{
-   $fbButton = '<a href="'.$faceBookObj->getLoginUrl().'">;
-                    <img src="images/loginFB.png" alt="Login using Facebook" class="img-rounded"></a>';
-
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Tackster</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTFYOAEE3kGkMbUrcTErO9THCYE1DPbO05bMv9shxlOrQLY5uMc">
     
@@ -116,14 +69,60 @@ else
         width: 80px;
       }
     </style> 
-  
+
+    <?php
+       /* session_start();
+        require_once 'includes/faceBookApi.php';
+        require_once 'includes/mandrillApi.php';
+        require_once 'includes/user.php';
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
+        $faceBookObj = new faceBookApi();
+        $userObj = new user();
+        $registered = FALSE;
+        $exists = $faceBookObj->setUserState();
+        $logout = '<a href="'.$faceBookObj->getLogOutUrl().'">;
+                            <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
+
+        //$_SESSION['logoutURL'] = $fbButton;
+        if($exists)
+        {
+            $fbButton = '<a href="'.$faceBookObj->getLogOutUrl().'">;
+                            <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
+            $_SESSION['logoutURL'] = $fbButton;
+            $fbinfo = $faceBookObj->getUserProfile();
+            $registered = $userObj->searchUser($fbinfo['email']);
+            $_SESSION['profile'] = $fbinfo;
+            if (!$registered)
+            {
+                $userArray = array('fname'=>$fbinfo['first_name'],
+                               'lname'=>$fbinfo['last_name'],
+                               'email'=>$fbinfo['email'],
+                               'password' =>'',
+                               'gender'=>$fbinfo['gender'],
+                               'source'=>'F');
+                $userObj->createUser($userArray);
+                header('Location:dashboard.php');
+            }
+            else
+            {
+                header('Location:dashboard.php');
+            }
+        }
+        else
+        {
+           $fbButton = '<a href="'.$faceBookObj->getLoginUrl().'">;
+                            <img src="images/loginFB.png" alt="Login using Facebook" class="img-rounded"></a>';
+
+        }*/
+     ?>
   </head>
 
   <body>
 
       <!-- NAVBAR
       ================================================== -->
-        <div class="navbar"> 
+        <div class="navbar">
           <div class="navbar-inner">
             <div class="container-fluid" style = "padding: 5px 0 5px 0;">
               <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -131,10 +130,10 @@ else
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="brand" href="/index.php" style="color: #00B800">Tackster</a>
+              <a class="brand" href="index.html" style="color: #00B800">Tackster</a>
               <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
-                  <a class="btn btn-default" href="/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login with email</a>
+                  <a class="btn btn-default" href="login.html" role = "button" style=" margin: 0 -10px 0px 0">Login with email</a>
                 </p>
                 <p class="navbar-text pull-right">
                   <a href="#" onClick="MyWindow=window.open('https://www.facebook.com/login.php?skip_api_login=1&api_key=294846713986884&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252F153.18.33.144%252FDEV%252F%26state%3D7a56d86c0a6c372440bf849d630e2a27%26scope%3Demail%26client_id%3D294846713986884%26ret%3Dlogin&cancel_uri=http%3A%2F%2F153.18.33.144%2FDEV%2F%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26state%3D7a56d86c0a6c372440bf849d630e2a27%23_%3D_&display=page','MyWindow','width=50px','height=10px'); return false;">
@@ -153,7 +152,7 @@ else
               <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post">      
                   <dl class="form">
                     <dd>
-                      <input type="text" name="loginName" class="textfield" required="" placeholder="Name" autofocus="">
+                      <input type="text" name="loginName" class="textfield" required="" placeholder="Name"autofocus="">
                     </dd>
                   </dl>
                   <dl class="form">
@@ -187,8 +186,5 @@ else
 
   <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.10.1.min.js"> </script>
   <script type = "text/javascript" src = "/framework/bootstrap/js/bootstrap.js"></script>
- 
- 
-</body>
-        
+  </body>
 </html>
