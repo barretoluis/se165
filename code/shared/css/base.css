@@ -1,7 +1,75 @@
+@font-face {
+	font-family: 'heydings_icons';
+	src: url('fonts/heydings_icons.ttf') format('truetype');
+}
 
 
+
+
+/* Main content styles */
 body {
+	background: #DCDDDF;
+	color: #000;
+	font: 14px Arial;
+	margin: 0 auto;
+	padding: 0;
+	position: relative;
+}
+
+h3{
+	font-size:18px;
+}
+
+.main h3{
+	margin: 50px 0 0 10px;
+}
+
+
+
+
+/* To style user's Navbar!!*/
+.container-fluid{
+	margin-left: -15px;
+	margin-right: -5px;
+}
+
+.navbar-search{
+	padding-left: 50px;
+}
+
+.dropdown-menu .divider {
+	height: 1px;
+	margin: 9px 1px;
+	overflow: hidden;
+	background-color: #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+/*body {
 	background-color: #F5FFFA;
 	font: normal normal normal 16px/24px Tahoma, "Trebuchet MS";
 	padding-bottom: 10px;
-}
+}*/
+
+
+/*body{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}*/
+
+
+/*.view {
+	width: 316px;
+	height: 216px;
+	margin: 10px;
+	float: left;
+	position: relative;
+	border: 8px solid #fff;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+	background: #333;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
+	-o-perspective: 500px;
+	-ms-perspective: 500px;
+	perspective: 500px;
+}*/
