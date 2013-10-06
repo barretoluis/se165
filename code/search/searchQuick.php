@@ -79,50 +79,12 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 
 
 	<body>
-		<!-- LOGGED IN USER'S NAVBAR
-		  ================================================== -->
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="/myTacks.php">My Tacks</a></li>
-									<li><a href="/followingTacks.php">Following Tacks</a></li>
-									<li><a href="/dashboard.php">Suggested Bookmarks</a></li>
-									<li class="divider"></li>
-									<li><a href="/profile.php">Profile</a></li>
-									<li><a href="#">???</a></li>
-								</ul>
-							</li>
-						</ul>
-						<form action="/search/" method="post" name="searchBmk" id="searchBmk" class="navbar-search pull-left">
-							<input type="text" class="search-query" placeholder="Search">
-						</form>
+		<!-- Navigation Bar -->
+		<?php require_once('html/navbar.php'); ?>
+		<!-- /Navigation Bar -->
 
-						<div class="btn-group pull-right">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Username <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Settings</a></li>
-								<li><a href="/index.php">Logout</a></li>
-							</ul>
-						</div> <!-- closing btn-group -->
-					</div>
-				</div>  <!-- closing container-fluid-->
-			</div>  <!-- closing navbar-inner-->
-		</div>  <!-- closing navbar-->
 
-		<!-- CONTENTS ***TO DO: GET THE PHOTOS TO AUTOMATICALLY RESIZE TO 300 X 200px!!!
-		================================================== -->
+		<!-- Body Content-->
 		<div id="quickSearch" class="main" >
 			<h3>Quick Search</h3>
 
@@ -136,10 +98,9 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 			<hr style="border-color:grey;" width=100% align=left>
 			<h4>Search Results</h4>
 
-			<p><?php
-			print_r($_keywords);
-			?></p>
+			<p><?php print_r($_keywords);?></p>
 
 		</div>
+		<!-- /Body Content-->
 	</body>
 </html>
