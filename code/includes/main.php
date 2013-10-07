@@ -21,6 +21,7 @@ session_start();
  * List all required libs for this page
  */
 $includeFilesMain = array(
+	'Utility/MyException.class.php',
 	'faceBookApi.php',
 	'mandrillApi.php',
 	'user.php'

@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 
@@ -12,6 +12,7 @@ require_once 'mandrillApi.php';
 class KeywordManager {
 
 	private $keyword;
+	private $_words;
 
 	/*
 	 * Get keywords from the keyword table.
@@ -22,20 +23,23 @@ class KeywordManager {
 	 * @return	array	Returns up to 20 matching words as an array.
 	 */
 	public function getKeyword($word) {
-		//TODO: Write function
 		$this->keyword = $word;
-		$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
+		if(strlen($word) >= 1) {	//let's make sure a word was even provided :)
+			$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
 
-		//Construct DB object
-		$sqlObj = new DataBase();
+			//Construct DB object
+			$sqlObj = new DataBase();
 
-		//Execute query
-		$this->keyword = $sqlObj->DoQuery($query);
+			//Execute query
+			$this->keyword = $sqlObj->DoQuery($query);
 
-		// Destroy the DB object
-		$sqlObj->destroy();
+			// Destroy the DB object
+			$sqlObj->destroy();
 
-		$_words = $sqlObj->GetData();
+			$this->_words = $sqlObj->GetData();
+		} else {
+			throw new MyException('No keywords were provided for searching.');
+		}
 
 		return $_words;
 	}

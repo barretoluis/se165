@@ -41,8 +41,12 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 	$keyword = (isset($_POST['keyword']) ? $_POST['keyword'] : $_GET['keyword']);
 
 	//Do a search for the keyword
-	$getKeyword = new KeywordManager();
-	$_keywords = $getKeyword->getKeyword($keyword);
+	try {
+		$getKeyword = new KeywordManager();
+		$_keywords = $getKeyword->getKeyword($keyword);
+	} catch (MyException $e) {
+		$e->getMyExceptionMessage();
+	}
 }
 ?><!DOCTYPE html>
 <html>
@@ -90,7 +94,7 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 
 			<p>This search will be used with the JQuery widget.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchQuick" id="searchQuick">
-				Keyword: <input type="text" name="keyword" value="goo" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
+				Keyword: <input type="text" name="keyword" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
 			</form>
 
 
@@ -98,7 +102,7 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 			<hr style="border-color:grey;" width=100% align=left>
 			<h4>Search Results</h4>
 
-			<p><?php print_r($_keywords);?></p>
+			<p><?php print_r($_keywords); ?></p>
 
 		</div>
 		<!-- /Body Content-->

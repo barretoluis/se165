@@ -12,6 +12,7 @@ require_once 'mandrillApi.php';
 class SearchBookmark {
 
 	private $keyword;
+	private $_words;
 
 	/*
 	 * Get keywords from the keyword table.
@@ -24,18 +25,20 @@ class SearchBookmark {
 	public function getKeyword($word) {
 		//TODO: Write function
 		$this->keyword = $word;
-		$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
-
-		//Construct DB object
-		$sqlObj = new DataBase();
-
-		//Execute query
-		$this->keyword = $sqlObj->DoQuery($query);
-
-		// Destroy the DB object
-		$sqlObj->destroy();
-
-		$_words = $sqlObj->GetData();
+		if(strlen($word) > 100) {	//let's make sure a word was even provided :)
+//			$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
+//
+//			//Construct DB object
+//			$sqlObj = new DataBase();
+//
+//			//Execute query
+//			$this->keyword = $sqlObj->DoQuery($query);
+//
+//			// Destroy the DB object
+//			$sqlObj->destroy();
+//
+//			$this->_words = $sqlObj->GetData();
+		}
 
 		return $_words;
 	}
