@@ -27,11 +27,15 @@ class KeywordManager {
 		if(strlen($word) >= 1) {	//let's make sure a word was even provided :)
 			$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
 
-			//Construct DB object
-			$sqlObj = new DataBase();
+			try {
+				//Construct DB object
+				$sqlObj = new DataBase();
 
-			//Execute query
-			$this->keyword = $sqlObj->DoQuery($query);
+				//Execute query
+				$this->keyword = $sqlObj->DoQuery($query);
+			} catch (MyException $e) {
+				$e->getMyExceptionMessage();
+			}
 
 			// Destroy the DB object
 			$sqlObj->destroy();

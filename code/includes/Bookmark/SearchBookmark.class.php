@@ -12,7 +12,7 @@ require_once 'mandrillApi.php';
 
 class SearchBookmark {
 
-	private $keyword;
+	private $searchWord;
 	private $_words;
 
 	/*
@@ -25,9 +25,9 @@ class SearchBookmark {
 	 */
 
 	public function getBookmark($word) {
-		$this->keyword = $word;
-		if (strlen($this->keyword) >= 1) { //let's make sure a word was even provided :)
-			$query = "SELECT * FROM v_searchKeyword_sortByLikeCount WHERE keyword LIKE '%{$this->keyword}%'";
+		$this->searchWord = $word;
+		if (strlen($this->searchWord) >= 1) { //let's make sure a word was even provided :)
+			$query = "SELECT * FROM v_searchKeyword_sortByLikeCount WHERE keyword LIKE '%{$this->searchWord}%'";
 //			error_log("SQL QUERY: " . $query . "\n");
 
 			try {
@@ -35,7 +35,7 @@ class SearchBookmark {
 				$sqlObj = new DataBase();
 
 				//Execute query
-				$this->keyword = $sqlObj->DoQuery($query);
+				$this->searchWord = $sqlObj->DoQuery($query);
 			} catch (MyException $e) {
 				$e->getMyExceptionMessage();
 			}

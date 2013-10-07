@@ -46,7 +46,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 						</li>
 					</ul>
 					<form action="/search/" method="post" name="searchBookmarks" id="searchBookmarks" class="navbar-search pull-left">
-						<input type="text" class="search-query" placeholder="Search" name="keyword" value="<?php echo $keyword ?>">
+						<input type="text" class="search-query" placeholder="Search" name="searchWord" value="<?php echo $searchWord ?>">
 					</form>
 
 					<div class="btn-group pull-right">
@@ -88,7 +88,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 						</li>
 					</ul>
 					<form action="/search/" method="post" name="searchBookmarks" id="searchBookmarks" class="navbar-search pull-left">
-						<input type="text" class="search-query" placeholder="Search" name="keyword" value="<?php echo $keyword ?>">
+						<input type="text" class="search-query" placeholder="Search" name="searchWord" value="<?php echo $searchWord ?>">
 					</form>
 
 					<div class="btn-group pull-right">

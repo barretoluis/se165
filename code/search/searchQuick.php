@@ -33,9 +33,10 @@ try {
 /*
  * Page specific PHP code here
  */
-$keyword = NULL;
-$_keywords = NULL;
-$formError = NULL;
+$keyword = NULL;  //search keywords from form
+$_keywords = NULL;  //return results of found keywords as an array
+$formError = NULL;  //form error messages to show end user on web page
+$formSubmitted = FALSE; //flag if form was submitted
 
 if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 	//prefer a post variable over a get
@@ -50,8 +51,13 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 			$e->getMyExceptionMessage();
 		}
 	} else {
-		$formError = "No search terms were provided in the Quick Search.";
+		if (isset($_POST)) {
+			$formError = "No search terms were provided in the Quick Search.";
+		} elseif (isset($_GET)) {
+			$formError = NULL; //a web service will be make GET requests, so send a null
+		}
 	}
+	$formSubmitted = TRUE;
 }
 ?><!DOCTYPE html>
 <html>
@@ -102,7 +108,7 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 
 			<p>This search will be used with the JQuery widget.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchQuick" id="searchQuick">
-				Keyword: <input type="text" name="keyword" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
+				Keyword: <input type="text" name="keyword" value="<?php echo $keyword ?>" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
 			</form>
 
 
@@ -110,7 +116,14 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 			<hr style="border-color:grey;" width=100% align=left>
 			<h4>Search Results</h4>
 
-			<p><?php print_r($_keywords); ?></p>
+			<p><?php
+			if ($formSubmitted && count($_bookmarks) >= 1) {
+				//we have a search result with entries
+				print_r($_keywords);
+			} else {
+				print("<p class='noSearchResults'>No search results were found.</p>");
+			}
+			?></p>
 
 		</div>
 		<!-- /Body Content-->
