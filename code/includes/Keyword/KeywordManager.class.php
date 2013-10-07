@@ -4,7 +4,7 @@ require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 
 /*
- * Search bookmarks
+ * Keyword management class.
  *
  * @author Jerry Phul
  */

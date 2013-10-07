@@ -35,23 +35,28 @@ try {
  */
 $keyword = NULL;
 $_keywords = NULL;
+$formError = NULL;
 
 if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 	//prefer a post variable over a get
 	$keyword = (isset($_POST['keyword']) ? $_POST['keyword'] : $_GET['keyword']);
 
 	//Do a search for the keyword
-	try {
-		$getKeyword = new KeywordManager();
-		$_keywords = $getKeyword->getKeyword($keyword);
-	} catch (MyException $e) {
-		$e->getMyExceptionMessage();
+	if (strlen($keyword) >= 1) { //was a keyword even submitted
+		try {
+			$getKeyword = new KeywordManager();
+			$_keywords = $getKeyword->getKeyword($keyword);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+	} else {
+		$formError = "No search terms were provided in the Quick Search.";
 	}
 }
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Dashboard</title>
+		<title>Tackster | Quick Search</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -91,6 +96,9 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 		<!-- Body Content-->
 		<div id="quickSearch" class="main" >
 			<h3>Quick Search</h3>
+			<?php if ($formError) { ?>
+				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
+			<?php } ?>
 
 			<p>This search will be used with the JQuery widget.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchQuick" id="searchQuick">

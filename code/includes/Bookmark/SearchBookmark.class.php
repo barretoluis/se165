@@ -1,5 +1,6 @@
 <?php
 
+require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 
@@ -22,38 +23,33 @@ class SearchBookmark {
 	 * @param	word	Takes the word to be searched.
 	 * @return	array	Returns up to 20 matching words as an array.
 	 */
-	public function getKeyword($word) {
-		//TODO: Write function
+
+	public function getBookmark($word) {
 		$this->keyword = $word;
-		if(strlen($word) > 100) {	//let's make sure a word was even provided :)
-//			$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
-//
-//			//Construct DB object
-//			$sqlObj = new DataBase();
-//
-//			//Execute query
-//			$this->keyword = $sqlObj->DoQuery($query);
-//
-//			// Destroy the DB object
-//			$sqlObj->destroy();
-//
-//			$this->_words = $sqlObj->GetData();
+		if (strlen($this->keyword) >= 1) { //let's make sure a word was even provided :)
+			$query = "SELECT * FROM v_searchKeyword_sortByLikeCount WHERE keyword LIKE '%{$this->keyword}%'";
+//			error_log("SQL QUERY: " . $query . "\n");
+
+			try {
+				//Construct DB object
+				$sqlObj = new DataBase();
+
+				//Execute query
+				$this->keyword = $sqlObj->DoQuery($query);
+			} catch (MyException $e) {
+				$e->getMyExceptionMessage();
+			}
+
+			// Destroy the DB object
+			$sqlObj->destroy();
+
+			$this->_words = $sqlObj->GetData();
+		} else {
+			throw new MyException('No keywords were provided for searching.');
 		}
 
-		return $_words;
+		return $this->_words;
 	}
-
-	/*
-	 * Add a new word to the keyword table.
-	 */
-	public function addKeyword() {
-		//TODO: Write function
-		//		Recomend integration with Dictionary.com. Validate word and then add.
-
-	}
-
-
-
 
 }
 

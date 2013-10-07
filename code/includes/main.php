@@ -22,6 +22,7 @@ session_start();
  */
 $includeFilesMain = array(
 	'Utility/MyException.class.php',
+	'Bookmark/headerSearch.php',
 	'faceBookApi.php',
 	'mandrillApi.php',
 	'user.php'

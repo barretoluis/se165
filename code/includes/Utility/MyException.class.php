@@ -21,7 +21,7 @@ class MyException extends Exception {
 	public function getMyExceptionMessage() {
 		$err = "<div class='exception' id='exception' onClick='if(this.className == \"exceptionHide\") { document.getElementById(\"exception\").className=\"exception\"; } else { document.getElementById(\"exception\").className=\"exceptionHide\"; }'>\n";
 		$err .= "<h2>Exception in Code</h2>\n";
-		$err .= "<P>The application generated an Exception. For more details, also revview the error log files. NOTE: To hide this exception, click on this message box.</p>\n";
+		$err .= "<P>The application generated an Exception. For more details, also review the error log files. NOTE: To hide this exception, click on this message box.</p>\n";
 		$err .= "<b>File:</b> " . parent::getFile() . "\n";
 		$err .= "<br><b>Line:</b> " . parent::getLine() . "\n";
 		$err .= "<br><b>Message:</b> " . parent::getMessage() . "\n";
