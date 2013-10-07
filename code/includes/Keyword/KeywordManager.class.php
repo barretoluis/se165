@@ -41,7 +41,7 @@ class KeywordManager {
 			throw new MyException('No keywords were provided for searching.');
 		}
 
-		return $_words;
+		return $this->_words;
 	}
 
 	/*
