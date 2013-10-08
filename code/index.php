@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Home2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTFYOAEE3kGkMbUrcTErO9THCYE1DPbO05bMv9shxlOrQLY5uMc">
+    <link rel="shortcut icon" href="">
     
     <!-- styles -->
     <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
