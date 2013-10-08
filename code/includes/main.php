@@ -22,6 +22,7 @@ session_start();
  */
 $includeFilesMain = array(
 	'Utility/MyException.class.php',
+	'Utility/EnvUtilities.class.php',
 	'Bookmark/headerSearch.php',
 	'faceBookApi.php',
 	'mandrillApi.php',
@@ -65,6 +66,13 @@ try {
 	// we need to exit out. This prevents any security errors.
 	exit(0);
 }
+
+/*
+ * Cleanup POST, GET and COOKIE variables before we do anything with them.
+ * This is to prevent SQL injection, XSS, etc.
+ */
+$secureVarContent = new EnvUtilities();
+$secureVarContent->disable_magic_quotes();
 
 
 /*

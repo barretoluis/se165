@@ -62,9 +62,6 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
-		<style type = "text/css">
-
-		</style>
 	</head>
 
 
@@ -83,7 +80,7 @@ try {
 
 			<p>Look for bookmarks matching your interest.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchBookmarks" id="searchBookmarks">
-				Search Words: <input type="text" name="searchWord" value="<?php echo $searchWord ?>" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
+				Search Words: <input type="text" name="searchWord" value="<?php echo $searchWord ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">
 			</form>
 
 

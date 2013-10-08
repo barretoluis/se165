@@ -65,7 +65,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 
 <?php } else { //show standard nav ?>
 
-	<div class="navbar navbar-fixed-top">
+	<div class="navbar navbar-fixed-top" Xstyle="visibility: hidden">
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
