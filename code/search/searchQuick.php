@@ -117,7 +117,7 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 			<h4>Search Results</h4>
 
 			<p><?php
-			if ($formSubmitted && count($_bookmarks) >= 1) {
+			if ($formSubmitted && count($_keywords) >= 1) {
 				//we have a search result with entries
 				print_r($_keywords);
 			} else {
