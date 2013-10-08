@@ -1,7 +1,121 @@
+@font-face {
+	font-family: 'heydings_icons';
+	src: url('fonts/heydings_icons.ttf') format('truetype');
+}
+
+/* Error styles */
+div.exception {
+	border: 1px solid red;
+	background-color: #FFE0EB;
+	width: 85%;
+	margin: auto;
+	padding: 5px 10px 5px 10px;
+	position:absolute;
+	z-index:10;
+	height: 50%;
+	overflow: auto;
+	opacity:0.93;
+	filter:alpha(opacity=93); /* For IE8 and earlier */
+	top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+div.exceptionHide {
+	border: 1px solid red;
+	background-color: #FFE0EB;
+	padding: 5px 10px 5px 10px;
+	position:absolute;
+	z-index:10;
+	height: 10px;
+	width: 100%;
+	overflow: hidden;
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+	top:0;
+    left: 0;
+}
+
+div.formError {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	font-size: smaller;
+	border: 1px solid red;
+	background-color: #FFE0EB;
+	padding: 1px 10px 10px 10px;
+	overflow: auto;
+	width: 750px;
+	display: block;
+}
 
 
+
+/* Main content styles */
 body {
+	background: #DCDDDF;
+	color: #000;
+	font: 14px Arial;
+	margin: 0 auto;
+	padding: 0;
+	position: relative;
+}
+
+h3{
+	font-size:18px;
+}
+
+.main h3{
+	margin: 50px 0 0 10px;
+}
+
+
+
+
+/* To style user's Navbar!!*/
+.container-fluid{
+	margin-left: -15px;
+	margin-right: -5px;
+}
+
+.navbar-search{
+	padding-left: 50px;
+}
+
+.dropdown-menu .divider {
+	height: 1px;
+	margin: 9px 1px;
+	overflow: hidden;
+	background-color: #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+/*body {
 	background-color: #F5FFFA;
 	font: normal normal normal 16px/24px Tahoma, "Trebuchet MS";
 	padding-bottom: 10px;
-}
+}*/
+
+
+/*body{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}*/
+
+
+/*.view {
+	width: 316px;
+	height: 216px;
+	margin: 10px;
+	float: left;
+	position: relative;
+	border: 8px solid #fff;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+	background: #333;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
+	-o-perspective: 500px;
+	-ms-perspective: 500px;
+	perspective: 500px;
+}*/
