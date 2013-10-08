@@ -30,7 +30,7 @@ class DataBase {
 		$this->result = mysqli_query($this->mysqli, $query);
 
 		if (mysqli_error($this->mysqli)) {
-			throw new MyException('Could not run SQL query.' . mysqli_error($this->mysqli) . "\n");
+			throw new MyException('<p>Could not run SQL query:<br><pre>' . $query . "</pre></p><p><i>MySQL Error:</i><br>" . mysqli_error($this->mysqli) . "</p>\n");
 			return NULL;
 		} else {
 			return mysqli_insert_id($this->mysqli);

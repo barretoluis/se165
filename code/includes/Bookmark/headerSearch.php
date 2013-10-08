@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Utility/MyException.class.php';
 require_once 'Bookmark/SearchBookmark.class.php';
 
 

@@ -23,7 +23,6 @@ session_start();
 $includeFilesMain = array(
 	'Utility/MyException.class.php',
 	'Utility/EnvUtilities.class.php',
-	'Bookmark/headerSearch.php',
 	'faceBookApi.php',
 	'mandrillApi.php',
 	'user.php'
@@ -108,4 +107,11 @@ if ($exists) {
 	$fbButton = '<a href="' . $faceBookObj->getLoginUrl() . '">;
                     <img src="images/loginFB.png" alt="Login using Facebook" class="img-rounded"></a>';
 }
+
+/*
+ * Business logic after libs have loaded
+ */
+//let's check if a search was done
+require_once('Bookmark/headerSearch.php');
+
 ?>

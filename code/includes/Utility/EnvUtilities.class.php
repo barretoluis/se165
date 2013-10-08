@@ -40,9 +40,19 @@ class EnvUtilities {
 		array_walk($_POST, 'cleanString');
 		array_walk($_GET, 'cleanString');
 		array_walk($_COOKIE, 'cleanString');
-//		print("<pre>" . $_POST['searchWord'] . "</pre>");
 	}
 
+	function print_formData($escapedString) {
+		$escapedString = stripcslashes($escapedString);
+
+		echo $escapedString;
+	}
+
+}
+
+function echo_formData($escapedString) {
+	$es = new EnvUtilities;
+	$es->print_formData($escapedString);
 }
 
 ?>

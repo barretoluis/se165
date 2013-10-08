@@ -1,4 +1,8 @@
 <?php
+require_once('Utility/EnvUtilities.class.php');
+
+$searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord']: NULL;
+
 //TODO: Add logic to check if user is or isn't logged in
 
 /*
@@ -46,7 +50,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 						</li>
 					</ul>
 					<form action="/search/" method="post" name="searchBookmarks" id="searchBookmarks" class="navbar-search pull-left">
-						<input type="text" class="search-query" placeholder="Search" name="searchWord" value="<?php echo $searchWord ?>">
+						<input type="text" class="search-query" placeholder="Search" name="searchWord" value="<?php echo_formData($searchWord); ?>">
 					</form>
 
 					<div class="btn-group pull-right">
@@ -88,7 +92,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 						</li>
 					</ul>
 					<form action="/search/" method="post" name="searchBookmarks" id="searchBookmarks" class="navbar-search pull-left">
-						<input type="text" class="search-query" placeholder="Search" name="searchWord" value="<?php echo $searchWord ?>">
+						<input type="text" class="search-query" placeholder="Search" name="searchWord" value="<?php echo_formData($searchWord); ?>">
 					</form>
 
 					<div class="btn-group pull-right">

@@ -80,7 +80,7 @@ try {
 
 			<p>Look for bookmarks matching your interest.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchBookmarks" id="searchBookmarks">
-				Search Words: <input type="text" name="searchWord" value="<?php echo $searchWord ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">
+				Search Words: <input type="text" name="searchWord" value="<?php echo_formData($searchWord) ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">
 			</form>
 
 
