@@ -1,8 +1,56 @@
-html { 
-	background-color: transparent !important;
-	background: url(/shared/images/bg_home.png) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
+      body {
+        padding-bottom: 40px;
+        color: #5a5a5a;
+      }
+      div{
+        display: block;
+      }
+      .heading{
+        color: white;
+      }
+      .subheading{
+        color: white;
+      }
+      .marketing-section-signup {
+        text-shadow: 0 1px 3px #222;
+        background: #202021 url("http://i.imgur.com/KiuQWYq.jpg") center no-repeat;
+      }
+      .marketing-section {
+        position: relative;
+        padding-top: 120px;
+        padding-bottom: 50px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .container {
+        width: 980px;
+        margin-left: auto;
+        margin-right: auto;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      form {
+        display: block;
+        margin-top: 0em;
+      }
+      .homepage .container {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .form-signup-home {
+        float: right;
+        width: 300px;
+        margin-left: 70px;
+      }
+      .form-signup-home dl.form {
+        position: relative;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .form-signup-home dl.form input[type="text"], .form-signup-home dl.form input[type="password"] {
+        width: 100%;
+        margin-right: 0;
+        border-color: white;
+      }
+      .form-signup-home dl.form button{
+        margin-left: 222px;
+        width: 80px;
+      }
