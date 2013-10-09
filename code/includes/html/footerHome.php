@@ -9,5 +9,5 @@ $curYear = date('Y');
 
 <footer>
 	<br/>
-	<p>&copy; <?php echo $curYear ?> Tackster, Inc. &middot; <a href="/privacy.php">Privacy</a> &middot; <a href="/terms.php">Terms</a></p>
+	<p>&copy; <?php echo $curYear ?> Tackster, Inc. &middot; <a href="/company/about/">About</a> &middot; <a href="/company/terms_and_privacy/">Terms & Privacy</a></p>
 </footer>
