@@ -54,7 +54,7 @@ div.formError {
 
 /* Main content styles */
 body {
-	background: #FFFFFF;
+	background: #DCDDDF;
 	color: #000;
 	font: 14px Arial;
 	margin: 0 auto;
@@ -70,13 +70,10 @@ h3{
 	margin: 50px 0 0 10px;
 }
 
-
-
-
-/* To style user's Navbar!!*/
+/* for Navbar in the homepage*/
 .container-fluid{
-	margin-left: -15px;
-	margin-right: -5px;
+        margin-left: 5px;
+        margin-right: 20px;
 }
 
 .navbar-search{
@@ -91,6 +88,10 @@ h3{
 	border-bottom: 1px solid #e5e5e5;
 }
 
+.dropdown-menu li>a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
+        background-image: none;
+        background-color: #00B800;
+      }
 /*body {
 	background-color: #F5FFFA;
 	font: normal normal normal 16px/24px Tahoma, "Trebuchet MS";

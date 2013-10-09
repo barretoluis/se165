@@ -19,25 +19,25 @@
 </head>
 <body>
 
-	<!-- NAVBAR
-    ================================================== -->
-      <div class="navbar">
+    <!-- Navigation Bar - DON'T use navbar.php as this navigation bar is specific to login.php alone --> 
+      <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-          <div class="container-fluid" style = "padding: 5px 0 5px 0;">
+          <div class="container-fluid">
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="/index.php" style="color: #00B800">Tackster</a>
+            <a class="brand" href="index.php" style="color: #00B800">Tackster</a>
             <div class="nav-collapse collapse">
               <p class="navbar-text pull-right">
-                <a class="btn btn-success" href="/register.php" role = "button" style=" margin: 0 -10px 0px 0">Sign Up</a>
+                <a class="btn btn-success" href="/auth/register.php" role = "button" style=" margin: 0 -10px 0px 0">Sign Up</a>
               </p>
             </div><!--/.nav-collapse -->
           </div>
         </div>
       </div>
+    <!-- /Navigation Bar -->
 
 <!-- LOGIN FORM 
     ================================================== -->

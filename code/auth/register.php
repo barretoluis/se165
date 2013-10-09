@@ -88,8 +88,24 @@ try {
 </head>
 
 <body>
-	<!-- Navigation Bar -->
-	<?php require_once('html/navbar.php'); ?>
+	<!-- Navigation Bar - DON'T use navbar.php as this navigation bar is specific to resgister.php alone -->
+	<div class="navbar navbar-fixed-top">
+	    <div class="navbar-inner">
+	      <div class="container-fluid">
+	        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	          <span class="icon-bar"></span>
+	          <span class="icon-bar"></span>
+	          <span class="icon-bar"></span>
+	        </button>
+	        <a class="brand" href="index.php" style="color: #00B800">Tackster</a>
+	        <div class="nav-collapse collapse">
+	          <p class="navbar-text pull-right">
+	            <a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login</a>
+	          </p>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
+	  </div>
 	<!-- /Navigation Bar -->
 
 
