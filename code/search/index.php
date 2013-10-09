@@ -32,8 +32,6 @@ try {
 /*
  * Page specific PHP code here
  */
-
-
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -75,7 +73,7 @@ try {
 		<div id="quickSearch" class="main" >
 			<h3>Search Bookmarks</h3>
 			<?php if ($formError) { ?>
-				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
+			<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
 
 			<p>Look for bookmarks matching your interest.</p>
@@ -99,5 +97,10 @@ try {
 
 		</div>
 		<!-- /Body Content-->
+
+		<!-- Footer Content -->
+		<?php require_once('html/footer.php'); ?>
+		<!-- /Footer Content -->
+
 	</body>
 </html>

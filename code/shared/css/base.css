@@ -54,7 +54,7 @@ div.formError {
 
 /* Main content styles */
 body {
-	background: #DCDDDF;
+	background: #FFFFFF;
 	color: #000;
 	font: 14px Arial;
 	margin: 0 auto;
@@ -66,7 +66,7 @@ h3{
 	font-size:18px;
 }
 
-.main h3{
+.main {
 	margin: 50px 0 0 10px;
 }
 

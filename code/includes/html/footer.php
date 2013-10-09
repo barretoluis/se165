@@ -7,7 +7,10 @@
 $curYear = date('Y');
 ?>
 
-<footer>
-	<br/>
-	<p>&copy; <?php echo $curYear ?> Tackster, Inc. &middot; <a href="/privacy.php">Privacy</a> &middot; <a href="/terms.php">Terms</a></p>
-</footer>
+<div class="container">
+	<!-- Example row of columns -->
+	<hr>
+	<footer>
+        <p>&copy; Tackster.com <?php echo $curYear ?></p>
+	</footer>
+</div> <!-- /container -->

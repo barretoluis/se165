@@ -82,5 +82,10 @@ try {
 			<p>Nulla volutpat erat eget urna mattis, ac vehicula ligula luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut sed enim quis mi blandit vestibulum eu quis magna. Morbi blandit feugiat neque vitae vulputate. Maecenas eleifend pretium nunc dictum gravida. Nam feugiat sit amet augue eu auctor. Nullam vulputate nisl lacus, quis tincidunt eros semper nec.</p>
 		</div>
 		<!-- /Body Content-->
+
+		<!-- Footer Content -->
+		<?php require_once('html/footer.php'); ?>
+		<!-- /Footer Content -->
+
 	</body>
 </html>

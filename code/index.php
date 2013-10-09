@@ -36,7 +36,7 @@ try {
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Home2</title>
+		<title>Tackster</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="">
 
@@ -65,7 +65,7 @@ try {
 
 	<body>
 		<!-- Navigation Bar -->
-		<?php require_once('html/navbarHome.php'); ?>
+		<?php require_once('html/navbar.php'); ?>
 		<!-- /Navigation Bar -->
 
 		<!-- Body Content-->
@@ -101,7 +101,7 @@ try {
 			<!-- /Body Content-->
 
 		<!-- Footer Content -->
-		<?php require_once('html/footer.php'); ?>
+		<?php require_once('html/footerHome.php'); ?>
 		<!-- /Footer Content -->
 
 	</body>

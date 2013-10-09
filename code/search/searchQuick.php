@@ -127,5 +127,10 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 
 		</div>
 		<!-- /Body Content-->
+
+		<!-- Footer Content -->
+		<?php require_once('html/footer.php'); ?>
+		<!-- /Footer Content -->
+
 	</body>
 </html>
