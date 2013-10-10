@@ -42,7 +42,7 @@
     <!-- LOGIN FORM  -->
     <div class="container" style="margin-top: 80px;">
         <section id="content">
-            <form action="./dashboard.php">
+            <form action="/dashboard.php">
                 <h1>Login</h1>
                 <div>
                     <input type="text" placeholder="Username" required="" id="username" />

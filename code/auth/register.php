@@ -110,7 +110,7 @@ try {
 	<!-- Body Content-->
 	<div class="container" style="margin-top: 80px;">
             <section id="content">
-                <form action="">
+                <form action="/dashboard.php">
                     <h1>Sign Up</h1>
                     <div>
                         <p>Name:&nbsp;<input type="text" required="" id="username" /></p>
@@ -123,7 +123,7 @@ try {
                     </div>
                     <div>
                         <button class="btn btn-success" type="submit">Sign Up</button>
-                        <button class="btn btn-danger" type="cancel" href="/index.php">Cancel</button>
+                        <button class="btn btn-danger" type="cancel" href="/">Cancel</button>
                     </div>
                 </form><!-- form -->
             <h6><span  class="line-center">OR</span></h6>

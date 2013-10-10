@@ -19,8 +19,9 @@ print_r($profile);
     <!-- Le styles -->
     <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" >
     <link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/shared/css/base.css" rel="stylesheet" type="text/css" />
+    
     <link href="/shared/css/tackStyle.css" rel="stylesheet" type="text/css" />
+    <link href="/shared/css/base.css" rel="stylesheet" type="text/css" />
     
     <script type = "text/javascript" src = "http://code.jquery.com/jquery-1.10.1.min.js"> </script>
     <script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
@@ -48,7 +49,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/4846704157/in/photostream">&rarr;</a>
         </div>
-        <img src="img/4.jpg" />
+        <img src="/images/4.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -57,7 +58,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
         </div>
-        <img src="img/3.jpg" />
+        <img src="/images/3.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -66,7 +67,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
         </div>
-        <img src="img/6.jpg"/>
+        <img src="/images/6.jpg"/>
       </div>
       <div class="view">
         <div class="view-back">
@@ -75,7 +76,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.google.com">&rarr;</a>
         </div>
-        <img src="img/1.jpg" />
+        <img src="/images/1.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -84,7 +85,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/4846704157/in/photostream">&rarr;</a>
         </div>
-        <img src="img/4.jpg" />
+        <img src="/images/4.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -93,7 +94,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
         </div>
-        <img src="img/3.jpg" />
+        <img src="/images/3.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -102,7 +103,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
         </div>
-        <img src="img/6.jpg"/>
+        <img src="/images/6.jpg"/>
       </div>
       <div class="view">
         <div class="view-back">
@@ -111,7 +112,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.google.com">&rarr;</a>
         </div>
-        <img src="img/1.jpg" />
+        <img src="/images/1.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -120,7 +121,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/4846704157/in/photostream">&rarr;</a>
         </div>
-        <img src="img/4.jpg" />
+        <img src="/images/4.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -129,7 +130,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
         </div>
-        <img src="img/3.jpg" />
+        <img src="/images/3.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -138,7 +139,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
         </div>
-        <img src="img/6.jpg"/>
+        <img src="/images/6.jpg"/>
       </div>
       <div class="view">
         <div class="view-back">
@@ -147,7 +148,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.google.com">&rarr;</a>
         </div>
-        <img src="img/1.jpg" />
+        <img src="/images/1.jpg" />
       </div>
       
       <div class="view">
@@ -157,7 +158,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
         </div>
-        <img src="img/3.jpg" />
+        <img src="/images/3.jpg" />
       </div>
       <div class="view">
         <div class="view-back">
@@ -166,7 +167,7 @@ print_r($profile);
           <span data-icon="B"></span>
           <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
         </div>
-        <img src="img/6.jpg"/>
+        <img src="/images/6.jpg"/>
       </div>
     </div>
 
