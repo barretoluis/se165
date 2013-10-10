@@ -7,10 +7,7 @@
 $curYear = date('Y');
 ?>
 
-<div class="container">
-	<!-- Example row of columns -->
-	<hr>
-	<footer>
-        <p>&copy; Tackster.com <?php echo $curYear ?></p>
-	</footer>
-</div> <!-- /container -->
+<hr/>
+<footer>
+    <p style ="margin-left: 50px;">&copy; Tackster.com <?php echo $curYear ?></p>
+</footer>

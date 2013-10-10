@@ -38,7 +38,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
             <div class="nav-collapse collapse">  
               <ul class="nav">
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="./myTacks.php">My Tacks</a></li>
                   <li><a href="./followingTacks.php">Following Tacks</a></li>
