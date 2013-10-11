@@ -84,9 +84,19 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 		<!-- JavaScript -->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
+                <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+                <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+                <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+                
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
-
+                   
+                <script>
+		jQuery(document).ready(function($){
+			$('#autocompleteSearch').autocomplete({source:'autocomplete.php', minLength:2});
+		});
+                </script>
+        
 		<style type = "text/css">
 
 		</style>
@@ -108,7 +118,7 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 
 			<p>This search will be used with the JQuery widget.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchQuick" id="searchQuick">
-				Keyword: <input type="text" name="keyword" value="<?php echo $keyword ?>" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
+				Keyword: <input type="text" id="autocompleteSearch" name="keyword" value="<?php echo $keyword ?>" size="20" maxlength="40"><input type="submit" name="submit" id="submit" value="Submit">
 			</form>
 
 
@@ -117,10 +127,28 @@ if (isset($_POST['keyword']) || isset($_GET['keyword'])) {
 			<h4>Search Results</h4>
 
 			<p><?php
-			if ($formSubmitted && count($_keywords) >= 1) {
-				//we have a search result with entries
-				print_r($_keywords);
-			} else {
+                        //we have a search result with entries
+			if ($formSubmitted && count($_keywords) >= 1) 
+                        { 
+                            //Need to reformat array so it is readable by JQuery autocomplete
+                            //Note: Still not working within searchQuick.php, using autocomplete.php as input source
+                            foreach ($_keywords as &$readable) 
+                            {
+                                $autoCompleteData[] = array(
+                                'label' => $readable['keyword'],
+                                'value' => $readable['keyword']
+                                );
+                            }   
+                                //echo json_encode($autoCompleteData);
+                                //flush();
+                                print_r($_keywords);
+                                //print_r($autoCompleteData);
+				//print(json_encode($_keywords));
+                                //print(json_encode($_autoCompleteData));
+			} 
+              
+                        else 
+                        {
 				print("<p class='noSearchResults'>No search results were found.</p>");
 			}
 			?></p>
