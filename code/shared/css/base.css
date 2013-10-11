@@ -50,6 +50,10 @@ div.formError {
 	display: block;
 }
 
+div.footer {
+	clear: left;
+}
+
 
 
 /* Main content styles */

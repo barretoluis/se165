@@ -7,7 +7,7 @@
 $curYear = date('Y');
 ?>
 
-<div>
+<div class="footer">
 	<hr/>
 	<footer>
 		<p style ="margin-left: 50px;">&copy; Tackster.com <?php echo $curYear ?></p>
