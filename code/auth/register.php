@@ -27,35 +27,26 @@ try {
 // DO NOT EDIT THIS BLOCK - END
 
 
-
-
 /*
- * Page specific PHP code here
+ * Checking if the form is submitted
  */
-/* require_once 'includes/user.php';
-  session_Start();
-  error_reporting(E_ALL);
-  ini_set('display_errors', '1');
-  $userObj = new user();
-  $username = $_POST['username'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+ if (isset($_GET["submit"])) {
+    require_once 'includes/user.php';
+    session_Start();
 
-  $userArray = array('username'=>$username,
-  'email'=>$email,
-  'password'=>$password,
-  'source' => 'S');
-  $userObj->createUSer($userArray);
+    $userObj = new user();
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-  echo "<p>Register Page</p>";
+    $userArray = array('fname'=>$fname,'lname'=>$lname,
+    'email'=>$email,
+    'password'=>$password,
+    'source' => 'S');
+    $userObj->createUSer($userArray);
+}
 
-  echo "<p>$username</p>";
-  echo "<p>$email</p>";
-  echo "<p>$password</p>";
-  /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 ?><!DOCTYPE html>
 <head>
 	<title>Tackster | Register Account</title>
@@ -110,19 +101,22 @@ try {
 	<!-- Body Content-->
 	<div class="container" style="margin-top: 80px;">
             <section id="content">
-                <form action="/dashboard.php">
+                <form action="../dashboard.php" method ="POST">
                     <h1>Sign Up</h1>
                     <div>
-                        <p>Name:&nbsp;<input type="text" required="" id="username" /></p>
+                        <p>First Name:&nbsp;<input type="text" required="" id="fname" name ="fname"/></p>
                     </div>
                     <div>
-                        <p>Email:&nbsp;<input type="text" required="" id="email" /></p>
+                        <p>Last Name:&nbsp;<input type="text" required="" id="lname" name ="lname"/></p>
                     </div>
                     <div>
-                        <p>Password:&nbsp;<input type="password" required="" id="password" /></p>
+                        <p>Email:&nbsp;<input type="text" required="" id="email" name ="email" /></p>
                     </div>
                     <div>
-                        <button class="btn btn-success" type="submit">Sign Up</button>
+                        <p>Password:&nbsp;<input type="password" required="" id="password" name ="password" /></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-success" type="submit" name="submit">Sign Up</button>
                         <button class="btn btn-danger" type="cancel" href="/">Cancel</button>
                     </div>
                 </form><!-- form -->

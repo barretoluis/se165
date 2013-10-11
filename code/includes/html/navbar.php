@@ -1,4 +1,6 @@
 <?php
+//session_start();
+//$loggedIn = $_SESSION['loggedin'];
 require_once('Utility/EnvUtilities.class.php');
 
 $searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord']: NULL;
@@ -40,12 +42,12 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                 <li class="dropdown">
                 <a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="./myTacks.php">My Tacks</a></li>
-                  <li><a href="./followingTacks.php">Following Tacks</a></li>
-                  <li><a href="./dashboard.php">Suggested Bookmarks</a></li>
+                  <li><a href="../myTacks.php">My Tacks</a></li>
+                  <li><a href="../followingTacks.php">Following Tacks</a></li>
+                  <li><a href="../dashboard.php">Suggested Bookmarks</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Upload Tacks</a></li>
-                  <li><a href="#">Upload Bookmark</a></li>
+                  <li><a href="#">Add Tacks</a></li>
+                  <li><a href="#">Add Bookmark</a></li>
                 </ul>
               </li>  
               </ul>  
@@ -58,9 +60,9 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                   Username <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="./profile.php">Profile</a></li>
+                  <li><a href="../profile.php">Profile</a></li>
                   <li><a href="#">Settings</a></li>
-                  <li><a href="/index.php">Logout</a></li>
+                  <li><a href="/">Logout</a></li>
                 </ul> 
               </div> <!-- closing btn-group -->
             </div>

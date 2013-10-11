@@ -26,12 +26,26 @@ try {
 }
 // DO NOT EDIT THIS BLOCK - END
 
-
-
-
 /*
- * Page specific PHP code here
+ * Checking if the form is submitted
  */
+ if (isset($_GET["submit"])) {
+    require_once 'includes/user.php';
+    session_Start();
+
+    $userObj = new user();
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $userArray = array('fname'=>$fname,'lname'=>$lname,
+    'email'=>$email,
+    'password'=>$password,
+    'source' => 'S');
+    $userObj->createUSer($userArray);
+}
+
 ?><!DOCTYPE html>
 <html>
     <head>
@@ -74,7 +88,12 @@ try {
               <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="./dashboard.php">      
                   <dl class="form">
                     <dd>
-                      <input type="text" name="loginName" class="textfield" required="" placeholder="Name"autofocus="">
+                      <input type="text" name="fName" class="textfield" required="" placeholder="First Name"autofocus="">
+                    </dd>
+                  </dl>
+                  <dl class="form">
+                    <dd>
+                      <input type="text" name="lName" class="textfield" required="" placeholder="Last Name">
                     </dd>
                   </dl>
                   <dl class="form">
@@ -89,7 +108,7 @@ try {
                   </dl>
                   <dl class="form">
                     <dd>
-                      <button class="btn btn-success" type="submit" on-click="/dashboard.php">Sign up</button>
+                      <button class="btn btn-success" type="submit" name="submit" on-click="/dashboard.php">Sign up</button>
                     </dd>
                   </dl>
               </form>

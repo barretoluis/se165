@@ -30,9 +30,9 @@ class user
         $this->fname = $userDataArray['fname'];
         $this->lname = $userDataArray['lname'];
         $this->email = $userDataArray['email'];
-        //$this->password = $userDataArray['password'];
-        $tempPwd = $userDataArray['password'];
-        $this->gender = $userDataArray['gender'];
+        $this->password = $userDataArray['password'];
+        //$tempPwd = $userDataArray['password'];
+//        $this->gender = $userDataArray['gender'];
         $this->state = "p";
         $this->fromFB = $userDataArray['source'];
         $sqlObj = new DataBase();
@@ -51,14 +51,15 @@ class user
                 );";
         $credentialID = $sqlObj->DoQuery($query);
         $query = "INSERT INTO `db_tackster`.`user_profile` (`uc_id`, `id`, `first`, 
-                `last`, `username`, `sex`, `bio`, `photo`, `timestamp`)
+                `last`, `username`, `bio`, `photo`, `timestamp`)
                 VALUES 
-                ('$credentialID', NULL, '$this->fname', '$this->lname', '$this->email', '$this->gender', 
+                ('$credentialID', NULL, '$this->fname', '$this->lname', '$this->email', 
                 NULL, NULL, CURRENT_TIMESTAMP);";
         $sqlObj->DoQuery($query);
         $sqlObj->destroy();
         $this->sendConfEmail();
         
+        $this->logInUser($this->email, $this->password);
     }
     #
     # Creates a hash of 128 characters in lenght based on a passphrase.

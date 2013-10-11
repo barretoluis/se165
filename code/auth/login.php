@@ -1,3 +1,16 @@
+<?php
+/*
+ * Checking if clicked submit
+*/
+if (isset($_GET["submit"])) {
+    require_once 'includes/user.php';
+    $userObj = new user();
+    session_start();
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $userObj->logInUser($username, $password);
+}
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -8,14 +21,6 @@
     <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen"/>
     <link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
         
-    <?php
-       /* require_once 'includes/user.php';
-        $userObj = new user();
-        session_start();
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $userObj->logInUser($username, $password);*/
-    ?>
 </head>
 <body>
 
@@ -42,19 +47,19 @@
     <!-- LOGIN FORM  -->
     <div class="container" style="margin-top: 80px;">
         <section id="content">
-            <form action="/dashboard.php">
+            <form action="../dashboard.php" method ="POST">
                 <h1>Login</h1>
                 <div>
-                    <input type="text" placeholder="Username" required="" id="username" />
+                    <input name ="username"type="text" placeholder="Username" required="" id="username" />
                 </div>
                 <div>
-                    <input type="password" placeholder="Password" required="" id="password" />
+                    <input name ="password"type="password" placeholder="Password" required="" id="password" />
                 </div>
                 <div>
                     <a href="#">Forgot Password?</a> 
                 </div>
                 <div>
-                    <button class="btn btn-default" type="submit">Login</button>
+                    <button class="btn btn-default" type="submit" name="submit">Login</button>
                 </div>
             </form><!-- form -->
                 <h6><span  class="line-center">OR</span></h6>

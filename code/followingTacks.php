@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Dashboard</title>
+    <title>Following Tacks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
+        <!-- Le styles -->
     <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" >
     <link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/shared/css/base.css" rel="stylesheet" type="text/css" />
@@ -26,11 +26,10 @@
         <?php require_once('html/navbar.php'); ?>
     <!-- /Navigation Bar -->
   
-
-    <!-- Body ***TO DO: GET THE PHOTOS TO AUTOMATICALLY RESIZE TO 300 X 200px!!!
+  <!-- Body ***TO DO: GET THE PHOTOS TO AUTOMATICALLY RESIZE TO 300 X 200px!!!
     ================================================== -->
     <div id="bookmarks" class="main" >
-      <h3>Suggested Bookmarks</h3>
+      <h3>Following Tacks!! *Note: tacks vs. bookmarks</h3>
       <div class="view">
         <div class="view-back">
           <span data-icon="b">200</span>
@@ -178,5 +177,6 @@
     </script>
 
 
+
   </body>
-</html>
+</html> 
