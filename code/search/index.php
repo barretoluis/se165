@@ -60,6 +60,23 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
+		<link href="/shared/css/tackStyle.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
+
+		<script type="text/javascript">
+			//TODO: The font heydings is being called. Wher is it in the code... probably remove it.
+			Modernizr.load({
+				test: Modernizr.csstransforms3d && Modernizr.csstransitions,
+				yep : ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js','/shared/js/jquery.hoverfold.js'],
+				nope: 'css/fallback.css',
+				callback : function( url, result, key ) {
+					if( url === '/shared/js/jquery.hoverfold.js' ) {
+						$( '#bookmarks' ).hoverfold();
+					}
+				}
+			});
+		</script>
+
 	</head>
 
 
@@ -73,7 +90,7 @@ try {
 		<div id="quickSearch" class="main" >
 			<h3>Search Bookmarks</h3>
 			<?php if ($formError) { ?>
-			<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
+				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
 
 			<p>Look for bookmarks matching your interest.</p>
@@ -96,6 +113,44 @@ try {
 			?></p>
 
 		</div>
+
+
+
+
+		<div id="bookmarks" class="main" >
+			<h3>Suggested Bookmarks</h3>
+			<?php
+			if (isset($_bookmarks)) {
+				foreach ($_bookmarks as $_bmk) {
+//					echo_formData($_bmk['id'] . "\n");
+//					echo_formData($_bmk['keyword'] . "\n");
+//					echo_formData($_bmk['description'] . "\n");
+
+					$html = '<div class="view">';
+					$html .= '	<div class="view-back">';
+					$html .= '		<span data-icon="b">' . $_bmk['like_count'] . '</span>';
+					$html .= '		<span data-icon="h">???</span>';		//TODO: Repin count needed
+					$html .= '		<span data-icon="B">???</span>';		 //TODO: What is this for?
+					$html .= '		<a href="' . $_bmk['url'] . '">&rarr;</a>';
+					$html .= '	</div>';
+					$html .= '	<img src="/shared/images/4.jpg" />';		//TODO: Pull reference from DB
+					$html .= '</div>';
+
+					echo_formData($html);
+				}
+			}
+			?>
+		</div>
+
+
+
+
+
+
+
+
+
+
 		<!-- /Body Content-->
 
 		<!-- Footer Content -->

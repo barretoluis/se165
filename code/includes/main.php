@@ -14,7 +14,9 @@ ini_set('display_errors', '1');
 /*
  * Start basic session
  */
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
+}
 
 
 /*
@@ -25,11 +27,11 @@ $includeFilesMain = array(
 	'Utility/EnvUtilities.class.php',
 	'faceBookApi.php',
 	'mandrillApi.php',
-	'user.php'
+	'Auth/User.class.php'
 );
 
 //Do we have more files to include in this page
-if(isset($includeFilesAdditional) && count($includeFilesAdditional)>0) {
+if (isset($includeFilesAdditional) && count($includeFilesAdditional) > 0) {
 	$includeFiles = array_merge($includeFilesMain, $includeFilesAdditional);
 } else {
 	$includeFiles = $includeFilesMain;
@@ -46,13 +48,13 @@ try {
 	// send the browser a 500 error
 	header('HTTP/1.1 500 Internal Server Error', true, 500);
 
-	$err =  "<br><b>EXCEPTION</b>\n";
+	$err = "<br><b>EXCEPTION</b>\n";
 	$err .= "<br><b>File:</b> " . $e->getFile() . "\n";
 	$err .= "<br><b>Line:</b> " . $e->getLine() . "\n";
 	$err .= "<br><b>Message:</b> " . $e->getMessage() . "\n";
 	$err .= "<br><b>Trace:</b><br>" . $e->getTraceAsString() . "\n";
 
-	if(ini_get('display_errors') == 1) {
+	if (ini_get('display_errors') == 1) {
 		//display errors to web page is on
 		print($err);
 		error_log(strip_tags($err));
@@ -113,5 +115,4 @@ if ($exists) {
  */
 //let's check if a search was done
 require_once('Bookmark/headerSearch.php');
-
 ?>

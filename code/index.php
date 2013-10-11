@@ -82,10 +82,10 @@ try {
     <!-- /Navigation Bar -->
 
     <!-- Body Content-->
-        <div id="site-container" class="context-loader-container" data-pjax-container="">       
+        <div id="site-container" class="context-loader-container" data-pjax-container="">
           <div class="marketing-section marketing-section-signup">
             <div class="container">
-              <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="./dashboard.php">      
+              <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/dashboard.php">
                   <dl class="form">
                     <dd>
                       <input type="text" name="fName" class="textfield" required="" placeholder="First Name"autofocus="">
