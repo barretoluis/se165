@@ -89,38 +89,19 @@ try {
 		<!-- Body Content-->
 		<div id="quickSearch" class="main" >
 			<h3>Search Bookmarks</h3>
-			<?php if ($formError) { ?>
-				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
-			<?php } ?>
-
 			<p>Look for bookmarks matching your interest.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchBookmarks" id="searchBookmarks">
 				Search Words: <input type="text" name="searchWord" value="<?php echo_formData($searchWord) ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">
 			</form>
 
-
-			<p><br></p>
-			<hr style="border-color:grey;" width=100% align=left>
-			<h4>Search Results</h4>
-
-			<p><?php
-			if ($formSubmitted && count($_bookmarks) >= 1) {
-				//we have a search result with entries
-				print_r($_bookmarks);
-			} else {
-				print("<p class='noSearchResults'>No search results were found.</p>");
-			}
-			?></p>
-
+			<?php if ($formError) { ?>
+				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
+			<?php } ?>
 		</div>
 
-
-
-
 		<div id="bookmarks" class="main" >
-			<h3>Suggested Bookmarks</h3>
 			<?php
-			if (isset($_bookmarks)) {
+			if ($formSubmitted == TRUE && isset($_bookmarks) == TRUE && count($_bookmarks) >= 1) {
 				foreach ($_bookmarks as $_bmk) {
 //					echo_formData($_bmk['id'] . "\n");
 //					echo_formData($_bmk['keyword'] . "\n");
@@ -129,27 +110,20 @@ try {
 					$html = '<div class="view">';
 					$html .= '	<div class="view-back">';
 					$html .= '		<span data-icon="b">' . $_bmk['like_count'] . '</span>';
-					$html .= '		<span data-icon="h">???</span>';		//TODO: Repin count needed
-					$html .= '		<span data-icon="B">???</span>';		 //TODO: What is this for?
+					$html .= '		<span data-icon="h">???</span>';  //TODO: Repin count needed
+					$html .= '		<span data-icon="B">???</span>';   //TODO: What is this for?
 					$html .= '		<a href="' . $_bmk['url'] . '">&rarr;</a>';
 					$html .= '	</div>';
-					$html .= '	<img src="/shared/images/4.jpg" />';		//TODO: Pull reference from DB
+					$html .= '	<img src="/shared/images/4.jpg" />';  //TODO: Pull reference from DB
 					$html .= '</div>';
 
 					echo_formData($html);
 				}
+			} elseif($formSubmitted == TRUE) {
+				print("<p class='noSearchResults'>No search results were found.</p>");
 			}
 			?>
 		</div>
-
-
-
-
-
-
-
-
-
 
 		<!-- /Body Content-->
 
