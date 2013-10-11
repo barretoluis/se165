@@ -1,5 +1,5 @@
 body {
-	padding-bottom: 40px;
+        padding-bottom: 40px;
 	color: #5a5a5a;
 }
 div{
@@ -17,12 +17,12 @@ div{
 }
 .marketing-section {
 	position: relative;
-	padding-top: 150px;
-	padding-bottom: 50px;
+	padding-top: 120px;
+	padding-bottom: 40px;
 	border-bottom: 1px solid #e5e5e5;
 }
 .container {
-	width: 980px;
+	width: 900px;
 	margin-left: auto;
 	margin-right: auto;
 	-moz-box-sizing: border-box;

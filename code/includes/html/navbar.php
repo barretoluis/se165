@@ -1,4 +1,6 @@
 <?php
+//session_start();
+//$loggedIn = $_SESSION['loggedin'];
 require_once('Utility/EnvUtilities.class.php');
 
 $searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord']: NULL;
@@ -44,8 +46,8 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                   <li><a href="/dashboard/followingTacks.php">Following Tacks</a></li>
                   <li><a href="/search/">Suggested Bookmarks</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Upload Tacks</a></li>
-                  <li><a href="#">Upload Bookmark</a></li>
+                  <li><a href="#">Add Tacks</a></li>
+                  <li><a href="#">Add Bookmark</a></li>
                 </ul>
               </li>
               </ul>
