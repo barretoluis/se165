@@ -16,6 +16,7 @@ require_once 'mandrillApi.php';
  */
 class User {
 
+	private $uid;
 	private $lname;
 	private $fname;
 	private $email;
@@ -28,7 +29,7 @@ class User {
 	//private $userInfoArray;
 
 
-	public function createUSer($userDataArray) {
+	public function createUser($userDataArray) {
 		$this->fname = $userDataArray['fname'];
 		$this->lname = $userDataArray['lname'];
 		$this->email = $userDataArray['email'];
@@ -64,7 +65,25 @@ class User {
 		$this->sendConfEmail();
 	}
 
-	#
+
+
+	/*
+	 * Update user
+	 *
+	 */
+	public function updateUser($userDataArray) {
+		//TODO: Implement method
+//		throw new MyException('Method createUser() not implemented');
+
+		return TRUE;
+	}
+
+
+
+
+
+
+#
 	# Creates a hash of 128 characters in lenght based on a passphrase.
 
 	#
@@ -122,16 +141,27 @@ class User {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
-		$query = "SELECT  `first` ,  `last` ,  `sex`, `username`
+		$query = "SELECT  `uc_id`, `first` ,  `last` ,  `sex`, `username`
                   FROM  `user_profile`
-                  WHERE  `uc_id` LIKE (
+                  WHERE  `uc_id` = (
                     SELECT  `id`
                     FROM  `user_credentials`
-                    WHERE  `email` LIKE  'barretoluis@gmail.com'
+                    WHERE  `email`='{$email}'
                     )
-                LIMIT 0 , 1";
+                ";
 		$sqlObj->DoQuery($query);
 		$result = $sqlObj->GetData();
+
+		//Let's make sure we're only returning one result
+		if(count($result) == 1) {
+			$result = $result[0];	//break the multi-dimensional array since this should only be 1 record
+		} elseif (count($result) > 1) {
+			$result = NULL;
+			throw new MyException('ERROR: We have duplicate records for User Credential email: {$email}.');
+		} else {
+			$result = NULL;
+		}
+
 		return $result;
 	}
 
@@ -141,10 +171,10 @@ class User {
 		$sqlObj = new DataBase();
 		$passPhrase = "FuckYou!!!";
 		$sha512 = hash('sha512', $pwd);
-		$query = "SELECT  `email` ,  `password` ,  `state` ,  `fromFB`
+		$query = "SELECT  `id`, `email` ,  `password` ,  `state` ,  `fromFB`
                     FROM  `user_credentials`
-                    WHERE  `email`='$email'
-                    AND  `password`='$sha512'";
+                    WHERE  `email`='{$email}'
+                    AND  `password`='{$sha512}'";
 
 		$sqlObj->DoQuery($query);
 		$num = $sqlObj->getNumberOfRecords();
@@ -153,9 +183,13 @@ class User {
 			if(!isset($_SESSION)) {
 				session_start();
 			}
+
+			//Set some basic session items
 			$_SESSION['loggedin'] = TRUE;
+
 			//create info array
 			$_SESSION['profile'] = $this->loadUser($email);
+			$_SESSION['uc_id'] = $_SESSION['profile']['uc_id'];	//get user login id
 			header('Location: /dashboard/');
 		} else {
 			$_SESSION['loggedin'] = FALSE;

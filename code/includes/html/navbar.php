@@ -20,6 +20,7 @@ $searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord']: NULL;
 
 //Variables
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
+$userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
 
 //User login status check and set show navigation variable
 if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
@@ -57,7 +58,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 
               <div class="btn-group pull-right">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                  Username <span class="caret"></span>
+                  <?php echo_formData($userName) ?> <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/account/">Profile</a></li>

@@ -32,6 +32,37 @@ try {
 /*
  * Page specific PHP code here
  */
+$formAction = NULL;
+$formField = "disabled";
+$updateStatus = NULL;
+$nameFirst = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : NULL;
+$nameLast = (isset($_SESSION['profile']['last'])) ? $_SESSION['profile']['last'] : NULL;
+$nameUser = (isset($_SESSION['profile']['username'])) ? $_SESSION['profile']['username'] : NULL;
+$userSex = (isset($_SESSION['profile']['sex'])) ? $_SESSION['profile']['sex'] : NULL;
+
+if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
+	$nameFirst = (isset($_POST['first'])) ? $_POST['first'] : NULL;
+	$nameLast = (isset($_POST['last'])) ? $_POST['last'] : NULL;
+	$nameUser = (isset($_POST['username'])) ? $_POST['username'] : NULL;
+	$userSex = (isset($_POST['sex'])) ? $_POST['sex'] : NULL;
+
+//	throw new MyException(json_encode($_POST));
+
+	try {
+		$updateProfile = new User();
+		$updateStatus = $updateProfile->updateUser($_POST);
+		if (isset($_POST))
+			unset($_POST); //no longer need the POST variables
+		$formStatus = "edit"; //updated successfully so show profile
+		header('Location: ' . $_SERVER['PHP_SELF'] . '');
+		exit();
+	} catch (MyException $e) {
+		$e->getMyExceptionMessage();
+	}
+} elseif (isset($_POST['formAction']) && $_POST['formAction'] == "edit") {
+	$formAction = "edit";
+	$formField = "";
+}
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -72,6 +103,29 @@ try {
 		<!-- Body Content-->
 		<div id="profile" class="main" >
 			<h3>My Profile</h3>
+			<style>
+				.input[readonly] {
+					background: #CCC;
+					color: #333;
+					border: 1px solid #666
+				}
+			</style>
+			<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
+				<input type="hidden" name="formAction" value="edited">
+				<p>First:<input type="text" name="first" value="<?PHP echo_formData($nameFirst) ?>" maxlength="20" <?php echo $formField ?>><br>
+					Last:<input type="text" name="last" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>><br>
+					Sex:<br>
+					<input type="radio" name="sex" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male<br>
+					<input type="radio" name="sex" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female</p>
+				<?php if ($formAction == 'edit') { ?>
+					<p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Save Profile</button></p>
+				<?php } else { ?>
+				</form>
+				<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileUpdate" id="formProfileUpdate">
+					<input type="hidden" name="formAction" value="edit">
+					<p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Edit Profile</button></p>
+				<?php } ?>
+			</form>
 		</div>
 
 		<!-- /Body Content-->

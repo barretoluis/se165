@@ -50,7 +50,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
 			'email' => $email,
 			'password' => $password,
 			'source' => 'S');
-		$userObj->createUSer($userArray);
+		$userObj->createUser($userArray);
 //		throw new MyException('TEST');
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
