@@ -60,8 +60,8 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                   Username <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="/auth/profile.php">Profile</a></li>
-                  <li><a href="#">Settings</a></li>
+                  <li><a href="/account/">Profile</a></li>
+                  <li><a href="/account/settings.php">Settings</a></li>
                   <li><a href="/auth/logout.php">Logout</a></li>
                 </ul>
               </div> <!-- closing btn-group -->
