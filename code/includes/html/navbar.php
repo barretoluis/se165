@@ -47,15 +47,77 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                   <li><a href="/dashboard/followingTacks.php">Following Tacks</a></li>
                   <li><a href="/search/">Suggested Bookmarks</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Add Tacks</a></li>
+                  <li><a href="#">Add Tracks</a></li>
                   <li><a href="#">Add Bookmark</a></li>
                 </ul>
               </li>
               </ul>
-              <form action="/search/" method="post" name="search" id="search" class="navbar-search pull-left">
-                <input type="text" name="searchWord" id="searchWord" maxlength="40" class="search-query" placeholder="Search">
-              </form>
+            </div>
+            <div class="searchbar">
+            <form id="ui_element" class="sb_wrapper">
+                <p>
+                    <span class="sb_down"></span>
+                    <input class="sb_input" type="text" placeholder="Search"/>
+                    <input class="sb_search" type="submit" value=""/>
+                </p>
+		<ul class="sb_dropdown" style="display:none;">
+                    <li class="sb_filter" style ="color: black;">Filter your search</li>
+                    <li><input type="checkbox"/><label for="all"><strong>Public Tracks</strong></label></li>
+                    <li><input type="checkbox"/><label for="Automotive">Automotive</label></li>
+                    <li><input type="checkbox"/><label for="Baby">Baby</label></li>
+                    <li><input type="checkbox"/><label for="Beauty">Beauty</label></li>
+                    <li><input type="checkbox"/><label for="Books">Books</label></li>
+                    <li><input type="checkbox"/><label for="Electronics">Electronics</label></li>
+                    <li><input type="checkbox"/><label for="Gourmet">Gourmet Food</label></li>
+                    <li><input type="checkbox"/><label for="Home">Home &amp; Garden</label></li>
+                    <li><input type="checkbox"/><label for="Industrial">Industrial &amp; Scientific</label></li>
+                    <li><input type="checkbox"/><label for="Jewelry">Jewelry</label></li>
+                    <li><input type="checkbox"/><label for="Magazines">Magazines</label></li>
+                </ul>
+            </form>
+        </div>
+        <div>
+        </div>
+<!-- The JavaScript specific to search bar-->
+        <script type="text/javascript">
+            $(function() {
+                /**
+                * the element
+                */
+                var $ui= $('#ui_element');
 
+                /**
+                * on focus and on click display the dropdown, 
+                * and change the arrow image
+                */
+                $ui.find('.sb_input').bind('focus click',function(){
+                        $ui.find('.sb_down')
+                           .addClass('sb_up')
+                           .removeClass('sb_down')
+                           .andSelf()
+                           .find('.sb_dropdown')
+                           .show();
+                });
+
+                /**
+                * on mouse leave hide the dropdown, 
+                * and change the arrow image
+                */
+                $ui.bind('mouseleave',function(){
+                        $ui.find('.sb_up')
+                           .addClass('sb_down')
+                           .removeClass('sb_up')
+                           .andSelf()
+                           .find('.sb_dropdown')
+                           .hide();
+                });
+            });
+        </script>
+              
+              <!--form action="/search/" method="post" name="search" id="search" class="navbar-search pull-left">
+                <input type="text" name="searchWord" id="searchWord" maxlength="40" class="search-query" placeholder="Search">
+              </form-->
+                
               <div class="btn-group pull-right">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                   <?php echo_formData($userName) ?> <span class="caret"></span>
