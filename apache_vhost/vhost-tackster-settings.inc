@@ -1,7 +1,8 @@
 #DO NOT EVER REMOVE THESE <Directory> DIRECTIVES
 <Directory />
-	#Options FollowSymLinks -Indexes -Includes -ExecCGI None
-	Options FollowSymLinks +Indexes +Includes -ExecCGI None
+	##This first directive turns off directory browsing - use for production
+	Options FollowSymLinks -Indexes -Includes -ExecCGI None
+	#Options FollowSymLinks +Indexes +Includes -ExecCGI None
 	AllowOverride None
 </Directory>
 
