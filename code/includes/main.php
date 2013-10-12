@@ -113,6 +113,25 @@ if ($exists) {
 /*
  * Business logic after libs have loaded
  */
+//Login Test
+$loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
+$ignorePageLogin = (isset($ignorePageLogin)) ? $ignorePageLogin: FALSE;
+$_pagesToIgnore = Array(
+	'/',
+	'/index.php',
+	'/auth/login.php',
+	'/auth/register.php',
+	'/auth/logout.php'
+);
+
+if($ignorePageLogin != FALSE && (!$loggedIn && !in_array($_SERVER['PHP_SELF'], $_pagesToIgnore))) {
+	header('Location: /');
+}
+
+
+
+
+
 //let's check if a search was done
 require_once('Bookmark/headerSearch.php');
 ?>

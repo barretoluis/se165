@@ -26,25 +26,37 @@ try {
 }
 // DO NOT EDIT THIS BLOCK - END
 
+
+
+
 /*
- * Checking if the form is submitted
+ * Page specific PHP code here
  */
- if (isset($_GET["submit"])) {
-    require_once 'includes/user.php';
-    session_Start();
+$ignorePageLogin = TRUE;
 
-    $userObj = new user();
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $userArray = array('fname'=>$fname,'lname'=>$lname,
-    'email'=>$email,
-    'password'=>$password,
-    'source' => 'S');
-    $userObj->createUSer($userArray);
-}
+///*
+// * LUIS - Shouldn't need this anymore. I'm posting the form to the register.php file.
+// * This way the logic is contained to one file. There are some minor issues that can probably
+// * Fixed pretty quickly. Try a submit or two and debug :)
+// *
+// * Checking if the form is submitted
+// */
+// if (isset($_GET["submit"])) {
+//    require_once 'includes/user.php';
+//    session_Start();
+//
+//    $userObj = new user();
+//    $fname = $_POST['fname'];
+//    $lname = $_POST['lname'];
+//    $email = $_POST['email'];
+//    $password = $_POST['password'];
+//
+//    $userArray = array('fname'=>$fname,'lname'=>$lname,
+//    'email'=>$email,
+//    'password'=>$password,
+//    'source' => 'S');
+//    $userObj->createUSer($userArray);
+//}
 
 ?><!DOCTYPE html>
 <html>
@@ -87,25 +99,30 @@ try {
 				<div class="container">
 					<div style="height: 200px">
 						<?php if (!isset($_SESSION['loggedin']) || (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE)) { ?>
-							<form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/dashboard.php">
+							<form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">
 								<dl class="form">
 									<dd>
-										<input type="text" name="loginName" class="textfield" required="" placeholder="Name"autofocus="">
+										<input type="text" name="fname" class="textfield" required="" placeholder="First Name"autofocus="">
 									</dd>
 								</dl>
 								<dl class="form">
 									<dd>
-										<input type="text" name="loginEmail" class="textfield" required="" placeholder="Email">
+										<input type="text" name="lname" class="textfield" required="" placeholder="Last Name"autofocus="">
 									</dd>
 								</dl>
 								<dl class="form">
 									<dd>
-										<input type="password" name="loginPassword" class="textfield" required="" placeholder="Password">
+										<input type="text" name="email" class="textfield" required="" placeholder="Email">
 									</dd>
 								</dl>
 								<dl class="form">
 									<dd>
-										<button class="btn btn-success" type="submit" on-click="/dashboard.php">Sign up</button>
+										<input type="password" name="password" class="textfield" required="" placeholder="Password">
+									</dd>
+								</dl>
+								<dl class="form">
+									<dd>
+										<button class="btn btn-success" type="submit" on-click="this.submit();">Sign up</button>
 									</dd>
 								</dl>
 							</form>

@@ -32,6 +32,8 @@ try {
 /*
  * Page specific PHP code here
  */
+$ignorePageLogin = TRUE;
+
 ?><!DOCTYPE html>
 <html>
 	<head>
