@@ -19,13 +19,16 @@ class MyException extends Exception {
 	}
 
 	public function getMyExceptionMessage() {
-		$err = "<div class='exception' id='exception' onClick='if(this.className == \"exceptionHide\") { document.getElementById(\"exception\").className=\"exception\"; } else { document.getElementById(\"exception\").className=\"exceptionHide\"; }'>\n";
+		$timestamp = strtotime("now");
+		sleep(1);
+		$err = "<div class='exception' id='exception_{$timestamp}' onClick='if(this.className == \"exceptionHide\") { document.getElementById(\"exception_{$timestamp}\").className=\"exception\"; } else { document.getElementById(\"exception_{$timestamp}\").className=\"exceptionHide\"; }'>\n";
 		$err .= "<h2>Exception in Code</h2>\n";
 		$err .= "<P>The application generated an Exception. For more details, also review the error log files. NOTE: To hide this exception, click on this message box.</p>\n";
 		$err .= "<b>File:</b> " . parent::getFile() . "\n";
 		$err .= "<br><b>Line:</b> " . parent::getLine() . "\n";
 		$err .= "<br><b>Message:</b> " . parent::getMessage() . "\n";
 		$err .= "<br><b>Exception Trace:</b><br><pre>" . parent::getTraceAsString() . "</pre></div>\n";
+
 
 		if (ini_get('display_errors') == 1) {
 			//display errors to web page is on

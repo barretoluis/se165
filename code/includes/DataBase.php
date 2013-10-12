@@ -13,7 +13,7 @@ class DataBase {
 			$this->mysqli = mysqli_connect($h, $u, $p, $n) or dbException();
 
 			if (!$this->mysqli) {
-				$mysqlErrMsg = mysqli_error($this->mysqli);
+				$mysqlErrMsg = mysqli_error($this->mysqli) or trigger_error("");
 				throw new MyException("The application was unable to connect to the database to retireve information. The DB returned the following error:\n" . $mysqlErrMsg . "\n");
 				echo "Unable to connect" . mysqli_error($this->mysqli);
 			}
@@ -26,8 +26,9 @@ class DataBase {
 		$this->mysqli->close();
 	}
 
+
 	public function DoQuery($query) {
-		$this->result = mysqli_query($this->mysqli, $query);
+		$this->result = mysqli_query($this->mysqli, $query) or trigger_error("");
 
 		if (mysqli_error($this->mysqli)) {
 			throw new MyException('<p>Could not run SQL query:<br><pre>' . $query . "</pre></p><p><i>MySQL Error:</i><br>" . mysqli_error($this->mysqli) . "</p>\n");
