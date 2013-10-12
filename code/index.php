@@ -89,54 +89,53 @@ $ignorePageLogin = TRUE;
     </head>
 
     <body>
-		<!-- Navigation Bar -->
-		<?php require_once('html/navbar.php'); ?>
-		<!-- /Navigation Bar -->
+<!-- Navigation Bar -->
+    <?php require_once('html/navbar.php'); ?>
+<!-- /Navigation Bar -->
 
-		<!-- Body Content-->
-        <div id="site-container" class="context-loader-container" data-pjax-container="">
-			<div class="marketing-section marketing-section-signup">
-				<div class="container">
-					<div style="height: 200px">
-						<?php if (!isset($_SESSION['loggedin']) || (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE)) { ?>
-							<form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">
-								<dl class="form">
-									<dd>
-										<input type="text" name="fname" class="textfield" required="" placeholder="First Name"autofocus="">
-									</dd>
-								</dl>
-								<dl class="form">
-									<dd>
-										<input type="text" name="lname" class="textfield" required="" placeholder="Last Name"autofocus="">
-									</dd>
-								</dl>
-								<dl class="form">
-									<dd>
-										<input type="text" name="email" class="textfield" required="" placeholder="Email">
-									</dd>
-								</dl>
-								<dl class="form">
-									<dd>
-										<input type="password" name="password" class="textfield" required="" placeholder="Password">
-									</dd>
-								</dl>
-								<dl class="form">
-									<dd>
-										<button class="btn btn-success" type="submit" on-click="this.submit();">Sign up</button>
-									</dd>
-								</dl>
-							</form>
-						<?php } ?>
-					</div>
-					<h1 class="heading">Explore, and Share your Interests</h1>
-					<p class="subheading">Easier and a faster way to pin your brain</p>
-				</div><!-- /.container -->
-			</div>
-			<!-- /Body Content-->
+<!-- Body Content-->
+    <div id="site-container" class="context-loader-container" data-pjax-container="">
+        <div class="marketing-section marketing-section-signup">
+            <div class="container">
+                <?php if (!isset($_SESSION['loggedin']) || (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE)) { ?>
+                  <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">      
+                     <dl class="form">
+                       <dd>
+                         <input type="text" name="fname" class="textfield" required="" placeholder="First Name"autofocus="">
+                       </dd>
+                     </dl>
+                      <dl class="form">
+                       <dd>
+                         <input type="text" name="lname" class="textfield" required="" placeholder="Last Name">
+                       </dd>
+                     </dl>
+                     <dl class="form">
+                       <dd>
+                         <input type="text" name="email" class="textfield" required="" placeholder="Email">
+                       </dd>
+                     </dl>
+                     <dl class="form">
+                       <dd>
+                         <input type="password" name="password" class="textfield" required="" placeholder="Password">
+                       </dd>
+                     </dl>
+                     <dl class="form">
+                       <dd>
+                         <button class="btn btn-success" type="submit" on-click="dashboard.html">Sign up</button>
+                       </dd>
+                     </dl>
+                 </form>
+               <?php } ?>
+            <h1 class="heading">Explore, and Share your Interests</h1>
+            <p class="subheading">Easier and a faster way to pin your brain</p>
+            </div><!-- /.container -->
+        </div>
+    </div>
+<!-- /Body Content-->
 
-			<!-- Footer Content -->
-			<?php require_once('html/footerHome.php'); ?>
-			<!-- /Footer Content -->
+<!-- Footer Content -->
+    <?php require_once('html/footerHome.php'); ?>
+<!-- /Footer Content -->
 
     </body>
 </html>
