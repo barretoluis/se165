@@ -57,7 +57,7 @@ try {
 								<li><a href="/search/">Suggested Bookmarks</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Add Tracks</a></li>
-								<li><a href="#">Add Bookmark</a></li>
+								<li><a href="/bookmark/">Add Bookmark</a></li>
 							</ul>
 						</li>
 					</ul>
