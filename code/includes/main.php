@@ -125,10 +125,9 @@ $_pagesToIgnore = Array(
 	'/auth/logout.php'
 );
 
-if($ignorePageLogin != FALSE && (!$loggedIn && !in_array($_SERVER['PHP_SELF'], $_pagesToIgnore))) {
+if($ignorePageLogin != FALSE || (!$loggedIn && !in_array($_SERVER['PHP_SELF'], $_pagesToIgnore))) {
 	header('Location: /');
 }
-
 
 
 

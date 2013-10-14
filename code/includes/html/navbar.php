@@ -22,22 +22,21 @@ $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first
 //User login status check and set show navigation variable
 if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 	$loggedIn = TRUE;
-}
 
-//Get user's tracks if not available in session already
-//if(!isset($_SESSION['myTracks'])) {
-try {
-	$myTracks = new track();
-	$_myTracks = $myTracks->getMyTrack($_SESSION['uc_id'], 'id,title');
-	$_SESSION['myTracks'] = $_myTracks;
-//	throw new MyException(json_encode($_SESSION['myTracks']));
-} catch (MyException $e) {
-	$e->getMyExceptionMessage();
+	//Get user's tracks if not available in session already
+	if (!isset($_SESSION['myTracks'])) {
+		try {
+			$myTracks = new track();
+			$_myTracks = $myTracks->getMyTrack($_SESSION['uc_id'], 'id,title');
+			$_SESSION['myTracks'] = $_myTracks;
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+	}
 }
-//}
 ?>
 
-<?php if ($loggedIn) { //show logged in-nav  ?>
+<?php if ($loggedIn) { //show logged in-nav   ?>
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -136,7 +135,7 @@ try {
 	</div>  <!-- closing navbar-inner-->
 	</div>  <!-- closing navbar-->
 
-<?php } else { //show standard nav  ?>
+<?php } else { //show standard nav   ?>
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
