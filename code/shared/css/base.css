@@ -213,3 +213,30 @@ input.sb_search:hover{
     width: 400px;
 }
 
+.bookmark{
+    margin-top: 50px;
+}
+.bookmark .container{
+    width: 600px;
+}
+.bookmark h3{
+    text-align: center;
+}
+.bookmark button{
+    float:right;
+    margin-right: 20px;
+}
+.form-horizontal{
+    padding: 10px;
+}
+input[type="text"] {
+    width: 400px;
+}
+
+textarea {
+    width: 400px;
+}
+
+table td{
+    padding: 0 10px 8px 10px ;
+}

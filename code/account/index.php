@@ -110,81 +110,53 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
                                 border: 1px solid #666
                         }
                     </style>
-                    <div class="container">
-                        <div class="well">
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
-                               <table>
-                                    <tr>
-                                       <td>&nbsp;&nbsp;&nbsp;First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                       <td>
-                                          <input type = "text" name = "fName" id = "fName" value="<?PHP echo_formData($nameFirst)?>" maxlength="20" <?php echo $formField ?>/>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>&nbsp;&nbsp;&nbsp;Last Name:</td>
-                                       <td><input type = "text" name = "lName" id = "lName" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>/>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>&nbsp;&nbsp;&nbsp;Email:</td>
-                                       <td><input type = "email" name = "email" id = "email"/>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>&nbsp;&nbsp;&nbsp;Password:</td>
-                                       <td>
-                                          <input type = "password" name = "password" id = "password"/>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td>&nbsp;&nbsp;&nbsp;Gender:</td>
-                                       <td>
-                                        <label class="radio inline"><input type="radio" name="sex" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male &nbsp;&nbsp;</label>
-                                        <label class="radio inline"><input type="radio" name="sex" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female </label>
-                                       </td>
-                                    </tr>
-                                </table>
-                                <?php if ($formAction == 'edit') { ?>
-                                    <br/>
-                                    <p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Save Profile</button></p>
-				<?php } else { ?>
-                                </form>
-                                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileUpdate" id="formProfileUpdate">
-                                        <input type="hidden" name="formAction" value="edit">
-                                        <p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Edit Profile</button></p>
-                                <?php } ?>
-                                </form>
-                            </div>
-			</div>
+                <div class="container">
+                    <div class="well">
+                        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
+                           <table>
+                                <tr>
+                                   <td>&nbsp;&nbsp;&nbsp;First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                   <td>
+                                      <input type = "text" name = "fName" id = "fName" value="<?PHP echo_formData($nameFirst)?>" maxlength="20" <?php echo $formField ?>/>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>&nbsp;&nbsp;&nbsp;Last Name:</td>
+                                   <td><input type = "text" name = "lName" id = "lName" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>/>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>&nbsp;&nbsp;&nbsp;Email:</td> <!-- Should they be allowed to change their email address?-->
+                                   <td><input type = "email" name = "email" id = "email"/>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>&nbsp;&nbsp;&nbsp;Password:</td> <!--Should we give them an opportunity to change password? if not see it? -->
+                                   <td>
+                                      <input type = "password" name = "password" id = "password"/>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>&nbsp;&nbsp;&nbsp;Gender:</td>
+                                   <td>
+                                    <label class="radio inline"><input type="radio" name="sex" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male &nbsp;&nbsp;</label>
+                                    <label class="radio inline"><input type="radio" name="sex" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female </label>
+                                   </td>
+                                </tr>
+                            </table>
+                            <?php if ($formAction == 'edit') { ?>
+                                <br/>
+                                <p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Save Profile</button></p>
+                            <?php } else { ?>
+                            </form>
+                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileUpdate" id="formProfileUpdate">
+                                    <input type="hidden" name="formAction" value="edit">
+                                    <p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Edit Profile</button></p>
+                            <?php } ?>
+                            </form>
+                        </div>
+                    </div>
 		</div>
-
-		<!--div id="profile" >
-			<h3>My Profile</h3>
-			<style>
-				.input[readonly] {
-					background: #CCC;
-					color: #333;
-					border: 1px solid #666
-				}
-			</style>
-			<form action="<?php /*echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
-				<input type="hidden" name="formAction" value="edited">
-				<p>First:<input type="text" name="first" value="<?PHP echo_formData($nameFirst) ?>" maxlength="20" <?php echo $formField ?>><br>
-					Last:<input type="text" name="last" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>><br>
-					Sex:<br>
-					<input type="radio" name="sex" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male<br>
-					<input type="radio" name="sex" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female</p>
-				<?php if ($formAction == 'edit') { ?>
-					<p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Save Profile</button></p>
-				<?php } else { ?>
-				</form>
-				<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileUpdate" id="formProfileUpdate">
-					<input type="hidden" name="formAction" value="edit">
-					<p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Edit Profile</button></p>
-				<?php } */?>
-			</form>
-		</div-->
-
 		<!-- /Body Content-->
 
 		<!-- Footer Content -->
