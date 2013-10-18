@@ -229,14 +229,14 @@ input.sb_search:hover{
 .form-horizontal{
     padding: 10px;
 }
-input[type="text"] {
+.form-horizontal input[type="text"] {
     width: 400px;
 }
 
-textarea {
+.form-horizontal textarea {
     width: 400px;
 }
 
-table td{
+.form-horizontal table td{
     padding: 0 10px 8px 10px ;
 }
