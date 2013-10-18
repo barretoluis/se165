@@ -52,8 +52,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">My Dashboard</a></li>
-								<li><a href="/dashboard/followingTacks.php">Following Tacks</a></li>
-								<li><a href="/search/">Suggested Bookmarks</a></li>
+								<li><a href="/dashboard/followingTracks.php">Following Tracks</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Add Tracks</a></li>
 								<li><a href="/bookmark/">Add Bookmark</a></li>
@@ -69,9 +68,9 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 							<input class="sb_search" type="submit" value=""/>
 						</p>
 						<ul class="sb_dropdown" style="display:none;">
-							<li class="sb_filter" style ="color: black;">Filter your search</li>
-							<li><input type="checkbox" name="track" value="public" checked><label for="all"><strong>Public Tracks</strong></label></li>
-							<li><input type="checkbox" name="track" value="allMyTracks"><label for="all"><strong>All My Tracks</strong></label></li>
+							<li class="sb_filter">Filter your search</li>
+							<li><input type="checkbox" name="track" id="public" value="public" checked><label for="public"><strong>Public Tracks</strong></label></li>
+							<li><input type="checkbox" name="track" id="allMyTracks" value="allMyTracks"><label for="allMyTracks">My Tracks</label></li>
 							<?php
 							//Let's populate the search bar with the user's tracks
 							if (isset($_SESSION['myTracks'])) {
@@ -125,7 +124,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 					<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
 						<?php echo_formData($userName) ?> <span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
+					<ul class="dropdown-menu" >
 						<li><a href="/account/">Profile</a></li>
 						<li><a href="/auth/logout.php">Logout</a></li>
 					</ul>

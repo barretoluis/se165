@@ -62,7 +62,7 @@ div.footer {
 /* Main content styles */
 body {
 	background: #FFFFFF;
-	color: #000;
+	color: #5a5a5a;
 	font: 14px Arial;
 	margin: 0 auto;
 	padding: 0;
@@ -70,9 +70,8 @@ body {
 }
 
 h3{
-	font-size:18px;
+    font-size: 20px;
 }
-
 .main {
 	margin-top: 50px;
 }
@@ -97,7 +96,7 @@ h3{
 
 .dropdown-menu li>a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
 	background-image: none;
-	background-color: #00B800;
+	background-color: #5CD65C;
 }
 
 /** FOR SEARCH BAR*/
@@ -115,14 +114,11 @@ ul.sb_dropdown{
 	background: #fafafa;
 	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#fafafa));
 	background: -moz-linear-gradient(top, #f2f2f2, #fafafa);
-	font-size:15px;
-	font-family:"Myriad Pro", "Trebuchet MS", sans-serif;
 	-moz-box-shadow:1px 1px 3px #555;
 	-webkit-box-shadow:1px 1px 3px #555;
 	-box-shadow:1px 1px 3px #555;
 	outline:none;
 	padding:6px 5px 6px 20px;
-	text-shadow:1px 1px 1px #fff;
 	width:310px;
 	float:left;
 	margin:0px;
@@ -139,7 +135,6 @@ ul.sb_dropdown{
 	border-bottom-left-radius:10px;
 }
 ul.sb_dropdown li{
-	font-size:16px;
 	line-height:32px;
 	height:32px;
 	float:left;
@@ -153,11 +148,8 @@ ul.sb_dropdown li.sb_filter{
 	width:360px;
 	border:1px solid #f9f9f9;
 	clear:both;
-	background: #00F000;
-	font-size:12px;
-	text-transform:uppercase;
-	letter-spacing:1px;
-	color:#444;
+	background: #5CD65C;
+	color:white;
 	height:25px;
 	line-height:16px;
 	padding:5px;
@@ -210,3 +202,14 @@ input.sb_search:hover{
 .sb_dropdown label{
     margin-top: 7px;
 }
+
+.profile{
+    margin-top: 50px;
+}
+.profile h3{
+    text-align: center;
+}
+.profile .container{
+    width: 400px;
+}
+
