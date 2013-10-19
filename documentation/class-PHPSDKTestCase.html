@@ -1,0 +1,3565 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class PHPSDKTestCase | SE165 - Tackster</title>
+
+	<script type="text/javascript" src="resources/combined.js?1277292761"></script>
+	<script type="text/javascript" src="elementlist.js?3890048175"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-BaseFacebook.html">BaseFacebook</a></li>
+				<li><a href="class-Bookmark.html">Bookmark</a></li>
+				<li><a href="class-DataBase.html">DataBase</a></li>
+				<li><a href="class-EnvUtilities.html">EnvUtilities</a></li>
+				<li><a href="class-Facebook.html">Facebook</a></li>
+				<li><a href="class-faceBookApi.html">faceBookApi</a></li>
+				<li><a href="class-FBAccessToken.html">FBAccessToken</a></li>
+				<li><a href="class-FBCode.html">FBCode</a></li>
+				<li><a href="class-FBGetCurrentURLFacebook.html">FBGetCurrentURLFacebook</a></li>
+				<li><a href="class-FBPublic.html">FBPublic</a></li>
+				<li><a href="class-FBPublicCookie.html">FBPublicCookie</a></li>
+				<li><a href="class-FBPublicGetAccessTokenFromCode.html">FBPublicGetAccessTokenFromCode</a></li>
+				<li><a href="class-FBPublicState.html">FBPublicState</a></li>
+				<li><a href="class-FBRecordMakeRequest.html">FBRecordMakeRequest</a></li>
+				<li><a href="class-FBRecordURL.html">FBRecordURL</a></li>
+				<li><a href="class-FBRewrite.html">FBRewrite</a></li>
+				<li><a href="class-KeywordManager.html">KeywordManager</a></li>
+				<li><a href="class-mandrillApi.html">mandrillApi</a></li>
+				<li><a href="class-PersistentFBPublic.html">PersistentFBPublic</a></li>
+				<li class="active"><a href="class-PHPSDKTestCase.html">PHPSDKTestCase</a></li>
+				<li><a href="class-SearchBookmark.html">SearchBookmark</a></li>
+				<li><a href="class-track.html">track</a></li>
+				<li><a href="class-TransientFacebook.html">TransientFacebook</a></li>
+				<li><a href="class-User.html">User</a></li>
+			</ul>
+
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-FacebookApiException.html">FacebookApiException</a></li>
+				<li><a href="class-MyException.html">MyException</a></li>
+			</ul>
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-echo_formData.html">echo_formData</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class PHPSDKTestCase</h1>
+
+
+	<div class="description">
+	
+<p>Copyright 2011 Facebook, Inc.</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at<br />
+<a
+href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
+for the specific language governing permissions and limitations under the
+License.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+PHPUnit_Framework_TestCase
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>PHPSDKTestCase</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+		<b>Located at</b> <a href="source-class-PHPSDKTestCase.html#3-1857" title="Go to source code">code/framework/facebook/tests/tests.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="testConstructor" id="_testConstructor">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testConstructor">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#80-89" title="Go to source code">testConstructor</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testConstructorWithFileUpload" id="_testConstructorWithFileUpload">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testConstructorWithFileUpload">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#91-106" title="Go to source code">testConstructorWithFileUpload</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSetAppId" id="_testSetAppId">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSetAppId">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#108-116" title="Go to source code">testSetAppId</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSetAPISecret" id="_testSetAPISecret">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSetAPISecret">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#118-126" title="Go to source code">testSetAPISecret</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSetAPPSecret" id="_testSetAPPSecret">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSetAPPSecret">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#128-136" title="Go to source code">testSetAPPSecret</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSetAccessToken" id="_testSetAccessToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSetAccessToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#138-147" title="Go to source code">testSetAccessToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSetFileUploadSupport" id="_testSetFileUploadSupport">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSetFileUploadSupport">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#149-165" title="Go to source code">testSetFileUploadSupport</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetCurrentURL" id="_testGetCurrentURL">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetCurrentURL">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#167-201" title="Go to source code">testGetCurrentURL</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetLoginURL" id="_testGetLoginURL">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetLoginURL">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#203-226" title="Go to source code">testGetLoginURL</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetLoginURLWithExtraParams" id="_testGetLoginURLWithExtraParams">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetLoginURLWithExtraParams">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#228-254" title="Go to source code">testGetLoginURLWithExtraParams</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetLoginURLWithScopeParamsAsArray" id="_testGetLoginURLWithScopeParamsAsArray">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetLoginURLWithScopeParamsAsArray">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#256-287" title="Go to source code">testGetLoginURLWithScopeParamsAsArray</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetCodeWithValidCSRFState" id="_testGetCodeWithValidCSRFState">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetCodeWithValidCSRFState">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#289-301" title="Go to source code">testGetCodeWithValidCSRFState</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetCodeWithInvalidCSRFState" id="_testGetCodeWithInvalidCSRFState">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetCodeWithInvalidCSRFState">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#303-314" title="Go to source code">testGetCodeWithInvalidCSRFState</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetCodeWithMissingCSRFState" id="_testGetCodeWithMissingCSRFState">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetCodeWithMissingCSRFState">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#316-326" title="Go to source code">testGetCodeWithMissingCSRFState</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetUserFromSignedRequest" id="_testGetUserFromSignedRequest">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetUserFromSignedRequest">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#328-337" title="Go to source code">testGetUserFromSignedRequest</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSignedRequestRewrite" id="_testSignedRequestRewrite">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSignedRequestRewrite">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#339-365" title="Go to source code">testSignedRequestRewrite</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetSignedRequestFromCookie" id="_testGetSignedRequestFromCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetSignedRequestFromCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#367-378" title="Go to source code">testGetSignedRequestFromCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetSignedRequestWithIncorrectSignature" id="_testGetSignedRequestWithIncorrectSignature">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetSignedRequestWithIncorrectSignature">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#380-389" title="Go to source code">testGetSignedRequestWithIncorrectSignature</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testNonUserAccessToken" id="_testNonUserAccessToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testNonUserAccessToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#391-402" title="Go to source code">testNonUserAccessToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testMissingMetadataCookie" id="_testMissingMetadataCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testMissingMetadataCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#404-410" title="Go to source code">testMissingMetadataCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testEmptyMetadataCookie" id="_testEmptyMetadataCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testEmptyMetadataCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#412-419" title="Go to source code">testEmptyMetadataCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testMetadataCookie" id="_testMetadataCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testMetadataCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#421-430" title="Go to source code">testMetadataCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testQuotedMetadataCookie" id="_testQuotedMetadataCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testQuotedMetadataCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#432-441" title="Go to source code">testQuotedMetadataCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testAPIForLoggedOutUsers" id="_testAPIForLoggedOutUsers">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testAPIForLoggedOutUsers">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#443-456" title="Go to source code">testAPIForLoggedOutUsers</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testAPIWithBogusAccessToken" id="_testAPIWithBogusAccessToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testAPIWithBogusAccessToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#458-483" title="Go to source code">testAPIWithBogusAccessToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testAPIGraphPublicData" id="_testAPIGraphPublicData">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testAPIGraphPublicData">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#485-494" title="Go to source code">testAPIGraphPublicData</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGraphAPIWithBogusAccessToken" id="_testGraphAPIWithBogusAccessToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGraphAPIWithBogusAccessToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#496-512" title="Go to source code">testGraphAPIWithBogusAccessToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGraphAPIWithExpiredAccessToken" id="_testGraphAPIWithExpiredAccessToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGraphAPIWithExpiredAccessToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#514-530" title="Go to source code">testGraphAPIWithExpiredAccessToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGraphAPIOAuthSpecError" id="_testGraphAPIOAuthSpecError">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGraphAPIOAuthSpecError">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#532-550" title="Go to source code">testGraphAPIOAuthSpecError</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGraphAPIMethodOAuthSpecError" id="_testGraphAPIMethodOAuthSpecError">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGraphAPIMethodOAuthSpecError">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#552-565" title="Go to source code">testGraphAPIMethodOAuthSpecError</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testCurlFailure" id="_testCurlFailure">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testCurlFailure">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#567-596" title="Go to source code">testCurlFailure</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGraphAPIWithOnlyParams" id="_testGraphAPIWithOnlyParams">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGraphAPIWithOnlyParams">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#598-622" title="Go to source code">testGraphAPIWithOnlyParams</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginURLDefaults" id="_testLoginURLDefaults">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginURLDefaults">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#624-634" title="Go to source code">testLoginURLDefaults</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginURLDefaultsDropStateQueryParam" id="_testLoginURLDefaultsDropStateQueryParam">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginURLDefaultsDropStateQueryParam">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#636-648" title="Go to source code">testLoginURLDefaultsDropStateQueryParam</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginURLDefaultsDropCodeQueryParam" id="_testLoginURLDefaultsDropCodeQueryParam">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginURLDefaultsDropCodeQueryParam">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#650-662" title="Go to source code">testLoginURLDefaultsDropCodeQueryParam</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginURLDefaultsDropSignedRequestParamButNotOthers" id="_testLoginURLDefaultsDropSignedRequestParamButNotOthers">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginURLDefaultsDropSignedRequestParamButNotOthers">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#664-677" title="Go to source code">testLoginURLDefaultsDropSignedRequestParamButNotOthers</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginURLCustomNext" id="_testLoginURLCustomNext">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginURLCustomNext">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#679-697" title="Go to source code">testLoginURLCustomNext</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLogoutURLDefaults" id="_testLogoutURLDefaults">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLogoutURLDefaults">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#699-710" title="Go to source code">testLogoutURLDefaults</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginStatusURLDefaults" id="_testLoginStatusURLDefaults">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginStatusURLDefaults">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#712-722" title="Go to source code">testLoginStatusURLDefaults</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLoginStatusURLCustom" id="_testLoginStatusURLCustom">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLoginStatusURLCustom">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#724-741" title="Go to source code">testLoginStatusURLCustom</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testNonDefaultPort" id="_testNonDefaultPort">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testNonDefaultPort">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#743-753" title="Go to source code">testNonDefaultPort</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSecureCurrentUrl" id="_testSecureCurrentUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSecureCurrentUrl">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#755-766" title="Go to source code">testSecureCurrentUrl</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSecureCurrentUrlWithNonDefaultPort" id="_testSecureCurrentUrlWithNonDefaultPort">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSecureCurrentUrlWithNonDefaultPort">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#768-779" title="Go to source code">testSecureCurrentUrlWithNonDefaultPort</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testBase64UrlEncode" id="_testBase64UrlEncode">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testBase64UrlEncode">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#781-786" title="Go to source code">testBase64UrlEncode</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSignedToken" id="_testSignedToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSignedToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#788-798" title="Go to source code">testSignedToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testNonTossedSignedtoken" id="_testNonTossedSignedtoken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testNonTossedSignedtoken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#800-812" title="Go to source code">testNonTossedSignedtoken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSignedRequestWithEmptyValue" id="_testSignedRequestWithEmptyValue">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSignedRequestWithEmptyValue">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#814-824" title="Go to source code">testSignedRequestWithEmptyValue</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSignedRequestWithWrongAlgo" id="_testSignedRequestWithWrongAlgo">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSignedRequestWithWrongAlgo">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#826-834" title="Go to source code">testSignedRequestWithWrongAlgo</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testMakeAndParse" id="_testMakeAndParse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testMakeAndParse">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#836-845" title="Go to source code">testMakeAndParse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testMakeSignedRequestExpectsArray" id="_testMakeSignedRequestExpectsArray">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testMakeSignedRequestExpectsArray">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#847-856" title="Go to source code">testMakeSignedRequestExpectsArray</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+				<h4>ExpectedException</h4>
+				<div class="list">
+						InvalidArgumentException<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testBundledCACert" id="_testBundledCACert">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testBundledCACert">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#858-872" title="Go to source code">testBundledCACert</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testVideoUpload" id="_testVideoUpload">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testVideoUpload">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#874-883" title="Go to source code">testVideoUpload</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testVideoUploadGraph" id="_testVideoUploadGraph">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testVideoUploadGraph">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#885-894" title="Go to source code">testVideoUploadGraph</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetUserAndAccessTokenFromSession" id="_testGetUserAndAccessTokenFromSession">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetUserAndAccessTokenFromSession">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#896-911" title="Go to source code">testGetUserAndAccessTokenFromSession</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetUserAndAccessTokenFromSignedRequestNotSession" id="_testGetUserAndAccessTokenFromSignedRequestNotSession">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetUserAndAccessTokenFromSignedRequestNotSession">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#913-934" title="Go to source code">testGetUserAndAccessTokenFromSignedRequestNotSession</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetUserWithoutCodeOrSignedRequestOrSession" id="_testGetUserWithoutCodeOrSignedRequestOrSession">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetUserWithoutCodeOrSignedRequestOrSession">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#936-954" title="Go to source code">testGetUserWithoutCodeOrSignedRequestOrSession</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testGetAccessTokenUsingCodeInJsSdkCookie" id="_testGetAccessTokenUsingCodeInJsSdkCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testGetAccessTokenUsingCodeInJsSdkCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#956-975" title="Go to source code">testGetAccessTokenUsingCodeInJsSdkCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSignedRequestWithoutAuthClearsData" id="_testSignedRequestWithoutAuthClearsData">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSignedRequestWithoutAuthClearsData">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#977-993" title="Go to source code">testSignedRequestWithoutAuthClearsData</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testInvalidCodeInSignedRequestWillClearData" id="_testInvalidCodeInSignedRequestWillClearData">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testInvalidCodeInSignedRequestWillClearData">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#995-1020" title="Go to source code">testInvalidCodeInSignedRequestWillClearData</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testInvalidCodeWillClearData" id="_testInvalidCodeWillClearData">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testInvalidCodeWillClearData">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1022-1047" title="Go to source code">testInvalidCodeWillClearData</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testValidCodeToToken" id="_testValidCodeToToken">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testValidCodeToToken">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1049-1072" title="Go to source code">testValidCodeToToken</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSignedRequestWithoutAuthClearsDataInAvailData" id="_testSignedRequestWithoutAuthClearsDataInAvailData">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSignedRequestWithoutAuthClearsDataInAvailData">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1074-1090" title="Go to source code">testSignedRequestWithoutAuthClearsDataInAvailData</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testFailedToGetUserFromAccessTokenClearsData" id="_testFailedToGetUserFromAccessTokenClearsData">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testFailedToGetUserFromAccessTokenClearsData">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1092-1115" title="Go to source code">testFailedToGetUserFromAccessTokenClearsData</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testUserFromAccessTokenIsStored" id="_testUserFromAccessTokenIsStored">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testUserFromAccessTokenIsStored">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1117-1142" title="Go to source code">testUserFromAccessTokenIsStored</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testUserFromAccessTokenPullsID" id="_testUserFromAccessTokenPullsID">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testUserFromAccessTokenPullsID">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1144-1165" title="Go to source code">testUserFromAccessTokenPullsID</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testUserFromAccessTokenResetsOnApiException" id="_testUserFromAccessTokenResetsOnApiException">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testUserFromAccessTokenResetsOnApiException">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1167-1191" title="Go to source code">testUserFromAccessTokenResetsOnApiException</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testEmptyCodeReturnsFalse" id="_testEmptyCodeReturnsFalse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testEmptyCodeReturnsFalse">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1193-1201" title="Go to source code">testEmptyCodeReturnsFalse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testNullRedirectURIUsesCurrentURL" id="_testNullRedirectURIUsesCurrentURL">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testNullRedirectURIUsesCurrentURL">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1203-1224" title="Go to source code">testNullRedirectURIUsesCurrentURL</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testNullRedirectURIAllowsEmptyStringForCookie" id="_testNullRedirectURIAllowsEmptyStringForCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testNullRedirectURIAllowsEmptyStringForCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1226-1247" title="Go to source code">testNullRedirectURIAllowsEmptyStringForCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testAPIExceptionDuringCodeExchangeIsIgnored" id="_testAPIExceptionDuringCodeExchangeIsIgnored">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testAPIExceptionDuringCodeExchangeIsIgnored">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1249-1264" title="Go to source code">testAPIExceptionDuringCodeExchangeIsIgnored</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testEmptyResponseInCodeExchangeIsIgnored" id="_testEmptyResponseInCodeExchangeIsIgnored">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testEmptyResponseInCodeExchangeIsIgnored">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1266-1281" title="Go to source code">testEmptyResponseInCodeExchangeIsIgnored</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExistingStateRestoredInConstructor" id="_testExistingStateRestoredInConstructor">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExistingStateRestoredInConstructor">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1283-1289" title="Go to source code">testExistingStateRestoredInConstructor</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testMissingAccessTokenInCodeExchangeIsIgnored" id="_testMissingAccessTokenInCodeExchangeIsIgnored">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testMissingAccessTokenInCodeExchangeIsIgnored">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1291-1306" title="Go to source code">testMissingAccessTokenInCodeExchangeIsIgnored</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionConstructorWithErrorCode" id="_testExceptionConstructorWithErrorCode">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionConstructorWithErrorCode">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1308-1312" title="Go to source code">testExceptionConstructorWithErrorCode</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionTypeFalse" id="_testExceptionTypeFalse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionTypeFalse">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1315-1318" title="Go to source code">testExceptionTypeFalse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionTypeMixedDraft00" id="_testExceptionTypeMixedDraft00">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionTypeMixedDraft00">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1320-1323" title="Go to source code">testExceptionTypeMixedDraft00</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionTypeDraft00" id="_testExceptionTypeDraft00">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionTypeDraft00">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1325-1330" title="Go to source code">testExceptionTypeDraft00</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionTypeDraft10" id="_testExceptionTypeDraft10">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionTypeDraft10">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1332-1336" title="Go to source code">testExceptionTypeDraft10</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionTypeDefault" id="_testExceptionTypeDefault">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionTypeDefault">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1338-1341" title="Go to source code">testExceptionTypeDefault</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testExceptionToString" id="_testExceptionToString">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testExceptionToString">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1343-1349" title="Go to source code">testExceptionToString</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testDestroyClearsCookie" id="_testDestroyClearsCookie">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testDestroyClearsCookie">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1351-1362" title="Go to source code">testDestroyClearsCookie</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testAuthExpireSessionDestroysSession" id="_testAuthExpireSessionDestroysSession">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testAuthExpireSessionDestroysSession">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1364-1388" title="Go to source code">testAuthExpireSessionDestroysSession</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testLowercaseAuthRevokeAuthDestroysSession" id="_testLowercaseAuthRevokeAuthDestroysSession">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testLowercaseAuthRevokeAuthDestroysSession">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1390-1414" title="Go to source code">testLowercaseAuthRevokeAuthDestroysSession</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testErrorCodeFromRestAPIThrowsException" id="_testErrorCodeFromRestAPIThrowsException">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testErrorCodeFromRestAPIThrowsException">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1416-1434" title="Go to source code">testErrorCodeFromRestAPIThrowsException</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+				<h4>ExpectedException</h4>
+				<div class="list">
+						FacebookAPIException<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testJsonEncodeOfNonStringParams" id="_testJsonEncodeOfNonStringParams">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testJsonEncodeOfNonStringParams">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1436-1449" title="Go to source code">testJsonEncodeOfNonStringParams</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSessionBackedFacebook" id="_testSessionBackedFacebook">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSessionBackedFacebook">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1451-1467" title="Go to source code">testSessionBackedFacebook</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSessionBackedFacebookIgnoresUnsupportedKey" id="_testSessionBackedFacebookIgnoresUnsupportedKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSessionBackedFacebookIgnoresUnsupportedKey">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1469-1484" title="Go to source code">testSessionBackedFacebookIgnoresUnsupportedKey</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testClearSessionBackedFacebook" id="_testClearSessionBackedFacebook">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testClearSessionBackedFacebook">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1486-1510" title="Go to source code">testClearSessionBackedFacebook</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSessionBackedFacebookIgnoresUnsupportedKeyInClear" id="_testSessionBackedFacebookIgnoresUnsupportedKeyInClear">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSessionBackedFacebookIgnoresUnsupportedKeyInClear">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1512-1524" title="Go to source code">testSessionBackedFacebookIgnoresUnsupportedKeyInClear</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testClearAllSessionBackedFacebook" id="_testClearAllSessionBackedFacebook">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testClearAllSessionBackedFacebook">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1526-1540" title="Go to source code">testClearAllSessionBackedFacebook</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedSessionBackedFacebook" id="_testSharedSessionBackedFacebook">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedSessionBackedFacebook">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1542-1560" title="Go to source code">testSharedSessionBackedFacebook</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedSessionBackedFacebookIgnoresUnsupportedKey" id="_testSharedSessionBackedFacebookIgnoresUnsupportedKey">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedSessionBackedFacebookIgnoresUnsupportedKey">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1562-1580" title="Go to source code">testSharedSessionBackedFacebookIgnoresUnsupportedKey</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedClearSessionBackedFacebook" id="_testSharedClearSessionBackedFacebook">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedClearSessionBackedFacebook">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1582-1603" title="Go to source code">testSharedClearSessionBackedFacebook</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedSessionBackedFacebookIgnoresUnsupportedKeyInClear" id="_testSharedSessionBackedFacebookIgnoresUnsupportedKeyInClear">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedSessionBackedFacebookIgnoresUnsupportedKeyInClear">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1605-1624" title="Go to source code">testSharedSessionBackedFacebookIgnoresUnsupportedKeyInClear</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedClearAllSessionBackedFacebook" id="_testSharedClearAllSessionBackedFacebook">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedClearAllSessionBackedFacebook">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1626-1647" title="Go to source code">testSharedClearAllSessionBackedFacebook</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedSessionBackedFacebookIsRestored" id="_testSharedSessionBackedFacebookIsRestored">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedSessionBackedFacebookIsRestored">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1649-1680" title="Go to source code">testSharedSessionBackedFacebookIsRestored</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testSharedSessionBackedFacebookIsNotRestoredWhenCorrupt" id="_testSharedSessionBackedFacebookIsNotRestoredWhenCorrupt">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testSharedSessionBackedFacebookIsNotRestoredWhenCorrupt">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1682-1717" title="Go to source code">testSharedSessionBackedFacebookIsNotRestoredWhenCorrupt</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testHttpHost" id="_testHttpHost">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testHttpHost">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1719-1728" title="Go to source code">testHttpHost</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testHttpProtocol" id="_testHttpProtocol">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testHttpProtocol">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1730-1738" title="Go to source code">testHttpProtocol</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testHttpHostForwarded" id="_testHttpHostForwarded">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testHttpHostForwarded">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1740-1750" title="Go to source code">testHttpHostForwarded</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testHttpProtocolForwarded" id="_testHttpProtocolForwarded">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testHttpProtocolForwarded">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1752-1761" title="Go to source code">testHttpProtocolForwarded</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testHttpProtocolForwardedSecure" id="_testHttpProtocolForwardedSecure">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testHttpProtocolForwardedSecure">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1763-1772" title="Go to source code">testHttpProtocolForwardedSecure</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testEndsWith" id="_testEndsWith">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testEndsWith">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1774-1782" title="Go to source code">testEndsWith</a>( <span>mixed <var>$big</var></span>, <span>mixed <var>$small</var></span>, <span>mixed <var>$result</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+				<h4>DataProvider</h4>
+				<div class="list">
+						provideEndsWith<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="provideEndsWith" id="_provideEndsWith">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_provideEndsWith">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1784-1795" title="Go to source code">provideEndsWith</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="testIsAllowedDomain" id="_testIsAllowedDomain">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_testIsAllowedDomain">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1797-1805" title="Go to source code">testIsAllowedDomain</a>( <span>mixed <var>$big</var></span>, <span>mixed <var>$small</var></span>, <span>mixed <var>$result</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+				<h4>DataProvider</h4>
+				<div class="list">
+						provideIsAllowedDomain<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="provideIsAllowedDomain" id="_provideIsAllowedDomain">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_provideIsAllowedDomain">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1807-1815" title="Go to source code">provideIsAllowedDomain</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="generateMD5HashOfRandomValue" id="_generateMD5HashOfRandomValue">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_generateMD5HashOfRandomValue">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1817-1819" title="Go to source code">generateMD5HashOfRandomValue</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setUp" id="_setUp">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setUp">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1821-1823" title="Go to source code">setUp</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="tearDown" id="_tearDown">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_tearDown">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1825-1828" title="Go to source code">tearDown</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clearSuperGlobals" id="_clearSuperGlobals">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clearSuperGlobals">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1830-1842" title="Go to source code">clearSuperGlobals</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="assertIsSubset" id="_assertIsSubset">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_assertIsSubset">#</a>
+		<code><a href="source-class-PHPSDKTestCase.html#1844-1856" title="Go to source code">assertIsSubset</a>( <span>array <var>$correct</var></span>, <span>array <var>$actual</var></span>, <span>string <var>$msg</var> = <span class="php-quote">''</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Checks that the correct args are a subset of the returned obj</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks that the correct args are a subset of the returned obj</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$correct</var></dt>
+					<dd><code>array</code><br>$correct The correct array values</dd>
+					<dt><var>$actual</var></dt>
+					<dd><code>array</code><br>$actual The values in practice</dd>
+					<dt><var>$msg</var></dt>
+					<dd><code>string</code><br>$message to be shown on failure</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="APP_ID" id="APP_ID">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-PHPSDKTestCase.html#19" title="Go to source code"><b>APP_ID</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'117743971608120'</span></code></td>
+		<td class="description"><div>
+			<a href="#APP_ID" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="SECRET" id="SECRET">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-PHPSDKTestCase.html#20" title="Go to source code"><b>SECRET</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'9c8ea2071859659bea1246d33a9207cf'</span></code></td>
+		<td class="description"><div>
+			<a href="#SECRET" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MIGRATED_APP_ID" id="MIGRATED_APP_ID">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-PHPSDKTestCase.html#22" title="Go to source code"><b>MIGRATED_APP_ID</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'174236045938435'</span></code></td>
+		<td class="description"><div>
+			<a href="#MIGRATED_APP_ID" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MIGRATED_SECRET" id="MIGRATED_SECRET">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-PHPSDKTestCase.html#23" title="Go to source code"><b>MIGRATED_SECRET</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'0073dce2d95c4a5c2922d1827ea0cca6'</span></code></td>
+		<td class="description"><div>
+			<a href="#MIGRATED_SECRET" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="TEST_USER" id="TEST_USER">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-PHPSDKTestCase.html#25" title="Go to source code"><b>TEST_USER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">499834690</span></code></td>
+		<td class="description"><div>
+			<a href="#TEST_USER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="TEST_USER_2" id="TEST_USER_2">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-PHPSDKTestCase.html#26" title="Go to source code"><b>TEST_USER_2</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">499835484</span></code></td>
+		<td class="description"><div>
+			<a href="#TEST_USER_2" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		SE165 - Tackster API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
