@@ -127,7 +127,7 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-KeywordManager.html#12-63" title="Go to source code">code/includes/Keyword/KeywordManager.class.php</a><br />
+		<b>Located at</b> <a href="source-class-KeywordManager.html#13-65" title="Go to source code">code/includes/Keyword/KeywordManager.class.php</a><br />
 	</div>
 
 
@@ -138,24 +138,41 @@
 
 		<td class="attributes"><code>
 			 public 
-			
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getKeyword">#</a>
-		<code><a href="source-class-KeywordManager.html#25-49" title="Go to source code">getKeyword</a>( <span>mixed <var>$word</var></span> )</code>
+		<code><a href="source-class-KeywordManager.html#18-50" title="Go to source code">getKeyword</a>( <span>word <var>$word</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Get keywords from the keyword table. This function will primarily be used
+when an end user is typing a word and we wish to autocomplete or suggest
+words.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Get keywords from the keyword table. This function will primarily be used
+when an end user is typing a word and we wish to autocomplete or suggest
+words.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$word</var></dt>
+					<dd><code>word</code><br>Takes the word to be searched.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>Returns up to 20 matching words as an array.<br />
+				</div>
 
 
 
@@ -174,14 +191,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addKeyword">#</a>
-		<code><a href="source-class-KeywordManager.html#54-58" title="Go to source code">addKeyword</a>( )</code>
+		<code><a href="source-class-KeywordManager.html#52-60" title="Go to source code">addKeyword</a>( )</code>
 
 		<div class="description short">
 			
+<p>Adds a new word to the keyword table. Is currently not implemented.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Adds a new word to the keyword table. Is currently not implemented.</p>
+
 
 
 

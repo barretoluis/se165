@@ -4,13 +4,10 @@ require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of user
+ * Description of user. 
+ * Stores the user credentials and stores it in the database.
+ * Handles authentication for encrypting the users login.
  *
  * @author Luis Barreto
  */
@@ -28,7 +25,12 @@ class User {
 
 	//private $userInfoArray;
 
-
+        /**
+         * Stores all the information that is passed in from the array.
+         * Queries the Tackster Database to enter this information.
+         * @param type $userDataArray This is the passed data from when the user
+         * hits submit.
+         */
 	public function createUser($userDataArray) {
 		$this->fname = $userDataArray['fname'];
 		$this->lname = $userDataArray['lname'];
@@ -67,10 +69,14 @@ class User {
 
 
 
-	/*
-	 * Update user
-	 *
-	 */
+	/**
+         * This function updates user credentials based on the userDataArray
+         * object. This function is currently not implemented, will be implemented on a future date.
+         *  
+         * @param type $userDataArray This is the passed data from when the user
+         * hits submit.
+         * @return boolean This boolean is defaulted to TRUE since the function isn't implemented yet.
+         */
 	public function updateUser($userDataArray) {
 		//TODO: Implement method
 //		throw new MyException('Method createUser() not implemented');
@@ -83,21 +89,32 @@ class User {
 
 
 
-#
-	# Creates a hash of 128 characters in lenght based on a passphrase.
 
-	#
+	 
+	/**
+         * Creates a hash of 128 characters in length based on a passphrase using a salt.
+         * 
+         * @param type $string This is the password that is input.
+         * @return type This is a hashed numeric value to check against the input password.
+         */
 
-	#
+	
     public function encyptPwd($string) {
 		$passPhrase = "FuckYou!!!";
 		$sha512 = hash('sha512', $passPhrase);
 		return $sha512;
 	}
-
+        /** This function checks the a password against the current password in
+         * the database. It will return TRUE or FALSE depending on the comparison
+         * between the input password, after being hashed, and the stored hashed password. 
+         * @param type $postPwd The password that is being checked
+         * @param type $dbPwd The hashed password taken from the database
+         * @return boolean Returns TRUE if the password is the same as the stored password, 
+         * and FALSE if the password is different.
+         */
 	public function checkPassword($postPwd, $dbPwd) {
 		$match = FALSE;
-		$passPhrase = "FuckYou!!!";
+		$passPhrase = "FuckYou!!!"; // is this neccessary?
 		$sha512 = hash('sha512', $postPwd);
 		if (strcmp($sha512, $dbPwd) == 0) {
 			$match = TRUE;
@@ -106,7 +123,9 @@ class User {
 		}
 		return $match;
 	}
-
+        /** This function creates an Email object with 
+         * a welcome message confirming account creation.
+         */
 	public function sendConfEmail() {
 		$to = array($this->email => $this->fname . " " . $this->lname);
 		$emailObj = new mandrillApi($to, "Welcome to Tackster.com");
@@ -117,7 +136,11 @@ class User {
 		$emailObj->createEmail($htmlString);
 		$emailObj->sendEmail();
 	}
-
+        /** Searches for a user by doing a query with the user credentials with the database.
+         * 
+         * @param type $email The email of the user.
+         * @return boolean  True if the user was found, False if the user was not found
+         */
 	public function searchUser($email) {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
@@ -136,7 +159,14 @@ class User {
 		return $found;
 		$sqlObj->destroy();
 	}
-
+        /** Loads the user information based on the e-mail address that is provided. This queries the
+ 	 * database to retrieve all of the user credentials, such as first and last name. 
+         * 
+         * @param type $email The email address of the user
+         * @return null The result of the query against the database. This will store the user data.
+         * @throws MyException This exception is thrown in the case that there is a duplicate credential 
+         * email.
+         */
 	public function loadUser($email) {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
@@ -164,7 +194,13 @@ class User {
 
 		return $result;
 	}
-
+/**This function logs in a user by taking their e-mail and password that they provide through the log in page.
+ * 
+ * @param type $email The email address of the user
+ * @param type $pwd The password of the user
+ * @throws MyException This exception is thrown when the user was not able to be logged in. For example, if their credentials 
+ * don't match that stored on the database.
+ */
 	public function logInUser($email, $pwd) {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
@@ -197,7 +233,9 @@ class User {
 			header('Location: /auth/login.php');
 		}
 	}
-
+        /**This function ends a users session with the server and logs them out of their account.
+         * 
+         */
 	public function logOutUser() {
 		if (isset($_SESSION)) {
 			unset($_SESSION);

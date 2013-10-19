@@ -4,7 +4,8 @@ require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 
 /*
- * Keyword management class.
+ * This class implements Keyword Management. It allows Keyword creation, and allows
+ * querying of the database for keywords.
  *
  * @author Jerry Phul
  */
@@ -14,7 +15,7 @@ class KeywordManager {
 	private $keyword;
 	private $_words;
 
-	/*
+	/**
 	 * Get keywords from the keyword table.
 	 * This function will primarily be used when an end user is typing a word
 	 * and we wish to autocomplete or suggest words.
@@ -48,8 +49,9 @@ class KeywordManager {
 		return $this->_words;
 	}
 
-	/*
-	 * Add a new word to the keyword table.
+	/**
+	 * Adds a new word to the keyword table.
+         * Is currently not implemented.
 	 */
 	public function addKeyword() {
 		//TODO: Write function
