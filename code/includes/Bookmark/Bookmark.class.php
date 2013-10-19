@@ -4,30 +4,37 @@
 /**
  * This class provides information pertaining to bookmarks.
  * It contains a URL, a description and keywords. The UI takes these variables
- * to display the 
+ * to display the
+ *
+ * @author Miguel Gonzalez
  */
 class Bookmark {
 
 	private $url;
 	private $description;
 	private $keywords;
-        /**
-         * This function creates a bookmark from the passed data.
-         * @param type $bookmarkDataArray This is the data about a bookmark passed in as an array.
-         */
+
+	/**
+	 * This function creates a bookmark from the passed data.
+	 * @param type $bookmarkDataArray This is the data about a bookmark passed in as an array.
+	 */
 	public function createBookmark($bookmarkDataArray) {
 		$this->url = $bookmarkDataArray['url'];
 		$this->description = $bookmarkDataArray['description'];
 		$this->keywords = $bookmarkDataArray['keywords'];
 		// $this->checkDescription($bookmarkUrl);
 	}
-        /** This function is desgined to take meta tags automatically from a URL.
-         * This is done by looking at meta tags from the passed URL
-         * Currently this function is not fully implemented, it only shows an example website and meta tags.
-         * @param type $bookmarkUrl The passed URL that meta tags will be taken from.
-         */
+
+	/** This function is desgined to take meta tags automatically from a URL.
+	 * This is done by looking at meta tags from the passed URL
+	 * Currently this function is not fully implemented, it only shows an example website and meta tags.
+	 *
+	 * @param type $bookmarkUrl The passed URL that meta tags will be taken from.
+	 * @return string Description is returned from META tag found at the given URL.
+	 */
 	public function checkDescription($bookmarkUrl) {
-		/* $tags = get_meta_tags($bookmarkUrl);
+		/* // Debugging code
+		  $tags = get_meta_tags($bookmarkUrl);
 		  echo $tags['keywords'];
 		  echo $tags['description'];
 		  if($tags != null)
@@ -53,7 +60,6 @@ class Bookmark {
 		}
 		echo $meta_description;
 	}
-
 }
 
 ?>

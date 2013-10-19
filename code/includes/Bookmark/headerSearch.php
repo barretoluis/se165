@@ -5,6 +5,8 @@ require_once 'Bookmark/SearchBookmark.class.php';
 
 /*
  * Search logic for header search form.
+ *
+ * @author Jerry Phul
  */
 $searchWord = NULL; //search terms from form
 $_bookmarks = NULL; //return results of found bookmarks as an array
