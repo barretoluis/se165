@@ -35,7 +35,7 @@ try {
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Search Bookmarks</title>
+		<title>Tackster | Search Result</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -88,7 +88,7 @@ try {
 
 		<!-- Body Content-->
 		<div id="quickSearch" class="main" >
-			<h3>Search Bookmarks</h3>
+			<h3>Search Results</h3>
 			<p>Look for bookmarks matching your interest.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchBookmarks" id="searchBookmarks">
 				Search Words: <input type="text" name="searchWord" value="<?php echo_formData($searchWord) ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">

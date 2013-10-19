@@ -52,11 +52,11 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">My Dashboard</a></li>
-								<li><a href="/dashboard/followingTacks.php">Following Tacks</a></li>
-								<li><a href="/search/">Suggested Bookmarks</a></li>
+								<li><a href="/dashboard/followingTracks.php">Following Tracks</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Add Tracks</a></li>
-								<li><a href="/bookmark/">Add Bookmark</a></li>
+								<!--li><a href="/bookmark/">Add Bookmark</a></li-->
+                                                                <li><a data-toggle="modal" href="#bookmarkModal">Add Bookmark</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -69,9 +69,9 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 							<input class="sb_search" type="submit" value=""/>
 						</p>
 						<ul class="sb_dropdown" style="display:none;">
-							<li class="sb_filter" style ="color: black;">Filter your search</li>
-							<li><input type="checkbox" name="track" value="public" checked><label for="all"><strong>Public Tracks</strong></label></li>
-							<li><input type="checkbox" name="track" value="allMyTracks"><label for="all"><strong>All My Tracks</strong></label></li>
+							<li class="sb_filter">Filter your search</li>
+							<li><input type="checkbox" name="track" id="public" value="public" checked><label for="public"><strong>Public Tracks</strong></label></li>
+							<li><input type="checkbox" name="track" id="allMyTracks" value="allMyTracks"><label for="allMyTracks">My Tracks</label></li>
 							<?php
 							//Let's populate the search bar with the user's tracks
 							if (isset($_SESSION['myTracks'])) {
@@ -125,14 +125,61 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 					<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
 						<?php echo_formData($userName) ?> <span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="/account/">Profile</a></li>
+					<ul class="dropdown-menu" >
+						<!--li><a href="/account/">Profile</a></li-->
+                                                <li><a data-toggle="modal" href="#profileModal">Profile</a></li>
 						<li><a href="/auth/logout.php">Logout</a></li>
 					</ul>
 				</div> <!-- closing btn-group -->
+                                
 			</div>
 		</div>  <!-- closing container-fluid-->
 	</div>  <!-- closing navbar-inner-->
+        <!-- Bookmark Modal-->
+        <div class="modal fade" id="bookmarkModal" tabindex="-1" role="dialog" aria-labelledby="bookmarkModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 style="color:#00B800; font-size: 22px;">Add Bookmark</h4>
+                </div>
+                <div class="modal-body"  style="margin-left: 35px;">
+                  Title: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="title" style ="width: 350px;"><span class="error"></span><br/>
+                  URL: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="url" type="text" name="url" value="http://" onKeyUp="getDescription(url.value); getImages(url.value);" required style ="width: 350px;"> <br/>
+                  Description: &nbsp;&nbsp;<textarea name="description" rows="3"style ="width: 365px;"></textarea> <br/>
+                  Keywords: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="keywords" style ="width: 355px;"><span class="error"></span><br/>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success">Add Bookmark</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        <!--/Bookmark Modal-->
+        
+        <!-- Profile Modal-->
+        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" style="width: 400px;"  >
+            <div class="modal-dialog" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 style="color:#00B800; font-size: 22px;">Edit Profile</h4>
+                </div>
+                <div class="modal-body" style="margin-left: 25px;">
+                  First Name: &nbsp;<input type = "text" name = "fName" id = "fName" maxlength="20"/> <br/>
+                  Last Name: &nbsp;<input type = "text" name = "lName" id = "lName" maxlength="20"/> <br/>
+                  Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" name = "email" id = "email"/><br/>
+                  Password: &nbsp;&nbsp;<button type="button">Change Password</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-success">Save changes</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        <!--/Profile Modal-->
 	</div>  <!-- closing navbar-->
 
 <?php } else { //show standard nav   ?>

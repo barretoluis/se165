@@ -86,7 +86,8 @@ $formSubmitted = TRUE;
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
 		<script type="text/javascript">
-			//TODO: The font heydings is being called. Wher is it in the code... probably remove it.
+			//TODO: The font heydings is being called. Where is it in the code... probably remove it.
+                        //Reply (Shruti): can't remove it b/c those give the icons: heart, bookmark, comments on the each track!
 			Modernizr.load({
 				test: Modernizr.csstransforms3d && Modernizr.csstransitions,
 				yep : ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js','/shared/js/jquery.hoverfold.js'],
