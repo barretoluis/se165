@@ -112,50 +112,59 @@
 
 <pre><code><span id="1" class="l"><a class="l" href="#1"> 1: </a><span class="xlang">&lt;?php</span>
 </span><span id="2" class="l"><a class="l" href="#2"> 2: </a>
-</span><span id="3" class="l"><a class="l" href="#3"> 3: </a><span class="php-comment">/*
+</span><span id="3" class="l"><a class="l" href="#3"> 3: </a><span class="php-comment">/**
 </span></span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-comment"> * Creating custom excption class to handle web pages and error logging.
-</span></span><span id="5" class="l"><a class="l" href="#5"> 5: </a><span class="php-comment"> */</span>
-</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>
-</span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-keyword1">class</span> <a id="MyException" href="#MyException">MyException</a> <span class="php-keyword1">extends</span> Exception {
-</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>
-</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>    <span class="php-comment">// Redefine the exception so message isn't optional</span>
-</span><span id="10" class="l"><a class="l" href="#10">10: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(<span class="php-var">$message</span>, <span class="php-var">$code</span> = <span class="php-num">0</span>, Exception <span class="php-var">$previous</span> = <span class="php-keyword1">null</span>) {
-</span><span id="11" class="l"><a class="l" href="#11">11: </a>        <span class="php-comment">// some code</span>
-</span><span id="12" class="l"><a class="l" href="#12">12: </a>        <span class="php-comment">// make sure everything is assigned properly</span>
-</span><span id="13" class="l"><a class="l" href="#13">13: </a>        parent::__construct(<span class="php-var">$message</span>, <span class="php-var">$code</span>, <span class="php-var">$previous</span>);
-</span><span id="14" class="l"><a class="l" href="#14">14: </a>    }
-</span><span id="15" class="l"><a class="l" href="#15">15: </a>
-</span><span id="16" class="l"><a class="l" href="#16">16: </a>    <span class="php-comment">// custom string representation of object</span>
-</span><span id="17" class="l"><a class="l" href="#17">17: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___toString" href="#___toString">__toString</a>() {
-</span><span id="18" class="l"><a class="l" href="#18">18: </a>        <span class="php-keyword1">return</span> __CLASS__ . <span class="php-quote">&quot;: [</span><span class="php-var">{$this-&gt;code}</span><span class="php-quote">]: </span><span class="php-var">{$this-&gt;message}</span><span class="php-quote">\n&quot;</span>;
+</span></span><span id="5" class="l"><a class="l" href="#5"> 5: </a><span class="php-comment"> * This class extends Exception, so that it is an exception.
+</span></span><span id="6" class="l"><a class="l" href="#6"> 6: </a><span class="php-comment"> */</span>
+</span><span id="7" class="l"><a class="l" href="#7"> 7: </a>
+</span><span id="8" class="l"><a class="l" href="#8"> 8: </a><span class="php-keyword1">class</span> <a id="MyException" href="#MyException">MyException</a> <span class="php-keyword1">extends</span> Exception {
+</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>    <span class="php-comment">/** This function constructs a MyException object by calling the 
+</span></span><span id="11" class="l"><a class="l" href="#11">11: </a><span class="php-comment">         * parent construct function.
+</span></span><span id="12" class="l"><a class="l" href="#12">12: </a><span class="php-comment">         * @param type $message The passsed message
+</span></span><span id="13" class="l"><a class="l" href="#13">13: </a><span class="php-comment">         * @param type $code Is 0 by default.
+</span></span><span id="14" class="l"><a class="l" href="#14">14: </a><span class="php-comment">         * @param Exception $previous 
+</span></span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-comment">         */</span>
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(<span class="php-var">$message</span>, <span class="php-var">$code</span> = <span class="php-num">0</span>, Exception <span class="php-var">$previous</span> = <span class="php-keyword1">null</span>) 
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>        {
+</span><span id="18" class="l"><a class="l" href="#18">18: </a>        parent::__construct(<span class="php-var">$message</span>, <span class="php-var">$code</span>, <span class="php-var">$previous</span>);
 </span><span id="19" class="l"><a class="l" href="#19">19: </a>    }
 </span><span id="20" class="l"><a class="l" href="#20">20: </a>
-</span><span id="21" class="l"><a class="l" href="#21">21: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getMyExceptionMessage" href="#_getMyExceptionMessage">getMyExceptionMessage</a>() {
-</span><span id="22" class="l"><a class="l" href="#22">22: </a>        <span class="php-var">$timestamp</span> = <span class="php-keyword2">strtotime</span>(<span class="php-quote">&quot;now&quot;</span>);
-</span><span id="23" class="l"><a class="l" href="#23">23: </a>        <span class="php-keyword2">sleep</span>(<span class="php-num">1</span>);
-</span><span id="24" class="l"><a class="l" href="#24">24: </a>        <span class="php-var">$err</span> = <span class="php-quote">&quot;&lt;div class='exception' id='exception_</span><span class="php-var">{$timestamp}</span><span class="php-quote">' onClick='if(this.className == \&quot;exceptionHide\&quot;) { document.getElementById(\&quot;exception_</span><span class="php-var">{$timestamp}</span><span class="php-quote">\&quot;).className=\&quot;exception\&quot;; } else { document.getElementById(\&quot;exception_</span><span class="php-var">{$timestamp}</span><span class="php-quote">\&quot;).className=\&quot;exceptionHide\&quot;; }'&gt;\n&quot;</span>;
-</span><span id="25" class="l"><a class="l" href="#25">25: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;h2&gt;Exception in Code&lt;/h2&gt;\n&quot;</span>;
-</span><span id="26" class="l"><a class="l" href="#26">26: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;P&gt;The application generated an Exception. For more details, also review the error log files. NOTE: To hide this exception, click on this message box.&lt;/p&gt;\n&quot;</span>;
-</span><span id="27" class="l"><a class="l" href="#27">27: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;b&gt;File:&lt;/b&gt; &quot;</span> . parent::getFile() . <span class="php-quote">&quot;\n&quot;</span>;
-</span><span id="28" class="l"><a class="l" href="#28">28: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;br&gt;&lt;b&gt;Line:&lt;/b&gt; &quot;</span> . parent::getLine() . <span class="php-quote">&quot;\n&quot;</span>;
-</span><span id="29" class="l"><a class="l" href="#29">29: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;br&gt;&lt;b&gt;Message:&lt;/b&gt; &quot;</span> . parent::getMessage() . <span class="php-quote">&quot;\n&quot;</span>;
-</span><span id="30" class="l"><a class="l" href="#30">30: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;br&gt;&lt;b&gt;Exception Trace:&lt;/b&gt;&lt;br&gt;&lt;pre&gt;&quot;</span> . parent::getTraceAsString() . <span class="php-quote">&quot;&lt;/pre&gt;&lt;/div&gt;\n&quot;</span>;
-</span><span id="31" class="l"><a class="l" href="#31">31: </a>
-</span><span id="32" class="l"><a class="l" href="#32">32: </a>
-</span><span id="33" class="l"><a class="l" href="#33">33: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">ini_get</span>(<span class="php-quote">'display_errors'</span>) == <span class="php-num">1</span>) {
-</span><span id="34" class="l"><a class="l" href="#34">34: </a>            <span class="php-comment">//display errors to web page is on</span>
-</span><span id="35" class="l"><a class="l" href="#35">35: </a>            <span class="php-keyword1">print</span>(<span class="php-var">$err</span>);
-</span><span id="36" class="l"><a class="l" href="#36">36: </a>            <span class="php-keyword2">error_log</span>(<span class="php-keyword2">strip_tags</span>(<span class="php-var">$err</span>));
-</span><span id="37" class="l"><a class="l" href="#37">37: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="38" class="l"><a class="l" href="#38">38: </a>            <span class="php-comment">//only send the exception to the error log</span>
-</span><span id="39" class="l"><a class="l" href="#39">39: </a>            <span class="php-keyword2">error_log</span>(<span class="php-keyword2">strip_tags</span>(<span class="php-var">$err</span>));
-</span><span id="40" class="l"><a class="l" href="#40">40: </a>        }
-</span><span id="41" class="l"><a class="l" href="#41">41: </a>    }
-</span><span id="42" class="l"><a class="l" href="#42">42: </a>
-</span><span id="43" class="l"><a class="l" href="#43">43: </a>}
-</span><span id="44" class="l"><a class="l" href="#44">44: </a>
-</span><span id="45" class="l"><a class="l" href="#45">45: </a><span class="xlang">?&gt;</span>
-</span><span id="46" class="l"><a class="l" href="#46">46: </a></span></code></pre>
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>    <span class="php-comment">/** This function returns the Exception in a string format.
+</span></span><span id="22" class="l"><a class="l" href="#22">22: </a><span class="php-comment">         * @return type The Exception in string format.
+</span></span><span id="23" class="l"><a class="l" href="#23">23: </a><span class="php-comment">         */</span>
+</span><span id="24" class="l"><a class="l" href="#24">24: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___toString" href="#___toString">__toString</a>() {
+</span><span id="25" class="l"><a class="l" href="#25">25: </a>        <span class="php-keyword1">return</span> __CLASS__ . <span class="php-quote">&quot;: [</span><span class="php-var">{$this-&gt;code}</span><span class="php-quote">]: </span><span class="php-var">{$this-&gt;message}</span><span class="php-quote">\n&quot;</span>;
+</span><span id="26" class="l"><a class="l" href="#26">26: </a>    }
+</span><span id="27" class="l"><a class="l" href="#27">27: </a>        <span class="php-comment">/** This function displays the error message from this exception
+</span></span><span id="28" class="l"><a class="l" href="#28">28: </a><span class="php-comment">         *  by appending it to the current webpage.
+</span></span><span id="29" class="l"><a class="l" href="#29">29: </a><span class="php-comment">         */</span>
+</span><span id="30" class="l"><a class="l" href="#30">30: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getMyExceptionMessage" href="#_getMyExceptionMessage">getMyExceptionMessage</a>() {
+</span><span id="31" class="l"><a class="l" href="#31">31: </a>        <span class="php-var">$timestamp</span> = <span class="php-keyword2">strtotime</span>(<span class="php-quote">&quot;now&quot;</span>);
+</span><span id="32" class="l"><a class="l" href="#32">32: </a>        <span class="php-keyword2">sleep</span>(<span class="php-num">1</span>);
+</span><span id="33" class="l"><a class="l" href="#33">33: </a>        <span class="php-var">$err</span> = <span class="php-quote">&quot;&lt;div class='exception' id='exception_</span><span class="php-var">{$timestamp}</span><span class="php-quote">' onClick='if(this.className == \&quot;exceptionHide\&quot;) { document.getElementById(\&quot;exception_</span><span class="php-var">{$timestamp}</span><span class="php-quote">\&quot;).className=\&quot;exception\&quot;; } else { document.getElementById(\&quot;exception_</span><span class="php-var">{$timestamp}</span><span class="php-quote">\&quot;).className=\&quot;exceptionHide\&quot;; }'&gt;\n&quot;</span>;
+</span><span id="34" class="l"><a class="l" href="#34">34: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;h2&gt;Exception in Code&lt;/h2&gt;\n&quot;</span>;
+</span><span id="35" class="l"><a class="l" href="#35">35: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;P&gt;The application generated an Exception. For more details, also review the error log files. NOTE: To hide this exception, click on this message box.&lt;/p&gt;\n&quot;</span>;
+</span><span id="36" class="l"><a class="l" href="#36">36: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;b&gt;File:&lt;/b&gt; &quot;</span> . parent::getFile() . <span class="php-quote">&quot;\n&quot;</span>;
+</span><span id="37" class="l"><a class="l" href="#37">37: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;br&gt;&lt;b&gt;Line:&lt;/b&gt; &quot;</span> . parent::getLine() . <span class="php-quote">&quot;\n&quot;</span>;
+</span><span id="38" class="l"><a class="l" href="#38">38: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;br&gt;&lt;b&gt;Message:&lt;/b&gt; &quot;</span> . parent::getMessage() . <span class="php-quote">&quot;\n&quot;</span>;
+</span><span id="39" class="l"><a class="l" href="#39">39: </a>        <span class="php-var">$err</span> .= <span class="php-quote">&quot;&lt;br&gt;&lt;b&gt;Exception Trace:&lt;/b&gt;&lt;br&gt;&lt;pre&gt;&quot;</span> . parent::getTraceAsString() . <span class="php-quote">&quot;&lt;/pre&gt;&lt;/div&gt;\n&quot;</span>;
+</span><span id="40" class="l"><a class="l" href="#40">40: </a>
+</span><span id="41" class="l"><a class="l" href="#41">41: </a>
+</span><span id="42" class="l"><a class="l" href="#42">42: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">ini_get</span>(<span class="php-quote">'display_errors'</span>) == <span class="php-num">1</span>) {
+</span><span id="43" class="l"><a class="l" href="#43">43: </a>            <span class="php-comment">//display errors to web page is on</span>
+</span><span id="44" class="l"><a class="l" href="#44">44: </a>            <span class="php-keyword1">print</span>(<span class="php-var">$err</span>);
+</span><span id="45" class="l"><a class="l" href="#45">45: </a>            <span class="php-keyword2">error_log</span>(<span class="php-keyword2">strip_tags</span>(<span class="php-var">$err</span>));
+</span><span id="46" class="l"><a class="l" href="#46">46: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="47" class="l"><a class="l" href="#47">47: </a>            <span class="php-comment">//only send the exception to the error log</span>
+</span><span id="48" class="l"><a class="l" href="#48">48: </a>            <span class="php-keyword2">error_log</span>(<span class="php-keyword2">strip_tags</span>(<span class="php-var">$err</span>));
+</span><span id="49" class="l"><a class="l" href="#49">49: </a>        }
+</span><span id="50" class="l"><a class="l" href="#50">50: </a>    }
+</span><span id="51" class="l"><a class="l" href="#51">51: </a>
+</span><span id="52" class="l"><a class="l" href="#52">52: </a>}
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>
+</span><span id="54" class="l"><a class="l" href="#54">54: </a><span class="xlang">?&gt;</span>
+</span><span id="55" class="l"><a class="l" href="#55">55: </a></span></code></pre>
 
 	<div id="footer">
 		SE165 - Tackster API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

@@ -114,7 +114,9 @@
 
 	<div class="description">
 	
-<p>Description of track</p>
+<p>This class defines a track. A track holds bookmarks/tacks. This class
+provides functionality to create, search, delete and modify tracks associated
+with the user account.</p>
 
 	</div>
 
@@ -134,7 +136,7 @@
 
 				<b>Author:</b>
 				Luis<br />
-		<b>Located at</b> <a href="source-class-track.html#11-111" title="Go to source code">code/includes/track.php</a><br />
+		<b>Located at</b> <a href="source-class-track.html#8-116" title="Go to source code">code/includes/track.php</a><br />
 	</div>
 
 
@@ -152,16 +154,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createTrack">#</a>
-		<code><a href="source-class-track.html#29-48" title="Go to source code">createTrack</a>( <span>mixed <var>$trackArray</var></span> )</code>
+		<code><a href="source-class-track.html#24-47" title="Go to source code">createTrack</a>( <span>type <var>$trackArray</var></span> )</code>
 
 		<div class="description short">
 			
+<p>This function creates a track based upon the passed array.<br />
+It then passes that data, via a query, into the database.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>This function creates a track based upon the passed array. It then passes
+that data, via a query, into the database.</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$trackArray</var></dt>
+					<dd><code>type</code><br>$trackArray The information that applies to the track.</dd>
+				</dl></div>
 
 
 
@@ -174,24 +187,40 @@
 
 		<td class="attributes"><code>
 			 public 
-			
+			type
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_searchtrack">#</a>
-		<code><a href="source-class-track.html#54-61" title="Go to source code">searchtrack</a>( <span>mixed <var>$term</var></span>, <span>mixed <var>$ucId</var> = <span class="php-quote">&quot;%&quot;</span></span> )</code>
+		<code><a href="source-class-track.html#49-64" title="Go to source code">searchtrack</a>( <span>type <var>$term</var></span>, <span>type <var>$ucId</var> = <span class="php-quote">&quot;%&quot;</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Searches for a track based on a term that is provided by the user.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Searches for a track based on a term that is provided by the user.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$term</var></dt>
+					<dd><code>type</code><br>$term the word or phrase that will be used as part of the query to look for a
+track with a title that is similar to that term</dd>
+					<dt><var>$ucId</var></dt>
+					<dd><code>type</code><br>$ucId the user id.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br>Returns the track that has been searched for.<br />
+				</div>
 
 
 
@@ -203,25 +232,44 @@
 
 		<td class="attributes"><code>
 			 public 
-			
+			type
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMyTrack">#</a>
-		<code><a href="source-class-track.html#70-97" title="Go to source code">getMyTrack</a>( <span>mixed <var>$ucId</var></span>, <span>mixed <var>$fields</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-track.html#67-102" title="Go to source code">getMyTrack</a>( <span>type <var>$ucId</var></span>, <span>type <var>$fields</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Get the tracks for the given user id.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Get the tracks for the given user id.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$ucId</var></dt>
+					<dd><code>type</code><br>$ucId The user's credential ID</dd>
+					<dt><var>$fields</var></dt>
+					<dd><code>type</code><br>$fields The specific fields that are going to be returned.</dd>
+				</dl></div>
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br>Return's an array of all tracks for the given ucId.<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-MyException.html">MyException</a></code></code><br>Throws an exception if the user id is less than one.<br />
+				</div>
 
 
 
@@ -239,16 +287,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteTrack">#</a>
-		<code><a href="source-class-track.html#103-109" title="Go to source code">deleteTrack</a>( <span>mixed <var>$trackId</var></span> )</code>
+		<code><a href="source-class-track.html#104-114" title="Go to source code">deleteTrack</a>( <span>type <var>$trackId</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Deletes a track based on the trackID that is provided to the function as a
+parameter.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Deletes a track based on the trackID that is provided to the function as a
+parameter.</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$trackId</var></dt>
+					<dd><code>type</code><br>$trackId the track id that is going to be deleted from the database.</dd>
+				</dl></div>
 
 
 

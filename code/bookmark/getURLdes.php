@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(

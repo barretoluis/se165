@@ -114,8 +114,8 @@
 
 	<div class="description">
 	
-<p>faceBookApi is used by the system to make calls to the FaceBook SDK installed
-in the server.</p>
+<p>FaceBookApi is used by the system to make calls to the FaceBook SDK installed
+in the server and provide the functions to login and logout.</p>
 
 	</div>
 
@@ -135,7 +135,7 @@ in the server.</p>
 
 				<b>Author:</b>
 				Luis Barreto<br />
-		<b>Located at</b> <a href="source-class-faceBookApi.html#5-74" title="Go to source code">code/includes/faceBookApi.php</a><br />
+		<b>Located at</b> <a href="source-class-faceBookApi.html#5-98" title="Go to source code">code/includes/faceBookApi.php</a><br />
 	</div>
 
 
@@ -153,14 +153,20 @@ in the server.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-faceBookApi.html#19-27" title="Go to source code">__construct</a>( )</code>
+		<code><a href="source-class-faceBookApi.html#18-30" title="Go to source code">__construct</a>( )</code>
 
 		<div class="description short">
 			
+<p>Creates a new Facebook object which allows the system to access Facebook
+information.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a new Facebook object which allows the system to access Facebook
+information.</p>
+
 
 
 
@@ -175,24 +181,34 @@ in the server.</p>
 
 		<td class="attributes"><code>
 			 public 
-			
+			type
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLogOutUrl">#</a>
-		<code><a href="source-class-faceBookApi.html#28-31" title="Go to source code">getLogOutUrl</a>( )</code>
+		<code><a href="source-class-faceBookApi.html#31-39" title="Go to source code">getLogOutUrl</a>( )</code>
 
 		<div class="description short">
 			
+<p>Returns the URL for the user to logout, so that the user can logout from our
+website.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns the URL for the user to logout, so that the user can logout from our
+website.</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br>Returns a URL.<br />
+				</div>
 
 
 
@@ -204,24 +220,32 @@ in the server.</p>
 
 		<td class="attributes"><code>
 			 public 
-			
+			type
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLoginUrl">#</a>
-		<code><a href="source-class-faceBookApi.html#32-35" title="Go to source code">getLoginUrl</a>( )</code>
+		<code><a href="source-class-faceBookApi.html#40-48" title="Go to source code">getLoginUrl</a>( )</code>
 
 		<div class="description short">
 			
+<p>This returns the login URL to Facebook</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>This returns the login URL to Facebook</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br>This returns a URL from Facebook<br />
+				</div>
 
 
 
@@ -233,24 +257,32 @@ in the server.</p>
 
 		<td class="attributes"><code>
 			 public 
-			
+			type
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserProfile">#</a>
-		<code><a href="source-class-faceBookApi.html#36-39" title="Go to source code">getUserProfile</a>( )</code>
+		<code><a href="source-class-faceBookApi.html#49-56" title="Go to source code">getUserProfile</a>( )</code>
 
 		<div class="description short">
 			
+<p>This returns the user's information in the form of a profile.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>This returns the user's information in the form of a profile.</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>type</code><br>This returns a user profile.<br />
+				</div>
 
 
 
@@ -262,24 +294,36 @@ in the server.</p>
 
 		<td class="attributes"><code>
 			 public 
-			
+			True
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setUserState">#</a>
-		<code><a href="source-class-faceBookApi.html#40-56" title="Go to source code">setUserState</a>( )</code>
+		<code><a href="source-class-faceBookApi.html#57-78" title="Go to source code">setUserState</a>( )</code>
 
 		<div class="description short">
 			
+<p>If the user that is logged in is the correct user, then return their
+information. If the user that is logged in is not the correct user, then get the
+loginURL.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>If the user that is logged in is the correct user, then return their
+information. If the user that is logged in is not the correct user, then get the
+loginURL.</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>True</code><br>if the user was the correct user, return False otherwise.<br />
+				</div>
 
 
 
@@ -298,14 +342,18 @@ in the server.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserInfo">#</a>
-		<code><a href="source-class-faceBookApi.html#58-73" title="Go to source code">getUserInfo</a>( )</code>
+		<code><a href="source-class-faceBookApi.html#79-97" title="Go to source code">getUserInfo</a>( )</code>
 
 		<div class="description short">
 			
+<p>This function returns the user data based on the facebook login.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>This function returns the user data based on the facebook login.</p>
+
 
 
 

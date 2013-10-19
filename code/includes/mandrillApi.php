@@ -1,7 +1,10 @@
 <?php
 include_once 'swift_required.php';
 /**
- * Description of mandrillApi
+ * Description of mandrillApi.
+ * Mandrill is a third party application that automatically sends email in
+ * response to certain triggers. The application also allows you to track
+ * data on these emails to gain insights into the emails that have been sent.
  *
  * @author Luis Barreto
  */
@@ -14,9 +17,13 @@ class mandrillApi
     private $transport;
     private $swift;
     private $message;
-        
-    public function __construct($recipient, $sbj)// $recipient is an associative
-            //array email => full name
+    /**
+     * This creates the Application with the recipient and the subject of
+     * the message. 
+     * @param type $recipient The address that will receive the email.
+     * @param type $sbj The subject of the message.
+     */
+    public function __construct($recipient, $sbj)
     {
         $this->subject = $sbj;
         $this->to = $recipient;
@@ -27,13 +34,25 @@ class mandrillApi
         $this->swift = Swift_Mailer::newInstance($this->transport);
         
     }
-        public function createEmail($htmlString)
+    /**
+      * Creates an e-mail message by setting the message data to the 
+      * information stored in this class.
+      * @param type $htmlString the body of the e-mail that will be sent.
+      */
+    public function createEmail($htmlString)
     {
         $this->message = new Swift_Message($this->subject);
         $this->message->setFrom($this->from);
         $this->message->setBody($htmlString, 'text/html');
         $this->message->setTo($this->to);
     }
+    /**
+     * Attempts to send an e-mail to the recipients, if successful then print 
+     * out a message and set the status to true. If there was an error, set the
+     * status to false and print the failures.
+     * @return type $status the status of whether or not the e-mail was sent correctly or not.
+     * @param type $htmlString
+     */
     public function sendEmail()
     {
         $status = FALSE;

@@ -1,23 +1,32 @@
 <?php
 
-/*
+/**
  * Creating custom excption class to handle web pages and error logging.
+ * This class extends Exception, so that it is an exception.
  */
 
 class MyException extends Exception {
 
-	// Redefine the exception so message isn't optional
-	public function __construct($message, $code = 0, Exception $previous = null) {
-		// some code
-		// make sure everything is assigned properly
+	/** This function constructs a MyException object by calling the 
+         * parent construct function.
+         * @param type $message The passsed message
+         * @param type $code Is 0 by default.
+         * @param Exception $previous 
+         */
+	public function __construct($message, $code = 0, Exception $previous = null) 
+        {
 		parent::__construct($message, $code, $previous);
 	}
 
-	// custom string representation of object
+	/** This function returns the Exception in a string format.
+         * @return type The Exception in string format.
+         */
 	public function __toString() {
 		return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
 	}
-
+        /** This function displays the error message from this exception
+         *  by appending it to the current webpage.
+         */
 	public function getMyExceptionMessage() {
 		$timestamp = strtotime("now");
 		sleep(1);
