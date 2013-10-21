@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Utility/MyException.class.php';
+require_once 'Configs/defineDb.php';
 
 /** This class handles Database interactions, such as constructing a new
  *  connection, and allows related functions.
@@ -22,7 +23,7 @@ class DataBase {
 	 *
 	 * @throws MyException The exception that is thrown in case of an error.
 	 */
-	public function __construct($h = "localhost", $u = "tackster", $p = "4tackster2use", $n = "db_tackster") {
+	public function __construct($h = DB_HOST, $u = DB_USER, $p = DB_PASS, $n = DB_NAME) {
 		try {
 			$this->mysqli = mysqli_connect($h, $u, $p, $n) or dbException();
 

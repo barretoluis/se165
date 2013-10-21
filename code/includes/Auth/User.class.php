@@ -3,6 +3,7 @@
 require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
+require_once 'Configs/defineSalt.php';
 
 /**
  * Description of user.
@@ -90,7 +91,7 @@ class User {
 	 * @return type This is a hashed numeric value to check against the input password.
 	 */
 	public function encyptPwd($pwd) {
-		$passPhrase = "d9N5z!heP^2" . $pwd;
+		$passPhrase = PASS_SALT . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
 		return $sha512;
 	}
@@ -104,9 +105,10 @@ class User {
 	 * and FALSE if the password is different.
 	 */
 	public function checkPassword($postPwd, $dbPwd) {
+		//TODO: I don't believe this method has been tested or used anywhere in the code. Need to verify.
 		$match = FALSE;
-		$passPhrase = "d9N5z!heP^2"; // is this neccessary?
-		$sha512 = hash('sha512', $postPwd);
+		$passPhrase = SALT_PASS;
+		$sha512 = hash('sha512', SALT_PASS . $postPwd);
 		if (strcmp($sha512, $dbPwd) == 0) {
 			$match = TRUE;
 		} else {
@@ -201,9 +203,8 @@ class User {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
-		$passPhrase = "d9N5z!heP^2" . $pwd;
+		$passPhrase = SALT_PASS . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
-//		$sha512 = hash('sha512', $pwd);
 		$query = "SELECT  `id`, `email` ,  `password` ,  `state` ,  `fromFB`
                     FROM  `user_credentials`
                     WHERE  `email`='{$email}'
