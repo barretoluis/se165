@@ -60,6 +60,7 @@ class Bookmark {
 		}
 		echo $meta_description;
 	}
+
 }
 
 ?>

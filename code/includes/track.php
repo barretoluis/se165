@@ -4,13 +4,12 @@ require_once 'DataBase.php';
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-
 /** This class defines a track.
  * A track holds bookmarks/tacks.
  * This class provides functionality to create, search, delete and modify tracks
- * associated with the user account.  
- *  
- *  @author Luis
+ * associated with the user account.
+ *
+ *  @author Luis Barreto
  */
 class track {
 
@@ -20,11 +19,11 @@ class track {
 	private $title;
 	private $description;
 	private $private;
-        
-        /** This function creates a track based upon the passed array.
-         *  It then passes that data, via a query, into the database.
-         *  @param type $trackArray The information that applies to the track.
-         */
+
+	/** This function creates a track based upon the passed array.
+	 *  It then passes that data, via a query, into the database.
+	 *  @param type $trackArray The information that applies to the track.
+	 */
 	public function createTrack($trackArray) {
 		$this->ucId = $trackArray['userId'];
 		$this->title = $trackArray['title'];
@@ -45,15 +44,15 @@ class track {
 		$sqlObj->DoQuery($query);
 		$sqlObj->destroy();
 	}
-        /**
-         * Searches for a track based on a term that is provided by the user.
-         * @param type $term the word or phrase that will be used as part of the query to look for a track
-         * with a title that is similar to that term
-         * @param type $ucId the user id.
-         * 
-         *  @return type Returns the track that has been searched for.
-         */
-        
+
+	/**
+	 * Searches for a track based on a term that is provided by the user.
+	 * @param type $term the word or phrase that will be used as part of the query to look for a track
+	 * with a title that is similar to that term
+	 * @param type $ucId the user id.
+	 *
+	 * @return type Returns the track that has been searched for.
+	 */
 	public function searchtrack($term, $ucId = "%") {
 		$sqlObj = new DataBase();
 		$query = "SELECT * FROM `track` WHERE `title` LIKE '$term' OR `description` LIKE '$term' AND `uc_id` LIKE '$ucId'";
@@ -64,16 +63,14 @@ class track {
 	}
 
 	/**
-         * Get the tracks for the given user id.
-         *
-         * @param type $ucId The user's credential ID
-         * @param type $fields The specific fields that are going to be returned.
-         * @return type Return's an array of all tracks for the given ucId.
-         * @throws MyException Throws an exception if the user id is less than one. 
-        */
-
-	public function getMyTrack($ucId, $fields = NULL) 
-                {
+	 * Get the tracks for the given user id.
+	 *
+	 * @param type $ucId The user's credential ID
+	 * @param type $fields The specific fields that are going to be returned.
+	 * @return type Return's an array of all tracks for the given ucId.
+	 * @throws MyException Throws an exception if the user id is less than one.
+	 */
+	public function getMyTrack($ucId, $fields = NULL) {
 		if ($ucId < !1) {
 			throw new MyException('Sorry, you forgot to provide a user id. I cannot retrieve any tracks without it. Here\'s what you tried sending: "' . $ucId . '".');
 		}
@@ -101,10 +98,10 @@ class track {
 		return $_resultSet;
 	}
 
-	/** 
-         * Deletes a track based on the trackID that is provided to the function as a parameter.
- 	 * @param type $trackId the track id that is going to be deleted from the database. 
-         */
+	/**
+	 * Deletes a track based on the trackID that is provided to the function as a parameter.
+	 * @param type $trackId the track id that is going to be deleted from the database.
+	 */
 	public function deleteTrack($trackId) {
 		$sqlObj = new DataBase();
 		$query = "DELETE FROM `db_tackster`.`track` WHERE `track`.`id` = $trackId";

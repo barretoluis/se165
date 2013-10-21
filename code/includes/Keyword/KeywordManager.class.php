@@ -1,4 +1,5 @@
 <?php
+
 require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
@@ -25,7 +26,7 @@ class KeywordManager {
 	 */
 	public function getKeyword($word) {
 		$this->keyword = $word;
-		if(strlen($word) >= 1) {	//let's make sure a word was even provided :)
+		if (strlen($word) >= 1) { //let's make sure a word was even provided :)
 			$query = "SELECT id, keyword FROM lkup_keyword WHERE keyword LIKE '{$word}%' ORDER BY keyword ASC LIMIT 0,20;";
 
 			try {
@@ -51,16 +52,20 @@ class KeywordManager {
 
 	/**
 	 * Adds a new word to the keyword table.
-         * Is currently not implemented.
+	 * <b>NOTE: </b> Is currently not implemented.
+	 *
+	 * @param string $keyword The keyword to be added.
+	 * @throws MyException Error returned on any unsuccessful submission.
+	 * @return boolean Return TRUE on success.
 	 */
-	public function addKeyword() {
+	public function addKeyword($keyword) {
 		//TODO: Write function
 		//		Recomend integration with Dictionary.com. Validate word and then add.
 
+		throw new MyException('Method not implemented.');
+
+		return FALSE;
 	}
-
-
-
 
 }
 
