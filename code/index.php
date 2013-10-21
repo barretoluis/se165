@@ -64,7 +64,6 @@ $ignorePageLogin = TRUE;
         <meta charset="utf-8">
         <title>Tackster</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="">
 
         <!-- styles -->
         <link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
@@ -98,7 +97,7 @@ $ignorePageLogin = TRUE;
         <div class="marketing-section marketing-section-signup">
             <div class="container">
                 <?php if (!isset($_SESSION['loggedin']) || (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE)) { ?>
-                  <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">      
+                  <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">
                      <dl class="form">
                        <dd>
                          <input type="text" name="fname" class="textfield" required="" placeholder="First Name"autofocus="">
