@@ -51,7 +51,10 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
 			'password' => $password,
 			'source' => 'S');
 		$userObj->createUser($userArray);
-//		throw new MyException('TEST');
+
+		header('Location: /dashboard/');
+		exit();
+
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
 	}

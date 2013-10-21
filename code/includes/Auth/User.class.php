@@ -44,6 +44,7 @@ class User {
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
 		$this->password = $this->encyptPwd($tempPwd);
+
 		$query = "INSERT INTO  `db_tackster`.`user_credentials` (
                     `id` ,
                     `email` ,
@@ -88,8 +89,8 @@ class User {
 	 * @param type $string This is the password that is input.
 	 * @return type This is a hashed numeric value to check against the input password.
 	 */
-	public function encyptPwd($string) {
-		$passPhrase = "d9N5z!heP^2";
+	public function encyptPwd($pwd) {
+		$passPhrase = "d9N5z!heP^2" . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
 		return $sha512;
 	}
@@ -200,8 +201,9 @@ class User {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
-		$passPhrase = "d9N5z!heP^2";
-		$sha512 = hash('sha512', $pwd);
+		$passPhrase = "d9N5z!heP^2" . $pwd;
+		$sha512 = hash('sha512', $passPhrase);
+//		$sha512 = hash('sha512', $pwd);
 		$query = "SELECT  `id`, `email` ,  `password` ,  `state` ,  `fromFB`
                     FROM  `user_credentials`
                     WHERE  `email`='{$email}'
@@ -224,7 +226,7 @@ class User {
 			header('Location: /dashboard/');
 		} else {
 			$_SESSION['loggedin'] = FALSE;
-			throw new MyException('User: ' . $email . 'was not able to login using encrypted password (' . $sha512 . ').');
+			throw new MyException('User: ' . $email . ' was not able to login using encrypted password (' . $sha512 . ').');
 			header('Location: /auth/login.php');
 		}
 	}
@@ -241,6 +243,7 @@ class User {
 		}
 		header('Location: /');
 	}
+
 }
 
 ?>
