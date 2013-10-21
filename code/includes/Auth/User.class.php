@@ -80,7 +80,6 @@ class User {
 	public function updateUser($userDataArray) {
 		//TODO: Implement method
 //		throw new MyException('Method createUser() not implemented');
-
 		return TRUE;
 	}
 
@@ -116,6 +115,20 @@ class User {
 		}
 		return $match;
 	}
+        /** This function creates a Password reset email and dends it to the user
+         * @param type $email the email of the user
+         */
+        public function sendResteEmail($email, $pwd){
+            	$to = array($this->email => $this->fname . " " . $this->lname);
+		$emailObj = new mandrillApi($to, "Passwowrd Successfuly reseted");
+		$htmlString = "<html>
+                    <h1>Your passwd was successfuly resset</hi>
+                    <p>Your new password is: $pwd</p>
+                    </html>";
+		$emailObj->createEmail($htmlString);
+		$emailObj->sendEmail();
+            
+        }
 
 	/** This function creates an Email object with
 	 * a welcome message confirming account creation.
@@ -244,6 +257,27 @@ class User {
 		}
 		header('Location: /');
 	}
+        /** This function loads a user object and based on an email provided provides
+         * the facility to reset a user's password.
+         * @param type $email The email address of the user
+         */
+        public function resetPassword($email,$newPWD){
+            if($this->searchUser($email)==TRUE){
+                $this->loadUser($email);
+                $sqlObj = new DataBase();
+                $newEncryptedPWD = $this->encyptPwd($newPWD);
+                $query = "UPDATE  `db_tackster`.`user_credentials` SET  
+                         `password` = '$newEncryptedPWD' WHERE  
+                         `user_credentials`.`email` = '$email'";
+                $sqlObj->DoQuery($query);
+                $sqlObj->destroy();
+                $this->sendResteEmail($email, $newPWD);
+                
+            }
+            else{
+                throw new MyException('User Profile not found');
+            }    
+        }
 
 }
 
