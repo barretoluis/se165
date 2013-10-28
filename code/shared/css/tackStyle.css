@@ -1,0 +1,222 @@
+@font-face {
+  font-family: 'heydings_icons';
+  src: url('fonts/heydings_icons.ttf') format('truetype');
+}
+
+body{
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.main h3{
+	margin: 50px 0 0 10px;
+}
+
+.view {
+	width: 316px;
+	height: 216px;
+	margin: 10px;
+	float: left;
+	position: relative;
+	border: 8px solid #fff;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+	background: #333;
+	-webkit-perspective: 500px;
+	-moz-perspective: 500px;
+	-o-perspective: 500px;
+	-ms-perspective: 500px;
+	perspective: 500px;
+}
+
+.view .slice{
+	width: 60px;
+	height: 100%;
+	z-index: 100;
+	
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	
+	-webkit-transform-origin: left center;
+	-moz-transform-origin: left center;
+	-o-transform-origin: left center;
+	-ms-transform-origin: left center;
+	transform-origin: left center;
+	
+	-webkit-transition: -webkit-transform 150ms ease-in-out;
+	-moz-transition: -moz-transform 150ms ease-in-out;
+	-o-transition: -o-transform 150ms ease-in-out;
+	-ms-transition: -ms-transform 150ms ease-in-out;
+	transition: transform 150ms ease-in-out;
+		
+}
+
+.view div.view-back{
+	width: 50%;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	background: #000;
+	z-index: 0;
+}
+
+.view-back span {
+	display: block;
+	float: right;
+	padding: 5px 20px 5px;
+	width: 100%;
+	text-align: right;
+	font-size: 16px;
+	color: rgba(255,255,255,0.6);
+}
+
+.view-back span:first-child {
+	padding-top: 20px;
+}
+
+.view-back a {
+	display: block;
+	font-size: 18px;
+	color: rgba(255,255,255,0.4);
+	position: absolute;
+	right: 15px;
+	bottom: 15px;
+	border: 2px solid rgba(255,255,255,0.3);
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	line-height: 22px;
+	text-align: center;
+	font-weight: 700;
+}
+
+.view-back a:hover {
+	color: #fff;
+	border-color: #fff;
+}
+
+.view-back span[data-icon]:before {
+    content: attr(data-icon);
+    font-family: 'heydings_icons';
+	text-shadow: 0 0 1px rgba(255,255,255,0.2);
+	padding-right: 5px;
+}
+
+.view-back span[data-icon =b]:before {
+	color: #0066FF;
+}
+.view-back span[data-icon =h]:before {
+	color: #FF1919;
+}
+.view-back span[data-icon =B]:before {
+	color: #008A00;
+}
+.view .s2, 
+.view .s3, 
+.view .s4, 
+.view .s5 {
+	-webkit-transform: translate3d(60px,0,0);
+	-moz-transform: translate3d(60px,0,0);
+	-o-transform: translate3d(60px,0,0);
+	-ms-transform: translate3d(60px,0,0);
+	transform: translate3d(60px,0,0);
+}
+.view .s1 {
+	background-position: 0px 0px;
+}
+.view .s2 {
+	background-position: -60px 0px;
+}
+.view .s3 {
+	background-position: -120px 0px;
+}
+.view .s4 {
+	background-position: -180px 0px;
+}
+.view .s5 {
+	background-position: -240px 0px;
+}
+/*.main{
+	width: 672px;
+	height: 480px;
+	padding: 0px 0;
+
+	position: relative;
+	overflow: hidden;
+	
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}*/
+
+/** To style the frames of Bookmarks*/
+input[type="text"] {
+-webkit-appearance: textfield; /* 1 */
+-moz-box-sizing: content-box;
+-webkit-box-sizing: content-box; /* 2 */
+box-sizing: content-box;
+}
+
+/* apply a natural box layout model to all elements */
+/* By Paul Irish: http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+* { box-sizing: border-box; }
+       
+
+/***********HOVER OVER FEATURE*/
+.view {
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	-o-perspective: 1000px;
+	-ms-perspective: 1000px;
+	perspective: 1000px;
+}
+
+.view:hover .s1{
+	-webkit-transform: rotate3d(0,1,0,-55deg);
+	-moz-transform: rotate3d(0,1,0,-55deg);
+	-o-transform: rotate3d(0,1,0,-55deg);
+	-ms-transform: rotate3d(0,1,0,-55deg);
+	transform: rotate3d(0,1,0,-55deg);
+}
+
+.view:hover .s2,
+.view:hover .s5{
+	-webkit-transform: translate3d(59px,0,0) rotate3d(0,1,0,20deg);
+	-moz-transform: translate3d(59px,0,0) rotate3d(0,1,0,20deg);
+	-o-transform: translate3d(59px,0,0) rotate3d(0,1,0,20deg);
+	-ms-transform: translate3d(59px,0,0) rotate3d(0,1,0,20deg);
+	transform: translate3d(59px,0,0) rotate3d(0,1,0,20deg);
+}
+
+.view:hover .s3{
+	-webkit-transform: translate3d(59px,0,0) rotate3d(0,1,0,30deg);
+	-moz-transform: translate3d(59px,0,0) rotate3d(0,1,0,30deg);
+	-o-transform: translate3d(59px,0,0) rotate3d(0,1,0,30deg);
+	-ms-transform: translate3d(59px,0,0) rotate3d(0,1,0,30deg);
+	transform: translate3d(59px,0,0) rotate3d(0,1,0,30deg);
+}
+
+.view:hover .s4{
+	-webkit-transform: translate3d(59px,0,0) rotate3d(0,1,0,40deg);
+	-moz-transform: translate3d(59px,0,0) rotate3d(0,1,0,40deg);
+	-o-transform: translate3d(59px,0,0) rotate3d(0,1,0,40deg);
+	-ms-transform: translate3d(59px,0,0) rotate3d(0,1,0,40deg);
+	transform: translate3d(59px,0,0) rotate3d(0,1,0,40deg);
+}
+
+.view .s1 > .overlay {
+	background: -moz-linear-gradient(left, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(left, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(left, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(left, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+}
+
+.view .s5 > .overlay {
+	background: -moz-linear-gradient(right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 100%);
+	background: -o-linear-gradient(right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 100%);
+	background: -ms-linear-gradient(right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(right, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0) 100%);
+}

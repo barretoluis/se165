@@ -1,0 +1,242 @@
+@font-face {
+	font-family: 'heydings_icons';
+	src: url('/framework/bootstrap/fonts/heydings_icons.ttf') format('truetype');
+}
+
+/* Error styles */
+div.exception {
+	border: 1px solid red;
+	background-color: #FFE0EB;
+	width: 85%;
+	height: 400px;
+	margin: auto;
+	padding: 5px 10px 5px 10px;
+	position:float;
+	z-index:10;
+	overflow: auto;
+	opacity:0.93;
+	filter:alpha(opacity=93); /* For IE8 and earlier */
+	top:0px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-top: 50px;
+}
+
+div.exceptionHide {
+	border: 1px solid red;
+	background-color: #FFE0EB;
+	padding: 5px 10px 5px 10px;
+	position:absolute;
+	z-index:10;
+	height: 10px;
+	width: 100%;
+	overflow: hidden;
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+	top:50px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+div.formError {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	font-size: smaller;
+	border: 1px solid red;
+	background-color: #FFE0EB;
+	padding: 1px 10px 10px 10px;
+	overflow: auto;
+	width: 750px;
+	display: block;
+}
+
+div.footer {
+	clear: left;
+}
+
+
+
+/* Main content styles */
+body {
+	background: #FFFFFF;
+	color: #5a5a5a;
+	font: 14px Arial;
+	margin: 0 auto;
+	padding: 0;
+	position: relative;
+}
+
+h3{
+    font-size: 20px;
+}
+.main {
+	margin-top: 50px;
+}
+
+/* for Navbar in the homepage*/
+.container-fluid{
+	margin-left: 5px;
+	margin-right: 20px;
+}
+
+.navbar-search{
+	padding-left: -10px;
+}
+
+.dropdown-menu .divider {
+	height: 1px;
+	margin: 9px 1px;
+	overflow: hidden;
+	background-color: #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.dropdown-menu li>a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
+	background-image: none;
+	background-color: #5CD65C;
+}
+
+/** FOR SEARCH BAR*/
+.sb_wrapper{
+	margin:0;
+	padding:0;
+	position: absolute;
+	top:3px;
+	left:210px;
+	width:372px;
+}
+.sb_wrapper input[type="text"],
+ul.sb_dropdown{
+	border:1px solid #fff;
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#fafafa));
+	background: -moz-linear-gradient(top, #f2f2f2, #fafafa);
+	-moz-box-shadow:1px 1px 3px #555;
+	-webkit-box-shadow:1px 1px 3px #555;
+	-box-shadow:1px 1px 3px #555;
+	outline:none;
+	padding:6px 5px 6px 20px;
+	width:310px;
+	float:left;
+	margin:0px;
+}
+ul.sb_dropdown{
+	float:left;
+	list-style:none;
+	width:369px;
+	padding:6px 5px;
+	-moz-border-radius:0px 0px 10px 10px;
+	-webkit-border-bottom-right-radius:10px;
+	-webkit-border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	border-bottom-left-radius:10px;
+}
+ul.sb_dropdown li{
+	line-height:32px;
+	height:32px;
+	float:left;
+	width:50%;
+}
+ul.sb_dropdown li input[type="checkbox"]{
+	float:left;
+	margin:10px 4px 0 5px;
+}
+ul.sb_dropdown li.sb_filter{
+	width:360px;
+	border:1px solid #f9f9f9;
+	clear:both;
+	background: #5CD65C;
+	color:white;
+	height:25px;
+	line-height:16px;
+	padding:5px;
+	-moz-box-shadow:0px 0px 2px #777;
+	-webkit-box-shadow:0px 0px 3px #555 inset;
+	-box-shadow:0px 0px 3px #555 inset;
+
+}
+span.sb_up,
+span.sb_down{
+	position:absolute;
+	top:3px;
+	left:0px;
+	width:14px;
+	height:28px;
+	background-color:#f2f2f2;
+	background-position:center center;
+	background-repeat: no-repeat;
+	z-index:10;
+	border:1px solid #fff;
+	-moz-box-shadow:1px 0px 1px #ddd;
+	-webkit-box-shadow:1px 0px 1px #ddd;
+	-box-shadow:1px 0px 1px #ddd;
+
+}
+span.sb_up{
+	background-image:url(/shared/images/upLogo.png);
+}
+span.sb_down{
+	background-image:url(/shared/images/downLogo.png);
+}
+input.sb_search{
+	background:#f2f2f2 url(/shared/images/searchLogo.png) no-repeat center center;
+	height:34px;
+	width:32px;
+	float:left;
+	border:none;
+	margin: 0px;
+	border:1px solid #fff;
+	-moz-box-shadow:1px 1px 3px #555;
+	-webkit-box-shadow:1px 1px 3px #555;
+	-box-shadow:1px 1px 3px #555;
+	outline:none;
+	cursor:pointer;
+}
+input.sb_search:hover{
+	background-color:#fff;
+}
+
+.sb_dropdown label{
+    margin-top: 7px;
+}
+
+.profile{
+    margin-top: 50px;
+}
+.profile h3{
+    text-align: center;
+}
+.profile .container{
+    width: 400px;
+}
+
+.bookmark{
+    margin-top: 50px;
+}
+.bookmark .container{
+    width: 600px;
+}
+.bookmark h3{
+    text-align: center;
+}
+.bookmark button{
+    float:right;
+    margin-right: 20px;
+}
+.form-horizontal{
+    padding: 10px;
+}
+.form-horizontal input[type="text"] {
+    width: 400px;
+}
+
+.form-horizontal textarea {
+    width: 400px;
+}
+
+.form-horizontal table td{
+    padding: 0 10px 8px 10px ;
+}

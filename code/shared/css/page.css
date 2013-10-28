@@ -1,0 +1,46 @@
+.head {
+	background-color: Aqua;
+	background-image: url(/shared/images/bg_head.png);
+	height: 75px;
+	width: 960px;
+	margin-top: 0px;
+	padding-top: 0px;
+	position: relative;
+	overflow: visible;
+}
+
+.headRepeat {
+	background-color: Fuchsia;
+	background-image: url(/shared/images/bg_headRepeat.png);
+	height: 75px;
+	width: 100%;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+img.logo {
+	margin-top:17px;
+	margin-left:17px;
+	float: left;
+}
+
+div.search {
+	margin-left: 200px;
+	top: 35%;
+	bottom: 65%;
+	position: absolute;
+	height: 75px;
+	float: left;
+}
+
+div.headMenu {
+	top: 45%;
+	bottom: 55%;
+	height: 75px;
+	float: right;
+}
+
+
+
+
+
