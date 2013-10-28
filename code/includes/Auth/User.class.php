@@ -158,16 +158,42 @@ class User {
                     FROM  `user_credentials`
                     WHERE  `email` LIKE  '$email'";
 		$sqlObj->DoQuery($query);
+                $resultset = $sqlObj->GetData();
+                
 		$num = $sqlObj->getNumberOfRecords();
 		if ($num > 0) {
-			$found = TRUE;
+                        $id = $resultset[0]['id'];
+			$found = $id;
 		} else {
 			$found = FALSE;
 		}
 		return $found;
 		$sqlObj->destroy();
 	}
-
+        /** Deletes the user account. 
+         * @param email
+         * 
+         * 
+         */
+        public function deleteUser($email){
+            $sqlObj = new DataBase();
+            $id = $this->searchUser($email);
+            if ($id != FALSE){
+                $query = "DELETE FROM `db_tackster`.`user_credentials` WHERE `user_credentials`.`id`=$id";
+                $sqlObj->DoQuery($query);
+                $query = "DELETE FROM `db_tackster`.`user_profile` WHERE `user_profile`.`uc_id` = $id";
+                $sqlObj->DoQuery($query);
+                $query ="DELETE FROM `db_tackster`.`track` WHERE `track`.`uc_id` = $id";
+                $sqlObj->DoQuery($query);
+                $query = "DELETE FROM `db_tackster`.`bmk_activity` WHERE `bmk_activity`.`uc_id` = $id";
+                $sqlObj->DoQuery($query);
+                $query = "DELETE FROM `db_tackster`.`bmk_entry` WHERE `bmk_entry`.`uc_id` = $id";
+                $sqlObj->DoQuery($query); 
+                $query = "DELETE FROM `db_tackster`.`bmk_activity` WHERE `bmk_activity`.`uc_id` = $id";
+                $sqlObj->DoQuery($query); 
+            }
+            $sqlObj->destroy();
+        }
 	/** Loads the user information based on the e-mail address that is provided. This queries the
 	 * database to retrieve all of the user credentials, such as first and last name.
 	 *
