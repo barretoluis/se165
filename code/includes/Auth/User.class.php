@@ -90,7 +90,7 @@ class User {
 	 * @return type This is a hashed numeric value to check against the input password.
 	 */
 	public function encyptPwd($pwd) {
-		$passPhrase = PASS_SALT . $pwd;
+		$passPhrase = SALT_PASS . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
 		return $sha512;
 	}
@@ -127,7 +127,7 @@ class User {
                     </html>";
 		$emailObj->createEmail($htmlString);
 		$emailObj->sendEmail();
-            
+
         }
 
 	/** This function creates an Email object with
@@ -266,17 +266,17 @@ class User {
                 $this->loadUser($email);
                 $sqlObj = new DataBase();
                 $newEncryptedPWD = $this->encyptPwd($newPWD);
-                $query = "UPDATE  `db_tackster`.`user_credentials` SET  
-                         `password` = '$newEncryptedPWD' WHERE  
+                $query = "UPDATE  `db_tackster`.`user_credentials` SET
+                         `password` = '$newEncryptedPWD' WHERE
                          `user_credentials`.`email` = '$email'";
                 $sqlObj->DoQuery($query);
                 $sqlObj->destroy();
                 $this->sendResteEmail($email, $newPWD);
-                
+
             }
             else{
                 throw new MyException('User Profile not found');
-            }    
+            }
         }
 
 }
