@@ -242,9 +242,8 @@ class User {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
-		//$passPhrase = SALT_PASS . $pwd;
-                $sha512 = $this->encyptPwd($pwd);
-		//$sha512 = hash('sha512', $passPhrase);
+		$passPhrase = SALT_PASS . $pwd;
+		$sha512 = hash('sha512', $passPhrase);
 		$query = "SELECT  `id`, `email` ,  `password` ,  `state` ,  `fromFB`
                     FROM  `user_credentials`
                     WHERE  `email`='{$email}'
