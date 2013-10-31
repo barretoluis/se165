@@ -28,7 +28,8 @@ $includeFilesMain = array(
 	'faceBookApi.php',
 	'mandrillApi.php',
 	'Auth/User.class.php',
-	'track.php'
+	'track.php',
+    '/framework/js/reveal.min.js'
 );
 
 //Do we have more files to include in this page
