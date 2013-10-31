@@ -4,7 +4,7 @@
 /**
  * This class provides information pertaining to bookmarks.
  * It contains a URL, a description and keywords. The UI takes these variables
- * to display the
+ * to display the bookmark with its title, description and image
  *
  * @author Miguel Gonzalez
  */
