@@ -95,11 +95,6 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
 
 
 	<body>
-		<!-- Navigation Bar -->
-		<?php require_once('html/navbar.php'); ?>
-		<!-- /Navigation Bar -->
-
-
 		<!-- Body Content-->
                 <div class="profile">
                     <h3>My Profile</h3>
@@ -158,10 +153,5 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
                     </div>
 		</div>
 		<!-- /Body Content-->
-
-		<!-- Footer Content -->
-		<?php require_once('html/footer.php'); ?>
-		<!-- /Footer Content -->
-
 	</body>
 </html>

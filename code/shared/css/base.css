@@ -203,9 +203,6 @@ input.sb_search:hover{
     margin-top: 7px;
 }
 
-.profile{
-    margin-top: 50px;
-}
 .profile h3{
     text-align: center;
 }
@@ -213,9 +210,6 @@ input.sb_search:hover{
     width: 400px;
 }
 
-.bookmark{
-    margin-top: 50px;
-}
 .bookmark .container{
     width: 600px;
 }

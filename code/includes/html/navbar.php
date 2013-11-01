@@ -37,7 +37,18 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 ?>
 
 <?php if ($loggedIn) { //show logged in-nav   ?>
-
+    <!-- Bookmark Popup-->
+    <link href="/shared/css/colorbox.css" rel="stylesheet">
+    <script src="../framework/jquery/jquery.colorbox.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function(){
+                    //Examples of how to assign the Colorbox event to elements
+                    $(".bookmark_popUp").colorbox({iframe:true, width:"50%", height:"60%"});
+                    $(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
+            });
+    </script>        
+    <!--/Bookmark Popup-->
+    
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid" style= "margin-left: -10px; margin-right: -5px;">
@@ -55,12 +66,13 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                                 <li><a href="/dashboard/followingTracks.php">Following Tracks</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Add Tracks</a></li>
-                                <li><a href="/bookmark/" data-reveal-id="bookmark-modal">Add Bookmark</a></li> <!--was working here!!!!-->
+                                <li><a class='bookmark_popUp' href="/bookmark/">Add Bookmark</a></li>
                                 <!--li><a data-toggle="modal" href="#bookmarkModal">Add Bookmark</a></li-->
                             </ul>
                         </li>
                     </ul>
                 </div>
+                
                 <div class="searchbar">
                     <form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
                         <p>
@@ -85,6 +97,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                 </div>
                 <div>
                 </div>
+                
                 <!-- The JavaScript specific to search bar-->
                 <script type="text/javascript">
                     $(function() {
@@ -126,8 +139,8 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                         <?php echo_formData($userName) ?> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" >
-                        <!--li><a href="/account/">Profile</a></li-->
-                        <li><a data-toggle="modal" href="#profileModal">Profile</a></li>
+                        <li><a class='profile_popUp' href="/account/">Profile</a></li>
+                        <!--li><a data-toggle="modal" href="#profileModal">Profile</a></li-->
                         <li><a href="/auth/logout.php">Logout</a></li>
                     </ul>
                 </div> <!-- closing btn-group -->
@@ -135,12 +148,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
             </div>
         </div>  <!-- closing container-fluid-->
     </div>  <!-- closing navbar-inner-->
-    <!-- Bookmark Modal-->
-    <div class="reveal-modal" id="bookmark-modal">
-        <?php include_once("/bookmark/")?>
-        <a class="close-reveal-modal">x</a>
-    </div><!-- /.modal -->
-    <!--/Bookmark Modal-->
+
 
     <!-- Profile Modal-->
     <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" style="width: 400px;"  >
