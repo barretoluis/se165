@@ -37,7 +37,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 ?>
 
 <?php if ($loggedIn) { //show logged in-nav   ?>
-    <!-- Bookmark Popup-->
+    <!-- Popups-->
     <link href="/shared/css/colorbox.css" rel="stylesheet">
     <script src="../framework/jquery/jquery.colorbox.js"></script>
     <script type="text/javascript">
@@ -47,7 +47,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                     $(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
             });
     </script>        
-    <!--/Bookmark Popup-->
+    <!--/Popups-->
     
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
@@ -67,7 +67,6 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                                 <li class="divider"></li>
                                 <li><a href="#">Add Tracks</a></li>
                                 <li><a class='bookmark_popUp' href="/bookmark/">Add Bookmark</a></li>
-                                <!--li><a data-toggle="modal" href="#bookmarkModal">Add Bookmark</a></li-->
                             </ul>
                         </li>
                     </ul>
@@ -140,7 +139,6 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
                     </button>
                     <ul class="dropdown-menu" >
                         <li><a class='profile_popUp' href="/account/">Profile</a></li>
-                        <!--li><a data-toggle="modal" href="#profileModal">Profile</a></li-->
                         <li><a href="/auth/logout.php">Logout</a></li>
                     </ul>
                 </div> <!-- closing btn-group -->
@@ -148,30 +146,6 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
             </div>
         </div>  <!-- closing container-fluid-->
     </div>  <!-- closing navbar-inner-->
-
-
-    <!-- Profile Modal-->
-    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true" style="width: 400px;"  >
-        <div class="modal-dialog" >
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 style="color:#00B800; font-size: 22px;">Edit Profile</h4>
-                </div>
-                <div class="modal-body" style="margin-left: 25px;">
-                    First Name: &nbsp;<input type = "text" name = "fName" id = "fName" maxlength="20"/> <br/>
-                    Last Name: &nbsp;<input type = "text" name = "lName" id = "lName" maxlength="20"/> <br/>
-                    Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" name = "email" id = "email"/><br/>
-                    Password: &nbsp;&nbsp;<button type="button">Change Password</button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save changes</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!--/Profile Modal-->
     </div>  <!-- closing navbar-->
 
 <?php } else { //show standard nav   ?>

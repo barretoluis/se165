@@ -234,3 +234,16 @@ input.sb_search:hover{
 .form-horizontal table td{
     padding: 0 10px 8px 10px ;
 }
+
+.forgotPassword{
+    padding-top: 50px;
+}
+.forgotPassword h3{
+    text-align: center;
+}
+.forgotPassword .container{
+    width: 350px;
+}
+.forgotPassword button{
+    float:right;
+}

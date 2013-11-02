@@ -122,7 +122,10 @@ $_pagesToIgnore = Array(
 	'/index.php',
 	'/auth/login.php',
 	'/auth/register.php',
-	'/auth/logout.php'
+	'/auth/logout.php',
+        '/auth/forgotPassword.php',
+        '/company/about/index.php',
+        '/company/terms_and_privacy/index.php'
 );
 
 if($ignorePageLogin != FALSE || (!$loggedIn && !in_array($_SERVER['PHP_SELF'], $_pagesToIgnore))) {

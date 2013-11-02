@@ -24,38 +24,12 @@ try {
 	header('HTTP/1.1 500 Internal Server Error', true, 500);
 	exit(0);
 }
-// DO NOT EDIT THIS BLOCK - END
 
-
-
-
-/*
- * Page specific PHP code here
- */
-$formError = NULL; //Error message to show end user
-//If you're already logged in, redirect to the dashboard
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
-	header('Location: /dashboard/');
-}
-
-//test if user is trying to login, if so, do a credential test
-if (isset($_POST['username']) && isset($_POST['password'])) {
-	//Looks like someone is trying to login
-	try {
-		$userObj = new User();
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$userObj->logInUser($username, $password);
-	} catch (MyException $e) {
-		$e->getMyExceptionMessage();
-		$formError = "User / Password combination did not work.";
-	}
-}
 ?><!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Login</title>
+		<title>Tackster | Forgot Password</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -80,7 +54,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="/shared/css/loginStyle.css" />
 	</head>
 
 	<body>
@@ -104,33 +77,27 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			</div>
 		</div>
 		<!-- /Navigation Bar -->
+                
+                <!-- Body Content-->
+                <div class="forgotPassword">
+                    <h3>Forgot Password</h3>
+                    <div class="container">
+                        <div class="well">
+                            <table>
+                                 <tr>
+                                    <td>Enter Email:</td> <!-- Should they be allowed to change their email address?-->
+                                    <td>&nbsp;&nbsp;<input type = "email" name = "email" id = "email"/></td>
+                                 </tr>
 
-		<!-- LOGIN FORM  -->
-		<div class="container" style="margin-top: 80px;">
-			<section id="content">
-				<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formLogin">
-					<h1>Login</h1>
-					<div>
-						<input type="text" name="username" id="username" maxlength="40" placeholder="Username">
-					</div>
-					<div>
-						<input type="password" name="password" id="password" maxlength="15" placeholder="Password">
-					</div>
-					<div>
-						<a href="forgotPassword.php">Forgot Password?</a>
-					</div>
-					<div>
-						<button class="btn btn-default" type="submit">Login</button>
-					</div>
-				</form><!-- form -->
-				<h6><span  class="line-center">OR</span></h6>
-				<a href="#" onClick="MyWindow=window.open('https://www.facebook.com/login.php?skip_api_login=1&api_key=294846713986884&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252F153.18.33.144%252FDEV%252F%26state%3D7a56d86c0a6c372440bf849d630e2a27%26scope%3Demail%26client_id%3D294846713986884%26ret%3Dlogin&cancel_uri=http%3A%2F%2F153.18.33.144%2FDEV%2F%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26state%3D7a56d86c0a6c372440bf849d630e2a27%23_%3D_&display=page','MyWindow',width=20,height=30); return false;">
-					<img src= "http://i.imgur.com/zIhhdJP.png" alt="Login with Facebook" class= "img-rounded" style="margin-top: 10px"/>
-				</a>
-			</section><!-- content -->
-		</div><!-- container -->
+                             </table>
+                             <p><button class="btn btn-success" type="submit" on-click="">Submit</button></p>
+                             <br/>
+                        </div>
+                    </div>
+		</div>
+		<!-- /Body Content-->
 
-		<!-- Footer Content -->
+                <!-- Footer Content -->
 		<?php require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 	</body>
