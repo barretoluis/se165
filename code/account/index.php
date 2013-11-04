@@ -38,19 +38,20 @@ $updateStatus = NULL;
 $nameFirst = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : NULL;
 $nameLast = (isset($_SESSION['profile']['last'])) ? $_SESSION['profile']['last'] : NULL;
 $nameUser = (isset($_SESSION['profile']['username'])) ? $_SESSION['profile']['username'] : NULL;
+$emailUser = (isset($_SESSION['profile']['email'])) ? $_SESSION['profile']['email'] : NULL;
 $userSex = (isset($_SESSION['profile']['sex'])) ? $_SESSION['profile']['sex'] : NULL;
 
-if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
-	$nameFirst = (isset($_POST['first'])) ? $_POST['first'] : NULL;
-	$nameLast = (isset($_POST['last'])) ? $_POST['last'] : NULL;
+if (isset($_POST['formAction']) && $_POST['formAction'] == "saveProfile") {
+	$nameFirst = (isset($_POST['fname'])) ? $_POST['fname'] : NULL;
+	$nameLast = (isset($_POST['lname'])) ? $_POST['lname'] : NULL;
 	$nameUser = (isset($_POST['username'])) ? $_POST['username'] : NULL;
-	$userSex = (isset($_POST['sex'])) ? $_POST['sex'] : NULL;
+	$userSex = (isset($_POST['gender'])) ? $_POST['gender'] : NULL;
 
 //	throw new MyException(json_encode($_POST));
 
 	try {
 		$updateProfile = new User();
-		$updateStatus = $updateProfile->updateUser($_POST);
+		$updateStatus = $updateProfile->updateUser($_SESSION['uc_id'], $_POST);
 		if (isset($_POST))
 			unset($_POST); //no longer need the POST variables
 		$formStatus = "edit"; //updated successfully so show profile
@@ -77,7 +78,7 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
 
 		<!-- Style Sheets -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-		<link href="/shared/css/base.css" rel="stylesheet" type="text/css">             
+		<link href="/shared/css/base.css" rel="stylesheet" type="text/css">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -96,61 +97,67 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "edited") {
 
 	<body>
 		<!-- Body Content-->
-                <div class="profile">
-                    <h3>My Profile</h3>
-                    <style>
-                        .input[readonly] {
-                                background: #CCC;
-                                color: #333;
-                                border: 1px solid #666
-                        }
-                    </style>
-                <div class="container">
-                    <div class="well">
-                        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
-                           <table>
-                                <tr>
-                                   <td>&nbsp;&nbsp;&nbsp;First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                   <td>
-                                      <input type = "text" name = "fName" id = "fName" value="<?PHP echo_formData($nameFirst)?>" maxlength="20" <?php echo $formField ?>/>
-                                   </td>
-                                </tr>
-                                <tr>
-                                   <td>&nbsp;&nbsp;&nbsp;Last Name:</td>
-                                   <td><input type = "text" name = "lName" id = "lName" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>/>
-                                   </td>
-                                </tr>
-                                <tr>
-                                   <td>&nbsp;&nbsp;&nbsp;Email:</td> <!-- Should they be allowed to change their email address?-->
-                                   <td><input type = "email" name = "email" id = "email"/>
-                                   </td>
-                                </tr>
-                                <tr>
-                                   <td>&nbsp;&nbsp;&nbsp;Password:</td> <!--Should we give them an opportunity to change password? if not see it? -->
-                                   <td>
-                                      <input type = "password" name = "password" id = "password"/>
-                                   </td>
-                                </tr>
-                                <tr>
-                                   <td>&nbsp;&nbsp;&nbsp;Gender:</td>
-                                   <td>
-                                    <label class="radio inline"><input type="radio" name="sex" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male &nbsp;&nbsp;</label>
-                                    <label class="radio inline"><input type="radio" name="sex" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female </label>
-                                   </td>
-                                </tr>
-                            </table>
-                            <?php if ($formAction == 'edit') { ?>
-                                <br/>
-                                <p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Save Profile</button></p>
-                            <?php } else { ?>
-                            </form>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileUpdate" id="formProfileUpdate">
-                                    <input type="hidden" name="formAction" value="edit">
-                                    <p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Edit Profile</button></p>
-                            <?php } ?>
-                            </form>
-                        </div>
-                    </div>
+		<div class="profile">
+			<h3>My Profile</h3>
+			<style>
+				.input[readonly] {
+					background: #CCC;
+					color: #333;
+					border: 1px solid #666
+				}
+			</style>
+			<div class="container">
+				<div class="well">
+					<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
+						<table>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>
+									<input type = "text" name = "fname" id = "fname" value="<?PHP echo_formData($nameFirst) ?>" maxlength="20" <?php echo $formField ?>/>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;Last Name:</td>
+								<td><input type="text" name="lname" id="lname" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>/>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;Username:</td>
+								<td><input type="username" name="username" id="username" value="<?PHP echo_formData($nameUser) ?>"  <?php echo $formField ?>/>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;Email:</td> <!-- Should they be allowed to change their email address?-->
+								<td><input type="email" name="email" id="email" value="<?PHP echo_formData($emailUser) ?>"  <?php echo $formField ?>/>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;Password:</td> <!--Should we give them an opportunity to change password? if not see it? -->
+								<td>
+									<input type="password" name="password" id="password"  <?php echo $formField ?> placeholder="Enter New Password to Reset"/>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;&nbsp;&nbsp;Gender:</td>
+								<td>
+                                    <label class="radio inline"><input type="radio" name="gender" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male &nbsp;&nbsp;</label>
+                                    <label class="radio inline"><input type="radio" name="gender" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female </label>
+								</td>
+							</tr>
+						</table>
+						<?php if ($formAction == 'edit') { ?>
+							<br/>
+							<input type="hidden" name="formAction" value="saveProfile">
+							<p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Save Profile</button></p>
+						<?php } else { ?>
+						</form>
+						<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileUpdate" id="formProfileUpdate">
+							<input type="hidden" name="formAction" value="edit">
+							<p><button class="btn btn-success" type="submit" on-click="<?php echo$_SERVER['PHP_SELF'] ?>">Edit Profile</button></p>
+						<?php } ?>
+					</form>
+				</div>
+			</div>
 		</div>
 		<!-- /Body Content-->
 	</body>

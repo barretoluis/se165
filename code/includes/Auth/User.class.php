@@ -18,11 +18,13 @@ class User {
 	private $lname;
 	private $fname;
 	private $email;
+	private $username;
 	private $password;
 	private $state;
 	private $fromFB;
 	private $about;
 	private $gender;
+	private $_errorMsg = Array();
 
 	//private $userInfoArray;
 
@@ -36,6 +38,7 @@ class User {
 		$this->fname = $userDataArray['fname'];
 		$this->lname = $userDataArray['lname'];
 		$this->email = $userDataArray['email'];
+		$this->username = $userDataArray['email'];
 		//$this->password = $userDataArray['password'];
 		$tempPwd = $userDataArray['password'];
 		$this->gender = $userDataArray['gender'];
@@ -46,7 +49,7 @@ class User {
 		$sqlObj = new DataBase();
 		$this->password = $this->encyptPwd($tempPwd);
 
-		$query = "INSERT INTO  `db_tackster`.`user_credentials` (
+		$query = "INSERT INTO  `user_credentials` (
                     `id` ,
                     `email` ,
                     `password` ,
@@ -59,10 +62,10 @@ class User {
                     '$this->fromFB', CURRENT_TIMESTAMP
                 );";
 		$credentialID = $sqlObj->DoQuery($query);
-		$query = "INSERT INTO `db_tackster`.`user_profile` (`uc_id`, `id`, `first`,
+		$query = "INSERT INTO `user_profile` (`uc_id`, `id`, `first`,
                 `last`, `username`, `sex`, `bio`, `photo`, `timestamp`)
                 VALUES
-                ('$credentialID', NULL, '$this->fname', '$this->lname', '$this->email', '$this->gender',
+                ('$credentialID', NULL, '$this->fname', '$this->lname', '$this->username', '$this->gender',
                 NULL, NULL, CURRENT_TIMESTAMP);";
 		$sqlObj->DoQuery($query);
 		$sqlObj->destroy();
@@ -75,12 +78,58 @@ class User {
 	 *
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
-	 * @return boolean This boolean is defaulted to TRUE since the function isn't implemented yet.
+	 * @return array Returns an array of errors. NULL if transaction was successful.
 	 */
-	public function updateUser($userDataArray) {
-		//TODO: Implement method
-//		throw new MyException('Method createUser() not implemented');
-		return TRUE;
+	public function updateUser($userId, $userDataArray) {
+		$this->uid = (int) $userId;
+		$this->fname = $userDataArray['fname'];
+		$this->lname = $userDataArray['lname'];
+		$this->email = $userDataArray['email'];
+		$this->username = $userDataArray['username'];
+		$tempPwd = $userDataArray['password'];
+		$this->password = $this->encyptPwd($tempPwd);
+		$this->gender = $userDataArray['gender'];
+
+		//TODO: Look at bookmark class for sample try/catch block around DB code
+		$sqlObj = new DataBase();
+
+		//Update email if needed
+		if ($this->email != $_SESSION['profile']['email'] && $this->uid) {
+			if ($this->searchUser($this->email)) {
+				//email already exists
+				array_push($this->_errorMsg, "Email address already exists. Please try another one.");
+			} else {
+				$query = "UPDATE `user_credentials` SET email='" . $this->email . "  ' WHERE id='" . $this->uid . "'";
+				$result = $sqlObj->DoQuery($query);
+			}
+		}
+
+		//Update password if needed
+		if ($tempPwd && $this->uid) {
+			$query = "UPDATE `user_credentials` SET password='" . $this->password . "  ' WHERE id='" . $this->uid . "'";
+			$result = $sqlObj->DoQuery($query);
+		}
+
+		//Update profile if needed
+		//Construct fields
+		$_queryCols = Array();
+		array_push($_queryCols, (isset($this->fname)) ? "first='" . $this->fname . "'": '');
+		array_push($_queryCols, (isset($this->lname)) ? "last='" . $this->lname . "'": '');
+		array_push($_queryCols, (isset($this->username)) ? "username='" . $this->username . "'": '');
+		array_push($_queryCols, (isset($this->gender)) ? "sex='" . $this->gender . "'": '');
+
+		if ($this->uid && count($_queryCols)>0) {
+			$queryColsVals = implode(", ", $_queryCols);
+			$query = "UPDATE `user_profile` SET {$queryColsVals} WHERE uc_id='" . $this->uid . "'";
+			$result = $sqlObj->DoQuery($query);
+		}
+
+		//Reload session profile with updated data from the DB
+		$_SESSION['profile'] = $this->loadUser($this->email);
+
+		$sqlObj->destroy();
+
+		return $_errorMsg;
 	}
 
 	/**
@@ -115,20 +164,20 @@ class User {
 		}
 		return $match;
 	}
-        /** This function creates a Password reset email and dends it to the user
-         * @param type $email the email of the user
-         */
-        public function sendResteEmail($email, $pwd){
-            	$to = array($this->email => $this->fname . " " . $this->lname);
+
+	/** This function creates a Password reset email and dends it to the user
+	 * @param type $email the email of the user
+	 */
+	public function sendResteEmail($email, $pwd) {
+		$to = array($this->email => $this->fname . " " . $this->lname);
 		$emailObj = new mandrillApi($to, "Passwowrd Successfuly reseted");
 		$htmlString = "<html>
-                    <h1>Your passwd was successfuly resset</hi>
+                    <h1>Your passwd was successfuly reset</hi>
                     <p>Your new password is: $pwd</p>
                     </html>";
 		$emailObj->createEmail($htmlString);
 		$emailObj->sendEmail();
-
-        }
+	}
 
 	/** This function creates an Email object with
 	 * a welcome message confirming account creation.
@@ -154,46 +203,47 @@ class User {
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
 		$found = FALSE;
-		$query = "SELECT *
-                    FROM  `user_credentials`
-                    WHERE  `email` LIKE  '$email'";
+		$query = "SELECT * FROM  `user_credentials` WHERE  `email`='$email'";
 		$sqlObj->DoQuery($query);
-                $resultset = $sqlObj->GetData();
-                
+		$resultset = $sqlObj->GetData();
+
 		$num = $sqlObj->getNumberOfRecords();
 		if ($num > 0) {
-                        $id = $resultset[0]['id'];
+			$id = $resultset[0]['id'];
 			$found = $id;
 		} else {
 			$found = FALSE;
 		}
+		$sqlObj->destroy();
+
 		return $found;
+	}
+
+	/** Deletes the user account.
+	 * @param email
+	 *
+	 *
+	 */
+	public function deleteUser($email) {
+		$sqlObj = new DataBase();
+		$id = (int) $this->searchUser($email);
+		if ($id != FALSE) {
+			$query = "DELETE FROM `db_tackster`.`user_credentials` WHERE `user_credentials`.`id`=$id";
+			$sqlObj->DoQuery($query);
+			$query = "DELETE FROM `db_tackster`.`user_profile` WHERE `user_profile`.`uc_id` = $id";
+			$sqlObj->DoQuery($query);
+			$query = "DELETE FROM `db_tackster`.`track` WHERE `track`.`uc_id` = $id";
+			$sqlObj->DoQuery($query);
+			$query = "DELETE FROM `db_tackster`.`bmk_activity` WHERE `bmk_activity`.`uc_id` = $id";
+			$sqlObj->DoQuery($query);
+			$query = "DELETE FROM `db_tackster`.`bmk_entry` WHERE `bmk_entry`.`uc_id` = $id";
+			$sqlObj->DoQuery($query);
+			$query = "DELETE FROM `db_tackster`.`bmk_activity` WHERE `bmk_activity`.`uc_id` = $id";
+			$sqlObj->DoQuery($query);
+		}
 		$sqlObj->destroy();
 	}
-        /** Deletes the user account. 
-         * @param email
-         * 
-         * 
-         */
-        public function deleteUser($email){
-            $sqlObj = new DataBase();
-            $id = $this->searchUser($email);
-            if ($id != FALSE){
-                $query = "DELETE FROM `db_tackster`.`user_credentials` WHERE `user_credentials`.`id`=$id";
-                $sqlObj->DoQuery($query);
-                $query = "DELETE FROM `db_tackster`.`user_profile` WHERE `user_profile`.`uc_id` = $id";
-                $sqlObj->DoQuery($query);
-                $query ="DELETE FROM `db_tackster`.`track` WHERE `track`.`uc_id` = $id";
-                $sqlObj->DoQuery($query);
-                $query = "DELETE FROM `db_tackster`.`bmk_activity` WHERE `bmk_activity`.`uc_id` = $id";
-                $sqlObj->DoQuery($query);
-                $query = "DELETE FROM `db_tackster`.`bmk_entry` WHERE `bmk_entry`.`uc_id` = $id";
-                $sqlObj->DoQuery($query); 
-                $query = "DELETE FROM `db_tackster`.`bmk_activity` WHERE `bmk_activity`.`uc_id` = $id";
-                $sqlObj->DoQuery($query); 
-            }
-            $sqlObj->destroy();
-        }
+
 	/** Loads the user information based on the e-mail address that is provided. This queries the
 	 * database to retrieve all of the user credentials, such as first and last name.
 	 *
@@ -206,14 +256,8 @@ class User {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
-		$query = "SELECT  `uc_id`, `first` ,  `last` ,  `sex`, `username`
-                  FROM  `user_profile`
-                  WHERE  `uc_id` = (
-                    SELECT  `id`
-                    FROM  `user_credentials`
-                    WHERE  `email`='{$email}'
-                    )
-                ";
+		$query = "SELECT id AS uc_id, first, last, email, username, sex FROM v_returnShortUserProfile WHERE email='{$email}';";
+
 		$sqlObj->DoQuery($query);
 		$result = $sqlObj->GetData();
 
@@ -226,6 +270,8 @@ class User {
 		} else {
 			$result = NULL;
 		}
+
+		$sqlObj->destroy();
 
 		return $result;
 	}
@@ -283,27 +329,26 @@ class User {
 		}
 		header('Location: /');
 	}
-        /** This function loads a user object and based on an email provided provides
-         * the facility to reset a user's password.
-         * @param type $email The email address of the user
-         */
-        public function resetPassword($email,$newPWD){
-            if($this->searchUser($email)==TRUE){
-                $this->loadUser($email);
-                $sqlObj = new DataBase();
-                $newEncryptedPWD = $this->encyptPwd($newPWD);
-                $query = "UPDATE  `db_tackster`.`user_credentials` SET
+
+	/** This function loads a user object and based on an email provided provides
+	 * the facility to reset a user's password.
+	 * @param type $email The email address of the user
+	 */
+	public function resetPassword($email, $newPWD) {
+		if ($this->searchUser($email) == TRUE) {
+			$this->loadUser($email);
+			$sqlObj = new DataBase();
+			$newEncryptedPWD = $this->encyptPwd($newPWD);
+			$query = "UPDATE  `db_tackster`.`user_credentials` SET
                          `password` = '$newEncryptedPWD' WHERE
                          `user_credentials`.`email` = '$email'";
-                $sqlObj->DoQuery($query);
-                $sqlObj->destroy();
-                $this->sendResteEmail($email, $newPWD);
-
-            }
-            else{
-                throw new MyException('User Profile not found');
-            }
-        }
+			$sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+			$this->sendResteEmail($email, $newPWD);
+		} else {
+			throw new MyException('User Profile not found');
+		}
+	}
 
 }
 
