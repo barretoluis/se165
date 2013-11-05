@@ -39,7 +39,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 <?php if ($loggedIn) { //show logged in-nav   ?>
 	<!-- Popups-->
 	<link href="/shared/css/colorbox.css" rel="stylesheet">
-	<script src="../framework/jquery/jquery.colorbox.js"></script>
+	<script src="/framework/jquery/jquery.colorbox.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//Examples of how to assign the Colorbox event to elements
@@ -49,6 +49,27 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 	</script>
 	<!--/Popups-->
 
+	<link href="/shared/css/jquery.sidr.light.css" rel="stylesheet">
+	<script src="/framework/sidr/jquery.sidr.min.js"></script>
+	<?php
+	require_once 'html/trackMenu.php';
+	?>
+
+<!--	<div id="sidr">
+		<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr"><small>(close menu)</small></a></div>
+		<ul>
+			<li style="margin-left: 5px;"><b>My Tracks</b></li>
+			<li><a href="#">My Private Track</a></li>
+			<li class="active"><a href="#">My Public Track</a></li>
+			<li><a href="#">Another track</a></li>
+		</ul>
+		<ul>
+			<li style="margin-left: 5px;"><b>Following Tracks</b></li>
+			<li><a href="#">My Private Track</a></li>
+			<li class="active"><a href="#">My Public Track</a></li>
+			<li><a href="#">Another track</a></li>
+		</ul>
+	</div>-->
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid" style= "margin-left: -10px; margin-right: -5px;">
@@ -64,6 +85,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">My Dashboard</a></li>
 								<li><a href="/dashboard/followingTracks.php">Following Tracks</a></li>
+								<li><a id="simple-menu" href="#sidr">Tracks</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/">Add Bookmark</a></li>
@@ -71,6 +93,14 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 						</li>
 					</ul>
 				</div>
+				<script>
+					$(document).ready(function() {
+						$('#simple-menu').sidr();
+					});
+					$(document).ready(function() {
+						$('#simple-menu2').sidr();
+					});
+				</script>
 
 				<div class="searchbar">
 					<form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
@@ -148,6 +178,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 		</div>  <!-- closing container-fluid-->
 	</div>  <!-- closing navbar-inner-->
 	</div>  <!-- closing navbar-->
+
 
 <?php } else { //show standard nav   ?>
 
