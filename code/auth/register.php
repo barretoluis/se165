@@ -37,7 +37,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	header('Location: /dashboard/');
 }
 
-//test if user is trying to login, if so, do a credential test
+//create a user
 if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']) && isset($_POST['lname'])) {
 	try {
 		$userObj = new user();
@@ -52,7 +52,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
 			'source' => 'S');
 		$userObj->createUser($userArray);
 
-		header('Location: /dashboard/');
+		header('Location: /auth/login.php');
 		exit();
 
 	} catch (MyException $e) {
