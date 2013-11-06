@@ -49,8 +49,9 @@ div.formError {
 	background-color: #FFE0EB;
 	padding: 1px 10px 10px 10px;
 	overflow: auto;
-	width: 750px;
+/*	width: 750px;*/
 	display: block;
+	padding: 10px 10px 10px 10px;
 }
 
 div.footer {

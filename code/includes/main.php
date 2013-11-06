@@ -28,7 +28,7 @@ $includeFilesMain = array(
 	'faceBookApi.php',
 	'mandrillApi.php',
 	'Auth/User.class.php',
-	'track.php'    
+	'track.php'
 );
 
 //Do we have more files to include in this page
@@ -102,9 +102,9 @@ if ($exists) {
 			'gender' => $fbinfo['gender'],
 			'source' => 'F');
 		$userObj->createUser($userArray);
-		header('Location:dashboard.php');
+		header('Location: /dashboard/');
 	} else {
-		header('Location:dashboard.php');
+		header('Location: /dashboard/');
 	}
 } else {
 	$fbButton = '<a href="' . $faceBookObj->getLoginUrl() . '">;
