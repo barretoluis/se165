@@ -52,7 +52,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	}
 }
 ?><!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 	<head>
 		<title>Tackster | Login</title>

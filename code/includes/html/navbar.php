@@ -88,7 +88,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 								<li><a id="simple-menu" href="#sidr">Tracks</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Add Tracks</a></li>
-								<li><a class='bookmark_popUp' href="/bookmark/">Add Bookmark</a></li>
+								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
 							</ul>
 						</li>
 					</ul>

@@ -10,11 +10,14 @@
 require_once 'DataBase.php';
 
 class Bookmark {
+
+	private $_errorMsgs = Array();
 	private $_bookmarks = Array();
+	private $_comments = Array();
 	private $ucId;
 	private $defaultTid;
 	private $trackId;
-	private $_errorMsgs = Array();
+	private $bmkId;
 
 	/*
 	 * Standard constructor
@@ -31,7 +34,15 @@ class Bookmark {
 	}
 
 	/**
-	 * Create the standard bookmark object.
+	 * Create the standard bookmark object and insert into DB.
+	 *
+	 * @param type $trackId The ID of the track the bookmark should be added to.
+	 * @param type $url The URL of the destination bookmark.
+	 * @param type $privacy 1 if private or 0 for public access.
+	 * @param type $description The description of the bookmark.
+	 * @param type $keyword Comma separated list of keywords for the bookmark.
+	 *
+	 * @return array Return user friendly error messages if any.
 	 *
 	 */
 	public function createBookmark($trackId, $url, $privacy, $description, $keyword = NULL) {
@@ -65,17 +76,91 @@ class Bookmark {
 	}
 
 	/**
-	 * Create the standard bookmark object.
+	 * Return a bookmark and all it's data.
 	 *
-	 * @param int $bmkId ID of bookmark to get data for from DB. If NULL, return the existing object's data.
+	 * @param int $bmkId For a given bookmark ID, return its data.
+	 *
+	 * @return array Result only contains one entry of the bookmark requested.
+	 */
+	public function returnBookmark($bmkId) {
+		if ($bmkId == NULL) {
+			throw new MyException('One of the parameters was not provided for the bookmark.');
+		}
+
+		$this->resetObject();
+		$this->setBmkId($bmkId);
+
+		//let's make sure to tie the query to the uc_id
+		$query = "SELECT * FROM bmk_entry WHERE id='" . $this->getBmkId() . "'";
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		// Destroy the DB object
+		$sqlObj->destroy();
+
+		$this->setBookmarks($sqlObj->GetData());
+
+		return $this->getBookmarks();
+	}
+
+	/**
+	 * Provided the user's ID, check to see if they have permission to view the bookmark.
+	 *
+	 * @param int $uc_id	The user's credential ID in the DB.
+	 * @param int $bmkId	The ID of the bookmark who's permission should be checked.
+	 * @return boolean		TRUE if user has permissions to view the bookmark.
+	 */
+	public function canViewBmk($uc_id, $bmkId) {
+		if ($uc_id == NULL || $bmkId == NULL) {
+			throw new MyException('One of the parameters was not provided for the bookmark.');
+		}
+
+		$canView = FALSE;
+		$this->setBmkId($bmkId);
+
+		try {
+			$this->returnBookmark($this->getBmkId());
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		$bmkUcId =  (isset($this->_bookmarks[0]['uc_id'])) ? $this->_bookmarks[0]['uc_id'] : FALSE;
+		$privacyValue = (isset($this->_bookmarks[0]['privacy']) && $this->_bookmarks[0]['privacy'] == 1) ? TRUE : FALSE;
+
+		if($bmkUcId == $this->getUcId()) {
+			$canView = TRUE;
+		} elseif ($bmkUcId != $this->getUcId() && $privacyValue == FALSE) {
+			//the bookmark privacy is set to public
+			$canView = TRUE;
+		}
+
+		return $canView;
+	}
+
+	/**
+	 * Get all the bookmarks and their data for a given Track ID.
+	 * This method also assumes the user's credential ID was already set as a session object.
+	 * This assures only bookmarks are returned for the authorized user.
+	 *
+	 * @param int $trackId	The ID of the track to get bookmarks for.
 	 * @return array Returns an array of all bookmark data from the DB.
 	 */
-	public function getBmkDataByTrack($trackId) {
-		$this->setTrackId($trackId);
-
+	public function returnBmkDataByTrack($trackId) {
 		if ($this->getTrackId() == NULL) {
 			throw new MyException('No track ID provided.');
 		}
+
+		$this->resetObject();
+		$this->setTrackId($trackId);
+		$this->setBmkId(NULL); //Reset id since this will not be a single bookmark
 
 		//let's make sure to tie the query to the uc_id
 		$query = "SELECT * FROM bmk_entry WHERE t_id='" . $this->getTrackId() . "' AND uc_id='" . $this->getUcId() . "'";
@@ -99,16 +184,67 @@ class Bookmark {
 	}
 
 	/**
-	 * Set Bookmarks variable.
+	 * Return the comments for a given bookmark entry.
 	 *
-	 * @param array $_bookmarks Set the bookmarks array with bookmark data.
+	 * @param int $bmkId ID of bookmark to get data for from DB..
+	 * @return array Returns an array of all bookmark comments from the DB.
 	 */
-	private function setBookmarks($_bookmarks) {
-		$this->_bookmarks = $_bookmarks;
+	public function returnBmkComments($bmkId) {
+		$this->setBmkId($bmkId);
+
+		if ($this->getBmkId() == NULL) {
+			throw new MyException('No bookmark ID provided.');
+			return NULL;
+		}
+
+		//let's make sure to tie the query to the uc_id
+		$query = "select * from `v_returnBookmarkComments` where be_id='" . $this->getBmkId() . "'";
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		// Destroy the DB object
+		$sqlObj->destroy();
+
+		$this->setComments($sqlObj->GetData());
+
+		return $this->getComments();
 	}
 
 	/**
-	 * Get URL variable.
+	 * Reset this objects varibles.
+	 *
+	 */
+	private function resetObject() {
+		$this->setBmkId(NULL);
+		$this->setBookmarks(NULL);
+		$this->setComments(NULL);
+		$this->setDefaultTid(NULL);
+		$this->setTrackId(NULL);
+	}
+
+	/* *************************************************************************
+	 * SETTERS and GETTERS
+	 */
+
+	/**
+	 * Populate private variable with bookmarks data.
+	 *
+	 * @param array $_bookmarks Set the bookmarks array with bookmark data from the DB.
+	 */
+	private function setBookmarks($_bookmarks) {
+		$this->_bookmarks = (array) $_bookmarks;
+	}
+
+	/**
+	 * Get the DB results of bookmarks data.
 	 *
 	 * @return array  Return the bookmarks array with bookmark data.
 	 */
@@ -122,7 +258,7 @@ class Bookmark {
 	 * @param int $defaultTid Set the user's default track id.
 	 */
 	private function setDefaultTid($defaultTid) {
-		$this->defaultTid = $$defaultTid;
+		$this->defaultTid = (int) $defaultTid;
 	}
 
 	/**
@@ -135,16 +271,16 @@ class Bookmark {
 	}
 
 	/**
-	 * Set TrackId variable.
+	 * Set the user's credential ID.
 	 *
-	 * @param string $trackId Set the user's ID.
+	 * @param int $ucId Set the user's ID.
 	 */
 	private function setUcId($ucId) {
 		$this->ucId = (int) $ucId;
 	}
 
 	/**
-	 * Get URL variable.
+	 * Get the user's credential ID.
 	 *
 	 * @return int User's ID.
 	 */
@@ -164,10 +300,46 @@ class Bookmark {
 	/**
 	 * Get URL variable.
 	 *
-	 * @return string ID of the track for which the bookmark should be related to.
+	 * @return int ID of the track for which the bookmark should be related to.
 	 */
 	private function getTrackId() {
 		return $this->trackId;
+	}
+
+	/**
+	 * Set bookmark ID.
+	 *
+	 * @param int $bmkId Bookmark id in the DB.
+	 */
+	private function setBmkId($bmkId) {
+		$this->bmkId = (int) $bmkId;
+	}
+
+	/**
+	 * Get bookmark id variable.
+	 *
+	 * @return int Bookmark id in the DB.
+	 */
+	private function getBmkId() {
+		return $this->bmkId;
+	}
+
+	/**
+	 * Set the array with comments from a given bookmark.
+	 *
+	 * @param array $_comments Result set from DB of the comments.
+	 */
+	private function setComments($_comments) {
+		$this->_comments = (array) $_comments;
+	}
+
+	/**
+	 * Get bookmark id variable.
+	 *
+	 * @return array Result set from DB of the comments.
+	 */
+	private function getComments() {
+		return $this->_comments;
 	}
 
 }
