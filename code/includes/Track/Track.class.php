@@ -172,12 +172,12 @@ class Track {
 			}
 		}
 
-
 		return $trackId;
 	}
 
 	/**
 	 * Get the tracks for the given user id.
+	 * IMPORTANT: This method will not return the user's default track.
 	 *
 	 * @param type $ucId The user's credential ID
 	 * @param type $fields The specific fields that are going to be returned.
@@ -193,7 +193,45 @@ class Track {
 		$_resultSet = NULL;
 
 		$ucId = (int) $ucId; //cast as into to assure no SQL injection
-		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' ORDER BY title ASC";
+		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' AND flag_default != 1 ORDER BY title ASC";
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+
+			$_resultSet = $sqlObj->GetData();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		$sqlObj->destroy();
+
+		return $_resultSet;
+	}
+
+	/**
+	 * Get the tracks for the given user id.
+	 * IMPORTANT: This method will not return the user's default track.
+	 *
+	 * @param type $ucId The user's credential ID
+	 * @param type $fields The specific fields that are going to be returned.
+	 * @return type Return's an array of all tracks for the given ucId.
+	 * @throws MyException Throws an exception if the user id is less than one.
+	 */
+	//TODO: To be implemented
+	public function returnFollowingTracks($ucId, $fields = NULL) {
+		if ($ucId < !1) {
+			throw new MyException('Sorry, you forgot to provide a user id. I cannot retrieve any tracks without it. Here\'s what you tried sending: "' . $ucId . '".');
+		}
+
+		$fields = ($fields != NULL) ? $fields : "*";
+		$_resultSet = NULL;
+
+		$ucId = (int) $ucId; //cast as into to assure no SQL injection
+		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' AND flag_default != 1 ORDER BY title ASC";
 
 		try {
 			//Construct DB object

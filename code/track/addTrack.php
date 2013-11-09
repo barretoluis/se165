@@ -42,6 +42,16 @@ $private = (isset($_POST['privacy'])) ? $_POST['privacy'] : NULL;
 if ($trackName) {
 	$Track = new Track();
 	$Track->createTrack($ucId, $trackName, $trackDescr, $private);
+	unset($_SESSION['_myTracks']);
+
+	//Get user's tracks if not available in session already
+	try {
+		$myTracks = new track();
+		$_myTracks = $myTracks->getMyTrack($_SESSION['uc_id'], 'id,title,private');
+		$_SESSION['_myTracks'] = $_myTracks;
+	} catch (MyException $e) {
+		$e->getMyExceptionMessage();
+	}
 } else {
 	header('Location: /dashboard/');
 	exit;

@@ -3,7 +3,7 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
-	'track.php'
+	'Track/Track.class.php'
 );
 
 
@@ -33,8 +33,11 @@ try {
 /*
  * Page specific PHP code here
  */
+
+
 //Variables
-$html = '<li class="private"><a href="/dashboard/">My Dashboard</a>'; //default dashboard
+$ucId = (int) $_SESSION['uc_id'];
+$html = NULL; //default dashboard
 $_myTracks = NULL;
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
@@ -42,8 +45,8 @@ $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first
 //Get user's tracks if not available in session already
 if (!isset($_SESSION['_myTracks'])) {
 	try {
-		$myTracks = new track();
-		$_myTracks = $myTracks->getMyTrack($_SESSION['uc_id'], 'id,title,private');
+		$Track = new Track();
+		$_myTracks = $Track->getMyTrack($_SESSION['uc_id'], 'id,title,private');
 		$_SESSION['_myTracks'] = $_myTracks;
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
@@ -52,25 +55,32 @@ if (!isset($_SESSION['_myTracks'])) {
 	$_myTracks = $_SESSION['_myTracks'];
 }
 
+$defaultTrackId = $Track->returnDefaultTrackId($ucId);
+$defaultTrackName = $Track->returnTrackName($defaultTrackId);
+$html = '<li class="private"><a href="/dashboard/">' . $defaultTrackName . '</a>'; //default dashboard
+
 foreach ($_myTracks as $dbRow) {
 	$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
 
-	foreach ($dbRow as $key => $value) {
-		switch ($key) {
-			case 'id':
-				if (!$isPrivate) {
-					$html .= '<li class="private"><a href="/dashboard/?tid=' . $value . '">';
-				} else {
-					$html .= '<li><a href="/dashboard/?tid=' . $value . '">';
-				}
-				break;
+	//we don't want the default track in the list again
+	if ($dbRow['id'] != $defaultTrackId) {
+		foreach ($dbRow as $key => $value) {
+			switch ($key) {
+				case 'id':
+					if ($isPrivate) {
+						$html .= '<li class="private"><a href="/dashboard/?tid=' . $value . '">';
+					} else {
+						$html .= '<li><a href="/dashboard/?tid=' . $value . '">';
+					}
+					break;
 
-			case 'title':
-				$html .= $value . "</a></li>\n";
-				break;
+				case 'title':
+					$html .= $value . "</a></li>\n";
+					break;
 
-			default:
-				break;
+				default:
+					break;
+			}
 		}
 	}
 }
