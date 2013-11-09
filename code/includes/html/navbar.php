@@ -1,6 +1,6 @@
 <?php
 require_once('Utility/EnvUtilities.class.php');
-require_once('track.php');
+require_once('Track/Track.class.php');
 
 $searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord'] : NULL;
 
@@ -43,6 +43,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//Examples of how to assign the Colorbox event to elements
+			$(".track_popUp").colorbox({iframe:true, width:"50%", height:"60%"});
 			$(".bookmark_popUp").colorbox({iframe:true, width:"50%", height:"60%"});
 			$(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
 		});
@@ -87,7 +88,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 								<li><a href="/dashboard/followingTracks.php">Following Tracks</a></li>
 								<li><a id="simple-menu" href="#sidr">Tracks</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Add Tracks</a></li>
+								<li><a class='track_popUp' href="/track/createTrack.php">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
 							</ul>
 						</li>

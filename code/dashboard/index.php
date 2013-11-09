@@ -3,7 +3,9 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
-	'Bookmark/SearchBookmark.class.php'
+	'Bookmark/SearchBookmark.class.php',
+	'Bookmark/Bookmark.class.php',
+	'Track/Track.class.php'
 );
 
 
@@ -33,27 +35,35 @@ try {
 /*
  * Page specific PHP code here
  */
-$searchWord = NULL; //search terms from form
-$_bookmarks = NULL; //return results of found bookmarks as an array
-$formError = NULL; //form error messages to show end user on web page
-$formSubmitted = FALSE; //flag if form was submitted
-//TODO: Right now I'm doing a hard search. Need to fix based on track.
+$ucId = $_SESSION['uc_id'];
+$trackId = (isset($_GET['tid'])) ? (int) $_GET['tid'] : NULL;
+$Bookmark = new Bookmark();
+$Track = new track();
 
-//prefer a post variable over a get
-$searchWord = 'search';
-
-//Do a search for the search words
-if (strlen($searchWord) >= 0) { //was a keyword even submitted
-	try {
-		$getBookmark = new SearchBookmark();
-		$_bookmarks = $getBookmark->getBookmark($searchWord);
-	} catch (MyException $e) {
-		$e->getMyExceptionMessage();
-	}
-} else {
-	$formError = "No search terms were provided in the Bookmark Search.";
+//Let's see if a specific track was requested. Else show the default track.
+if ($trackId == NULL) {
+	//let's get the default track id
+	$trackId = $Track->returnDefaultTrackId($ucId);
 }
-$formSubmitted = TRUE;
+
+//TODO: Add this code to main and do a one time check on login instead
+//Create a default track for the user if one doesn't exist.
+try {
+	$trackId = $Track->createDefaultTrack($ucId);
+} catch (MyException $e) {
+	$e->getMyExceptionMessage();
+}
+
+//Get the requested track to view's name
+$trackName = $Track->returnTrackName($trackId);
+
+//Get all the bookmarks associated with the track requested
+try {
+	$_bookmarks = $Bookmark->returnBmkDataByTrack($trackId);
+} catch (MyException $e) {
+	$_bookmarks = NULL;
+	$e->getMyExceptionMessage();
+}
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -87,7 +97,7 @@ $formSubmitted = TRUE;
 
 		<script type="text/javascript">
 			//TODO: The font heydings is being called. Where is it in the code... probably remove it.
-                        //Reply (Shruti): can't remove it b/c those give the icons: heart, bookmark, comments on the each track!
+			//Reply (Shruti): can't remove it b/c those give the icons: heart, bookmark, comments on the each track!
 			Modernizr.load({
 				test: Modernizr.csstransforms3d && Modernizr.csstransitions,
 				yep : ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js','/shared/js/jquery.hoverfold.js'],
@@ -105,20 +115,21 @@ $formSubmitted = TRUE;
 
 	<body>
 		<!-- Navigation Bar -->
-<?php require_once('html/navbar.php'); ?>
+		<?php require_once('html/navbar.php'); ?>
 		<!-- /Navigation Bar -->
 
 
 		<!-- Body Content-->
 		<div id="bookmarks" class="main" >
-			<h3>My Dashboard</h3>
+			<h3><?php echo_formData($trackName) ?></h3>
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
 
 			<p><?php
-			if (isset($_bookmarks)) {
+			if (isset($_bookmarks) && count($_bookmarks) > 0) {
 				foreach ($_bookmarks as $_bmk) {
+					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$html = '<div class="view">';
 					$html .= '	<div class="view-back">';
 					$html .= '		<span data-icon="b">' . $_bmk['like_count'] . '</span>';
@@ -141,7 +152,7 @@ $formSubmitted = TRUE;
 		<!-- /Body Content-->
 
 		<!-- Footer Content -->
-<?php require_once('html/footer.php'); ?>
+		<?php require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 
 	</body>

@@ -28,7 +28,7 @@ $includeFilesMain = array(
 	'faceBookApi.php',
 	'mandrillApi.php',
 	'Auth/User.class.php',
-	'track.php'
+	'Track/Track.class.php'
 );
 
 //Do we have more files to include in this page

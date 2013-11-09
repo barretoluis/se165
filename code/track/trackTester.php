@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once 'includes/track.php';
+require_once 'Track/Track.class.php';
 
 $criteria = $_POST['criteria'];
-$trackObj = new track();
+$trackObj = new Track();
 $result = $trackObj->searchtrack($criteria);
 var_dump($result);
 ?>

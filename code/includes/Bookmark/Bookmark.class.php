@@ -23,7 +23,6 @@ class Bookmark {
 	 * Standard constructor
 	 *
 	 */
-
 	public function __construct() {
 		$this->setUcId($_SESSION['uc_id']);
 		//$this->setDefaultTid($_SESSION['defaultTrackId']);
@@ -155,7 +154,7 @@ class Bookmark {
 	 * @return array Returns an array of all bookmark data from the DB.
 	 */
 	public function returnBmkDataByTrack($trackId) {
-		if ($this->getTrackId() == NULL) {
+		if ($trackId == NULL) {
 			throw new MyException('No track ID provided.');
 		}
 

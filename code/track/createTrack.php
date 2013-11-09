@@ -65,7 +65,7 @@ try {
 
 	<body>
 		<!-- Navigation Bar -->
-		<?php require_once('html/navbar.php'); ?>
+		<?php //require_once('html/navbar.php'); ?>
 		<!-- /Navigation Bar -->
 
 
@@ -75,7 +75,7 @@ try {
 				<div class="container">
 					<h3>Create Track</h3>
 
-					<form class="form-horizontal" role="form" method="POST" action="addTrack.php">
+					<form class="form-horizontal" role="form" method="POST" action="/track/addTrack.php">
 						<div class="form-group">
 							<label for="inputName" class="col-sm-2 control-label">Name</label>
 							<div class="col-md-3">
@@ -111,7 +111,7 @@ try {
 		<!-- /Body Content-->
 
 		<!-- Footer Content -->
-		<?php require_once('html/footer.php'); ?>
+		<?php //require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 
 	</body>
