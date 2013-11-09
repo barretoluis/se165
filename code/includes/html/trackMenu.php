@@ -41,11 +41,11 @@ $html = NULL; //default dashboard
 $_myTracks = NULL;
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
+$Track = new Track();
 
 //Get user's tracks if not available in session already
 if (!isset($_SESSION['_myTracks'])) {
 	try {
-		$Track = new Track();
 		$_myTracks = $Track->getMyTrack($_SESSION['uc_id'], 'id,title,private');
 		$_SESSION['_myTracks'] = $_myTracks;
 	} catch (MyException $e) {
