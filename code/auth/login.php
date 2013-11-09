@@ -125,7 +125,11 @@ if (count($_websiteErr) >= 1) {
 			<section id="content">
 				<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formLogin">
 					<h1>Login</h1>
-					<?php echo_formData($errString); ?>
+					<?php
+					if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+						echo $_websiteErr;
+					}
+					?>
 					<div>
 						<input type="text" name="username" id="username" maxlength="40" placeholder="Username">
 					</div>
