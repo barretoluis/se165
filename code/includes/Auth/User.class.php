@@ -6,10 +6,10 @@ require_once __DIR__ . '\..\DataBase.php';
 require_once __DIR__ . '\..\mandrillApi.php';
 require_once __DIR__ . '\..\Configs\defineSalt.php';
 */
-require_once '/Utility/MyException.class.php';
-require_once '/DataBase.php';
-require_once '/mandrillApi.php';
-require_once '/Configs/defineSalt.php';
+require_once 'Utility/MyException.class.php';
+require_once 'DataBase.php';
+require_once 'mandrillApi.php';
+require_once 'Configs/defineSalt.php';
 
 
 /**
@@ -40,7 +40,7 @@ class User {
 	 * Queries the Tackster Database to enter this information.
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
-         * 
+         *
          *  @assert (array("fname" => "Robert", "lname" => "Lee", "email" => "test@test.com",
             "password" => "password", "gender" => "M", "source" => "I")) == TRUE
 	 */
@@ -145,7 +145,7 @@ class User {
 
 	/**
 	 * Creates a hash of 128 characters in length based on a passphrase using a salt.
-	 * 
+	 *
 	 * @param type $string This is the password that is input.
 	 * @return type This is a hashed numeric value to check against the input password.
          * @assert ('password') != 'password'
@@ -181,7 +181,7 @@ class User {
 
 	/** This function creates a Password reset email and dends it to the user
          *  @TODO change functionname
-         * 
+         *
 	 * @param type $email the email of the user
          * @assert ('tack@tackster.com', 'param2') != Exception
 	 */
