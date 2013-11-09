@@ -32,24 +32,40 @@ try {
 /*
  * Page specific PHP code here
  */
-$formError = NULL; //Error message to show end user
+$_websiteErr = Array(); //Error message to show end user
 //If you're already logged in, redirect to the dashboard
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	header('Location: /dashboard/');
 }
 
 //test if user is trying to login, if so, do a credential test
-if (isset($_POST['username']) && isset($_POST['password'])) {
-	//Looks like someone is trying to login
-	try {
-		$userObj = new User();
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$userObj->logInUser($username, $password);
-	} catch (MyException $e) {
-		$e->getMyExceptionMessage();
-		$formError = "User / Password combination did not work.";
+if (isset($_POST['username']) || isset($_POST['password'])) {
+	if ($_POST['username'] == NULL) {
+		array_push($_websiteErr, 'Please complete the username field.');
+	} elseif ($_POST['password'] == NULL) {
+		array_push($_websiteErr, 'Please complete the password field.');
+	} else {
+		//Looks like someone is trying to login
+		try {
+			$userObj = new User();
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$userObj->logInUser($username, $password);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			array_push($_websiteErr, 'User / Password combination did not work.');
+		}
 	}
+}
+
+//format any errors
+if (count($_websiteErr) >= 1) {
+	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
+	foreach ($_websiteErr as $value) {
+		$errString .= "<li>" . $value . "</li>\n";
+	}
+	$errString .= '</ol></div>';
+	$_websiteErr = $errString;
 }
 ?><!DOCTYPE html>
 <html>
@@ -109,6 +125,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 			<section id="content">
 				<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formLogin">
 					<h1>Login</h1>
+					<?php echo_formData($errString); ?>
 					<div>
 						<input type="text" name="username" id="username" maxlength="40" placeholder="Username">
 					</div>
