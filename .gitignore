@@ -1,1 +1,8 @@
-/barreto/
+#NetBeans project folders
+/barreto/*
+/jphul/*
+/nbproject/*
+/rlee/*
+
+#Test directories
+/code/test/*
