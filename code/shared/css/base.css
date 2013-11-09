@@ -62,7 +62,7 @@ div.footer {
 
 /* Main content styles */
 body {
-	background: #FFFFFF;
+	background: #E8E8E8;
 	color: #5a5a5a;
 	font: 14px Arial;
 	margin: 0 auto;
@@ -247,4 +247,33 @@ input.sb_search:hover{
 }
 .forgotPassword button{
     float:right;
+}
+
+.createTrack .container{
+    width: 600px;
+}
+.createTrack h3{
+    text-align: center;
+}
+.createTrack button{
+    float:right;
+    margin-right: 20px;
+}
+
+.displayBookmark .container{
+    width: 600px;
+}
+.displayBookmark h3{
+    text-align: center;
+}
+.displayBookmark button{
+    float:right;
+    margin-right: 20px;
+}
+.displayBookmark .container .well img {
+    display: block;
+    margin: 0 auto;
+}
+.displayBookmark .container .well h3 {
+    text-align: left;
 }
