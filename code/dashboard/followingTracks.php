@@ -39,7 +39,7 @@ try {
     <!-- Style Sheets -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
     <link href="/shared/css/base.css" rel="stylesheet" type="text/css">
-
+    <link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="/framework/bootstrap/assets/js/html5shiv.js"></script>
@@ -51,13 +51,14 @@ try {
     <script src="/framework/jquery/jquery-1.10.2.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/framework/bootstrap/js/bootstrap.min.js"></script>
-
-    <link href="/shared/css/tackStyle.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
     <script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
     <script type="text/javascript">
             //TODO: The font heydings is being called. Where is it in the code... probably remove it.
-            //Reply (Shruti): can't remove it b/c those give the icons: heart, bookmark, comments on the each track!
+            //Reply (Shruti): can't remove it b/c those provide icons: heart, bookmark, comments on each track!
             Modernizr.load({
                     test: Modernizr.csstransforms3d && Modernizr.csstransitions,
                     yep : ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js','/shared/js/jquery.hoverfold.js'],
@@ -75,138 +76,64 @@ try {
     <!-- Navigation Bar -->
         <?php require_once('html/navbar.php'); ?>
     <!-- /Navigation Bar -->
-  
+  <script>
+      $(document).ready(function() {
+    $('.track img').click(function () {
+       window.location = 'trackSpecific.php';
+    });
+});
+  </script>
   <!-- Body ***TO DO: GET THE PHOTOS TO AUTOMATICALLY RESIZE TO 300 X 200px!!!
     ================================================== -->
-    <div id="bookmarks" class="main" >
-      <h3>Following Tacks!! *Note: tacks vs. bookmarks</h3>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">200</span>
-          <span data-icon="h">124</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/4846704157/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/Shoes.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">210</span>
-          <span data-icon="h">102</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/3.jpg"/>
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">690</span>
-          <span data-icon="h">361</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/6.jpg"/>
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">987</span>
-          <span data-icon="h">130</span>
-          <span data-icon="B"></span>
-          <a href="http://www.google.com">&rarr;</a>
-        </div>
-        <img src="/shared/images/1.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">200</span>
-          <span data-icon="h">124</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/4846704157/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/4.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">210</span>
-          <span data-icon="h">102</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/3.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">690</span>
-          <span data-icon="h">361</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/6.jpg"/>
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">987</span>
-          <span data-icon="h">130</span>
-          <span data-icon="B"></span>
-          <a href="http://www.google.com">&rarr;</a>
-        </div>
-        <img src="/shared/images/1.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">200</span>
-          <span data-icon="h">124</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/4846704157/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/4.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">210</span>
-          <span data-icon="h">102</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/3.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">690</span>
-          <span data-icon="h">361</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/6.jpg"/>
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">987</span>
-          <span data-icon="h">130</span>
-          <span data-icon="B"></span>
-          <a href="http://www.google.com">&rarr;</a>
-        </div>
-        <img src="/shared/images/1.jpg" />
-      </div>
+    <div class="main" >
+      <h3>&nbsp; &nbsp; &nbsp;This should be My Dashboard View!</h3>
+      <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="row-fluid">
+            <div class="track">
+              <div id="trackName">Track 1</div>
+              <img src= "/shared/images/placeholder.jpg"/>
+              <a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            </div><!--/span-->
+            <div class="track">
+              <div id="trackName">Track 1</div>
+              <img src= "/shared/images/Shoes.jpg"/>
+              <a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            </div><!--/span-->
+            <div class="track">
+              <div id="trackName">Track 1</div>
+              <img src= "/shared/images/placeholder.jpg"/>
+              <a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            </div><!--/span-->
+            <div class="track">
+              <div id="trackName">Track 1</div>
+              <img src= "/shared/images/placeholder.jpg"/>
+              <a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            </div><!--/span-->
+            <div class="track">
+              <div id="trackName">Track 1</div>
+              <img src= "/shared/images/placeholder.jpg"/>
+              <a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            </div><!--/span-->
+            <div class="track" id = "trk">
+              <div id="trackName">Last Track</div>
+              <img src= "/shared/images/placeholder.jpg"/>
+              <a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+              <a class="btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
       
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">210</span>
-          <span data-icon="h">102</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6271521984/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/3.jpg" />
-      </div>
-      <div class="view">
-        <div class="view-back">
-          <span data-icon="b">690</span>
-          <span data-icon="h">361</span>
-          <span data-icon="B"></span>
-          <a href="http://www.flickr.com/photos/ag2r/6131126901/in/photostream">&rarr;</a>
-        </div>
-        <img src="/shared/images/6.jpg"/>
-      </div>
-    </div>
+      		<!-- Footer Content -->
+<?php require_once('html/footer.php'); ?>
+		<!-- /Footer Content -->
+
   </body>
 </html> 

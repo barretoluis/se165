@@ -92,7 +92,7 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
-		<link href="/shared/css/tackStyle.css" rel="stylesheet" type="text/css" />
+		<link href="/shared/css/bookmarkStyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
 		<script type="text/javascript">
@@ -133,8 +133,8 @@ try {
 					$html = '<div class="view">';
 					$html .= '	<div class="view-back">';
 					$html .= '		<span data-icon="b">' . $_bmk['like_count'] . '</span>';
-					$html .= '		<span data-icon="h">???</span>';  //TODO: Repin count needed
-					$html .= '		<span data-icon="B">???</span>';   //TODO: What is this for?
+					$html .= '		<span data-icon="h">???</span>';  //TODO: Count the number of likes
+					$html .= '		<span data-icon="B">???</span>';   //TODO: Bookmark it without reading the description
 					$html .= '		<a href="' . $_bmk['url'] . '">&rarr;</a>';
 					$html .= '	</div>';
 					$html .= '	<img src="/shared/images/4.jpg" />';  //TODO: Pull reference from DB
