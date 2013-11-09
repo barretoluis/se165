@@ -46,7 +46,7 @@ class MyException extends Exception {
 		$err .= "<br><b>Exception Trace:</b><br><pre>" . parent::getTraceAsString() . "</pre></div>\n";
 
 
-		if (ini_get('display_errors') == 1) {
+		if (ini_get('display_errors') == 1 || ini_get('display_errors') == 'On') {
 			//display errors to web page is on
 			print($err);
 			error_log(strip_tags($err));

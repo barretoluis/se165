@@ -8,7 +8,7 @@
  * Debugging Settings
  */
 error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ini_set('display_errors', 'On');
 
 
 /*
@@ -55,7 +55,7 @@ try {
 	$err .= "<br><b>Message:</b> " . $e->getMessage() . "\n";
 	$err .= "<br><b>Trace:</b><br>" . $e->getTraceAsString() . "\n";
 
-	if (ini_get('display_errors') == 1) {
+	if (ini_get('display_errors') == 1 || ini_get('display_errors') == 'On') {
 		//display errors to web page is on
 		print($err);
 		error_log(strip_tags($err));
