@@ -31,7 +31,7 @@ try {
  * Checking if the form is submitted
  */
 
-$formError = NULL; //Error message to show end user
+$_websiteErr = Array(); //Error message to show end user
 //If you're already logged in, redirect to the dashboard
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	header('Location: /dashboard/');
@@ -50,14 +50,28 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
 			'email' => $email,
 			'password' => $password,
 			'source' => 'S');
-		$userObj->createUser($userArray);
 
-		header('Location: /auth/login.php');
-		exit();
-
+		if (!$userObj->createUser($userArray)) {
+			//we weren't successful in creating an account
+			throw new MyException('Was not able to register your account. Please try using a different email address or use forgot password to recover your credentials.');
+		} else {
+			header('Location: /auth/login.php');
+			exit();
+		}
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
+		array_push($_websiteErr, $e->getMessage());
 	}
+}
+
+//format any errors
+if (count($_websiteErr) >= 1) {
+	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
+	foreach ($_websiteErr as $value) {
+		$errString .= "<li>" . $value . "</li>\n";
+	}
+	$errString .= '</ol></div>';
+	$_websiteErr = $errString;
 }
 ?><!DOCTYPE html>
 <head>
@@ -67,6 +81,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
 	<meta name="author" content="">
 
 	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="/shared/css/base.css" />
 	<link rel="stylesheet" type="text/css" href="/shared/css/registerStyle.css" />
 	<link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
 	<link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -101,7 +116,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
                 <a class="brand" href="/" style="color: #00B800">Tackster</a>
                 <div class="nav-collapse collapse">
                     <p class="navbar-text pull-right">
-                       <a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login</a>
+						<a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login</a>
                     </p>
                 </div><!--/.nav-collapse -->
             </div>
@@ -115,21 +130,22 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
         <section id="content">
             <form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formRegister">
                 <h1>Sign Up</h1>
+				<?php echo_formData($errString); ?>
                 <div>
-                        <p>First Name:&nbsp;<input type="text" required="" id="fname" name ="fname"/></p>
+					<p>First Name:&nbsp;<input type="text" required="" id="fname" name ="fname"/></p>
                 </div>
                 <div>
-                        <p>Last Name:&nbsp;<input type="text" required="" id="lname" name ="lname"/></p>
+					<p>Last Name:&nbsp;<input type="text" required="" id="lname" name ="lname"/></p>
                 </div>
                 <div>
-                        <p>Email:&nbsp;<input type="text" required="" id="email" name ="email" /></p>
+					<p>Email:&nbsp;<input type="text" required="" id="email" name ="email" /></p>
                 </div>
                 <div>
-                        <p>Password:&nbsp;<input type="password" required="" id="password" name ="password" /></p>
+					<p>Password:&nbsp;<input type="password" required="" id="password" name ="password" /></p>
                 </div>
                 <div>
-                        <button class="btn btn-success" type="submit" name="submit">Sign Up</button>
-                        <button class="btn btn-danger" type="cancel" href="/">Cancel</button>
+					<button class="btn btn-success" type="submit" name="submit">Sign Up</button>
+					<button class="btn btn-danger" type="cancel" href="/">Cancel</button>
                 </div>
             </form><!-- form -->
             <h6><span  class="line-center">OR</span></h6>
@@ -138,11 +154,11 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
             </a>
         </section>
     </div>
-<!-- /Body Content-->
+	<!-- /Body Content-->
 
-<!-- Footer Content -->
-    <?php require_once('html/footer.php'); ?>
-<!-- /Footer Content -->
+	<!-- Footer Content -->
+	<?php require_once('html/footer.php'); ?>
+	<!-- /Footer Content -->
 
 </body>
 </html>

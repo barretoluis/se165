@@ -1,16 +1,16 @@
 <?php
+
 /*
- for windows users? maybe.
-require_once __DIR__ . '\..\Utility\MyException.class.php';
-require_once __DIR__ . '\..\DataBase.php';
-require_once __DIR__ . '\..\mandrillApi.php';
-require_once __DIR__ . '\..\Configs\defineSalt.php';
-*/
+  for windows users? maybe.
+  require_once __DIR__ . '\..\Utility\MyException.class.php';
+  require_once __DIR__ . '\..\DataBase.php';
+  require_once __DIR__ . '\..\mandrillApi.php';
+  require_once __DIR__ . '\..\Configs\defineSalt.php';
+ */
 require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 require_once 'Configs/defineSalt.php';
-
 
 /**
  * Description of user.
@@ -40,20 +40,19 @@ class User {
 	 * Queries the Tackster Database to enter this information.
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
-         *
-         *  @assert (array("fname" => "Robert", "lname" => "Lee", "email" => "test@test.com",
-            "password" => "password", "gender" => "M", "source" => "I")) == TRUE
+	 *
+	 *  @assert (array("fname" => "Robert", "lname" => "Lee", "email" => "test@test.com",
+	  "password" => "password", "gender" => "M", "source" => "I")) == TRUE
 	 */
 	public function createUser($userDataArray) {
-		$this->fname = $userDataArray['fname'];
-		$this->lname = $userDataArray['lname'];
-		$this->email = $userDataArray['email'];
-		$this->username = $userDataArray['email'];
-		//$this->password = $userDataArray['password'];
-		$tempPwd = $userDataArray['password'];
-		$this->gender = $userDataArray['gender'];
+		$this->fname = (isset($userDataArray['fname'])) ? $userDataArray['fname']: NULL;
+		$this->lname = (isset($userDataArray['lname'])) ? $userDataArray['lname']: NULL;
+		$this->email = (isset($userDataArray['email'])) ? $userDataArray['email']: NULL;
+		$this->username = (isset($userDataArray['email'])) ? $userDataArray['email']: NULL;
+		$tempPwd = (isset($userDataArray['password'])) ? $userDataArray['password']: NULL;
+		$this->gender = (isset($userDataArray['gender'])) ? $userDataArray['gender']: NULL;
 		$this->state = "p";
-		$this->fromFB = $userDataArray['source'];
+		$this->fromFB = (isset($userDataArray['source'])) ? $userDataArray['source']: NULL;
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
@@ -71,16 +70,31 @@ class User {
                     NULL ,  '$this->email',  '$this->password',  '$this->state',
                     '$this->fromFB', CURRENT_TIMESTAMP
                 );";
-		$credentialID = $sqlObj->DoQuery($query);
+		try {
+			//let's try to create a simple credential record
+			$createProfileResult = $credentialID = $sqlObj->DoQuery($query);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			return FALSE;
+		}
+
+
 		$query = "INSERT INTO `user_profile` (`uc_id`, `id`, `first`,
                 `last`, `username`, `sex`, `bio`, `photo`, `timestamp`)
                 VALUES
                 ('$credentialID', NULL, '$this->fname', '$this->lname', '$this->username', '$this->gender',
                 NULL, NULL, CURRENT_TIMESTAMP);";
-		$sqlObj->DoQuery($query);
+		try {
+			//now let's add the user's profile information
+			$sqlObj->DoQuery($query);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			return FALSE;
+		}
+
 		$sqlObj->destroy();
 		$this->sendConfEmail();
-                return true;
+		return true;
 	}
 
 	/**
@@ -124,12 +138,12 @@ class User {
 		//Update profile if needed
 		//Construct fields
 		$_queryCols = Array();
-		array_push($_queryCols, (isset($this->fname)) ? "first='" . $this->fname . "'": '');
-		array_push($_queryCols, (isset($this->lname)) ? "last='" . $this->lname . "'": '');
-		array_push($_queryCols, (isset($this->username)) ? "username='" . $this->username . "'": '');
-		array_push($_queryCols, (isset($this->gender)) ? "sex='" . $this->gender . "'": '');
+		array_push($_queryCols, (isset($this->fname)) ? "first='" . $this->fname . "'" : '');
+		array_push($_queryCols, (isset($this->lname)) ? "last='" . $this->lname . "'" : '');
+		array_push($_queryCols, (isset($this->username)) ? "username='" . $this->username . "'" : '');
+		array_push($_queryCols, (isset($this->gender)) ? "sex='" . $this->gender . "'" : '');
 
-		if ($this->uid && count($_queryCols)>0) {
+		if ($this->uid && count($_queryCols) > 0) {
 			$queryColsVals = implode(", ", $_queryCols);
 			$query = "UPDATE `user_profile` SET {$queryColsVals} WHERE uc_id='" . $this->uid . "'";
 			$result = $sqlObj->DoQuery($query);
@@ -148,8 +162,8 @@ class User {
 	 *
 	 * @param type $string This is the password that is input.
 	 * @return type This is a hashed numeric value to check against the input password.
-         * @assert ('password') != 'password'
-         */
+	 * @assert ('password') != 'password'
+	 */
 	public function encyptPwd($pwd) {
 		$passPhrase = SALT_PASS . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
@@ -163,9 +177,9 @@ class User {
 	 * @param type $dbPwd The hashed password taken from the database
 	 * @return boolean Returns TRUE if the password is the same as the stored password,
 	 * and FALSE if the password is different.
-         * @assert ('tack', '3e818eec51b45583b9881f5f2fe455413483848ab61ba10a0c4914d5cfb24a155dfc70b707b948c1ae7ce175b7ee6f0d54487d07fcc147f813e0283346bb023c') == TRUE
-         * @assert ('tack', '129dkjsf0') == FALSE
-         */
+	 * @assert ('tack', '3e818eec51b45583b9881f5f2fe455413483848ab61ba10a0c4914d5cfb24a155dfc70b707b948c1ae7ce175b7ee6f0d54487d07fcc147f813e0283346bb023c') == TRUE
+	 * @assert ('tack', '129dkjsf0') == FALSE
+	 */
 	public function checkPassword($postPwd, $dbPwd) {
 		//TODO: I don't believe this method has been tested or used anywhere in the code. Need to verify.
 		$match = FALSE;
@@ -180,10 +194,10 @@ class User {
 	}
 
 	/** This function creates a Password reset email and dends it to the user
-         *  @TODO change functionname
-         *
+	 *  @TODO change functionname
+	 *
 	 * @param type $email the email of the user
-         * @assert ('tack@tackster.com', 'param2') != Exception
+	 * @assert ('tack@tackster.com', 'param2') != Exception
 	 */
 	public function sendResteEmail($email, $pwd) {
 		$to = array($this->email => $this->fname . " " . $this->lname);
@@ -214,8 +228,8 @@ class User {
 	 *
 	 * @param type $email The email of the user.
 	 * @return boolean  True if the user was found, False if the user was not found
-         * @assert ('tack@tackster.com') == TRUE
-         * @assert ('notauser@random.org') == FALSE
+	 * @assert ('tack@tackster.com') == TRUE
+	 * @assert ('notauser@random.org') == FALSE
 	 */
 	public function searchUser($email) {
 
@@ -339,7 +353,6 @@ class User {
 	/** This function ends a users session with the server and logs them out of their account.
 	 * @assert () == TRUE
 	 */
-
 	public function logOutUser() {
 		if (isset($_SESSION)) {
 			unset($_SESSION);
@@ -347,7 +360,7 @@ class User {
 			session_destroy();
 		}
 		header('Location: /');
-                return TRUE;
+		return TRUE;
 	}
 
 	/** This function loads a user object and based on an email provided provides
