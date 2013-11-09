@@ -33,6 +33,7 @@ class faceBookApi {
 	 * Returns the URL for the user to logout, so that the user can logout from
 	 * our website.
 	 * @return type Returns a URL.
+         * 
 	 */
 	public function getLogOutUrl() {
 		return $this->logoutUrl;

@@ -2,8 +2,7 @@
 /*
  * Add additional include files to array if needed for this page.
  */
-$includeFilesAdditional = array(
-);
+$includeFilesAdditional = array();
 
 
 

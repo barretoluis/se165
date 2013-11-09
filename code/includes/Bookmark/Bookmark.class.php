@@ -117,6 +117,7 @@ class Bookmark {
 	 * @param int $uc_id	The user's credential ID in the DB.
 	 * @param int $bmkId	The ID of the bookmark who's permission should be checked.
 	 * @return boolean		TRUE if user has permissions to view the bookmark.
+         * @assert (param1, param2) == expectedResult
 	 */
 	public function canViewBmk($uc_id, $bmkId) {
 		if ($uc_id == NULL || $bmkId == NULL) {
@@ -220,7 +221,7 @@ class Bookmark {
 
 	/**
 	 * Reset this objects varibles.
-	 *
+	 * @assert () == TRUE
 	 */
 	private function resetObject() {
 		$this->setBmkId(NULL);
@@ -228,6 +229,7 @@ class Bookmark {
 		$this->setComments(NULL);
 		$this->setDefaultTid(NULL);
 		$this->setTrackId(NULL);
+                return TRUE;
 	}
 
 	/* *************************************************************************
@@ -235,9 +237,10 @@ class Bookmark {
 	 */
 
 	/**
-	 * Populate private variable with bookmarks data.
+	 * Populate private variable with from passed in bookmark data.
 	 *
 	 * @param array $_bookmarks Set the bookmarks array with bookmark data from the DB.
+         * @assert () == expectedResult
 	 */
 	private function setBookmarks($_bookmarks) {
 		$this->_bookmarks = (array) $_bookmarks;

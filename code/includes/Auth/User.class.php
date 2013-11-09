@@ -1,9 +1,16 @@
 <?php
+/*
+ for windows users? maybe.
+require_once __DIR__ . '\..\Utility\MyException.class.php';
+require_once __DIR__ . '\..\DataBase.php';
+require_once __DIR__ . '\..\mandrillApi.php';
+require_once __DIR__ . '\..\Configs\defineSalt.php';
+*/
+require_once '/Utility/MyException.class.php';
+require_once '/DataBase.php';
+require_once '/mandrillApi.php';
+require_once '/Configs/defineSalt.php';
 
-require_once 'Utility/MyException.class.php';
-require_once 'DataBase.php';
-require_once 'mandrillApi.php';
-require_once 'Configs/defineSalt.php';
 
 /**
  * Description of user.
@@ -33,6 +40,9 @@ class User {
 	 * Queries the Tackster Database to enter this information.
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
+         * 
+         *  @assert (array("fname" => "Robert", "lname" => "Lee", "email" => "test@test.com",
+            "password" => "password", "gender" => "M", "source" => "I")) == TRUE
 	 */
 	public function createUser($userDataArray) {
 		$this->fname = $userDataArray['fname'];
@@ -70,6 +80,7 @@ class User {
 		$sqlObj->DoQuery($query);
 		$sqlObj->destroy();
 		$this->sendConfEmail();
+                return true;
 	}
 
 	/**
@@ -134,10 +145,11 @@ class User {
 
 	/**
 	 * Creates a hash of 128 characters in length based on a passphrase using a salt.
-	 *
+	 * 
 	 * @param type $string This is the password that is input.
 	 * @return type This is a hashed numeric value to check against the input password.
-	 */
+         * @assert ('password') != 'password'
+         */
 	public function encyptPwd($pwd) {
 		$passPhrase = SALT_PASS . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
@@ -151,7 +163,9 @@ class User {
 	 * @param type $dbPwd The hashed password taken from the database
 	 * @return boolean Returns TRUE if the password is the same as the stored password,
 	 * and FALSE if the password is different.
-	 */
+         * @assert ('tack', '3e818eec51b45583b9881f5f2fe455413483848ab61ba10a0c4914d5cfb24a155dfc70b707b948c1ae7ce175b7ee6f0d54487d07fcc147f813e0283346bb023c') == TRUE
+         * @assert ('tack', '129dkjsf0') == FALSE
+         */
 	public function checkPassword($postPwd, $dbPwd) {
 		//TODO: I don't believe this method has been tested or used anywhere in the code. Need to verify.
 		$match = FALSE;
@@ -166,11 +180,14 @@ class User {
 	}
 
 	/** This function creates a Password reset email and dends it to the user
+         *  @TODO change functionname
+         * 
 	 * @param type $email the email of the user
+         * @assert ('tack@tackster.com', 'param2') != Exception
 	 */
 	public function sendResteEmail($email, $pwd) {
 		$to = array($this->email => $this->fname . " " . $this->lname);
-		$emailObj = new mandrillApi($to, "Passwowrd Successfuly reseted");
+		$emailObj = new mandrillApi($to, "Password Successfuly reseted");
 		$htmlString = "<html>
                     <h1>Your passwd was successfuly reset</hi>
                     <p>Your new password is: $pwd</p>
@@ -197,6 +214,8 @@ class User {
 	 *
 	 * @param type $email The email of the user.
 	 * @return boolean  True if the user was found, False if the user was not found
+         * @assert ('tack@tackster.com') == TRUE
+         * @assert ('notauser@random.org') == FALSE
 	 */
 	public function searchUser($email) {
 
@@ -317,8 +336,8 @@ class User {
 		}
 	}
 
-	/*	 * This function ends a users session with the server and logs them out of their account.
-	 *
+	/** This function ends a users session with the server and logs them out of their account.
+	 * @assert () == TRUE
 	 */
 
 	public function logOutUser() {
@@ -328,6 +347,7 @@ class User {
 			session_destroy();
 		}
 		header('Location: /');
+                return TRUE;
 	}
 
 	/** This function loads a user object and based on an email provided provides
