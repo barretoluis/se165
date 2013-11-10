@@ -14,7 +14,8 @@ body {
 
 .track img{
     width: 100%;
-    height: 150px;
+    max-height: 150px;
+	max-width: 225px;
 }
 
 #trackName{
@@ -27,3 +28,19 @@ body {
     margin-top: 7px;
     width: 84px;
 }
+
+#private {
+	background-image: url("/shared/images/lock.png");
+	background-size: 18px 18px;
+	background-repeat: no-repeat;
+	background-position: 96%;
+	width: 18px;
+	height: 18px;
+	float: right;
+	position: relative;
+	z-index: 2;
+	margin-top: -6px;
+	opacity: 0.85;
+	filter:alpha(opacity=85); /* For IE8 and earlier */
+}
+

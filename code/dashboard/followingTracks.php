@@ -27,7 +27,7 @@ try {
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Following Tracks</title>
+    <title>Tackster | Following Tracks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -51,7 +51,7 @@ try {
     <script src="/framework/jquery/jquery-1.10.2.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/framework/bootstrap/js/bootstrap.min.js"></script>
-    
+
     <link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
     <script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
@@ -72,7 +72,7 @@ try {
     </script>
   </head>
   <body>
-    
+
     <!-- Navigation Bar -->
         <?php require_once('html/navbar.php'); ?>
     <!-- /Navigation Bar -->
@@ -130,10 +130,10 @@ try {
           </div><!--/row-->
         </div><!--/span-->
       </div><!--/row-->
-      
+
       		<!-- Footer Content -->
 <?php require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 
   </body>
-</html> 
+</html>

@@ -35,16 +35,14 @@ try {
 /*
  * Page specific PHP code here
  */
+$htmlTrack = NULL; //default dashboard
+$_myTracks = NULL;
 $ucId = $_SESSION['uc_id'];
-$trackId = (isset($_GET['tid'])) ? (int) $_GET['tid'] : NULL;
-$Bookmark = new Bookmark();
-$Track = new track();
 
-//Let's see if a specific track was requested. Else show the default track.
-if ($trackId == NULL) {
-	//let's get the default track id
-	$trackId = $Track->returnDefaultTrackId($ucId);
-}
+$Track = new Track();
+
+//let's get the default track id
+$trackId = $Track->returnDefaultTrackId($ucId);
 
 //TODO: Add this code to main and do a one time check on login instead
 //Create a default track for the user if one doesn't exist.
@@ -54,15 +52,41 @@ try {
 	$e->getMyExceptionMessage();
 }
 
-//Get the requested track to view's name
-$trackName = $Track->returnTrackName($trackId);
+//Get user's tracks if not available in session already
+if (!isset($_SESSION['_myTracks'])) {
+	try {
+		$_myTracks = $Track->getMyTrack($_SESSION['uc_id'], 'id,title,private');
+	} catch (MyException $e) {
+		$e->getMyExceptionMessage();
+	}
+} else {
+	$_myTracks = $_SESSION['_myTracks'];
+}
 
-//Get all the bookmarks associated with the track requested
-try {
-	$_bookmarks = $Bookmark->returnBmkDataByTrack($trackId);
-} catch (MyException $e) {
-	$_bookmarks = NULL;
-	$e->getMyExceptionMessage();
+//TODO: Make sure a default track cannot be deleted or edited
+$defaultTrackId = $Track->returnDefaultTrackId($ucId);
+$defaultTrackName = $Track->returnTrackName($defaultTrackId);
+$htmlTrack .=<<<EOF
+<div class="track">
+	<div style="position: relative;"><div id="private"></div><div id="trackName">{$defaultTrackName}</div></div>
+	<img src= "/shared/images/placeholder.jpg" tid="{$defaultTrackId}" />
+</div><!--/track-->
+EOF;
+
+foreach ($_myTracks as $dbRow) {
+	$isPrivate = ($dbRow['private'] == "T") ? '<div id="private"></div>' : '';
+
+	//we don't want the default track in the list again
+	if ($dbRow['id'] != $defaultTrackId) {
+		$htmlTrack .=<<<EOF
+<div class="track" id="track">
+	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
+	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
+	<div style="position: relative;"><a class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+	<a class="btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
+</div><!--/track-->\n
+EOF;
+	}
 }
 ?><!DOCTYPE html>
 <html>
@@ -92,21 +116,18 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
-		<link href="/shared/css/bookmarkStyle.css" rel="stylesheet" type="text/css" />
+		<!--		<link href="/shared/css/bookmarkStyle.css" rel="stylesheet" type="text/css" />-->
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
-		<script type="text/javascript">
-			//TODO: The font heydings is being called. Where is it in the code... probably remove it.
-			//Reply (Shruti): can't remove it b/c those give the icons: heart, bookmark, comments on the each track!
-			Modernizr.load({
-				test: Modernizr.csstransforms3d && Modernizr.csstransitions,
-				yep : ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js','/shared/js/jquery.hoverfold.js'],
-				nope: 'css/fallback.css',
-				callback : function( url, result, key ) {
-					if( url === '/shared/js/jquery.hoverfold.js' ) {
-						$( '#bookmarks' ).hoverfold();
-					}
-				}
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
+		<link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css" />
+
+		<script>
+			$(document).ready(function() {
+				$('.track img').click(function () {
+					var tid = parseInt($(this).attr("tid"));
+					window.location = '/track/?tid=' + tid;
+				});
 			});
 		</script>
 
@@ -120,40 +141,27 @@ try {
 
 
 		<!-- Body Content-->
-		<div id="bookmarks" class="main" >
-			<h3><?php echo_formData($trackName) ?></h3>
+		<div class="main" >
+			<h3>My Tracks Dashboard</h3>
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<?php echo_formData($htmlTrack); ?>
+						</div><!--/row-->
+					</div><!--/span-->
+				</div><!--/row-->
+			</div>
 
-			<p><?php
-			if (isset($_bookmarks) && count($_bookmarks) > 0) {
-				foreach ($_bookmarks as $_bmk) {
-					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
-					$html = '<div class="view">';
-					$html .= '	<div class="view-back">';
-					$html .= '		<span data-icon="b">' . $_bmk['like_count'] . '</span>';
-					$html .= '		<span data-icon="h">???</span>';  //TODO: Count the number of likes
-					$html .= '		<span data-icon="B">???</span>';   //TODO: Bookmark it without reading the description
-					$html .= '		<a href="' . $_bmk['url'] . '">&rarr;</a>';
-					$html .= '	</div>';
-					$html .= '	<img src="/shared/images/4.jpg" />';  //TODO: Pull reference from DB
-					$html .= '</div>';
 
-					echo_formData($html);
-				}
-			} else {
-				print("<p class='noSearchResults'>You currently have no bookmarks in this Track.</p>");
-			}
-			?></p>
+			<!-- /Body Content-->
 
-		</div>
-
-		<!-- /Body Content-->
-
-		<!-- Footer Content -->
-		<?php require_once('html/footer.php'); ?>
-		<!-- /Footer Content -->
+			<!-- Footer Content -->
+			<?php require_once('html/footer.php'); ?>
+			<!-- /Footer Content -->
 
 	</body>
 </html>

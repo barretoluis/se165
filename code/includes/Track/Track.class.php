@@ -234,18 +234,15 @@ class Track {
 		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' AND flag_default != 1 ORDER BY title ASC";
 
 		try {
-			//Construct DB object
-			$sqlObj = new DataBase();
-
 			//Execute query
-			$sqlObj->DoQuery($query);
+			$this->sqlObj->DoQuery($query);
 
-			$_resultSet = $sqlObj->GetData();
+			$_resultSet = $this->sqlObj->GetData();
 		} catch (MyException $e) {
 			$e->getMyExceptionMessage();
 		}
 
-		$sqlObj->destroy();
+		$this->sqlObj->destroy();
 
 		return $_resultSet;
 	}
@@ -255,11 +252,10 @@ class Track {
 	 * @param type $trackId the track id that is going to be deleted from the database.
 	 */
 	public function deleteTrack($trackId) {
-		$sqlObj = new DataBase();
 		$query = "DELETE FROM `db_tackster`.`track` WHERE `track`.`id` = $trackId";
-		$sqlObj->DoQuery($query);
-		$resultSet = $sqlObj->GetData();
-		$sqlObj->destroy();
+		$this->sqlObj->DoQuery($query);
+		$resultSet = $this->sqlObj->GetData();
+		$this->sqlObj->destroy();
 	}
 
 }
