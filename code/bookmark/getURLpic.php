@@ -59,7 +59,7 @@ if (isset($_matches[0])) {
 				if (preg_match('/^\//', $imgSrc)) {
 					$imgSrc = $getUrlData . $imgSrc;
 				}
-				echo "<img src=" . $imgSrc . ">";
+				echo '<br><img class="img-polaroid" src="' . $imgSrc . '" ></br>';
 				unset($imgSrc);
 			}
 		} else {
