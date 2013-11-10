@@ -44,7 +44,7 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 		$(document).ready(function(){
 			//Examples of how to assign the Colorbox event to elements
 			$(".track_popUp").colorbox({iframe:true, width:"50%", height:"80%"});
-			$(".bookmark_popUp").colorbox({iframe:true, width:"50%", height:"70%"});
+			$(".bookmark_popUp").colorbox({iframe:true, width:"80%", height:"80%"});
 			$(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
 		});
 	</script>
