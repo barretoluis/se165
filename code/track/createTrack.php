@@ -71,12 +71,12 @@ try {
                     <form class="form-horizontal" id="createTrack" name="createTrack" method="post">
                       <table>
                         <tr>
-                          <img src="/shared/images/Shoes.jpg">
-                          <td width="95"><br/></td>
-                        </tr>
-                        <tr>
                           <td><label>Name: </label></td>
                           <td><input id="name" type="text" name="name" required=""></td>
+                        </tr>
+                        <tr>
+                          <td><label>Description: </label></td>
+                          <td><textarea name="description" rows="3"></textarea></td>
                         </tr>
                         <tr>
                           <td><label style="padding-top:5px;">Privacy: </label></td>
@@ -88,7 +88,7 @@ try {
                           </td>
                         </tr>
                       </table>
-                      <button class="btn btn-success" type="submit" >Submit</button>
+                      <button class="btn btn-success" type="submit" >Create</button>
                     </form>
                   </div>
                 </div>
