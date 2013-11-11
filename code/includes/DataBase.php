@@ -53,7 +53,7 @@ class DataBase {
 	 * displayed saying the query could not be completed.
 	 */
 	public function DoQuery($query) {
-		$this->result = mysqli_query($this->mysqli, $query) or trigger_error("");
+		$this->result = mysqli_query($this->mysqli, $query);// or trigger_error("whattt");
 
 		if (mysqli_error($this->mysqli)) {
 			throw new MyException('<p>Could not run SQL query:<br><pre>' . $query . "</pre></p><p><i>MySQL Error:</i><br>" . mysqli_error($this->mysqli) . "</p>\n");

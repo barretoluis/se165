@@ -1,7 +1,7 @@
 <?php
 
 /*
-  for windows users? maybe.
+//  for windows users? maybe.
   require_once __DIR__ . '\..\Utility\MyException.class.php';
   require_once __DIR__ . '\..\DataBase.php';
   require_once __DIR__ . '\..\mandrillApi.php';
@@ -40,9 +40,10 @@ class User {
 	 * Queries the Tackster Database to enter this information.
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
-	 *
+	 * White box testing is limited here due to the nature of private keys in our database;
+         * there is little automation that we can do since we would need to create a new user
 	 *  @assert (array("fname" => "Robert", "lname" => "Lee", "email" => "test@test.com",
-	  "password" => "password", "gender" => "M", "source" => "I")) == TRUE
+	  "password" => "password", "gender" => "M", "source" => "I")) == FALSE
 	 */
 	public function createUser($userDataArray) {
 		$this->fname = (isset($userDataArray['fname'])) ? $userDataArray['fname']: NULL;
@@ -94,7 +95,7 @@ class User {
 
 		$sqlObj->destroy();
 		$this->sendConfEmail();
-		return true;
+		return TRUE;
 	}
 
 	/**
@@ -159,7 +160,7 @@ class User {
 
 	/**
 	 * Creates a hash of 128 characters in length based on a passphrase using a salt.
-	 *
+	 * @TODO rename encyptPwd to encryptPwd
 	 * @param type $string This is the password that is input.
 	 * @return type This is a hashed numeric value to check against the input password.
 	 * @assert ('password') != 'password'
@@ -228,7 +229,7 @@ class User {
 	 *
 	 * @param type $email The email of the user.
 	 * @return boolean  True if the user was found, False if the user was not found
-	 * @assert ('tack@tackster.com') == TRUE
+	 * @assert ('test@test.com') != FALSE
 	 * @assert ('notauser@random.org') == FALSE
 	 */
 	public function searchUser($email) {
@@ -254,7 +255,6 @@ class User {
 
 	/** Deletes the user account.
 	 * @param email
-	 *
 	 *
 	 */
 	public function deleteUser($email) {
@@ -284,6 +284,7 @@ class User {
 	 * @return null The result of the query against the database. This will store the user data.
 	 * @throws MyException This exception is thrown in the case that there is a duplicate credential
 	 * email.
+         * 
 	 */
 	public function loadUser($email) {
 
@@ -350,8 +351,10 @@ class User {
 		}
 	}
 
-	/** This function ends a users session with the server and logs them out of their account.
-	 * @assert () == TRUE
+	/** This function ends a users session with the server and logs them out of their account,
+         *  it requires an active connection.
+	 *  This is untestable using white box testing.
+         *  
 	 */
 	public function logOutUser() {
 		if (isset($_SESSION)) {
@@ -360,7 +363,6 @@ class User {
 			session_destroy();
 		}
 		header('Location: /');
-		return TRUE;
 	}
 
 	/** This function loads a user object and based on an email provided provides

@@ -31,6 +31,7 @@ class MyException extends Exception {
          */
 	public function getMyExceptionMessage() {
 		$timestamp = strtotime("now");
+                //$timestamp = ""; //strtotime doesn't work on our local machine.
 		sleep(1);
 		$err = "<div class='exception' id='exception_{$timestamp}'
 				onClick='if(this.className == \"exceptionHide\") {
