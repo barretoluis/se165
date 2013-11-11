@@ -57,7 +57,7 @@ if (!isset($_SESSION['_myTracks'])) {
 
 $defaultTrackId = $Track->returnDefaultTrackId($ucId);
 $defaultTrackName = $Track->returnTrackName($defaultTrackId);
-$html = '<li class="private"><a href="/dashboard/">' . $defaultTrackName . '</a>'; //default dashboard
+$html = '<li class="private"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
 
 foreach ($_myTracks as $dbRow) {
 	$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
@@ -68,7 +68,7 @@ foreach ($_myTracks as $dbRow) {
 			switch ($key) {
 				case 'id':
 					if ($isPrivate) {
-						$html .= '<li class="private"><a href="/dashboard/?tid=' . $value . '">';
+						$html .= '<li class="private"><a href="/track/?tid=' . $value . '">';
 					} else {
 						$html .= '<li><a href="/dashboard/?tid=' . $value . '">';
 					}
