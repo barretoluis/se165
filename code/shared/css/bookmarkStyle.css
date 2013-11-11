@@ -31,25 +31,25 @@ body{
 	width: 60px;
 	height: 100%;
 	z-index: 100;
-	
+
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	-o-transform-style: preserve-3d;
 	-ms-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-	
+
 	-webkit-transform-origin: left center;
 	-moz-transform-origin: left center;
 	-o-transform-origin: left center;
 	-ms-transform-origin: left center;
 	transform-origin: left center;
-	
+
 	-webkit-transition: -webkit-transform 150ms ease-in-out;
 	-moz-transition: -moz-transform 150ms ease-in-out;
 	-o-transition: -o-transform 150ms ease-in-out;
 	-ms-transition: -ms-transform 150ms ease-in-out;
 	transition: transform 150ms ease-in-out;
-		
+
 }
 
 .view div.view-back{
@@ -81,7 +81,8 @@ body{
 	text-shadow: 0 0 1px rgba(255,255,255,0.2);
 	padding-right: 5px;
 }
-/*.view-back a {
+
+.view-back a {
 	display: block;
 	font-size: 18px;
 	color: rgba(255,255,255,0.4);
@@ -95,7 +96,7 @@ body{
 	line-height: 22px;
 	text-align: center;
 	font-weight: 700;
-}*/
+}
 
 .view-back a:hover {
 	color: #fff;
@@ -118,9 +119,9 @@ body{
 .view-back span[data-icon =B]:before {
 	color: #008A00;
 }
-.view .s2, 
-.view .s3, 
-.view .s4, 
+.view .s2,
+.view .s3,
+.view .s4,
 .view .s5 {
 	-webkit-transform: translate3d(60px,0,0);
 	-moz-transform: translate3d(60px,0,0);
@@ -150,7 +151,7 @@ body{
 
 	position: relative;
 	overflow: hidden;
-	
+
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
@@ -167,7 +168,7 @@ box-sizing: content-box;
 /* apply a natural box layout model to all elements */
 /* By Paul Irish: http://paulirish.com/2012/box-sizing-border-box-ftw/ */
 * { box-sizing: border-box; }
-       
+
 
 /***********HOVER OVER FEATURE*/
 .view {

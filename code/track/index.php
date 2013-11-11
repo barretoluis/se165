@@ -114,26 +114,16 @@ try {
 		<link href="/shared/css/colorbox.css" rel="stylesheet">
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<script type="text/javascript">
-				$(document).click(function () {
-					var bid = parseInt($('#view').attr("bid"));
-					url = "/bookmark/?bid=" + bid;
-//					alert(url);
-					$('.view').colorbox({iframe:true, width:"70%", height:"100%", href:url});
-				});
-//
-//			$(document).ready(function(){
-//				//to assign the Colorbox event to elements
-//				var bid = parseInt($(this).attr("bid"));
-//				var url = "/bookmark/?bid=" + bid;
-//				$('.view').colorbox({iframe:true, width:"70%", height:"100%", href:url});
-//				});
-//			$(document).click(function(){
-//				//to assign the Colorbox event to elements
-//				var bid = parseInt($(this).attr("bid"));
-//				var url = "/bookmark/?bid=" + bid;
-//				$('.view').colorbox({iframe:true, width:"70%", height:"100%", href:url});
-//				});
+			$(document).ready(function(){
+				$('.bmkUrl').colorbox({iframe:true, width:"80%", height:"85%", href:$(this).attr("href")});
+				return false;
+			});
 		</script>
+<!--		<script type="text/javascript">
+			$(document).delegate(".view", "click", function() {
+				$('.bmkUrl')[0].click();
+			});
+		</script>-->
 		<!--/Popups and onClick-->
 
 	</head>
@@ -158,17 +148,18 @@ try {
 					$_bmk['comment_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
-					$html = '<div class="view" id="view" bid="' . $_bmk['id'] . '">\n';
+					$html = '<div class="view" id="view">\n';
 					$html .= '	<div class="view-back">\n';
 					$html .= '		<span data-icon="b">' . $_bmk['comment_count'] . '</span>\n';
 					$html .= '		<span data-icon="h">' . $_bmk['like_count'] . '</span>\n';  //TODO: Repin count needed
 					$html .= '		<span data-icon="B">' . $_bmk['repin_count'] . '</span>\n';   //TODO: What is this for?
-					$html .= '		<a href="' . $_bmk['url'] . '">&rarr;</a>\n';
+					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
-					$html .= '	<img src="/shared/images/4.jpg" bid="' . $_bmk['id'] . '" />\n';  //TODO: Pull reference from DB
+					$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
 					$html .= '</div>\n\n';
 
 					echo_formData($html);
+					flush();
 				}
 			} else {
 				print("<p class='noSearchResults'>You currently have no bookmarks in this Track.</p>");
