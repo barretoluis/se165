@@ -41,7 +41,11 @@ $private = (isset($_POST['privacy'])) ? $_POST['privacy'] : NULL;
 
 if ($trackName) {
 	$Track = new Track();
-	$Track->createTrack($ucId, $trackName, $trackDescr, $private);
+	try {
+		$Track->createTrack($ucId, $trackName, $trackDescr, $private);
+	} catch (MyException $e) {
+		$e->getMyExceptionMessage();
+	}
 	unset($_SESSION['_myTracks']);
 
 	//Get user's tracks if not available in session already

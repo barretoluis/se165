@@ -3,6 +3,7 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
+	'Track/Track.class.php'
 );
 
 
@@ -32,10 +33,50 @@ try {
 /*
  * Page specific PHP code here
  */
+$ucId = (int) $_SESSION['uc_id'];
+$trackId = (isset($_GET['tid'])) ? $_GET['tid'] : NULL;
+$_websiteErr = Array();
+
+if (isset($trackId) && $trackId > 0) {
+	$Track = new Track();
+	try {
+		$resultSet = $Track->deleteTrack($trackId, $ucId);
+	} catch (MyException $e) {
+		array_push($_websiteErr, 'The system encountered an error and was not able to delete the track.');
+		$e->getMyExceptionMessage();
+	}
+	// was the delete successful
+	if ($resultSet == NULL) {
+		array_push($_websiteErr, 'The system encountered an error and was not able to delete the track.');
+	}
+	unset($_SESSION['_myTracks']);
+
+	//Get user's tracks if not available in session already
+	try {
+		$myTracks = new track();
+		$_myTracks = $myTracks->getMyTrack($_SESSION['uc_id'], 'id,title,private');
+		$_SESSION['_myTracks'] = $_myTracks;
+	} catch (MyException $e) {
+		$e->getMyExceptionMessage();
+	}
+
+	//let's see if there were any errors
+	if (count($_websiteErr) >= 1) {
+		$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
+		foreach ($_websiteErr as $value) {
+			$errString .= "<li>" . $value . "</li>\n";
+		}
+		$errString .= '</ol></div>';
+		$_websiteErr = $errString;
+	}
+} else {
+	header('Location: /dashboard/');
+	exit;
+}
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Track</title>
+		<title>Tackster | Track | Delete Track</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -62,40 +103,30 @@ try {
 
 	</head>
 
+
 	<body>
+		<!-- Navigation Bar -->
+		<?php require_once('html/navbar.php'); ?>
+		<!-- /Navigation Bar -->
+
+
 		<!-- Body Content-->
-            <div class="createTrack">
-                <h3>Add Track</h3>
-                <div class="container">
-                  <div class="well">
-                    <form action="/track/addTrack.php" method="post" name="createTrack" id="createTrack" class="form-horizontal">
-                      <table>
-                        <tr>
-                          <img src="/shared/images/Shoes.jpg">
-                          <td width="95"><br/></td>
-                        </tr>
-                        <tr>
-                          <td><label>Track Name: </label></td>
-                          <td><input id="name" type="text" name="name" required=""></td>
-                        </tr>
-                        <tr>
-                          <td><label>Description: </label></td>
-                          <td><textarea cols="30" rows="3" name="desc" id="desc" required=""></textarea></td>
-                        </tr>
-                        <tr>
-                          <td><label style="padding-top:5px;">Privacy: </label></td>
-                          <td>
-                            <select name="privacy" id="privacy">
-                              <option value="0">Share</option>
-                              <option value="1">For Me</option>
-                            </select>
-                          </td>
-                        </tr>
-                      </table>
-                      <button class="btn btn-success" type="submit" >Submit</button>
-                    </form>
-                  </div>
-                </div>
-             </div>
+		<div class="main" >
+			<h3>Delete Track</h3>
+			<?php
+			if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+				echo $_websiteErr;
+			} else {
+				echo_formData('<p>The track was deleted successfully.</p>');
+			}
+			?>
+
+
+			<!-- /Body Content-->
+
+			<!-- Footer Content -->
+			<?php require_once('html/footer.php'); ?>
+			<!-- /Footer Content -->
+
 	</body>
 </html>

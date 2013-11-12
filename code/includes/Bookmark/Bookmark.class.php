@@ -23,6 +23,7 @@ class Bookmark {
 	 * Standard constructor
 	 *
 	 */
+
 	public function __construct() {
 		$this->setUcId($_SESSION['uc_id']);
 		//$this->setDefaultTid($_SESSION['defaultTrackId']);
@@ -63,13 +64,21 @@ class Bookmark {
 			//Execute query
 			$sqlObj->DoQuery($query);
 		} catch (MyException $e) {
+			array_push($this->_errorMsgs, 'Was not able to create the bookmark. Please make sure required fields are filled in.');
 			$e->getMyExceptionMessage();
 		}
 
 		// Destroy the DB object
 		$sqlObj->destroy();
 
-		$this->getBmkDataByTrack($this->getTrackId());
+		try {
+			if (count($this->_errorMsgs) < 1) {
+				$this->returnBmkDataByTrack($this->getTrackId());
+			}
+		} catch (MyException $e) {
+			array_push($this->_errorMsgs, 'Was not able to get your current list of tracks. Please log out and log back in to see if issue is resolved.');
+			$e->getMyExceptionMessage();
+		}
 
 		return $this->_errorMsgs;
 	}
@@ -116,7 +125,7 @@ class Bookmark {
 	 * @param int $uc_id	The user's credential ID in the DB.
 	 * @param int $bmkId	The ID of the bookmark who's permission should be checked.
 	 * @return boolean		TRUE if user has permissions to view the bookmark.
-         * @assert (param1, param2) == expectedResult
+	 * @assert (param1, param2) == expectedResult
 	 */
 	public function canViewBmk($uc_id, $bmkId) {
 		if ($uc_id == NULL || $bmkId == NULL) {
@@ -132,10 +141,10 @@ class Bookmark {
 			$e->getMyExceptionMessage();
 		}
 
-		$bmkUcId =  (isset($this->_bookmarks[0]['uc_id'])) ? $this->_bookmarks[0]['uc_id'] : FALSE;
+		$bmkUcId = (isset($this->_bookmarks[0]['uc_id'])) ? $this->_bookmarks[0]['uc_id'] : FALSE;
 		$privacyValue = (isset($this->_bookmarks[0]['privacy']) && $this->_bookmarks[0]['privacy'] == 1) ? TRUE : FALSE;
 
-		if($bmkUcId == $this->getUcId()) {
+		if ($bmkUcId == $this->getUcId()) {
 			$canView = TRUE;
 		} elseif ($bmkUcId != $this->getUcId() && $privacyValue == FALSE) {
 			//the bookmark privacy is set to public
@@ -161,7 +170,6 @@ class Bookmark {
 		$this->resetObject();
 		$this->setTrackId($trackId);
 		$this->setBmkId(NULL); //Reset id since this will not be a single bookmark
-
 		//let's make sure to tie the query to the uc_id
 		$query = "SELECT * FROM bmk_entry WHERE t_id='" . $this->getTrackId() . "' AND uc_id='" . $this->getUcId() . "'";
 
@@ -228,10 +236,10 @@ class Bookmark {
 		$this->setComments(NULL);
 		$this->setDefaultTid(NULL);
 		$this->setTrackId(NULL);
-                return TRUE;
+		return TRUE;
 	}
 
-	/* *************************************************************************
+	/*	 * ************************************************************************
 	 * SETTERS and GETTERS
 	 */
 
@@ -239,7 +247,7 @@ class Bookmark {
 	 * Populate private variable with from passed in bookmark data.
 	 *
 	 * @param array $_bookmarks Set the bookmarks array with bookmark data from the DB.
-         * @assert () == expectedResult
+	 * @assert () == expectedResult
 	 */
 	private function setBookmarks($_bookmarks) {
 		$this->_bookmarks = (array) $_bookmarks;

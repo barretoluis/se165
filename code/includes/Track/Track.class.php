@@ -250,12 +250,24 @@ class Track {
 	/**
 	 * Deletes a track based on the trackID that is provided to the function as a parameter.
 	 * @param type $trackId the track id that is going to be deleted from the database.
+	 *
+	 * @return boolean TRUE on successful delete.
 	 */
-	public function deleteTrack($trackId) {
-		$query = "DELETE FROM `db_tackster`.`track` WHERE `track`.`id` = $trackId";
-		$this->sqlObj->DoQuery($query);
-		$resultSet = $this->sqlObj->GetData();
-		$this->sqlObj->destroy();
+	public function deleteTrack($trackId, $ucId) {
+		$this->trackId = (int) $trackId;
+		$this->ucId = (int) $ucId;
+
+		$query = "DELETE FROM `track` WHERE `id` = '$trackId' AND `uc_id` = '$ucId'";
+		try {
+			$this->sqlObj->DoQuery($query);
+			$this->sqlObj->destroy();
+			$deleteSuccess = TRUE;
+		} catch (MyException $e) {
+			$deleteSuccess = FALSE;
+			$e->getMyExceptionMessage();
+		}
+
+		return $deleteSuccess;
 	}
 
 }
