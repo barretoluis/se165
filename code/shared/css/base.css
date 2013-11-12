@@ -277,3 +277,7 @@ input.sb_search:hover{
 .displayBookmark .container .well h3 {
     text-align: left;
 }
+
+#sidr .active{
+    background-color: #71D771;
+}

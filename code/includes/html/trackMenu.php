@@ -85,12 +85,19 @@ foreach ($_myTracks as $dbRow) {
 	}
 }
 ?>
-
+<script>
+    $(document).ready(function() {
+        
+        //jQuery("#simple-menu2").colorbox.close();
+            $('#simple-menu2').colorbox.close();
+    });
+        
+</script>
 
 
 <?php if ($loggedIn) { //show logged in-nav    ?>
 	<div id="sidr">
-		<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr"><small>(close menu)</small></a></div>
+		<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr">X</a></div>
 		<ul>
 			<li style="margin-left: 5px;"><b>My Tracks</b></li>
 			<?php

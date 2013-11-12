@@ -80,6 +80,10 @@ try {
                         </tr>
                         <tr>
                           <td><label>Description: </label></td>
+                          <td><textarea name="description" rows="3"></textarea></td>
+                        </tr>
+                        <tr>
+                          <td><label>Description: </label></td>
                           <td><textarea cols="30" rows="3" name="desc" id="desc" required=""></textarea></td>
                         </tr>
                         <tr>
@@ -92,7 +96,7 @@ try {
                           </td>
                         </tr>
                       </table>
-                      <button class="btn btn-success" type="submit" >Submit</button>
+                      <button class="btn btn-success" type="submit" >Create</button>
                     </form>
                   </div>
                 </div>
