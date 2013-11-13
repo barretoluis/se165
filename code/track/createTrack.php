@@ -71,10 +71,6 @@ try {
                     <form action="/track/addTrack.php" method="post" name="createTrack" id="createTrack" class="form-horizontal">
                       <table>
                         <tr>
-                          <img src="/shared/images/Shoes.jpg">
-                          <td width="95"><br/></td>
-                        </tr>
-                        <tr>
                           <td><label>Track Name: </label></td>
                           <td><input id="name" type="text" name="name" required=""></td>
                         </tr>
