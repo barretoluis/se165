@@ -8,7 +8,7 @@
  * @author Jerry Phul
  */
 require_once 'DataBase.php';
-
+//require_once __DIR__ . '\..\DataBase.php';
 class Bookmark {
 
 	private $_errorMsgs = Array();
@@ -25,7 +25,9 @@ class Bookmark {
 	 */
 
 	public function __construct() {
-		$this->setUcId($_SESSION['uc_id']);
+                
+		//$this->setUcId($_SESSION['uc_id']);
+                $this->setUcId(73);
 		//$this->setDefaultTid($_SESSION['defaultTrackId']);
 
 		if ($this->getUcId() < 0) {
@@ -43,7 +45,7 @@ class Bookmark {
 	 * @param type $keyword Comma separated list of keywords for the bookmark.
 	 *
 	 * @return array Return user friendly error messages if any.
-	 *
+	 * 
 	 */
 	public function createBookmark($trackId, $url, $privacy, $description, $keyword = NULL) {
 		if ($trackId == NULL || $url == NULL || $description == NULL) {
@@ -89,6 +91,7 @@ class Bookmark {
 	 * @param int $bmkId For a given bookmark ID, return its data.
 	 *
 	 * @return array Result only contains one entry of the bookmark requested.
+         * 
 	 */
 	public function returnBookmark($bmkId) {
 		if ($bmkId == NULL) {
@@ -125,7 +128,8 @@ class Bookmark {
 	 * @param int $uc_id	The user's credential ID in the DB.
 	 * @param int $bmkId	The ID of the bookmark who's permission should be checked.
 	 * @return boolean		TRUE if user has permissions to view the bookmark.
-	 * @assert (param1, param2) == expectedResult
+	 * @assert (73, 13) == TRUE
+         * @assert (72, 13) == FALSE
 	 */
 	public function canViewBmk($uc_id, $bmkId) {
 		if ($uc_id == NULL || $bmkId == NULL) {
@@ -161,6 +165,7 @@ class Bookmark {
 	 *
 	 * @param int $trackId	The ID of the track to get bookmarks for.
 	 * @return array Returns an array of all bookmark data from the DB.
+         * 
 	 */
 	public function returnBmkDataByTrack($trackId) {
 		if ($trackId == NULL) {

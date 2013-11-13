@@ -1,12 +1,11 @@
 <?php
-
 /*
 //  for windows users? maybe.
   require_once __DIR__ . '\..\Utility\MyException.class.php';
   require_once __DIR__ . '\..\DataBase.php';
   require_once __DIR__ . '\..\mandrillApi.php';
   require_once __DIR__ . '\..\Configs\defineSalt.php';
- */
+*/
 require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
