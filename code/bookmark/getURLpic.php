@@ -59,11 +59,11 @@ if (isset($_matches[0])) {
 				if (preg_match('/^\//', $imgSrc)) {
 					$imgSrc = $getUrlData . $imgSrc;
 				}
-				echo '<br><img class="img-polaroid" src="' . $imgSrc . '" ></br>';
+				echo '<br><img class="img-polaroid" src="' . $imgSrc . '" onClick="setImage(src)"></br>';
 				unset($imgSrc);
 			}
 		} else {
-			throw new MyException('Was not able to retireve any HTML from the URL provided:<br>' . $getUrlData);
+			//throw new MyException('Was not able to retireve any HTML from the URL provided:<br>' . $getUrlData);
 		}
 	} catch (MyException $e) {
 		//looks like no meta tags were found
