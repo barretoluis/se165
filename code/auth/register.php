@@ -130,7 +130,11 @@ if (count($_websiteErr) >= 1) {
         <section id="content">
             <form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formRegister">
                 <h1>Sign Up</h1>
-				<?php echo_formData($errString); ?>
+				<?php
+				if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+					echo $_websiteErr;
+				}
+				?>
                 <div>
 					<p>First Name:&nbsp;<input type="text" required="" id="fname" name ="fname"/></p>
                 </div>
