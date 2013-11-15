@@ -70,11 +70,8 @@ body {
 	position: relative;
 }
 
-h3{
-    font-size: 20px;
-}
 .main {
-	margin-top: 50px;
+	margin: 50px 0 10px 50px;
 }
 
 /* for Navbar in the homepage*/
