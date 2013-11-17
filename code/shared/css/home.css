@@ -15,6 +15,7 @@ div{
 .marketing-section-signup {
 	text-shadow: 0 1px 3px #222;
 	background: #202021 url("http://i.imgur.com/KiuQWYq.jpg") center no-repeat;
+	height: 275px;
 }
 .marketing-section {
 	position: relative;
