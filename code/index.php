@@ -134,7 +134,9 @@ $ignorePageLogin = TRUE;
 <!-- /Body Content-->
 
 <!-- Footer Content -->
+<div class="main">
     <?php require_once('html/footerHome.php'); ?>
+</div>
 <!-- /Footer Content -->
 
     </body>
