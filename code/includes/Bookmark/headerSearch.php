@@ -8,6 +8,8 @@ require_once 'Bookmark/SearchBookmark.class.php';
  *
  * @author Jerry Phul
  */
+$ucId = (int) $_SESSION['uc_id'];
+$tid = NULL;	//search your specific track
 $searchWord = NULL; //search terms from form
 $_bookmarks = NULL; //return results of found bookmarks as an array
 $formError = NULL; //form error messages to show end user on web page
@@ -17,12 +19,15 @@ $formSubmitted = FALSE; //flag if form was submitted
 if (isset($_POST['searchWord'])) {
 	//prefer a post variable over a get
 	$searchWord = $_POST['searchWord'];
+	$tid = $_POST['tid'];
 
 	//Do a search for the search words
 	if (strlen($searchWord) >= 1) { //was a keyword even submitted
 		try {
 			$getBookmark = new SearchBookmark();
-			$_bookmarks = $getBookmark->getBookmark($searchWord);
+			$_bookmarks = $getBookmark->searchPublicBookmarks($searchWord);
+//			$_bookmarks = $getBookmark->searchMyBookmarks($searchWord, $ucId);
+//			$_bookmarks = $getBookmark->searchMyTrackBookmarks($searchWord, $ucId, $tid);
 		} catch (MyException $e) {
 			$e->getMyExceptionMessage();
 		}
