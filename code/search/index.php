@@ -32,6 +32,19 @@ try {
 /*
  * Page specific PHP code here
  */
+$htmlHeadTitle = (isset($htmlHeadTitle)) ? $htmlHeadTitle : "Search Results";
+//check if errors already set in headerSearch.php
+$_websiteErr = (isset($_websiteErr)) ? $_websiteErr: Array(); //Error message to show end user
+
+//format any errors
+if (count($_websiteErr) >= 1) {
+	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
+	foreach ($_websiteErr as $value) {
+		$errString .= "<li>" . $value . "</li>\n";
+	}
+	$errString .= '</ol></div>';
+	$_websiteErr = $errString;
+}
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -97,20 +110,15 @@ try {
 
 
 		<!-- Body Content-->
-		<div id="quickSearch" class="main" >
-			<h3>Search Results</h3>
-<!--TODO: Probably remove the code for search form in body content area.-->
-<!--			<p>Look for bookmarks matching your interest.</p>
-			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchBookmarks" id="searchBookmarks">
-				Search Words: <input type="text" name="searchWord" value="<?php echo_formData($searchWord) ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">
-			</form>-->
-
-			<?php if ($formError) { ?>
-				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
-			<?php } ?>
-		</div>
-
 		<div id="bookmarks" class="main" >
+			<h3><?php echo_formData($htmlHeadTitle) ?></h3>
+
+			<?php
+			if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+				echo $_websiteErr;
+			}
+			?>
+
 			<?php
 			if ($formSubmitted == TRUE && isset($_bookmarks) == TRUE && count($_bookmarks) >= 1) {
 				foreach ($_bookmarks as $_bmk) {
@@ -130,7 +138,7 @@ try {
 					echo_formData($html);
 					flush();
 				}
-			} elseif($formSubmitted == TRUE) {
+			} elseif ($formSubmitted == TRUE) {
 				print("<p class='noSearchResults'>No search results were found.</p>");
 			}
 			?>
