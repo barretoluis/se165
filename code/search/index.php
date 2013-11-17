@@ -60,11 +60,13 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
-		<link href="/shared/css/tackStyle.css" rel="stylesheet" type="text/css" />
+		<link href="/shared/css/bookmarkStyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
+		<!-- Popups and onClick-->
 		<script type="text/javascript">
-			//TODO: The font heydings is being called. Wher is it in the code... probably remove it.
+			//TODO: The font heydings is being called. Where is it in the code... probably remove it.
+			//Reply (Shruti): can't remove it b/c those give the icons: heart, bookmark, comments on the each track!
 			Modernizr.load({
 				test: Modernizr.csstransforms3d && Modernizr.csstransitions,
 				yep : ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js','/shared/js/jquery.hoverfold.js'],
@@ -74,6 +76,14 @@ try {
 						$( '#bookmarks' ).hoverfold();
 					}
 				}
+			});
+		</script>
+		<link href="/shared/css/colorbox.css" rel="stylesheet">
+		<script src="/framework/jquery/jquery.colorbox.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.bmkUrl').colorbox({iframe:true, width:"80%", height:"85%", href:$(this).attr("href")});
+				return false;
 			});
 		</script>
 
@@ -103,21 +113,21 @@ try {
 			<?php
 			if ($formSubmitted == TRUE && isset($_bookmarks) == TRUE && count($_bookmarks) >= 1) {
 				foreach ($_bookmarks as $_bmk) {
-//					echo_formData($_bmk['id'] . "\n");
-//					echo_formData($_bmk['keyword'] . "\n");
-//					echo_formData($_bmk['description'] . "\n");
-
-					$html = '<div class="view">';
-					$html .= '	<div class="view-back">';
-					$html .= '		<span data-icon="b">' . $_bmk['like_count'] . '</span>';
-					$html .= '		<span data-icon="h">???</span>';  //TODO: Repin count needed
-					$html .= '		<span data-icon="B">???</span>';   //TODO: What is this for?
-					$html .= '		<a href="' . $_bmk['url'] . '">&rarr;</a>';
+					$_bmk['comment_count'] = 0; //TODO: Build code for showing bookmarks likes
+					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
+					$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
+					$html = '<div class="view" id="view">\n';
+					$html .= '	<div class="view-back">\n';
+					$html .= '		<span data-icon="b">' . $_bmk['comment_count'] . '</span>\n';
+					$html .= '		<span data-icon="h">' . $_bmk['like_count'] . '</span>\n';  //TODO: Repin count needed
+					$html .= '		<span data-icon="B">' . $_bmk['repin_count'] . '</span>\n';   //TODO: What is this for?
+					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
-					$html .= '	<img src="/shared/images/4.jpg" />';  //TODO: Pull reference from DB
-					$html .= '</div>';
+					$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
+					$html .= '</div>\n\n';
 
 					echo_formData($html);
+					flush();
 				}
 			} elseif($formSubmitted == TRUE) {
 				print("<p class='noSearchResults'>No search results were found.</p>");

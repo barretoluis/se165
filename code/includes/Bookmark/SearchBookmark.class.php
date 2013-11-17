@@ -12,6 +12,7 @@ require_once 'mandrillApi.php';
 class SearchBookmark {
 
 	private $searchWord;
+	private $privacy;
 	private $_words;
 
 	/**
@@ -19,15 +20,18 @@ class SearchBookmark {
 	 * This function will primarily be used when an end user is typing a word
 	 * and we wish to autocomplete or suggest words.
 	 *
-	 * @param	word	Takes the word to be searched.
+	 * @param	string	word		Takes the word to be searched.
+	 * @param	int		$privacy	0=public bookmarks while 1=private
 	 * @return	array	Returns up to 20 matching words as an array.
 	 * @throws MyException this exception is thrown when no phrase is entered into the search.
 	 * Returns an error message.
 	 */
-	public function getBookmark($word) {
+	public function getBookmark($word, $privacy = 0) {
 		$this->searchWord = $word;
+		$this->privacy = (int) $privacy;
+
 		if (strlen($this->searchWord) >= 1) { //let's make sure a word was even provided :)
-			$query = "SELECT * FROM v_searchKeyword_sortByLikeCount WHERE keyword LIKE '%{$this->searchWord}%'";
+			$query = "SELECT * FROM v_searchKeyword_sortByLikeCount WHERE keyword LIKE '%{$this->searchWord}%' AND privacy='" . $this->privacy . "'";
 //			error_log("SQL QUERY: " . $query . "\n");
 
 			try {
