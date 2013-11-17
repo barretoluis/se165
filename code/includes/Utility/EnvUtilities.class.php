@@ -31,15 +31,21 @@ class EnvUtilities {
 		 * @return string
 		 */
 		function cleanString(&$string) {
-			$string = strip_tags($string);
-			$string = htmlspecialchars($string, 4, 'UTF-8');
-			$string = htmlentities($string);
-			$string = stripslashes($string);
+			if (is_array($string)) {
+				foreach ($string as $key => &$value) {
+					cleanString($value);
+				}
+			} else {
+				$string = strip_tags($string);
+				$string = htmlspecialchars($string, 4, 'UTF-8');
+				$string = htmlentities($string);
+				$string = stripslashes($string);
 
-			$mysqliLink = new mysqli("localhost", "tackster", "4tackster2use", "db_tackster");
+				$mysqliLink = new mysqli("localhost", "tackster", "4tackster2use", "db_tackster");
 //			error_log("SQL INJECTION BEFORE: " . $string . "\n", 3, "/tmp/php_error.log");
-			$string = mysqli_real_escape_string($mysqliLink, $string);
+				$string = mysqli_real_escape_string($mysqliLink, $string);
 //			error_log("SQL INJECTION AFTER: " . $string . "\n", 3, "/tmp/php_error.log");
+			}
 		}
 
 		array_walk($_POST, 'cleanString');

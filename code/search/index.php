@@ -99,10 +99,11 @@ try {
 		<!-- Body Content-->
 		<div id="quickSearch" class="main" >
 			<h3>Search Results</h3>
-			<p>Look for bookmarks matching your interest.</p>
+<!--TODO: Probably remove the code for search form in body content area.-->
+<!--			<p>Look for bookmarks matching your interest.</p>
 			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="searchBookmarks" id="searchBookmarks">
 				Search Words: <input type="text" name="searchWord" value="<?php echo_formData($searchWord) ?>" size="20" maxlength="80"><input type="submit" name="submit" id="submit" value="Submit">
-			</form>
+			</form>-->
 
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
