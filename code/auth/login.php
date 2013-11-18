@@ -131,7 +131,7 @@ if (count($_websiteErr) >= 1) {
 					}
 					?>
 					<div>
-						<input type="text" name="username" id="username" maxlength="40" placeholder="Username">
+						<input type="text" name="username" id="username" maxlength="40" placeholder="Username" autofocus="">
 					</div>
 					<div>
 						<input type="password" name="password" id="password" maxlength="15" placeholder="Password">

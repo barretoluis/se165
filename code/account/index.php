@@ -123,7 +123,7 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "saveProfile") {
 							</tr>
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;Username:</td>
-								<td><input type="username" name="username" id="username" value="<?PHP echo_formData($nameUser) ?>"  <?php echo $formField ?>/>
+								<td><input type="text" name="username" id="username" value="<?PHP echo_formData($nameUser) ?>" maxlength="20"  <?php echo $formField ?>/>
 								</td>
 							</tr>
 							<tr>

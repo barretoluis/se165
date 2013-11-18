@@ -136,7 +136,7 @@ if (count($_websiteErr) >= 1) {
 				}
 				?>
                 <div>
-					<p>First Name:&nbsp;<input type="text" required="" id="fname" name ="fname"/></p>
+					<p>First Name:&nbsp;<input type="text" required="" id="fname" name ="fname" autofocus=""/></p>
                 </div>
                 <div>
 					<p>Last Name:&nbsp;<input type="text" required="" id="lname" name ="lname"/></p>
@@ -149,7 +149,7 @@ if (count($_websiteErr) >= 1) {
                 </div>
                 <div>
 					<button class="btn btn-success" type="submit" name="submit">Sign Up</button>
-					<button class="btn btn-danger" type="cancel" href="/">Cancel</button>
+					<button href="/" class="btn btn-danger" type="cancel" >Cancel</button>
                 </div>
             </form><!-- form -->
             <h6><span  class="line-center">OR</span></h6>
