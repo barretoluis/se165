@@ -1,6 +1,7 @@
 body {
-        padding-bottom: 40px;
+	background: #E8E8E8;
 	color: #5a5a5a;
+	padding-bottom: 40px;
 }
 div{
 	display: block;
@@ -14,6 +15,7 @@ div{
 .marketing-section-signup {
 	text-shadow: 0 1px 3px #222;
 	background: #202021 url("http://i.imgur.com/KiuQWYq.jpg") center no-repeat;
+	height: 275px;
 }
 .marketing-section {
 	position: relative;
@@ -55,13 +57,15 @@ form {
 	width: 80px;
 }
 .container-fluid{
-        margin-left: 5px;
-        margin-right: 20px;
-      }
-
- .context-loader-container{
-  margin-top: 80px;
+	margin-left: 5px;
+	margin-right: 20px;
 }
-.main {
-    padding: 50px;
+
+.context-loader-container{
+	margin-top: 80px;
+}
+
+div.main {
+	margin-top: 10px;
+
 }
