@@ -9,7 +9,8 @@
 
 class MyException extends Exception {
 
-	/** This function constructs a MyException object by calling the
+	/** 
+         * This function constructs a MyException object by calling the
          * parent construct function.
          * @param type $message The passsed message
          * @param type $code Is 0 by default.
@@ -20,13 +21,15 @@ class MyException extends Exception {
 		parent::__construct($message, $code, $previous);
 	}
 
-	/** This function returns the Exception in a string format.
+	/** 
+         * This function returns the Exception in a string format.
          * @return type The Exception in string format.
          */
 	public function __toString() {
 		return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
 	}
-        /** This function displays the error message from this exception
+        /** 
+         * This function displays the error message from this exception
          *  by appending it to the current webpage.
          */
 	public function getMyExceptionMessage() {

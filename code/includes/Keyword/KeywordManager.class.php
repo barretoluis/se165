@@ -4,7 +4,7 @@ require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 
-/*
+/**
  * This class implements Keyword Management. It allows Keyword creation, and allows
  * querying of the database for keywords.
  *

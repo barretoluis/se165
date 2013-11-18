@@ -20,8 +20,9 @@ $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TR
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
 
 //User login status check and set show navigation variable
-if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
-	$loggedIn = TRUE;
+if ($loggedIn) {
+//if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
+//	$loggedIn = TRUE;
 
 	//Get user's tracks if not available in session already
 	if (!isset($_SESSION['myTracks'])) {
@@ -112,13 +113,13 @@ if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 						</p>
 						<ul class="sb_dropdown" style="display:none;">
 							<li class="sb_filter">Filter your search</li>
-							<li><input type="checkbox" name="track" id="public" value="public" checked><label for="public"><strong>Public Tracks</strong></label></li>
-							<li><input type="checkbox" name="track" id="allMyTracks" value="allMyTracks"><label for="allMyTracks">My Tracks</label></li>
+							<li><input type="checkbox" name="publicTracks" id="tid" value="1" checked><label for="public"><strong>Public Tracks</strong></label></li>
+							<li><input type="checkbox" name="myTracks" id="tid" value="1"><label for="allMyTracks">My Tracks</label></li>
 							<?php
 							//Let's populate the search bar with the user's tracks
 							if (isset($_SESSION['myTracks'])) {
 								foreach ($_SESSION['myTracks'] as $_record) {
-									echo_formData('<li><input type="checkbox" name="track" value="' . $_record['id'] . '"><label for="' . $_record['title'] . '">' . $_record['title'] . '</label></li>');
+									echo_formData('<li><input type="checkbox" name="tid[]" id="tid" value="' . $_record['id'] . '"><label for="' . $_record['title'] . '">' . $_record['title'] . '</label></li>');
 								}
 							}
 							?>

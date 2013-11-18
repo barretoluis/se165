@@ -47,7 +47,7 @@ $ignorePageLogin = TRUE;
 
 		<!-- Style Sheets -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-		<link href="/shared/css/home.css" rel="stylesheet" type="text/css">
+		<link href="/shared/css/base.css" rel="stylesheet" type="text/css">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>

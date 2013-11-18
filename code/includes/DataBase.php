@@ -3,7 +3,8 @@
 require_once 'Utility/MyException.class.php';
 require_once 'Configs/defineDb.php';
 
-/** This class handles Database interactions, such as constructing a new
+/** 
+ * This class handles Database interactions, such as constructing a new
  *  connection, and allows related functions.
  *
  * @author Luis Barreto
@@ -14,7 +15,8 @@ class DataBase {
 	private $result;
 	private $returnSet = array();
 
-	/** This is the constructer that creates the connection.
+	/** 
+         * This is the constructer that creates the connection.
 	 *
 	 * @param type $h The name of the host.
 	 * @param type $u The user name to access the database.
