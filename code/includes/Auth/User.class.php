@@ -193,7 +193,8 @@ class User {
 		return $match;
 	}
 
-	/** This function creates a Password reset email and dends it to the user
+	/** 
+         * This function creates a Password reset email and dends it to the user
 	 *  @TODO change functionname
 	 *
 	 * @param type $email the email of the user
@@ -210,7 +211,8 @@ class User {
 		$emailObj->sendEmail();
 	}
 
-	/** This function creates an Email object with
+	/** 
+         * This function creates an Email object with
 	 * a welcome message confirming account creation.
 	 */
 	public function sendConfEmail() {
@@ -224,7 +226,8 @@ class User {
 		$emailObj->sendEmail();
 	}
 
-	/** Searches for a user by doing a query with the user credentials with the database.
+	/** 
+         * Searches for a user by doing a query with the user credentials with the database.
 	 *
 	 * @param type $email The email of the user.
 	 * @return boolean  True if the user was found, False if the user was not found
@@ -252,7 +255,8 @@ class User {
 		return $found;
 	}
 
-	/** Deletes the user account.
+	/** 
+         * Deletes the user account.
 	 * @param email
 	 *
 	 */
@@ -276,7 +280,8 @@ class User {
 		$sqlObj->destroy();
 	}
 
-	/** Loads the user information based on the e-mail address that is provided. This queries the
+	/** 
+         * Loads the user information based on the e-mail address that is provided. This queries the
 	 * database to retrieve all of the user credentials, such as first and last name.
 	 *
 	 * @param type $email The email address of the user
@@ -309,7 +314,8 @@ class User {
 		return $result;
 	}
 
-	/*	 * This function logs in a user by taking their e-mail and password that they provide through the log in page.
+	/** 
+         * This function logs in a user by taking their e-mail and password that they provide through the log in page.
 	 *
 	 * @param type $email The email address of the user
 	 * @param type $pwd The password of the user
@@ -350,7 +356,8 @@ class User {
 		}
 	}
 
-	/** This function ends a users session with the server and logs them out of their account,
+	/** 
+         * This function ends a users session with the server and logs them out of their account,
          *  it requires an active connection.
 	 *  This is untestable using white box testing.
          *  
@@ -364,7 +371,8 @@ class User {
 		header('Location: /');
 	}
 
-	/** This function loads a user object and based on an email provided provides
+	/** 
+         * This function loads a user object and based on an email provided provides
 	 * the facility to reset a user's password.
 	 * @param type $email The email address of the user
 	 */

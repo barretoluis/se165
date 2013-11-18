@@ -9,7 +9,8 @@
 
 class MyException extends Exception {
 
-	/** This function constructs a MyException object by calling the
+	/** 
+         * This function constructs a MyException object by calling the
          * parent construct function.
          * @param type $message The passsed message
          * @param type $code Is 0 by default.

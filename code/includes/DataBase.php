@@ -14,7 +14,8 @@ class DataBase {
 	private $result;
 	private $returnSet = array();
 
-	/** This is the constructer that creates the connection.
+	/** 
+         * This is the constructer that creates the connection.
 	 *
 	 * @param type $h The name of the host.
 	 * @param type $u The user name to access the database.
