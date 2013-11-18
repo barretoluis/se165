@@ -4,7 +4,7 @@ require_once 'Utility/MyException.class.php';
 require_once 'Bookmark/SearchBookmark.class.php';
 
 
-/*
+/**
  * Search logic for header search form.
  *
  * @author Jerry Phul

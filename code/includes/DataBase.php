@@ -3,7 +3,8 @@
 require_once 'Utility/MyException.class.php';
 require_once 'Configs/defineDb.php';
 
-/** This class handles Database interactions, such as constructing a new
+/** 
+ * This class handles Database interactions, such as constructing a new
  *  connection, and allows related functions.
  *
  * @author Luis Barreto
