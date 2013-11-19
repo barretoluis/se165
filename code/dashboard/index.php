@@ -36,7 +36,9 @@ try {
  * Page specific PHP code here
  */
 $htmlTrack = NULL; //default dashboard
-$_myTracks = NULL;
+$htmlTrackFollow = NULL; //default dashboard
+$_myTracks = array();
+$_followingTracks = array();
 $ucId = $_SESSION['uc_id'];
 
 $Track = new Track();
@@ -53,14 +55,16 @@ try {
 }
 
 //Get user's tracks if not available in session already
-if (!isset($_SESSION['_myTracks'])) {
+if (!isset($_SESSION['_myTracks']) || !isset($_SESSION['_followingTracks'])) {
 	try {
 		$_myTracks = $Track->getMyTrack($_SESSION['uc_id'], 'id,title,private');
+		$_followingTracks = $Track->returnFollowingTracks($_SESSION['uc_id'], 'id,title,private');
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
 	}
 } else {
 	$_myTracks = $_SESSION['_myTracks'];
+	$_followingTracks = $_SESSION['_followingTracks'];
 }
 
 //TODO: Make sure a default track cannot be deleted or edited
@@ -70,7 +74,7 @@ $htmlTrack .=<<<EOF
 <div class="track">
 	<div style="position: relative;"><div id="private"></div><div id="trackName">{$defaultTrackName}</div></div>
 	<img src= "/shared/images/placeholder.jpg" tid="{$defaultTrackId}" />
-        
+
 </div><!--/track-->
 EOF;
 
@@ -80,6 +84,30 @@ foreach ($_myTracks as $dbRow) {
 	//we don't want the default track in the list again
 	if ($dbRow['id'] != $defaultTrackId) {
 		$htmlTrack .=<<<EOF
+<div class="track" id="track">
+	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
+	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
+	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+	<a id="editBtn" class="btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
+        <script>
+            $("#deleteBtn").confirm();
+            $(document).ready(function(){
+                  $("#editBtn").colorbox({iframe:true, width:"50%", height:"60%"});
+                    });
+        </script>
+
+</div><!--/track-->\n
+EOF;
+	}
+}
+
+
+foreach ($_followingTracks as $dbRow) {
+	$isPrivate = ($dbRow['private'] == "T") ? '<div id="private"></div>' : '';
+
+	//we don't want the default track in the list again
+	if ($dbRow['id'] != $defaultTrackId) {
+		$htmlTrackFollow .=<<<EOF
 <div class="track" id="track">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
 	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
@@ -118,19 +146,19 @@ EOF;
 		<script src="/framework/bootstrap/assets/js/respond.min.js"></script>
 		<![endif]-->
 
-		  <!-- JavaScript -->
+		<!-- JavaScript -->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-                <script src="/framework/jquery/jquery-1.10.2.min.js"></script>
-                
-                <script src="/framework/jquery/jquery.confirm.js"></script>
-                <script src="/framework/jquery/jquery.colorbox.js"></script>
-                
-                <!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
+
+		<script src="/framework/jquery/jquery.confirm.js"></script>
+		<script src="/framework/jquery/jquery.colorbox.js"></script>
+
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
-                
-                <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-                
+
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 		<!--		<link href="/shared/css/bookmarkStyle.css" rel="stylesheet" type="text/css" />-->
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
@@ -145,33 +173,33 @@ EOF;
 				});
 			});
 		</script>
-                
-                <script>
-                    
-                </script>
-                <!--Before Deleting make confirmation>
-                <script type="text/javascript">
-                    function confirmDelete() {
-                        count = 1;
-                      $( "#delete-confirm" ).dialog({
-                        resizable: false,
-                        height:200,
-                        modal: true,
-                        buttons: {
-                          "Delete Track": function() {
-                            $( this ).dialog( "close" );
-                            return true;
-                          },
-                          Cancel: function() {
-                            $( this ).dialog( "close" );
-                            return false;
-                          }
-                        }
-                      });
-                    }
-                    return false;
-                </script-->
-                
+
+		<script>
+
+		</script>
+		<!--Before Deleting make confirmation>
+		<script type="text/javascript">
+			function confirmDelete() {
+				count = 1;
+			  $( "#delete-confirm" ).dialog({
+				resizable: false,
+				height:200,
+				modal: true,
+				buttons: {
+				  "Delete Track": function() {
+					$( this ).dialog( "close" );
+					return true;
+				  },
+				  Cancel: function() {
+					$( this ).dialog( "close" );
+					return false;
+				  }
+				}
+			  });
+			}
+			return false;
+		</script-->
+
 	</head>
 
 
@@ -183,7 +211,7 @@ EOF;
 
 		<!-- Body Content-->
 		<div class="main" >
-			<h3>Public Tracks</h3>
+			<h3>My Tracks</h3>
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
@@ -196,13 +224,14 @@ EOF;
 					</div><!--/span-->
 				</div><!--/row-->
 			</div>
-                        <hr/>
-                        <h3>Private Tracks</h3>
-                        <div class="container-fluid">
+			<hr/>
+			<h3>Tracks I'm Following</h3>
+			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="row-fluid">
-                                                    <p> &nbsp;&nbsp; Have all our private tracks display HERE with the little lock icon</p>
+							<?php echo_formData($htmlTrackFollow); ?>
+							<p>Basic code in place. Complete back-end method to return the bookmarks being followed by current user.</p>
 						</div><!--/row-->
 					</div><!--/span-->
 				</div><!--/row-->

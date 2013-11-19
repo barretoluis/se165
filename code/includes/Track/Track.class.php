@@ -223,28 +223,29 @@ class Track {
 	 */
 	//TODO: To be implemented
 	public function returnFollowingTracks($ucId, $fields = NULL) {
-		if ($ucId < !1) {
-			throw new MyException('Sorry, you forgot to provide a user id. I cannot retrieve any tracks without it. Here\'s what you tried sending: "' . $ucId . '".');
-		}
-
-		$fields = ($fields != NULL) ? $fields : "*";
-		$_resultSet = NULL;
-
-		$ucId = (int) $ucId; //cast as into to assure no SQL injection
-		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' AND flag_default != 1 ORDER BY title ASC";
-
-		try {
-			//Execute query
-			$this->sqlObj->DoQuery($query);
-
-			$_resultSet = $this->sqlObj->GetData();
-		} catch (MyException $e) {
-			$e->getMyExceptionMessage();
-		}
-
-		$this->sqlObj->destroy();
-
-		return $_resultSet;
+		return NULL;
+//		if ($ucId < !1) {
+//			throw new MyException('Sorry, you forgot to provide a user id. I cannot retrieve any tracks without it. Here\'s what you tried sending: "' . $ucId . '".');
+//		}
+//
+//		$fields = ($fields != NULL) ? $fields : "*";
+//		$_resultSet = NULL;
+//
+//		$ucId = (int) $ucId; //cast as into to assure no SQL injection
+//		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' AND flag_default != 1 ORDER BY title ASC";
+//
+//		try {
+//			//Execute query
+//			$this->sqlObj->DoQuery($query);
+//
+//			$_resultSet = $this->sqlObj->GetData();
+//		} catch (MyException $e) {
+//			$e->getMyExceptionMessage();
+//		}
+//
+//		$this->sqlObj->destroy();
+//
+//		return $_resultSet;
 	}
 
 	/**

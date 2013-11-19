@@ -37,27 +37,32 @@ try {
 
 //Variables
 $ucId = (int) $_SESSION['uc_id'];
-$html = NULL; //default dashboard
-$_myTracks = NULL;
+$htmlMyTrack = NULL; //default dashboard
+$htmlFollowTrack = NULL; //default dashboard
+$_myTracks = array();
+$_followingTracks = array();
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
 $Track = new Track();
 
 //Get user's tracks if not available in session already
-if (!isset($_SESSION['_myTracks'])) {
+if (!isset($_SESSION['_myTracks']) || !isset($_SESSION['_followingTracks'])) {
 	try {
 		$_myTracks = $Track->getMyTrack($_SESSION['uc_id'], 'id,title,private');
+		$_followingTracks = $Track->returnFollowingTracks($_SESSION['uc_id'], 'id,title,private');
 		$_SESSION['_myTracks'] = $_myTracks;
+		$_SESSION['_followingTracks'] = $_followingTracks;
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
 	}
 } else {
 	$_myTracks = $_SESSION['_myTracks'];
+	$_followingTracks = $_SESSION['_followingTracks'];
 }
 
 $defaultTrackId = $Track->returnDefaultTrackId($ucId);
 $defaultTrackName = $Track->returnTrackName($defaultTrackId);
-$html = '<li class="private"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
+$htmlMyTrack = '<li class="private"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
 
 foreach ($_myTracks as $dbRow) {
 	$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
@@ -68,14 +73,14 @@ foreach ($_myTracks as $dbRow) {
 			switch ($key) {
 				case 'id':
 					if ($isPrivate) {
-						$html .= '<li class="private"><a href="/track/?tid=' . $value . '">';
+						$htmlMyTrack .= '<li class="private"><a href="/track/?tid=' . $value . '">';
 					} else {
-						$html .= '<li><a href="/dashboard/?tid=' . $value . '">';
+						$htmlMyTrack .= '<li><a href="/track/?tid=' . $value . '">';
 					}
 					break;
 
 				case 'title':
-					$html .= $value . "</a></li>\n";
+					$htmlMyTrack .= $value . "</a></li>\n";
 					break;
 
 				default:
@@ -84,36 +89,66 @@ foreach ($_myTracks as $dbRow) {
 		}
 	}
 }
+
+if (is_array($_followingTracks) && count($_followingTracks) > 0) {
+	foreach ($_followingTracks as $dbRow) {
+		$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
+
+		//we don't want the default track in the list again
+		if ($dbRow['id'] != $defaultTrackId) {
+			foreach ($dbRow as $key => $value) {
+				switch ($key) {
+					case 'id':
+						if ($isPrivate) {
+							$htmlFollowTrack .= '<li class="private"><a href="/track/?tid=' . $value . '">';
+						} else {
+							$htmlFollowTrack .= '<li><a href="/track/?tid=' . $value . '">';
+						}
+						break;
+
+					case 'title':
+						$htmlFollowTrack .= $value . "</a></li>\n";
+						break;
+
+					default:
+						break;
+				}
+			}
+		}
+	}
+}
 ?>
 <script>
     $(document).ready(function() {
-        
+
         //jQuery("#simple-menu2").colorbox.close();
-            $('#simple-menu2').colorbox.close();
+		$('#simple-menu2').colorbox.close();
     });
-        
+
 </script>
 
 
-<?php if ($loggedIn) { //show logged in-nav    ?>
+<?php if ($loggedIn) { //show logged in-nav      ?>
 	<div id="sidr">
 		<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr">X</a></div>
 		<ul>
 			<li style="margin-left: 5px;"><b>My Tracks</b></li>
 			<?php
-			echo_formData($html);
+			echo_formData($htmlMyTrack);
 			?>
 		</ul>
 		<ul>
-			<li style="margin-left: 5px;"><b>Following Tracks</b></li>
-			<li><a href="#">To implement</a></li>
-			<li class="active"><a href="#">To implement</a></li>
-			<li><a href="#">To implement</a></li>
+			<?php
+			if($htmlFollowTrack) {
+				echo '<li style="margin-left: 5px;"><b>Following Tracks</b></li>';
+			}
+			echo_formData($htmlFollowTrack);
+			?>
 		</ul>
 	</div>
 
 
-<?php } else { //show standard nav    ?>
+<?php } else { //show standard nav      ?>
 
 
 <?php } ?>
