@@ -87,11 +87,8 @@ class Bookmark {
 
 	/**
 	 * Return a bookmark and all it's data.
-	 *
 	 * @param int $bmkId For a given bookmark ID, return its data.
-	 *
 	 * @return array Result only contains one entry of the bookmark requested.
-         * 
 	 */
 	public function returnBookmark($bmkId) {
 		if ($bmkId == NULL) {

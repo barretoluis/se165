@@ -56,7 +56,7 @@ class User {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
-		$this->password = $this->encyptPwd($tempPwd);
+		$this->password = $this->encryptPwd($tempPwd);
 
 		$query = "INSERT INTO  `user_credentials` (
                     `id` ,
@@ -99,7 +99,8 @@ class User {
 
 	/**
 	 * This function updates user credentials based on the userDataArray
-	 * object. This function is currently not implemented, will be implemented on a future date.
+	 * object. The function checks to see what areas of the userData needs
+         * to be updated, and then proceeds to update those fields.
 	 *
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
@@ -112,7 +113,7 @@ class User {
 		$this->email = $userDataArray['email'];
 		$this->username = $userDataArray['username'];
 		$tempPwd = $userDataArray['password'];
-		$this->password = $this->encyptPwd($tempPwd);
+		$this->password = $this->encryptPwd($tempPwd);
 		$this->gender = $userDataArray['gender'];
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
@@ -159,12 +160,11 @@ class User {
 
 	/**
 	 * Creates a hash of 128 characters in length based on a passphrase using a salt.
-	 * @TODO rename encyptPwd to encryptPwd
 	 * @param type $string This is the password that is input.
 	 * @return type This is a hashed numeric value to check against the input password.
 	 * @assert ('password') != 'password'
 	 */
-	public function encyptPwd($pwd) {
+	public function encryptPwd($pwd) {
 		$passPhrase = SALT_PASS . $pwd;
 		$sha512 = hash('sha512', $passPhrase);
 		return $sha512;
@@ -200,7 +200,7 @@ class User {
 	 * @param type $email the email of the user
 	 * @assert ('tack@tackster.com', 'param2') != Exception
 	 */
-	public function sendResteEmail($email, $pwd) {
+	public function sendResetEmail($email, $pwd) {
 		$to = array($this->email => $this->fname . " " . $this->lname);
 		$emailObj = new mandrillApi($to, "Password Successfuly reseted");
 		$htmlString = "<html>
@@ -380,13 +380,13 @@ class User {
 		if ($this->searchUser($email) == TRUE) {
 			$this->loadUser($email);
 			$sqlObj = new DataBase();
-			$newEncryptedPWD = $this->encyptPwd($newPWD);
+			$newEncryptedPWD = $this->encryptPwd($newPWD);
 			$query = "UPDATE  `db_tackster`.`user_credentials` SET
                          `password` = '$newEncryptedPWD' WHERE
                          `user_credentials`.`email` = '$email'";
 			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
-			$this->sendResteEmail($email, $newPWD);
+			$this->sendResetEmail($email, $newPWD);
 		} else {
 			throw new MyException('User Profile not found');
 		}

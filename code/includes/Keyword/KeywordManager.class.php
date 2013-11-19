@@ -17,7 +17,7 @@ class KeywordManager {
 	private $_words;
 
 	/**
-	 * Get keywords from the keyword table.
+	 * Gets keywords from the keyword table.
 	 * This function will primarily be used when an end user is typing a word
 	 * and we wish to autocomplete or suggest words.
 	 *
