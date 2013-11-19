@@ -46,7 +46,7 @@ if ($loggedIn) {
 			//Examples of how to assign the Colorbox event to elements
 			$(".track_popUp").colorbox({iframe:true, width:"70%", height:"60%", onClosed:function(){ location.reload(true); }});
 			$(".bookmark_popUp").colorbox({iframe:true, width:"80%", height:"85%"});
-			$(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
+			$(".profile_popUp").colorbox({iframe:true, width:"70%", height:"60%"});
 		});
 	</script>
 	<!--/Popups-->
