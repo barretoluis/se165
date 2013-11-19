@@ -81,11 +81,10 @@ if (count($_websiteErr) >= 1) {
 	<meta name="author" content="">
 
 	<!-- Style Sheets -->
-	<link rel="stylesheet" type="text/css" href="/shared/css/base.css" />
-	<link rel="stylesheet" type="text/css" href="/shared/css/registerStyle.css" />
 	<link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
 	<link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/shared/css/base.css" />
 
 
 
@@ -101,6 +100,7 @@ if (count($_websiteErr) >= 1) {
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="/shared/css/registerStyle.css" />
 </head>
 
 <body>
@@ -149,7 +149,7 @@ if (count($_websiteErr) >= 1) {
                 </div>
                 <div>
 					<button class="btn btn-success" type="submit" name="submit">Sign Up</button>
-					<button href="/" class="btn btn-danger" type="cancel" >Cancel</button>
+					<button class="btn btn-danger" type="reset" >Reset</button>
                 </div>
             </form><!-- form -->
             <h6><span  class="line-center">OR</span></h6>

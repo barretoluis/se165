@@ -1,5 +1,5 @@
 /* Reset CSS */
-html, body, div, span, object, iframe,
+html, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -15,8 +15,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
+
 body {
-	background: #FFFFFF;
 	color: #000;
 	font: 14px Arial;
 	margin: 0 auto;
@@ -189,10 +189,10 @@ h6:after{
     z-index:-1;
 }
 a img{
-  margin:-10px 0 10px 0;
+	margin:-10px 0 10px 0;
 }
 
 .container-fluid{
-  margin-left: 5px;
-  margin-right: 10px;
+	margin-left: 5px;
+	margin-right: 10px;
 }
