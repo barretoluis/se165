@@ -32,31 +32,8 @@ try {
 /*
  * Page specific PHP code here
  */
-$ignorePageLogin = TRUE;
-
-///*
-// * LUIS - Shouldn't need this anymore. I'm posting the form to the register.php file.
-// * This way the logic is contained to one file. There are some minor issues that can probably
-// * Fixed pretty quickly. Try a submit or two and debug :)
-// *
-// * Checking if the form is submitted
-// */
-// if (isset($_GET["submit"])) {
-//    require_once 'includes/user.php';
-//    session_Start();
-//
-//    $userObj = new user();
-//    $fname = $_POST['fname'];
-//    $lname = $_POST['lname'];
-//    $email = $_POST['email'];
-//    $password = $_POST['password'];
-//
-//    $userArray = array('fname'=>$fname,'lname'=>$lname,
-//    'email'=>$email,
-//    'password'=>$password,
-//    'source' => 'S');
-//    $userObj->createUSer($userArray);
-//}
+$randomInt	= (int) rand(1, 5);
+$homeImg	= "/shared/images/home{$randomInt}.jpg";
 
 ?><!DOCTYPE html>
 <html>
@@ -86,58 +63,63 @@ $ignorePageLogin = TRUE;
         <script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
         <link href="/shared/css/home.css" rel="stylesheet" type="text/css">
+		<style>
+			.marketing-section-signup {
+				background: #202021 url("<?php echo_formData($homeImg)?>") center no-repeat;
+			}
+		</style>
     </head>
 
     <body>
-<!-- Navigation Bar -->
-    <?php require_once('html/navbar.php'); ?>
-<!-- /Navigation Bar -->
+		<!-- Navigation Bar -->
+		<?php require_once('html/navbar.php'); ?>
+		<!-- /Navigation Bar -->
 
-<!-- Body Content-->
-    <div id="site-container" class="context-loader-container" data-pjax-container="">
-        <div class="marketing-section marketing-section-signup">
-            <div class="container">
-                <?php if (!isset($_SESSION['loggedin']) || (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE)) { ?>
-                  <form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">
-                     <dl class="form">
-                       <dd>
-                         <input type="text" name="fname" class="textfield" required="" placeholder="First Name"autofocus="">
-                       </dd>
-                     </dl>
-                      <dl class="form">
-                       <dd>
-                         <input type="text" name="lname" class="textfield" required="" placeholder="Last Name">
-                       </dd>
-                     </dl>
-                     <dl class="form">
-                       <dd>
-                         <input type="text" name="email" class="textfield" required="" placeholder="Email">
-                       </dd>
-                     </dl>
-                     <dl class="form">
-                       <dd>
-                         <input type="password" name="password" class="textfield" required="" placeholder="Password">
-                       </dd>
-                     </dl>
-                     <dl class="form">
-                       <dd>
-                         <button class="btn btn-success" type="submit" on-click="dashboard.html">Sign up</button>
-                       </dd>
-                     </dl>
-                 </form>
-               <?php } ?>
-            <h1 class="heading">Explore, and Share your Interests</h1>
-            <p class="subheading">Easier and a faster way to pin your brain</p>
-            </div><!-- /.container -->
-        </div>
-    </div>
-<!-- /Body Content-->
+		<!-- Body Content-->
+		<div id="site-container" class="context-loader-container" data-pjax-container="">
+			<div class="marketing-section marketing-section-signup">
+				<div class="container">
+					<?php if (!isset($_SESSION['loggedin']) || (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE)) { ?>
+						<form accept-charset="UTF-8" autocomplete="off" class="form-signup-home js-form-signup-home" method="post" action="/auth/register.php">
+							<dl class="form">
+								<dd>
+									<input type="text" name="fname" class="textfield" required="" placeholder="First Name"autofocus="">
+								</dd>
+							</dl>
+							<dl class="form">
+								<dd>
+									<input type="text" name="lname" class="textfield" required="" placeholder="Last Name">
+								</dd>
+							</dl>
+							<dl class="form">
+								<dd>
+									<input type="text" name="email" class="textfield" required="" placeholder="Email">
+								</dd>
+							</dl>
+							<dl class="form">
+								<dd>
+									<input type="password" name="password" class="textfield" required="" placeholder="Password">
+								</dd>
+							</dl>
+							<dl class="form">
+								<dd>
+									<button class="btn btn-success" type="submit" on-click="dashboard.html">Sign up</button>
+								</dd>
+							</dl>
+						</form>
+					<?php } ?>
+					<h1 class="heading">Explore, and Share your Interests</h1>
+					<p class="subheading">Easier and a faster way to pin your brain</p>
+				</div><!-- /.container -->
+			</div>
+		</div>
+		<!-- /Body Content-->
 
-<!-- Footer Content -->
-<div class="main">
-    <?php require_once('html/footerHome.php'); ?>
-</div>
-<!-- /Footer Content -->
+		<!-- Footer Content -->
+		<div class="main">
+			<?php require_once('html/footerHome.php'); ?>
+		</div>
+		<!-- /Footer Content -->
 
     </body>
 </html>

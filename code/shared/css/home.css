@@ -10,11 +10,12 @@ div{
 	color: white;
 }
 .subheading{
-	color: white;
+	font-size: 18px;
+	color: #F6F6F6;
 }
 .marketing-section-signup {
-	text-shadow: 0 1px 3px #222;
-	background: #202021 url("http://i.imgur.com/KiuQWYq.jpg") center no-repeat;
+	text-shadow: 0 2px 4px #222;
+	background: #202021 url("/shared/images/home1.jpg") center no-repeat;
 	height: 275px;
 }
 .marketing-section {
