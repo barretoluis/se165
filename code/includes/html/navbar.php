@@ -44,7 +44,7 @@ if ($loggedIn) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//Examples of how to assign the Colorbox event to elements
-			$(".track_popUp").colorbox({iframe:true, width:"50%", height:"60%"});
+			$(".track_popUp").colorbox({iframe:true, width:"50%", height:"60%", onClosed:function(){ location.reload(true); }});
 			$(".bookmark_popUp").colorbox({iframe:true, width:"50%", height:"80%"});
 			$(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
 		});
@@ -195,7 +195,7 @@ if ($loggedIn) {
 				<a class="brand" href="/" style="color: #00B800">Tackster</a>
 				<div class="nav-collapse collapse">
 					<p class="navbar-text pull-right">
-						<a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login with email</a>
+						<a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login</a>
 					</p>
 					<p class="navbar-text pull-right">
 					   <a href="#" onClick="MyWindow = window.open('https://www.facebook.com/login.php?skip_api_login=1&api_key=294846713986884&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252F153.18.33.144%252FDEV%252F%26state%3D7a56d86c0a6c372440bf849d630e2a27%26scope%3Demail%26client_id%3D294846713986884%26ret%3Dlogin&cancel_uri=http%3A%2F%2F153.18.33.144%2FDEV%2F%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26state%3D7a56d86c0a6c372440bf849d630e2a27%23_%3D_&display=page', 'MyWindow', 'width=50px', 'height=10px');
