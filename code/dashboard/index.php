@@ -146,7 +146,6 @@ EOF;
 
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
-		<!--		<link href="/shared/css/bookmarkStyle.css" rel="stylesheet" type="text/css" />-->
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
