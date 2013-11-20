@@ -7,7 +7,7 @@
 	<title>Class User | SE165 - Tackster</title>
 
 	<script type="text/javascript" src="resources/combined.js?1277292761"></script>
-	<script type="text/javascript" src="elementlist.js?3890048175"></script>
+	<script type="text/javascript" src="elementlist.js?1022670604"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -36,6 +36,7 @@
 			<ul>
 				<li><a href="class-BaseFacebook.html">BaseFacebook</a></li>
 				<li><a href="class-Bookmark.html">Bookmark</a></li>
+				<li><a href="class-BookmarkTest.html">BookmarkTest</a></li>
 				<li><a href="class-DataBase.html">DataBase</a></li>
 				<li><a href="class-EnvUtilities.html">EnvUtilities</a></li>
 				<li><a href="class-Facebook.html">Facebook</a></li>
@@ -55,9 +56,10 @@
 				<li><a href="class-PersistentFBPublic.html">PersistentFBPublic</a></li>
 				<li><a href="class-PHPSDKTestCase.html">PHPSDKTestCase</a></li>
 				<li><a href="class-SearchBookmark.html">SearchBookmark</a></li>
-				<li><a href="class-track.html">track</a></li>
+				<li><a href="class-Track.html">Track</a></li>
 				<li><a href="class-TransientFacebook.html">TransientFacebook</a></li>
 				<li class="active"><a href="class-User.html">User</a></li>
+				<li><a href="class-UserTest.html">UserTest</a></li>
 			</ul>
 
 
@@ -135,7 +137,7 @@ database. Handles authentication for encrypting the users login.</p>
 
 				<b>Author:</b>
 				Luis Barreto<br />
-		<b>Located at</b> <a href="source-class-User.html#8-309" title="Go to source code">code/includes/Auth/User.class.php</a><br />
+		<b>Located at</b> <a href="source-class-User.html#14-395" title="Go to source code">code/includes/Auth/User.class.php</a><br />
 	</div>
 
 
@@ -153,7 +155,7 @@ database. Handles authentication for encrypting the users login.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createUser">#</a>
-		<code><a href="source-class-User.html#29-70" title="Go to source code">createUser</a>( <span>type <var>$userDataArray</var></span> )</code>
+		<code><a href="source-class-User.html#37-98" title="Go to source code">createUser</a>( <span>type <var>$userDataArray</var></span> )</code>
 
 		<div class="description short">
 			
@@ -172,11 +174,19 @@ Tackster Database to enter this information.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$userDataArray</var></dt>
-					<dd><code>type</code><br>$userDataArray This is the passed data from when the user hits submit.</dd>
+					<dd><code>type</code><br>$userDataArray This is the passed data from when the user hits submit. White box
+testing is limited here due to the nature of private keys in our database; there
+is little automation that we can do since we would need to create a new user</dd>
 				</dl></div>
 
 
 
+				<h4>Assert</h4>
+				<div class="list">
+						(array("fname" =&gt; "Robert", "lname" =&gt; "Lee", "email" =&gt;
+"test@test.com", "password" =&gt; "password", "gender" =&gt; "M", "source" =&gt;
+"I")) == FALSE<br />
+				</div>
 
 
 		</div>
@@ -186,40 +196,42 @@ Tackster Database to enter this information.</p>
 
 		<td class="attributes"><code>
 			 public 
-			boolean
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateUser">#</a>
-		<code><a href="source-class-User.html#72-84" title="Go to source code">updateUser</a>( <span>type <var>$userDataArray</var></span> )</code>
+		<code><a href="source-class-User.html#100-159" title="Go to source code">updateUser</a>( <span>type <var>$userId</var></span>, <span>mixed <var>$userDataArray</var></span> )</code>
 
 		<div class="description short">
 			
-<p>This function updates user credentials based on the userDataArray object.
-This function is currently not implemented, will be implemented on a future
-date.</p>
+<p>This function updates user credentials based on the userDataArray object. The
+function checks to see what areas of the userData needs to be updated, and then
+proceeds to update those fields.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>This function updates user credentials based on the userDataArray object.
-This function is currently not implemented, will be implemented on a future
-date.</p>
+<p>This function updates user credentials based on the userDataArray object. The
+function checks to see what areas of the userData needs to be updated, and then
+proceeds to update those fields.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$userDataArray</var></dt>
+					<dt><var>$userId</var></dt>
 					<dd><code>type</code><br>$userDataArray This is the passed data from when the user hits submit.</dd>
+					<dt><var>$userDataArray</var></dt>
+					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br>This boolean is defaulted to TRUE since the function isn't implemented yet.<br />
+					<code>array</code><br>Returns an array of errors. NULL if transaction was successful.<br />
 				</div>
 
 
@@ -228,7 +240,7 @@ date.</p>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="encyptPwd" id="_encyptPwd">
+	<tr data-order="encryptPwd" id="_encryptPwd">
 
 		<td class="attributes"><code>
 			 public 
@@ -238,8 +250,8 @@ date.</p>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_encyptPwd">#</a>
-		<code><a href="source-class-User.html#86-96" title="Go to source code">encyptPwd</a>( <span>type <var>$pwd</var></span> )</code>
+		<a class="anchor" href="#_encryptPwd">#</a>
+		<code><a href="source-class-User.html#161-171" title="Go to source code">encryptPwd</a>( <span>type <var>$pwd</var></span> )</code>
 
 		<div class="description short">
 			
@@ -267,6 +279,10 @@ salt.</p>
 				</div>
 
 
+				<h4>Assert</h4>
+				<div class="list">
+						('password') != 'password'<br />
+				</div>
 
 
 		</div>
@@ -283,7 +299,7 @@ salt.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_checkPassword">#</a>
-		<code><a href="source-class-User.html#98-117" title="Go to source code">checkPassword</a>( <span>type <var>$postPwd</var></span>, <span>type <var>$dbPwd</var></span> )</code>
+		<code><a href="source-class-User.html#173-194" title="Go to source code">checkPassword</a>( <span>type <var>$postPwd</var></span>, <span>type <var>$dbPwd</var></span> )</code>
 
 		<div class="description short">
 			
@@ -316,12 +332,19 @@ the password is different.<br />
 				</div>
 
 
+				<h4>Assert</h4>
+				<div class="list">
+						('tack',
+'3e818eec51b45583b9881f5f2fe455413483848ab61ba10a0c4914d5cfb24a155dfc70b707b948c1ae7ce175b7ee6f0d54487d07fcc147f813e0283346bb023c')
+== TRUE<br />
+						('tack', '129dkjsf0') == FALSE<br />
+				</div>
 
 
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="sendResteEmail" id="_sendResteEmail">
+	<tr data-order="sendResetEmail" id="_sendResetEmail">
 
 		<td class="attributes"><code>
 			 public 
@@ -331,8 +354,8 @@ the password is different.<br />
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_sendResteEmail">#</a>
-		<code><a href="source-class-User.html#118-131" title="Go to source code">sendResteEmail</a>( <span>type <var>$email</var></span>, <span>mixed <var>$pwd</var></span> )</code>
+		<a class="anchor" href="#_sendResetEmail">#</a>
+		<code><a href="source-class-User.html#196-212" title="Go to source code">sendResetEmail</a>( <span>type <var>$email</var></span>, <span>mixed <var>$pwd</var></span> )</code>
 
 		<div class="description short">
 			
@@ -356,6 +379,14 @@ the password is different.<br />
 
 
 
+				<h4>Assert</h4>
+				<div class="list">
+						('tack@tackster.com', 'param2') != Exception<br />
+				</div>
+				<h4>TODO</h4>
+				<div class="list">
+						change functionname<br />
+				</div>
 
 
 		</div>
@@ -372,7 +403,7 @@ the password is different.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sendConfEmail">#</a>
-		<code><a href="source-class-User.html#133-145" title="Go to source code">sendConfEmail</a>( )</code>
+		<code><a href="source-class-User.html#214-227" title="Go to source code">sendConfEmail</a>( )</code>
 
 		<div class="description short">
 			
@@ -407,7 +438,7 @@ account creation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_searchUser">#</a>
-		<code><a href="source-class-User.html#147-172" title="Go to source code">searchUser</a>( <span>type <var>$email</var></span> )</code>
+		<code><a href="source-class-User.html#229-256" title="Go to source code">searchUser</a>( <span>type <var>$email</var></span> )</code>
 
 		<div class="description short">
 			
@@ -435,6 +466,11 @@ database.</p>
 				</div>
 
 
+				<h4>Assert</h4>
+				<div class="list">
+						('test@test.com') != FALSE<br />
+						('notauser@random.org') == FALSE<br />
+				</div>
 
 
 		</div>
@@ -451,7 +487,7 @@ database.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteUser">#</a>
-		<code><a href="source-class-User.html#173-196" title="Go to source code">deleteUser</a>( <span>email <var>$email</var></span> )</code>
+		<code><a href="source-class-User.html#258-281" title="Go to source code">deleteUser</a>( <span>email <var>$email</var></span> )</code>
 
 		<div class="description short">
 			
@@ -489,7 +525,7 @@ database.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadUser">#</a>
-		<code><a href="source-class-User.html#197-231" title="Go to source code">loadUser</a>( <span>type <var>$email</var></span> )</code>
+		<code><a href="source-class-User.html#283-315" title="Go to source code">loadUser</a>( <span>type <var>$email</var></span> )</code>
 
 		<div class="description short">
 			
@@ -539,18 +575,36 @@ last name.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_logInUser">#</a>
-		<code><a href="source-class-User.html#241-273" title="Go to source code">logInUser</a>( <span>mixed <var>$email</var></span>, <span>mixed <var>$pwd</var></span> )</code>
+		<code><a href="source-class-User.html#318-357" title="Go to source code">logInUser</a>( <span>type <var>$email</var></span>, <span>type <var>$pwd</var></span> )</code>
 
 		<div class="description short">
 			
+<p>This function logs in a user by taking their e-mail and password that they
+provide through the log in page.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>This function logs in a user by taking their e-mail and password that they
+provide through the log in page.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$email</var></dt>
+					<dd><code>type</code><br>$email The email address of the user</dd>
+					<dt><var>$pwd</var></dt>
+					<dd><code>type</code><br>$pwd The password of the user</dd>
+				</dl></div>
 
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-MyException.html">MyException</a></code></code><br>This exception is thrown when the user was not able to be logged in. For
+example, if their credentials don't match that stored on the database.<br />
+				</div>
 
 
 
@@ -568,14 +622,23 @@ last name.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_logOutUser">#</a>
-		<code><a href="source-class-User.html#279-286" title="Go to source code">logOutUser</a>( )</code>
+		<code><a href="source-class-User.html#359-372" title="Go to source code">logOutUser</a>( )</code>
 
 		<div class="description short">
 			
+<p>This function ends a users session with the server and logs them out of their
+account,<br />
+it requires an active connection.<br />
+This is untestable using white box testing.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>This function ends a users session with the server and logs them out of their
+account, it requires an active connection. This is untestable using white box
+testing.</p>
+
 
 
 
@@ -597,7 +660,7 @@ last name.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_resetPassword">#</a>
-		<code><a href="source-class-User.html#287-307" title="Go to source code">resetPassword</a>( <span>type <var>$email</var></span>, <span>mixed <var>$newPWD</var></span> )</code>
+		<code><a href="source-class-User.html#374-393" title="Go to source code">resetPassword</a>( <span>type <var>$email</var></span>, <span>mixed <var>$newPWD</var></span> )</code>
 
 		<div class="description short">
 			
