@@ -20,11 +20,10 @@ class Track {
 	private $private;
 	private $flag_default;
 
-	/*
-	 * Standard constructor
+	/**
+	 * Standard constructor that creates a sql Database object
 	 *
 	 */
-
 	public function __construct() {
 		$this->sqlObj = new DataBase();
 	}
@@ -38,7 +37,6 @@ class Track {
 	 * @param char		$privacy	T for private and F for public.
 	 * @param boolean	$isDefaultTrack	TRUE if this is being created as a default track.
 	 */
-//	public function createTrack($trackArray, $defaultFlag == NULL) {
 	public function createTrack($userId, $title, $desc, $privacy, $isDefaultTrack = FALSE) {
 		if ($isDefaultTrack == TRUE) {
 			$title = 'My Private Bookmarks';
@@ -215,13 +213,12 @@ class Track {
 	/**
 	 * Get the tracks for the given user id.
 	 * IMPORTANT: This method will not return the user's default track.
-	 *
+	 * TODO: To be implemented
 	 * @param type $ucId The user's credential ID
 	 * @param type $fields The specific fields that are going to be returned.
 	 * @return type Return's an array of all tracks for the given ucId.
 	 * @throws MyException Throws an exception if the user id is less than one.
 	 */
-	//TODO: To be implemented
 	public function returnFollowingTracks($ucId, $fields = NULL) {
 		return NULL;
 //		if ($ucId < !1) {

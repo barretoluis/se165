@@ -7,7 +7,7 @@
 	<title>Class SearchBookmark | SE165 - Tackster</title>
 
 	<script type="text/javascript" src="resources/combined.js?1277292761"></script>
-	<script type="text/javascript" src="elementlist.js?3890048175"></script>
+	<script type="text/javascript" src="elementlist.js?1022670604"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -36,6 +36,7 @@
 			<ul>
 				<li><a href="class-BaseFacebook.html">BaseFacebook</a></li>
 				<li><a href="class-Bookmark.html">Bookmark</a></li>
+				<li><a href="class-BookmarkTest.html">BookmarkTest</a></li>
 				<li><a href="class-DataBase.html">DataBase</a></li>
 				<li><a href="class-EnvUtilities.html">EnvUtilities</a></li>
 				<li><a href="class-Facebook.html">Facebook</a></li>
@@ -55,9 +56,10 @@
 				<li><a href="class-PersistentFBPublic.html">PersistentFBPublic</a></li>
 				<li><a href="class-PHPSDKTestCase.html">PHPSDKTestCase</a></li>
 				<li class="active"><a href="class-SearchBookmark.html">SearchBookmark</a></li>
-				<li><a href="class-track.html">track</a></li>
+				<li><a href="class-Track.html">Track</a></li>
 				<li><a href="class-TransientFacebook.html">TransientFacebook</a></li>
 				<li><a href="class-User.html">User</a></li>
+				<li><a href="class-UserTest.html">UserTest</a></li>
 			</ul>
 
 
@@ -135,58 +137,94 @@ the search bar.</p>
 
 				<b>Author:</b>
 				Jerry Phul<br />
-		<b>Located at</b> <a href="source-class-SearchBookmark.html#7-54" title="Go to source code">code/includes/Bookmark/SearchBookmark.class.php</a><br />
+		<b>Located at</b> <a href="source-class-SearchBookmark.html#7-127" title="Go to source code">code/includes/Bookmark/SearchBookmark.class.php</a><br />
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="getBookmark" id="_getBookmark">
+	<tr data-order="searchMyTrackBookmarks" id="_searchMyTrackBookmarks">
 
 		<td class="attributes"><code>
 			 public 
-			array
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_getBookmark">#</a>
-		<code><a href="source-class-SearchBookmark.html#17-52" title="Go to source code">getBookmark</a>( <span>word <var>$word</var></span> )</code>
+		<a class="anchor" href="#_searchMyTrackBookmarks">#</a>
+		<code><a href="source-class-SearchBookmark.html#20-35" title="Go to source code">searchMyTrackBookmarks</a>( <span>mixed <var>$word</var></span>, <span>mixed <var>$ucId</var></span>, <span>mixed <var>$_tid</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Get keywords from the keyword table. This function will primarily be used
-when an end user is typing a word and we wish to autocomplete or suggest
-words.</p>
-
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Get keywords from the keyword table. This function will primarily be used
-when an end user is typing a word and we wish to autocomplete or suggest
-words.</p>
 
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$word</var></dt>
-					<dd><code>word</code><br>Takes the word to be searched.</dd>
-				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>array</code><br>Returns up to 20 matching words as an array.<br />
-				</div>
 
-				<h4>Throws</h4>
-				<div class="list">
-					<code><code><a href="class-MyException.html">MyException</a></code></code><br>this exception is thrown when no phrase is entered into the search. Returns an
-error message.<br />
-				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="searchMyBookmarks" id="_searchMyBookmarks">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_searchMyBookmarks">#</a>
+		<code><a href="source-class-SearchBookmark.html#37-48" title="Go to source code">searchMyBookmarks</a>( <span>mixed <var>$word</var></span>, <span>mixed <var>$ucId</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="searchPublicBookmarks" id="_searchPublicBookmarks">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_searchPublicBookmarks">#</a>
+		<code><a href="source-class-SearchBookmark.html#50-57" title="Go to source code">searchPublicBookmarks</a>( <span>mixed <var>$word</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
 
 
 

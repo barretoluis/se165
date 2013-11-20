@@ -42,7 +42,8 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
     /**
      * Generated from @assert ('tack', '3e818eec51b45583b9881f5f2fe455413483848ab61ba10a0c4914d5cfb24a155dfc70b707b948c1ae7ce175b7ee6f0d54487d07fcc147f813e0283346bb023c') == TRUE.
-     *
+     * This test should return true, since this the second value in the assert function is
+     * what is pulled manually from the database.
      * @covers User::checkPassword
      */
     public function testCheckPassword() {
@@ -54,7 +55,8 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
     /**
      * Generated from @assert ('tack', '129dkjsf0') == FALSE.
-     *
+     * This test tests a random input for the second value. This second value is checked against the 
+     * value created from the check password function.
      * @covers User::checkPassword
      */
     public function testCheckPassword2() {
