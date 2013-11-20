@@ -26,7 +26,9 @@ class Bookmark {
 
 	public function __construct() {
 		$this->setUcId($_SESSION['uc_id']);
-		$this->setDefaultTid($_SESSION['defaultTrackId']);
+		//TODO: I believe this code isn't needed anymore
+		//If nothing breaks after QA, then delete this code and associated variables, setters, & getters
+		//$this->setDefaultTid($_SESSION['defaultTrackId']);
 
 		if ($this->getUcId() < 0) {
 			throw new MyException('Could not determine the User ID while constructing the bookmark object.');
