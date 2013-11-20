@@ -25,10 +25,8 @@ class Bookmark {
 	 */
 
 	public function __construct() {
-                
-		//$this->setUcId($_SESSION['uc_id']);
-                $this->setUcId(73);
-		//$this->setDefaultTid($_SESSION['defaultTrackId']);
+		$this->setUcId($_SESSION['uc_id']);
+		$this->setDefaultTid($_SESSION['defaultTrackId']);
 
 		if ($this->getUcId() < 0) {
 			throw new MyException('Could not determine the User ID while constructing the bookmark object.');
@@ -45,7 +43,7 @@ class Bookmark {
 	 * @param type $keyword Comma separated list of keywords for the bookmark.
 	 *
 	 * @return array Return user friendly error messages if any.
-	 * 
+	 *
 	 */
 	public function createBookmark($trackId, $url, $privacy, $description, $keyword = NULL) {
 		if ($trackId == NULL || $url == NULL || $description == NULL) {
@@ -162,7 +160,7 @@ class Bookmark {
 	 *
 	 * @param int $trackId	The ID of the track to get bookmarks for.
 	 * @return array Returns an array of all bookmark data from the DB.
-         * 
+         *
 	 */
 	public function returnBmkDataByTrack($trackId) {
 		if ($trackId == NULL) {
