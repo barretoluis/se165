@@ -132,6 +132,12 @@ if (count($_websiteErr) >= 1) {
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="/shared/css/loginStyle.css" />
+
+		<script>
+			window.opener.location.reload();
+			window.close();
+			return false;
+		</script>
 	</head>
 
 	<body>
