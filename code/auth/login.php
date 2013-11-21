@@ -44,7 +44,13 @@ if($fbLoginUrl == NULL) {	//if a person already logged into Facebook, log'em in
 	header('Location: /auth/loginFacebook.php');
 }
 
-$_websiteErr = Array(); //Error message to show end user
+if(isset($_SESSION['_websiteErr'])) {
+	$_websiteErr = $_SESSION['_websiteErr'];
+	unset($_SESSION['_websiteErr']);
+} else {
+	$_websiteErr = Array(); //Error message to show end user
+}
+
 //If you're already logged in, redirect to the dashboard
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	header('Location: /dashboard/');

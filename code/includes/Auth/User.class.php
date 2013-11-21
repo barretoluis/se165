@@ -332,7 +332,8 @@ class User {
 		$query = "SELECT  `id`, `email` ,  `password` ,  `state` ,  `fromFB`
                     FROM  `user_credentials`
                     WHERE  `email`='{$email}'
-                    AND  `password`='{$sha512}'";
+                    AND  `password`='{$sha512}'
+					AND fromFB='I'";
 
 		$sqlObj->DoQuery($query);
 		$num = $sqlObj->getNumberOfRecords();
@@ -369,12 +370,26 @@ class User {
 			session_start();
 		}
 
-		//Set some basic session items
-		$_SESSION['loggedin'] = TRUE;
+		$sqlObj = new DataBase();
+		$query = "SELECT  `id`, `email`, `state` , `fromFB`
+                    FROM  `user_credentials`
+                    WHERE  `email`='{$email}'
+					AND fromFB='F'";
 
-		//create info array
-		$_SESSION['profile'] = $this->loadUser($email);
-		$_SESSION['uc_id'] = $_SESSION['profile']['uc_id']; //get user login id
+		$sqlObj->DoQuery($query);
+		$num = $sqlObj->getNumberOfRecords();
+
+		//make sure no records were returned
+		if ($num == 1) {
+			//Set some basic session items
+			$_SESSION['loggedin'] = TRUE;
+
+			//create info array
+			$_SESSION['profile'] = $this->loadUser($email);
+			$_SESSION['uc_id'] = $_SESSION['profile']['uc_id']; //get user login id
+		} else {
+			throw new MyException('Account already created as a Tackster account. Please login with your email and password.');
+		}
 	}
 
 	/**

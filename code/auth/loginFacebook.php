@@ -34,6 +34,7 @@ try {
 /*
  * Page specific PHP code here
  */
+$_websiteErr = Array(); //Error message to show end user
 $htmlFb = NULL;
 $FBConn = new FacebookConnector();
 try {
@@ -87,13 +88,18 @@ try {
 }
 
 //time to load the user info
-$User->logInFbUser($fb_email);
+try {
+	$User->logInFbUser($fb_email);
+} catch (MyException $e) {
+	$fb_userInfo = NULL;
+	session_destroy();
+	session_start();
+	array_push($_websiteErr, $e->getMessage());
+	$_SESSION['_websiteErr'] = $_websiteErr;
+	$e->getMyExceptionMessage();
+}
 
 //$htmlFb =  ">>" . $FBUserFound;
-
-
-
-$_websiteErr = Array(); //Error message to show end user
 //format any errors
 if (count($_websiteErr) >= 1) {
 	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
@@ -133,11 +139,24 @@ if (count($_websiteErr) >= 1) {
 
 		<link rel="stylesheet" type="text/css" href="/shared/css/loginStyle.css" />
 
-		<script>
-			window.opener.location.reload();
-			window.close();
-			return false;
-		</script>
+		<?php
+		if (count($_websiteErr) >= 1) {
+			?>
+			<script type="text/javascript">
+				window.opener.document.location.href = '/auth/login.php';
+				window.close();
+			</script>
+
+			<?php
+		} else {
+			?>
+			<script type="text/javascript">
+				window.opener.location.reload();
+				window.close();
+			</script>
+			<?php
+		}
+		?>
 	</head>
 
 	<body>
@@ -164,11 +183,17 @@ if (count($_websiteErr) >= 1) {
 
 		<!-- LOGIN FORM  -->
 		<div class="main">
-			<pre><?php echo $htmlFb ?></pre>
+			<?php
+			if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+				echo $_websiteErr;
+			}
+			?>
+
+			<pre><?php var_dump($_SESSION) ?></pre>
 		</div><!-- container -->
 
 		<!-- Footer Content -->
-<?php require_once('html/footer.php'); ?>
+		<?php require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 	</body>
 </html>

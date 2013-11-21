@@ -106,6 +106,13 @@ class FacebookConnector {
 		}
 	}
 
+	/**
+	 * Destroy FB Session
+	 */
+	public function destroyFBSession() {
+		$this->destroyFBSession();
+	}
+
 }
 
 ?>
