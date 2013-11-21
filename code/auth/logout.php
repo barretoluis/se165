@@ -1,8 +1,11 @@
 <?php
+
 /*
  * Add additional include files to array if needed for this page.
  */
-$includeFilesAdditional = array();
+$includeFilesAdditional = array(
+	'FacebookConnector/FacebookConnector.class.php'
+);
 
 
 
@@ -32,14 +35,17 @@ try {
  * Page specific PHP code here
  */
 //If you don't have a session or haven't logged in, redirect to homepage
-if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE) {
-			header('Location: /');
+if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE) {
+	header('Location: /');
 }
 
 //if user is logged in, let's log them out and redirect to homepage
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	//Looks like someone is trying to login
 	try {
+		$FBConn = new FacebookConnector();
+		$FBConn->logoutUser();
+
 		$userObj = new User();
 		$userObj->logOutUser();
 	} catch (MyException $e) {

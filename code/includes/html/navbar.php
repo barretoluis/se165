@@ -1,8 +1,10 @@
 <?php
 require_once('Utility/EnvUtilities.class.php');
 require_once('Track/Track.class.php');
+require_once('FacebookConnector/FacebookConnector.class.php');
 
 $searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord'] : NULL;
+$fbLoginUrl = NULL;
 
 /*
  * Give navigtion based on user's authentication.
@@ -19,11 +21,15 @@ $searchWord = (isset($_POST['searchWord'])) ? $_POST['searchWord'] : NULL;
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
 
+if(!$loggedIn) {
+	$FBConn = new FacebookConnector();
+	$fbLoginUrl = $FBConn->getLoginUrl();
+}
+
 //User login status check and set show navigation variable
 if ($loggedIn) {
 //if (isset($_SESSION['loginState']) && $_SESSION['loginState'] == 1) {
 //	$loggedIn = TRUE;
-
 	//Get user's tracks if not available in session already
 	if (!isset($_SESSION['myTracks'])) {
 		try {
@@ -37,7 +43,7 @@ if ($loggedIn) {
 }
 ?>
 
-<?php if ($loggedIn) { //show logged in-nav   ?>
+<?php if ($loggedIn) { //show logged in-nav     ?>
 	<!-- Popups-->
 	<link href="/shared/css/colorbox.css" rel="stylesheet">
 	<script src="/framework/jquery/jquery.colorbox.js"></script>
@@ -57,21 +63,21 @@ if ($loggedIn) {
 	require_once 'html/trackMenu.php';
 	?>
 
-<!--	<div id="sidr">
-		<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr"><small>(close menu)</small></a></div>
-		<ul>
-			<li style="margin-left: 5px;"><b>My Tracks</b></li>
-			<li><a href="#">My Private Track</a></li>
-			<li class="active"><a href="#">My Public Track</a></li>
-			<li><a href="#">Another track</a></li>
-		</ul>
-		<ul>
-			<li style="margin-left: 5px;"><b>Following Tracks</b></li>
-			<li><a href="#">My Private Track</a></li>
-			<li class="active"><a href="#">My Public Track</a></li>
-			<li><a href="#">Another track</a></li>
-		</ul>
-	</div>-->
+	<!--	<div id="sidr">
+			<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr"><small>(close menu)</small></a></div>
+			<ul>
+				<li style="margin-left: 5px;"><b>My Tracks</b></li>
+				<li><a href="#">My Private Track</a></li>
+				<li class="active"><a href="#">My Public Track</a></li>
+				<li><a href="#">Another track</a></li>
+			</ul>
+			<ul>
+				<li style="margin-left: 5px;"><b>Following Tracks</b></li>
+				<li><a href="#">My Private Track</a></li>
+				<li class="active"><a href="#">My Public Track</a></li>
+				<li><a href="#">Another track</a></li>
+			</ul>
+		</div>-->
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid" style= "margin-left: -10px; margin-right: -5px;">
@@ -182,7 +188,7 @@ if ($loggedIn) {
 	</div>  <!-- closing navbar-->
 
 
-<?php } else { //show standard nav   ?>
+<?php } else { //show standard nav     ?>
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -198,8 +204,7 @@ if ($loggedIn) {
 						<a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login</a>
 					</p>
 					<p class="navbar-text pull-right">
-					   <a href="#" onClick="MyWindow = window.open('https://www.facebook.com/login.php?skip_api_login=1&api_key=294846713986884&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252F153.18.33.144%252FDEV%252F%26state%3D7a56d86c0a6c372440bf849d630e2a27%26scope%3Demail%26client_id%3D294846713986884%26ret%3Dlogin&cancel_uri=http%3A%2F%2F153.18.33.144%2FDEV%2F%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26state%3D7a56d86c0a6c372440bf849d630e2a27%23_%3D_&display=page', 'MyWindow', 'width=50px', 'height=10px');
-								return false;">
+						<a href="#" onClick="MyWindow=window.open('<?PHP echo $fbLoginUrl; ?>','MyWindow', 'width=875,height=675'); return false;">
 							<img src = "http://i.imgur.com/wfKcSNX.png" alt="Login with Facebook" class="img-rounded" style ="margin: 0px 10px 0px 10px;"/></a>
 					</p>
 				</div><!--/.nav-collapse -->

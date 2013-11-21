@@ -1,6 +1,7 @@
 <?php
 
-require 'facebook.php';
+require 'Configs/defineFb.php';
+require 'FacebookConnector/Framework/facebook.php';
 
 /**
  * FaceBookApi is used by the system to make calls to the FaceBook SDK installed
@@ -8,32 +9,33 @@ require 'facebook.php';
  *
  * @author Luis Barreto
  */
-class faceBookApi {
+//class faceBookApi {
+class FacebookConnector {
 
-	private $facebook;
-	private $logoutUrl;
-	private $loginUrl;
-	private $userProfile;
-	private $user;
+	private $Facebook = NULL;
+	private $logoutUrl = NULL;
+	private $loginUrl = NULL;
+	private $userProfile = NULL;
+	private $user = NULL;
 
 	/**
 	 * Creates a new Facebook object which allows the system to access
 	 * Facebook information.
 	 */
 	public function __construct() {
-		$this->facebook = new Facebook(array(
-					//    'appId'  => '294846713986884', Original API ID
-					'appId' => '336997676446819', // barreto dev id
-					//    'secret' => '984fbb242a0707457aaa3557a83eaaa2', Original secret
-					'secret' => 'caa37a6cc046b710a50bdfe214e9d4a0', //barreto dev secret
+		$fb = new facebook(array(
+					'appId' => FB_APP_ID,
+					'secret' => FB_APP_SECRET
 				));
+		$this->Facebook = $fb;
+		$this->setUserState();
 	}
 
 	/**
 	 * Returns the URL for the user to logout, so that the user can logout from
 	 * our website.
 	 * @return type Returns a URL.
-         * 
+	 *
 	 */
 	public function getLogOutUrl() {
 		return $this->logoutUrl;
@@ -45,6 +47,7 @@ class faceBookApi {
 	 * @return type This returns a URL from Facebook
 	 */
 	public function getLoginUrl() {
+		$this->setUserState();
 		return $this->loginUrl;
 	}
 
@@ -61,15 +64,15 @@ class faceBookApi {
 	 * If not logged in, get the FB login URL - allowing the user to login via FB.
 	 * @return True if the user was the correct user, return False otherwise.
 	 */
-	public function setUserState() {
+	private function setUserState() {
 		$status = FALSE;
-		$this->user = $this->facebook->getUser();
+		$this->user = $this->Facebook->getUser();
 		if ($this->user) {
-			$this->logoutUrl = $this->facebook->getLogoutUrl();
+			$this->logoutUrl = $this->Facebook->getLogoutUrl();
 			$this->getUserInfo();
 			$status = TRUE;
 		} else {
-			$this->loginUrl = $this->facebook->getLoginUrl(array('scope' => 'email'));
+			$this->loginUrl = $this->Facebook->getLoginUrl(array('scope' => 'email'));
 			$status = FALSE;
 		}
 		return $status;
@@ -82,11 +85,24 @@ class faceBookApi {
 		if ($this->user) {
 			try {
 				// Proceed knowing you have a logged in user who's authenticated.
-				$this->userProfile = $this->facebook->api('/me');
+				$this->userProfile = $this->Facebook->api('/me');
 			} catch (FacebookApiException $e) {
 				error_log($e);
-				$this->user = null;
+				echo $e;
+				$this->user = NULL;
+				$this->userProfile = NULL;
 			}
+		}
+		return $this->userProfile;
+	}
+
+	/**
+	 * Ends the Facebook session
+	 */
+	public function logoutUser() {
+		$this->setUserState(); //if user is logged in, let's make sure the state is updated
+		if ($this->getLogOutUrl() != NULL) {
+			header('Location: ' . $this->getLogOutUrl());
 		}
 	}
 

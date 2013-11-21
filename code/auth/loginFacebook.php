@@ -3,7 +3,8 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
-	'FacebookConnector/FacebookConnector.class.php'
+	'FacebookConnector/FacebookConnector.class.php',
+	'Auth/User.class.php'
 );
 
 
@@ -16,7 +17,7 @@ $includeFilesAdditional = array(
  *
  */
 try {
-	// require the primary include file
+// require the primary include file
 	if (!include_once('main.php')) {
 		throw new Exception("Unable to include the main library.\n");
 	}
@@ -33,45 +34,66 @@ try {
 /*
  * Page specific PHP code here
  */
-header('Cache-Control: no-cache, no-store, must-revalidate'); // HTTP 1.1.
-header('Pragma: no-cache'); // HTTP 1.0.
-header('Expires: 0'); // Proxies.
-
+$htmlFb = NULL;
 $FBConn = new FacebookConnector();
-$fbLoginUrl = $FBConn->getLoginUrl();
-
-//echo ">> $fbLoginUrl";
-
-if($fbLoginUrl == NULL) {	//if a person already logged into Facebook, log'em in
-	header('Location: /auth/loginFacebook.php');
+try {
+	$fb_userInfo = $FBConn->getUserInfo();
+} catch (MyException $e) {
+	$fb_userInfo = NULL;
+	$e->getMyExceptionMessage();
 }
 
-$_websiteErr = Array(); //Error message to show end user
-//If you're already logged in, redirect to the dashboard
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
-	header('Location: /dashboard/');
+//if we have no FB user info, they haven't logged in
+//redirect to login screen
+if ($fb_userInfo == NULL) {
+	header('Location: /auth/login.php');
 }
 
-//test if user is trying to login, if so, do a credential test
-if (isset($_POST['username']) || isset($_POST['password'])) {
-	if ($_POST['username'] == NULL) {
-		array_push($_websiteErr, 'Please complete the username field.');
-	} elseif ($_POST['password'] == NULL) {
-		array_push($_websiteErr, 'Please complete the password field.');
-	} else {
-		//Looks like someone is trying to login
-		try {
-			$userObj = new User();
-			$username = $_POST['username'];
-			$password = $_POST['password'];
-			$userObj->logInUser($username, $password);
-		} catch (MyException $e) {
-			$e->getMyExceptionMessage();
-			array_push($_websiteErr, 'User / Password combination did not work.');
+
+//let's define all the variables we'll need to create a profile if needed
+try {
+	$fb_email = $fb_userInfo['email'];
+	$fb_first = $fb_userInfo['first_name'];
+	$fb_last = $fb_userInfo['last_name'];
+	$fb_username = $fb_userInfo['username'];
+	$fb_gender = $fb_userInfo['gender'];
+
+	$userDataArray = Array(
+		"fname" => "{$fb_first}",
+		"lname" => "{$fb_last}",
+		"email" => "{$fb_email}",
+		"password" => "{$fb_email}_facebookLogin",
+		"gender" => "{$fb_gender}",
+		"source" => "F"
+	);
+} catch (MyException $e) {
+	$e->getMyExceptionMessage();
+}
+
+
+//check if email already in system else create a new account
+$User = new User();
+try {
+	if (!$User->loadUser($fb_email)) {
+		//create user because the email isn't in our system
+		$userCreateStatus = $User->createUser($userDataArray);
+		if (!$userCreateStatus) {
+			array_push($_websiteErr, 'Was not able to create your Tackster profile. We recommend you <a href="/auth/register.php">create a profile manually here</a>.');
 		}
 	}
+} catch (MyException $e) {
+	array_push($_websiteErr, 'We seem to have some system issues. Please try again shortly.');
+	$e->getMyExceptionMessage();
 }
 
+//time to load the user info
+$User->logInFbUser($fb_email);
+
+//$htmlFb =  ">>" . $FBUserFound;
+
+
+
+$_websiteErr = Array(); //Error message to show end user
 //format any errors
 if (count($_websiteErr) >= 1) {
 	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
@@ -84,7 +106,7 @@ if (count($_websiteErr) >= 1) {
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Login</title>
+		<title>Tackster | Login Via Facebook</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -135,37 +157,12 @@ if (count($_websiteErr) >= 1) {
 		<!-- /Navigation Bar -->
 
 		<!-- LOGIN FORM  -->
-		<div class="container" style="margin-top: 80px;">
-			<section id="content">
-				<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formLogin">
-					<h1>Login</h1>
-					<?php
-					if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
-						echo $_websiteErr;
-					}
-					?>
-					<div>
-						<input type="text" name="username" id="username" maxlength="40" placeholder="Username" autofocus="">
-					</div>
-					<div>
-						<input type="password" name="password" id="password" maxlength="15" placeholder="Password">
-					</div>
-					<div>
-						<a href="forgotPassword.php">Forgot Password?</a>
-					</div>
-					<div>
-						<button class="btn btn-default" type="submit">Login</button>
-					</div>
-				</form><!-- form -->
-				<h6><span  class="line-center">OR</span></h6>
-				<a href="#" onClick="MyWindow=window.open('<?PHP echo $fbLoginUrl; ?>','MyWindow', 'width=875,height=675'); return false;">
-					<img src= "http://i.imgur.com/zIhhdJP.png" alt="Login with Facebook" class= "img-rounded" style="margin-top: 10px"/>
-				</a>
-			</section><!-- content -->
+		<div class="main">
+			<pre><?php echo $htmlFb ?></pre>
 		</div><!-- container -->
 
 		<!-- Footer Content -->
-		<?php require_once('html/footer.php'); ?>
+<?php require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 	</body>
 </html>

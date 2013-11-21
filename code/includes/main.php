@@ -25,7 +25,6 @@ if (!isset($_SESSION)) {
 $includeFilesMain = array(
 	'Utility/MyException.class.php',
 	'Utility/EnvUtilities.class.php',
-	'faceBookApi.php',
 	'mandrillApi.php',
 	'Auth/User.class.php',
 	'Track/Track.class.php'
@@ -80,55 +79,57 @@ $secureVarContent->disable_magic_quotes();
 /*
  * Facebook login code
  */
-$faceBookObj = new faceBookApi();
-$userObj = new user();
-$registered = FALSE;
-$exists = $faceBookObj->setUserState();
-$logout = '<a href="' . $faceBookObj->getLogOutUrl() . '">; <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
-
-//$_SESSION['logoutURL'] = $fbButton;
-if ($exists) {
-	$fbButton = '<a href="' . $faceBookObj->getLogOutUrl() . '">;
-                    <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
-	$_SESSION['logoutURL'] = $fbButton;
-	$fbinfo = $faceBookObj->getUserProfile();
-	$registered = $userObj->searchUser($fbinfo['email']);
-	$_SESSION['profile'] = $fbinfo;
-	if (!$registered) {
-		$userArray = array('fname' => $fbinfo['first_name'],
-			'lname' => $fbinfo['last_name'],
-			'email' => $fbinfo['email'],
-			'password' => '',
-			'gender' => $fbinfo['gender'],
-			'source' => 'F');
-		$userObj->createUser($userArray);
-		header('Location: /dashboard/');
-	} else {
-		header('Location: /dashboard/');
-	}
-} else {
-	$fbButton = '<a href="' . $faceBookObj->getLoginUrl() . '">;
-                    <img src="images/loginFB.png" alt="Login using Facebook" class="img-rounded"></a>';
-}
+//$faceBookObj = new faceBookApi();
+//$userObj = new user();
+//$registered = FALSE;
+//$exists = $faceBookObj->setUserState();
+//$logout = '<a href="' . $faceBookObj->getLogOutUrl() . '">; <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
+//
+////$_SESSION['logoutURL'] = $fbButton;
+//if ($exists) {
+//	$fbButton = '<a href="' . $faceBookObj->getLogOutUrl() . '">;
+//                    <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
+//	$_SESSION['logoutURL'] = $fbButton;
+//	$fbinfo = $faceBookObj->getUserProfile();
+//	$registered = $userObj->searchUser($fbinfo['email']);
+//	$_SESSION['profile'] = $fbinfo;
+//	if (!$registered) {
+//		$userArray = array('fname' => $fbinfo['first_name'],
+//			'lname' => $fbinfo['last_name'],
+//			'email' => $fbinfo['email'],
+//			'password' => '',
+//			'gender' => $fbinfo['gender'],
+//			'source' => 'F');
+//		$userObj->createUser($userArray);
+//		header('Location: /dashboard/');
+//	} else {
+//		header('Location: /dashboard/');
+//	}
+//} else {
+//	$fbButton = '<a href="' . $faceBookObj->getLoginUrl() . '">;
+//                    <img src="images/loginFB.png" alt="Login using Facebook" class="img-rounded"></a>';
+//}
 
 /*
  * Business logic after libs have loaded
  */
 //Login Test
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
-$ignorePageLogin = (isset($ignorePageLogin)) ? $ignorePageLogin: FALSE;
+$ignorePageLogin = (isset($ignorePageLogin)) ? $ignorePageLogin : FALSE;
 $_pagesToIgnore = Array(
 	'/',
 	'/index.php',
 	'/auth/login.php',
+	'/auth/loginFacebook.php',
 	'/auth/register.php',
 	'/auth/logout.php',
-        '/auth/forgotPassword.php',
-        '/company/about/index.php',
-        '/company/terms_and_privacy/index.php'
+	'/auth/forgotPassword.php',
+	'/company/about/index.php',
+	'/company/terms_and_privacy/index.php',
+	'/test/index.php'
 );
 
-if($ignorePageLogin != FALSE || (!$loggedIn && !in_array($_SERVER['PHP_SELF'], $_pagesToIgnore))) {
+if ($ignorePageLogin != FALSE || (!$loggedIn && !in_array($_SERVER['PHP_SELF'], $_pagesToIgnore))) {
 	header('Location: /');
 }
 

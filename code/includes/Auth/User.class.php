@@ -1,11 +1,12 @@
 <?php
+
 /*
-//  for windows users? maybe.
+  //  for windows users? maybe.
   require_once __DIR__ . '\..\Utility\MyException.class.php';
   require_once __DIR__ . '\..\DataBase.php';
   require_once __DIR__ . '\..\mandrillApi.php';
   require_once __DIR__ . '\..\Configs\defineSalt.php';
-*/
+ */
 require_once 'Utility/MyException.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
@@ -40,19 +41,19 @@ class User {
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
 	 * White box testing is limited here due to the nature of private keys in our database;
-         * there is little automation that we can do since we would need to create a new user
+	 * there is little automation that we can do since we would need to create a new user
 	 *  @assert (array("fname" => "Robert", "lname" => "Lee", "email" => "test@test.com",
 	  "password" => "password", "gender" => "M", "source" => "I")) == FALSE
 	 */
 	public function createUser($userDataArray) {
-		$this->fname = (isset($userDataArray['fname'])) ? $userDataArray['fname']: NULL;
-		$this->lname = (isset($userDataArray['lname'])) ? $userDataArray['lname']: NULL;
-		$this->email = (isset($userDataArray['email'])) ? $userDataArray['email']: NULL;
-		$this->username = (isset($userDataArray['email'])) ? $userDataArray['email']: NULL;
-		$tempPwd = (isset($userDataArray['password'])) ? $userDataArray['password']: NULL;
-		$this->gender = (isset($userDataArray['gender'])) ? $userDataArray['gender']: NULL;
+		$this->fname = (isset($userDataArray['fname'])) ? $userDataArray['fname'] : NULL;
+		$this->lname = (isset($userDataArray['lname'])) ? $userDataArray['lname'] : NULL;
+		$this->email = (isset($userDataArray['email'])) ? $userDataArray['email'] : NULL;
+		$this->username = (isset($userDataArray['email'])) ? $userDataArray['email'] : NULL;
+		$tempPwd = (isset($userDataArray['password'])) ? $userDataArray['password'] : NULL;
+		$this->gender = (isset($userDataArray['gender'])) ? $userDataArray['gender'] : NULL;
 		$this->state = "p";
-		$this->fromFB = (isset($userDataArray['source'])) ? $userDataArray['source']: NULL;
+		$this->fromFB = (isset($userDataArray['source'])) ? $userDataArray['source'] : NULL;
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
@@ -100,7 +101,7 @@ class User {
 	/**
 	 * This function updates user credentials based on the userDataArray
 	 * object. The function checks to see what areas of the userData needs
-         * to be updated, and then proceeds to update those fields.
+	 * to be updated, and then proceeds to update those fields.
 	 *
 	 * @param type $userDataArray This is the passed data from when the user
 	 * hits submit.
@@ -193,8 +194,8 @@ class User {
 		return $match;
 	}
 
-	/** 
-         * This function creates a Password reset email and dends it to the user
+	/**
+	 * This function creates a Password reset email and dends it to the user
 	 *  @TODO change functionname
 	 *
 	 * @param type $email the email of the user
@@ -211,8 +212,8 @@ class User {
 		$emailObj->sendEmail();
 	}
 
-	/** 
-         * This function creates an Email object with
+	/**
+	 * This function creates an Email object with
 	 * a welcome message confirming account creation.
 	 */
 	public function sendConfEmail() {
@@ -226,8 +227,8 @@ class User {
 		$emailObj->sendEmail();
 	}
 
-	/** 
-         * Searches for a user by doing a query with the user credentials with the database.
+	/**
+	 * Searches for a user by doing a query with the user credentials with the database.
 	 *
 	 * @param type $email The email of the user.
 	 * @return boolean  True if the user was found, False if the user was not found
@@ -255,8 +256,8 @@ class User {
 		return $found;
 	}
 
-	/** 
-         * Deletes the user account.
+	/**
+	 * Deletes the user account.
 	 * @param email
 	 *
 	 */
@@ -280,15 +281,15 @@ class User {
 		$sqlObj->destroy();
 	}
 
-	/** 
-         * Loads the user information based on the e-mail address that is provided. This queries the
+	/**
+	 * Loads the user information based on the e-mail address that is provided. This queries the
 	 * database to retrieve all of the user credentials, such as first and last name.
 	 *
 	 * @param type $email The email address of the user
 	 * @return null The result of the query against the database. This will store the user data.
 	 * @throws MyException This exception is thrown in the case that there is a duplicate credential
 	 * email.
-         * 
+	 *
 	 */
 	public function loadUser($email) {
 
@@ -314,15 +315,14 @@ class User {
 		return $result;
 	}
 
-	/** 
-         * This function logs in a user by taking their e-mail and password that they provide through the log in page.
+	/**
+	 * This function logs in a user by taking their e-mail and password that they provide through the log in page.
 	 *
 	 * @param type $email The email address of the user
 	 * @param type $pwd The password of the user
 	 * @throws MyException This exception is thrown when the user was not able to be logged in. For example, if their credentials
 	 * don't match that stored on the database.
 	 */
-
 	public function logInUser($email, $pwd) {
 
 		//TODO: Look at bookmark class for sample try/catch block around DB code
@@ -356,11 +356,33 @@ class User {
 		}
 	}
 
-	/** 
-         * This function ends a users session with the server and logs them out of their account,
-         *  it requires an active connection.
+	/**
+	 * This function logs in a user by taking their e-mail that they provide through the Facebook log in page.
+	 *
+	 * @param type $email The email address of the user
+	 * @throws MyException This exception is thrown when the user was not able to be logged in. For example, if their credentials
+	 * don't match that stored on the database.
+	 */
+	public function logInFbUser($email) {
+		// Double check a session already exists, else start one
+		if (!isset($_SESSION)) {
+			session_start();
+		}
+
+		//Set some basic session items
+		$_SESSION['loggedin'] = TRUE;
+
+		//create info array
+		$_SESSION['profile'] = $this->loadUser($email);
+		$_SESSION['uc_id'] = $_SESSION['profile']['uc_id']; //get user login id
+		header('Location: /dashboard/');
+	}
+
+	/**
+	 * This function ends a users session with the server and logs them out of their account,
+	 *  it requires an active connection.
 	 *  This is untestable using white box testing.
-         *  
+	 *
 	 */
 	public function logOutUser() {
 		if (isset($_SESSION)) {
@@ -371,8 +393,8 @@ class User {
 		header('Location: /');
 	}
 
-	/** 
-         * This function loads a user object and based on an email provided provides
+	/**
+	 * This function loads a user object and based on an email provided provides
 	 * the facility to reset a user's password.
 	 * @param type $email The email address of the user
 	 */
