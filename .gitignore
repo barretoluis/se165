@@ -6,3 +6,6 @@
 
 #Test directories
 /code/test/*
+
+#Dynamic Directories
+/tacksterUploads/*
