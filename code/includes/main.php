@@ -76,39 +76,6 @@ $secureVarContent = new EnvUtilities();
 $secureVarContent->disable_magic_quotes();
 
 
-/*
- * Facebook login code
- */
-//$faceBookObj = new faceBookApi();
-//$userObj = new user();
-//$registered = FALSE;
-//$exists = $faceBookObj->setUserState();
-//$logout = '<a href="' . $faceBookObj->getLogOutUrl() . '">; <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
-//
-////$_SESSION['logoutURL'] = $fbButton;
-//if ($exists) {
-//	$fbButton = '<a href="' . $faceBookObj->getLogOutUrl() . '">;
-//                    <img src="images/logoutFB.png" alt="logout" class="img-rounded"></a>';
-//	$_SESSION['logoutURL'] = $fbButton;
-//	$fbinfo = $faceBookObj->getUserProfile();
-//	$registered = $userObj->searchUser($fbinfo['email']);
-//	$_SESSION['profile'] = $fbinfo;
-//	if (!$registered) {
-//		$userArray = array('fname' => $fbinfo['first_name'],
-//			'lname' => $fbinfo['last_name'],
-//			'email' => $fbinfo['email'],
-//			'password' => '',
-//			'gender' => $fbinfo['gender'],
-//			'source' => 'F');
-//		$userObj->createUser($userArray);
-//		header('Location: /dashboard/');
-//	} else {
-//		header('Location: /dashboard/');
-//	}
-//} else {
-//	$fbButton = '<a href="' . $faceBookObj->getLoginUrl() . '">;
-//                    <img src="images/loginFB.png" alt="Login using Facebook" class="img-rounded"></a>';
-//}
 
 /*
  * Business logic after libs have loaded

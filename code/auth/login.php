@@ -163,7 +163,7 @@ if (count($_websiteErr) >= 1) {
 				</form><!-- form -->
 				<h6><span  class="line-center">OR</span></h6>
 				<a href="#" onClick="MyWindow=window.open('<?PHP echo $fbLoginUrl; ?>','MyWindow', 'width=875,height=675'); return false;">
-					<img src= "http://i.imgur.com/zIhhdJP.png" alt="Login with Facebook" class= "img-rounded" style="margin-top: 10px"/>
+					<img src= "/shared/images/btn_fbLogin.png" width="161" height="30" alt="Login with Facebook" class= "img-rounded" style="margin-top: 10px"/>
 				</a>
 			</section><!-- content -->
 		</div><!-- container -->

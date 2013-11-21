@@ -209,7 +209,8 @@ if ($loggedIn) {
 					</p>
 					<p class="navbar-text pull-right">
 						<a href="#" onClick="MyWindow=window.open('<?PHP echo $fbLoginUrl; ?>','MyWindow', 'width=875,height=675'); return false;">
-							<img src = "http://i.imgur.com/wfKcSNX.png" alt="Login with Facebook" class="img-rounded" style ="margin: 0px 10px 0px 10px;"/></a>
+							<img src= "/shared/images/btn_fbLogin.png" width="161" height="30" alt="Login with Facebook" class= "img-rounded" style="margin: 0px 10px 0px 10px;"/>
+						</a>
 					</p>
 				</div><!--/.nav-collapse -->
 			</div>
