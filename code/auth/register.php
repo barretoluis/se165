@@ -33,11 +33,17 @@ try {
  */
 $FBConn = new FacebookConnector();
 $fbLoginUrl = $FBConn->getLoginUrl();
+$loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $_websiteErr = Array(); //Error message to show end user
 //If you're already logged in, redirect to the dashboard
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	header('Location: /dashboard/');
 }
+
+if ($fbLoginUrl == NULL && $loggedIn == FALSE) { //if a person already logged into Facebook, log'em in
+	header('Location: /auth/loginFacebook.php');
+}
+
 
 //create a user
 if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']) && isset($_POST['lname'])) {

@@ -21,9 +21,13 @@ $fbLoginUrl = NULL;
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
 
-if(!$loggedIn) {
+if (!$loggedIn) {
 	$FBConn = new FacebookConnector();
 	$fbLoginUrl = $FBConn->getLoginUrl();
+
+	if ($fbLoginUrl == NULL) { //if a person already logged into Facebook, log'em in
+		header('Location: /auth/loginFacebook.php');
+	}
 }
 
 //User login status check and set show navigation variable
@@ -43,7 +47,7 @@ if ($loggedIn) {
 }
 ?>
 
-<?php if ($loggedIn) { //show logged in-nav     ?>
+<?php if ($loggedIn) { //show logged in-nav      ?>
 	<!-- Popups-->
 	<link href="/shared/css/colorbox.css" rel="stylesheet">
 	<script src="/framework/jquery/jquery.colorbox.js"></script>
@@ -188,7 +192,7 @@ if ($loggedIn) {
 	</div>  <!-- closing navbar-->
 
 
-<?php } else { //show standard nav     ?>
+<?php } else { //show standard nav      ?>
 
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">

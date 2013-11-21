@@ -40,8 +40,6 @@ header('Expires: 0'); // Proxies.
 $FBConn = new FacebookConnector();
 $fbLoginUrl = $FBConn->getLoginUrl();
 
-//echo ">> $fbLoginUrl";
-
 if($fbLoginUrl == NULL) {	//if a person already logged into Facebook, log'em in
 	header('Location: /auth/loginFacebook.php');
 }
