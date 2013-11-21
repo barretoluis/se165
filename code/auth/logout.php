@@ -43,11 +43,11 @@ if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == FALSE) {
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) {
 	//Looks like someone is trying to login
 	try {
-		$FBConn = new FacebookConnector();
-		$FBConn->logoutUser();
-
 		$userObj = new User();
 		$userObj->logOutUser();
+
+		$FBConn = new FacebookConnector();
+		$FBConn->logoutUser();
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
 	}

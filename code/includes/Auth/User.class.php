@@ -375,7 +375,6 @@ class User {
 		//create info array
 		$_SESSION['profile'] = $this->loadUser($email);
 		$_SESSION['uc_id'] = $_SESSION['profile']['uc_id']; //get user login id
-		header('Location: /dashboard/');
 	}
 
 	/**
