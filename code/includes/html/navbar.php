@@ -136,6 +136,15 @@ if ($loggedIn) {
 						</ul>
 					</form>
 				</div>
+
+				<!-- JavaScript to handle JQuery autocomplete-->
+                <script>
+                $(document).ready(function($){
+                   $('#searchWord').autocomplete({source:'../search/autocomplete.php', minLength:1, 
+                       position: { my : "right top", at: "right bottom" }});
+                });
+                </script>
+                
 				<div>
 				</div>
 
