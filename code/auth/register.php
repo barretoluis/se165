@@ -57,7 +57,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']
 		$userArray = array('fname' => $fname, 'lname' => $lname,
 			'email' => $email,
 			'password' => $password,
-			'source' => 'S');
+			'source' => 'I');
 
 		if (!$userObj->createUser($userArray)) {
 			//we weren't successful in creating an account
