@@ -162,13 +162,7 @@ EOF;
 			});
 		</script>
 
-        <script>
-//          $("#deleteBtn").confirm();
-            $(document).ready(function(){
-                    $('.editBtn').colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
-                    return false;
-            });
-        </script>
+        
         <script>
             $(function() {
               $( "#tabs" ).tabs();

@@ -125,7 +125,13 @@ try {
 			});
 		</script>-->
 		<!--/Popups and onClick-->
-
+                <script>
+        //          $("#deleteBtn").confirm();
+//                    $(document).ready(function(){
+//                            $('.editBtn').colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
+//                            return false;
+//                    });
+                </script>
 	</head>
 
 
@@ -137,7 +143,10 @@ try {
 
 		<!-- Body Content-->
 		<div id="bookmarks" class="main">
-			<h3><?php echo_formData($trackName) ?></h3>
+			<h3><?php echo_formData($trackName) ?>
+                            <a id="deleteBtn" class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+                            <a id="editBtn" class="editBtn btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                        </h3> 
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
