@@ -823,14 +823,14 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	border: 1px solid #00B800;
-	background: #fff url(images/ui-bg_glass_75_fff_1x400.png) 50% 50% repeat-x;
+	background: #bbb;
 	font-weight: normal;
-	color: #000;
+	color: #3b3b3b;
 }
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
-	color: #000;
+	color: #777;
 	text-decoration: none;
 }
 .ui-state-hover,

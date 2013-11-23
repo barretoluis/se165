@@ -188,19 +188,7 @@ EOF;
             </script>
             <style>
             .ui-menu { width: 150px; }
-            </style>
-        <!-- Popups-->
-	<link href="/shared/css/colorbox.css" rel="stylesheet">
-	<script src="/framework/jquery/jquery.colorbox.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			//Examples of how to assign the Colorbox event to elements
-			$(".track_popUp").colorbox({iframe:true, width:"70%", height:"60%", onClosed:function(){ location.reload(true); }});
-			$(".bookmark_popUp").colorbox({iframe:true, width:"80%", height:"85%"});
-			$(".profile_popUp").colorbox({iframe:true, width:"50%", height:"80%"});
-		});
-	</script>
-	<!--/Popups-->
+        </style>
 	</head>
 
 
@@ -231,8 +219,8 @@ EOF;
                           <li><a href="#tabs-1">My Tracks</a></li>
                           <li><a href="#tabs-2">Following Tracks</a></li>
                           <div id ="icons">
-                            <li><a href="#" title="Delete Track"><i class="fa fa-trash-o fa-lg"></i></a></li>
-                            <li><a href="#" title="Edit Track"><i class="fa fa-pencil fa-lg"></i></a></li>
+<!--                            <li><a href="#" title="Delete Track"><i class="fa fa-trash-o fa-lg"></i></a></li>
+                            <li><a href="#" title="Edit Track"><i class="fa fa-pencil fa-lg"></i></a></li>-->
                             <li><a class='bookmark_popUp' href="/bookmark/createBookmark.php" title="Add Bookmark"><i class="fa fa-bookmark fa-lg"></i></a></li>
                             <li><a class='track_popUp' href="/track/createTrack.php" title="Add Track"><i class="fa fa-folder-open fa-lg"></i></a></li>
                           </div>
