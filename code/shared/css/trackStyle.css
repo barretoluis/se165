@@ -3,13 +3,13 @@ body {
 }
 .track {
   background-color: #FFF;
-  border: 10px solid #FFF;
+  border: 2px solid #71D771;
   height: 225px;
   width: 225px;
-  margin: 10px 0px 10px 10px;
+  margin: 0px 20px 20px 0px;
   float: left;
   display: block;
-  padding-top: 10px;
+/*  padding: 0 -10px 10px -35px;*/
 }
 
 .track img{
@@ -25,7 +25,7 @@ body {
 
 }
 .track .btn{
-    margin-top: 15px;
+    margin-top: 10px;
     width: 84px;
 }
 

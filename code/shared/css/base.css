@@ -69,7 +69,7 @@ body {
 }
 
 .main {
-	margin: 50px 0 10px 10px;
+	margin: 50px 10px 10px 10px;
 }
 
 hr {
@@ -215,7 +215,7 @@ input.sb_search:hover{
 }
 
 .bookmark .container{
-    width: 600px;
+    width: 620px;
 }
 .bookmark h3{
     text-align: center;
@@ -225,7 +225,7 @@ input.sb_search:hover{
     margin-right: 20px;
 }
 .form-horizontal{
-    padding: 10px;
+    padding: 8px;
 }
 .form-horizontal input[type="text"] {
     width: 400px;
@@ -236,7 +236,7 @@ input.sb_search:hover{
 }
 
 .form-horizontal table td{
-    padding: 0 10px 8px 10px ;
+    padding: 0 0px 8px 10px ;
 }
 
 .forgotPassword{
@@ -283,4 +283,56 @@ input.sb_search:hover{
 
 #sidr .active{
     background-color: #71D771;
+}
+/*.tabbable{
+    margin-left: 30px;
+}
+
+.nav-tabs .active{
+    background-color: #00B800;
+}
+
+.tab-content{
+    background-color: #FFF;
+    border: 1px solid #000;
+}*/
+
+/*#tabs .container-fluid{
+    margin: 0px;
+    padding: 0px;
+}*/
+#tabs{
+    font: 14px Arial;
+}
+#icons{
+    float: right;
+}
+#icons .fa:hover{
+    color: #fff;
+   /* border: hidden;*/
+}
+/*#icons li :hover{
+        border: 1px solid #3E3E3E;
+        border-radius: 8px;
+        margin: 0px;
+}*/
+
+#icons .fa{
+    color: #3E3E3E;
+}
+#icons li{
+    list-style-type: none;
+    padding:2px 2px 2px 4px;
+    margin-left: 2px;
+}
+.form-horizontal #icons li{
+    list-style-type: none;
+    padding:2px 2px 2px 4px;
+    margin-bottom:15px;
+}
+.form-horizontal #icons li .fa:hover{
+    color: #009900;
+}
+#tabs .row-fluid .span11{
+    width: 1000px;
 }
