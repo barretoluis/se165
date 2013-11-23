@@ -46,7 +46,7 @@ class KeywordManager {
 		} else {
 			throw new MyException('No keywords were provided for searching.');
 		}
-
+                echo json_encode($this->_words);
 		return $this->_words;
 	}
 
