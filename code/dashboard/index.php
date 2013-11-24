@@ -138,7 +138,7 @@ EOF;
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 		<link href="/framework/jquery/css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
-		<script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>
+<!--		<script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>-->
 
 		<script src="/framework/jquery/jquery.confirm.js"></script>
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
@@ -147,47 +147,33 @@ EOF;
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
-		<link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css" />
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/shared/css/tabBody.css" rel="stylesheet" type="text/css">
 
-		<script>
+		<script language="JavaScript" type="text/javascript">
+			// ////////////////////
+			//attach event handler for tracks
 			$(document).ready(function() {
-				$('.track img').click(function () {
+				$('.tabContent').on("click", ".track img", function() {
 					var tid = parseInt($(this).attr("tid"));
+					//alert($(this).attr("tid"));	//DEBUG
 					window.location = '/track/?tid=' + tid;
 				});
 			});
-		</script>
 
-
-        <script>
-            $(function() {
-				$( "#tabs" ).tabs();
-            });
-        </script>
-        <script>
-            $(function() {
+			// ////////////////////
+			//show tooltips when hovering over icons
+			$(function() {
 				$( document ).tooltip({
 					track: true
 				});
             });
-        </script>
-        <script>
-            $(function() {
-				$( "#menu" ).menu();
-            });
-		</script>
-		<style>
-            .ui-menu { width: 150px; }
-        </style>
 
-
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet">
-		<link href="/shared/css/tabBody.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript">
+			// ////////////////////
+			//populate tabs with appropriate content when clicked or page loaded
 			function getMyTrack(id) {
 				$.ajax({
 					type: "GET",
@@ -215,9 +201,7 @@ EOF;
 			$(document).ready(function() {
 				getMyTrack();
 			});
-
 		</script>
-
 
 
 	</head>

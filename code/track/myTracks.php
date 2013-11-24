@@ -103,7 +103,7 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 			$htmlTrackFollow .=<<<EOF
 <div class="track" id="track">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
-	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
+	<img src="/shared/images/placeholder.jpg" id="track" tid="{$dbRow['id']}" />
 	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
 	<a id="editBtn" class="btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
 </div><!--/track-->\n
@@ -138,7 +138,7 @@ EOF;
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 		<link href="/framework/jquery/css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
-		<script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>
+<!--		<script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>-->
 
 		<script src="/framework/jquery/jquery.confirm.js"></script>
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
@@ -153,36 +153,6 @@ EOF;
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
 		<link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css" />
 
-		<script>
-			$(document).ready(function() {
-				$('.track img').click(function () {
-					var tid = parseInt($(this).attr("tid"));
-					window.location = '/track/?tid=' + tid;
-				});
-			});
-		</script>
-
-
-        <script>
-            $(function() {
-				$( "#tabs" ).tabs();
-            });
-        </script>
-        <script>
-            $(function() {
-				$( document ).tooltip({
-					track: true
-				});
-            });
-        </script>
-        <script>
-            $(function() {
-				$( "#menu" ).menu();
-            });
-		</script>
-		<style>
-            .ui-menu { width: 150px; }
-        </style>
 	</head>
 
 
