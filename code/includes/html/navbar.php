@@ -80,9 +80,9 @@ if ($loggedIn) {
 						<li class="dropdown">
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="/dashboard/">My Dashboard</a></li>
-								<li><a href="">Following Tracks</a></li>
-								<li><a id="simple-menu" href="#sidr">Tracks</a></li>
+								<li><a href="/dashboard/">Dashboard</a></li>
+								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
+								<li style="padding-left: 10px;"><a href="/dashboard/#following">Following Tracks</a></li>
 								<li class="divider"></li>
 								<li><a class='track_popUp' href="/track/createTrack.php">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
