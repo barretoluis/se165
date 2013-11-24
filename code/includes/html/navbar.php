@@ -67,21 +67,6 @@ if ($loggedIn) {
 	require_once 'html/trackMenu.php';
 	?>
 
-	<!--	<div id="sidr">
-			<div align="right" style="margin: 5px 15px 5px 15px;"><a id="simple-menu2" href="#sidr"><small>(close menu)</small></a></div>
-			<ul>
-				<li style="margin-left: 5px;"><b>My Tracks</b></li>
-				<li><a href="#">My Private Track</a></li>
-				<li class="active"><a href="#">My Public Track</a></li>
-				<li><a href="#">Another track</a></li>
-			</ul>
-			<ul>
-				<li style="margin-left: 5px;"><b>Following Tracks</b></li>
-				<li><a href="#">My Private Track</a></li>
-				<li class="active"><a href="#">My Public Track</a></li>
-				<li><a href="#">Another track</a></li>
-			</ul>
-		</div>-->
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid" style= "margin-left: -10px; margin-right: -5px;">
@@ -95,9 +80,9 @@ if ($loggedIn) {
 						<li class="dropdown">
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="/dashboard/">My Dashboard</a></li>
-								<li><a href="">Following Tracks</a></li>
-								<li><a id="simple-menu" href="#sidr">Tracks</a></li>
+								<li><a href="/dashboard/">Dashboard</a></li>
+								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
+								<li style="padding-left: 10px;"><a href="/dashboard/#following">Following Tracks</a></li>
 								<li class="divider"></li>
 								<li><a class='track_popUp' href="/track/createTrack.php">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
@@ -192,11 +177,11 @@ if ($loggedIn) {
 				<!-- JavaScript to handle JQuery autocomplete-->
                 <script>
                 $(document).ready(function($){
-                   $('#searchWord').autocomplete({source:'../search/autocomplete.php', minLength:1, 
+                   $('#searchWord').autocomplete({source:'../search/autocomplete.php', minLength:1,
                        position: { my : "right top", at: "right bottom" }});
                 });
                 </script>
-                
+
 				<div>
 				</div>
 

@@ -114,7 +114,7 @@ EOF;
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | My Dashboard</title>
+		<title>Tackster | Following Tracks</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -183,75 +183,27 @@ EOF;
 		<style>
             .ui-menu { width: 150px; }
         </style>
-
-
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet">
-		<link href="/shared/css/tabBody.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript">
-			function getMyTrack(id) {
-				$.ajax({
-					type: "GET",
-					url: '/track/myTracks.php',
-					//data: "id=" + id, // appears as $_GET['id'] @ ur backend side
-					success: function(data) {
-						// data is ur summary
-						$('.tabContent').html(data);
-					}
-
-				});
-			}
-			function getFollowingTrack(id) {
-				$.ajax({
-					type: "GET",
-					url: '/track/following.php',
-					//data: "id=" + id, // appears as $_GET['id'] @ ur backend side
-					success: function(data) {
-						// data is ur summary
-						$('.tabContent').html(data);
-					}
-
-				});
-			}
-			$(document).ready(function() {
-				getMyTrack();
-			});
-
-		</script>
-
-
-
 	</head>
 
 
 	<body>
 		<!-- Navigation Bar -->
-		<?php require_once('html/navbar.php'); ?>
+		<?php //require_once('html/navbar.php'); ?>
 		<!-- /Navigation Bar -->
 
 
 		<!-- Body Content-->
 		<div class="main" id="main">
-			<div class="tab" id="tab">
-				<div id="quickMenu" class="quickMenuTab">
-					<div id="icons">
-						<a class='bookmark_popUp' href="/bookmark/createBookmark.php" title="Add Bookmark"><i class="fa fa-bookmark fa-lg"></i></a>
-						<a class='track_popUp' href="/track/createTrack.php" title="Add Track"><i class="fa fa-folder-open fa-lg"></i></a>
-					</div>
-				</div>
-				<div id='cssmenu'>
-					<ul>
-						<li class='active' id="myTrack"><a href="javascript:void(0)" onclick="getMyTrack('main'); document.getElementById('myTrack').className='active'; document.getElementById('followTrack').className='last';"><span>My Tracks</span></a></li>
-						<li class='last' id="followTrack"><a href="javascript:void(0)"  onclick="getFollowingTrack();  document.getElementById('myTrack').className='last'; document.getElementById('followTrack').className='active';"><span>Following Tracks</span></a></li>
-					</ul>
+			<?php if ($formError) { ?>
+				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
+			<?php } ?>
 
-				</div>
-				<div class="main tabContent" id="tabContent"></div>
-			</div>
-		</div>
+			<?php echo_formData($htmlTrackFollow); ?>
+		</div><!--/row-->
 		<!-- /Body Content-->
 
 		<!-- Footer Content -->
-		<?php require_once('html/footer.php'); ?>
+		<?php //require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 
 	</body>
