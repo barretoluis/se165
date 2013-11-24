@@ -97,7 +97,57 @@ if ($loggedIn) {
 					$(document).ready(function() {
 						$('#simple-menu2').sidr();
 					});
+                                        
 				</script>
+                                <script>
+                                    function checkPublicMarks(){
+                                    
+                                    document.getElementById("ui_element").publicTracks.checked = true;
+                                    document.getElementById("ui_element").myTracks.checked = false;
+                                    uncheckTracks();
+                                    }
+                                    function checkMyTracks(){
+                                            document.getElementById("ui_element").myTracks.checked = true;
+                                            document.getElementById("ui_element").publicTracks.checked = false;
+                                            checkTracks();
+                                  }
+                                  function checkTracks(){
+                                      var tracksNum = <?php
+                                        if (isset($_SESSION['myTracks'])) {
+                                            echo count($_SESSION['myTracks']);
+                                        }
+                                        ?>;
+      
+                                    if(tracksNum > 0){
+                                        for(var i = 0 ; i < tracksNum ; i++)
+                                        {
+                                            var trackID = "tid" + i;
+                                            document.getElementById(trackID).checked = true;  
+                                        }
+                                    }  
+//                                      document.getElementById("ui_element").publicTracks.checked = false;
+//                                      document.getElementById("ui_element").myTracks.checked = false;
+                                  }
+                                  function uncheckTracks(){
+                                    var tracksNum = <?php
+                                        if (isset($_SESSION['myTracks'])) {
+                                            echo count($_SESSION['myTracks']);
+                                        }
+                                        ?>;
+      
+                                    if(tracksNum > 0){
+                                        for(var i = 0 ; i < tracksNum ; i++)
+                                        {
+                                            var trackID = "tid" + i;
+                                            document.getElementById(trackID).checked = false;  
+                                        }
+                                    }  
+                                  }
+                                  function checkSingleTracks(){
+                                      document.getElementById("ui_element").publicTracks.checked = false;
+                                      document.getElementById("ui_element").myTracks.checked = false;
+                                  }
+                                </script>
 
 				<div class="searchbar">
 					<form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
@@ -108,13 +158,15 @@ if ($loggedIn) {
 						</p>
 						<ul class="sb_dropdown" style="display:none;">
 							<li class="sb_filter">Filter your search</li>
-							<li><input type="checkbox" name="publicTracks" id="tid" value="1" checked><label for="public"><strong>Public Tracks</strong></label></li>
-							<li><input type="checkbox" name="myTracks" id="tid" value="1"><label for="allMyTracks">My Tracks</label></li>
+                                                        <li><input type="checkbox" name="publicTracks" id="publicTracks" value="1" checked onclick="checkPublicMarks();"><label for="public"><strong>Public Tracks</strong></label></li>
+							<li><input type="checkbox" name="myTracks" id="myTracks" value="1" onclick="checkMyTracks();"><label for="allMyTracks">My Tracks</label></li>
 							<?php
 							//Let's populate the search bar with the user's tracks
+                                                       $trackNum = 0;
 							if (isset($_SESSION['myTracks'])) {
 								foreach ($_SESSION['myTracks'] as $_record) {
-									echo_formData('<li><input type="checkbox" name="tid[]" id="tid" value="' . $_record['id'] . '"><label for="' . $_record['title'] . '">' . $_record['title'] . '</label></li>');
+									echo_formData('<li><input type="checkbox" name="tid[]" id="tid' . $trackNum . '" value="' . $_record['id'] . '" onclick="checkSingleTracks();"><label for="' . $_record['title'] . '">' . $_record['title'] . '</label></li>');
+                                                                        $trackNum = $trackNum + 1;
 								}
 							}
 							?>
