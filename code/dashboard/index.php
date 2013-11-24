@@ -155,14 +155,28 @@ EOF;
 
 		<script language="JavaScript" type="text/javascript">
 			// ////////////////////
-			//attach event handler for tracks
+			//attach events for now and all new content
 			$(document).ready(function() {
+				//attach event handler for tracks
 				$('.tabContent').on("click", ".track img", function() {
 					var tid = parseInt($(this).attr("tid"));
 					//alert($(this).attr("tid"));	//DEBUG
 					window.location = '/track/?tid=' + tid;
 				});
+
+				//open edit buttons in modal
+				$('.tabContent').on("click", ".editBtn", function() {
+					$.colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
+					return false;
+				});
 			});
+
+			// ////////////////////
+			//open edit buttons in modal
+			//            $(document).ready(function(){
+			//				$('.editBtn').colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
+			//				return false;
+			//            });
 
 			// ////////////////////
 			//show tooltips when hovering over icons
