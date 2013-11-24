@@ -150,7 +150,6 @@ EOF;
 		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
 
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet">
 		<link href="/shared/css/tabBody.css" rel="stylesheet" type="text/css">
 
 		<script language="JavaScript" type="text/javascript">
@@ -196,7 +195,7 @@ EOF;
 			function getMyTrack(id) {
 				$.ajax({
 					type: "GET",
-					url: '/track/myTracks.php',
+					url: '/dashboard/tab_myTracks.php',
 					//data: "id=" + id, // appears as $_GET['id'] @ ur backend side
 					success: function(data) {
 						// data is ur summary
@@ -208,7 +207,7 @@ EOF;
 			function getFollowingTrack(id) {
 				$.ajax({
 					type: "GET",
-					url: '/track/following.php',
+					url: '/dashboard/tab_following.php',
 					//data: "id=" + id, // appears as $_GET['id'] @ ur backend side
 					success: function(data) {
 						// data is ur summary

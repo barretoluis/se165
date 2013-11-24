@@ -87,7 +87,7 @@ foreach ($_myTracks as $dbRow) {
 <div class="track" id="track">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
 	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
-	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+	<div style="position: relative;"><a id="deleteBtn" class="deleteBtn btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
 	<a id="editBtn" class="editBtn btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
 </div><!--/track-->\n
 EOF;
@@ -103,7 +103,7 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 			$htmlTrackFollow .=<<<EOF
 <div class="track" id="track">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
-	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
+	<img src="/shared/images/placeholder.jpg" id="track" tid="{$dbRow['id']}" />
 	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
 	<a id="editBtn" class="btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
 </div><!--/track-->\n
@@ -114,75 +114,9 @@ EOF;
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Following Tracks</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-
-		<!-- Bootstrap -->
-		<link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
-		<link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-		<!-- Style Sheets -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-		<link href="/shared/css/base.css" rel="stylesheet" type="text/css">
-
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="/framework/bootstrap/assets/js/html5shiv.js"></script>
-		<script src="/framework/bootstrap/assets/js/respond.min.js"></script>
-		<![endif]-->
-
-		<!-- JavaScript -->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-		<link href="/framework/jquery/css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
-		<script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>
-
-		<script src="/framework/jquery/jquery.confirm.js"></script>
-		<script src="/framework/jquery/jquery.colorbox.js"></script>
-
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
-
-		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
-		<script type="text/javascript" src="/shared/js/modernizr.custom.69142.js"></script>
-
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css" rel="stylesheet"> <!--for delete and edit icons-->
+		<title>Tackster | My Tracks</title>
 		<link href="/shared/css/trackStyle.css" rel="stylesheet" type="text/css" />
 
-		<script>
-			$(document).ready(function() {
-				$('.track img').click(function () {
-					var tid = parseInt($(this).attr("tid"));
-					window.location = '/track/?tid=' + tid;
-				});
-			});
-		</script>
-
-
-        <script>
-            $(function() {
-				$( "#tabs" ).tabs();
-            });
-        </script>
-        <script>
-            $(function() {
-				$( document ).tooltip({
-					track: true
-				});
-            });
-        </script>
-        <script>
-            $(function() {
-				$( "#menu" ).menu();
-            });
-		</script>
-		<style>
-            .ui-menu { width: 150px; }
-        </style>
 	</head>
 
 
@@ -198,7 +132,7 @@ EOF;
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
 
-			<?php echo_formData($htmlTrackFollow); ?>
+			<?php echo_formData($htmlTrack); ?>
 		</div><!--/row-->
 		<!-- /Body Content-->
 
