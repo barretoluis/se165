@@ -169,14 +169,16 @@ EOF;
 					$.colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
 					return false;
 				});
-			});
 
-			// ////////////////////
-			//open edit buttons in modal
-			//            $(document).ready(function(){
-			//				$('.editBtn').colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
-			//				return false;
-			//            });
+				//open delete buttons in modal
+				$('.tabContent').on("click", ".deleteBtn", function() {
+					var checkstr =  confirm('Are you sure want to delete this track and all it\'s bookmarks?');
+					if(checkstr == true){
+					}else{
+						return false;
+					}
+				});
+			});
 
 			// ////////////////////
 			//show tooltips when hovering over icons

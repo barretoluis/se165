@@ -87,7 +87,7 @@ foreach ($_myTracks as $dbRow) {
 <div class="track" id="track">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
 	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
-	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+	<div style="position: relative;"><a id="deleteBtn" class="deleteBtn btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
 	<a id="editBtn" class="editBtn btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
 </div><!--/track-->\n
 EOF;
