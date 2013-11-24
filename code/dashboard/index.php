@@ -157,6 +157,9 @@ EOF;
 			// ////////////////////
 			//attach events for now and all new content
 			$(document).ready(function() {
+				//load default tab
+				getMyTrack();
+
 				//attach event handler for tracks
 				$('.tabContent').on("click", ".track img", function() {
 					var tid = parseInt($(this).attr("tid"));
@@ -214,9 +217,6 @@ EOF;
 
 				});
 			}
-			$(document).ready(function() {
-				getMyTrack();
-			});
 		</script>
 
 
@@ -243,7 +243,6 @@ EOF;
 						<li class='active' id="myTrack"><a href="javascript:void(0)" onclick="getMyTrack('main'); document.getElementById('myTrack').className='active'; document.getElementById('followTrack').className='last';"><span>My Tracks</span></a></li>
 						<li class='last' id="followTrack"><a href="javascript:void(0)"  onclick="getFollowingTrack();  document.getElementById('myTrack').className='last'; document.getElementById('followTrack').className='active';"><span>Following Tracks</span></a></li>
 					</ul>
-
 				</div>
 				<div class="main tabContent" id="tabContent"></div>
 			</div>
