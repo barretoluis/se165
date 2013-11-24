@@ -54,9 +54,9 @@ if ($loggedIn) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//Examples of how to assign the Colorbox event to elements
-			$(".track_popUp").colorbox({iframe:true, width:"50%", height:"55%", onClosed:function(){ location.reload(true); }});
-			$(".bookmark_popUp").colorbox({iframe:true, width:"50%", height:"95%", onClosed:function(){ location.reload(true); }});
-			$(".profile_popUp").colorbox({iframe:true, width:"40%", height:"70%"});
+			$(".track_popUp").colorbox({iframe:true, width:"70%", height:"60%", onClosed:function(){ location.reload(true); }});
+			$(".bookmark_popUp").colorbox({iframe:true, width:"70%", height:"95%", onClosed:function(){ location.reload(true); }});
+			$(".profile_popUp").colorbox({iframe:true, width:"50%", height:"70%"});
 		});
 	</script>
 	<!--/Popups-->
@@ -97,11 +97,11 @@ if ($loggedIn) {
 					$(document).ready(function() {
 						$('#simple-menu2').sidr();
 					});
-                                        
+
 				</script>
                                 <script>
                                     function checkPublicMarks(){
-                                    
+
                                     document.getElementById("ui_element").publicTracks.checked = true;
                                     document.getElementById("ui_element").myTracks.checked = false;
                                     uncheckTracks();
@@ -117,14 +117,14 @@ if ($loggedIn) {
                                             echo count($_SESSION['myTracks']);
                                         }
                                         ?>;
-      
+
                                     if(tracksNum > 0){
                                         for(var i = 0 ; i < tracksNum ; i++)
                                         {
                                             var trackID = "tid" + i;
-                                            document.getElementById(trackID).checked = true;  
+                                            document.getElementById(trackID).checked = true;
                                         }
-                                    }  
+                                    }
 //                                      document.getElementById("ui_element").publicTracks.checked = false;
 //                                      document.getElementById("ui_element").myTracks.checked = false;
                                   }
@@ -134,14 +134,14 @@ if ($loggedIn) {
                                             echo count($_SESSION['myTracks']);
                                         }
                                         ?>;
-      
+
                                     if(tracksNum > 0){
                                         for(var i = 0 ; i < tracksNum ; i++)
                                         {
                                             var trackID = "tid" + i;
-                                            document.getElementById(trackID).checked = false;  
+                                            document.getElementById(trackID).checked = false;
                                         }
-                                    }  
+                                    }
                                   }
                                   function checkSingleTracks(){
                                       document.getElementById("ui_element").publicTracks.checked = false;
