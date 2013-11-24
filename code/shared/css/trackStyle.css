@@ -1,9 +1,10 @@
 body {
   padding-bottom: 40px;
 }
+
 .track {
   background-color: #FFF;
-  border: 2px solid #71D771;
+  border: 2px solid #c0c0c0;
   height: 225px;
   width: 225px;
   margin: 0px 20px 20px 0px;
@@ -39,7 +40,8 @@ body {
 	float: right;
 	position: relative;
 	z-index: 2;
-	margin-top: -6px;
+	margin-top: 1px;
+	margin-right: 1px;
 	opacity: 0.85;
 	filter:alpha(opacity=85); /* For IE8 and earlier */
 }

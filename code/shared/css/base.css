@@ -1,7 +1,9 @@
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css");
 @font-face {
 	font-family: 'heydings_icons';
 	src: url('/framework/bootstrap/fonts/heydings_icons.ttf') format('truetype');
 }
+
 
 /* Error styles */
 div.exception {
@@ -54,9 +56,33 @@ div.formError {
 	padding: 10px 10px 10px 10px;
 }
 
-div.footer {
+.footer {
 	clear: left;
+	padding-top: 15px;
 }
+
+.footerCopy {
+	font-color:red;
+	/*margin-top:100px;*/
+}
+
+.footerShortcut {
+	clear: left;
+	position: relative;
+	float: right;
+	right: 20px;
+	padding-top: 10px;
+	padding-bottom: 0px;
+	background-color: white;
+	width: 175px;
+	height: 30px;
+	opacity: .3;
+	overflow: hidden;
+	margin-top: -25px;
+	margin-right: 20px;
+}
+
+
 
 /* Main content styles */
 body {
@@ -73,7 +99,7 @@ body {
 }
 
 hr {
-    
+
     border-color:#D0D0D0;
 }
 

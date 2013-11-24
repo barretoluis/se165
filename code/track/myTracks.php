@@ -114,7 +114,7 @@ EOF;
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | My Dashboard</title>
+		<title>Tackster | My Tracks</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -136,9 +136,9 @@ EOF;
 		<!-- JavaScript -->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-                <link href="/framework/jquery/css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-                <script src="/framework/jquery/jquery-1.10.2.min.js"></script>
-                <script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>
+		<link href="/framework/jquery/css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
+		<script src="/framework/jquery/jquery-ui-1.10.3.custom.js"></script>
 
 		<script src="/framework/jquery/jquery.confirm.js"></script>
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
@@ -165,22 +165,22 @@ EOF;
 
         <script>
             $(function() {
-              $( "#tabs" ).tabs();
+				$( "#tabs" ).tabs();
             });
         </script>
         <script>
             $(function() {
-              $( document ).tooltip({
-                track: true
-              });
+				$( document ).tooltip({
+					track: true
+				});
             });
         </script>
         <script>
             $(function() {
-              $( "#menu" ).menu();
+				$( "#menu" ).menu();
             });
-            </script>
-            <style>
+		</script>
+		<style>
             .ui-menu { width: 150px; }
         </style>
 	</head>
@@ -188,73 +188,23 @@ EOF;
 
 	<body>
 		<!-- Navigation Bar -->
-		<?php require_once('html/navbar.php'); ?>
+		<?php //require_once('html/navbar.php'); ?>
 		<!-- /Navigation Bar -->
 
 
 		<!-- Body Content-->
 		<div class="main" id="main">
-                </div>
-                <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span1">
-                            <ul id="menu">
-                                <li class="ui-state-disabled"><a href="#">My Tracks</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">My Private Bookmarks</a></li>
-                                <li><a href="#">Come on UI work!</a></li>
-                                <li><a href="#">one</a></li>
-                                <li><a href="#">Testing</a></li>
-                            </ul>
-                    </div>
-                    <div class="span11"  style="padding-left: 60px;">
-                        <div id="tabs">
-                        <ul>
-                          <li><a href="#tabs-1">My Tracks</a></li>
-                          <li><a href="#tabs-2">Following Tracks</a></li>
-                          <div id ="icons">
-<!--                            <li><a href="#" title="Delete Track"><i class="fa fa-trash-o fa-lg"></i></a></li>
-                            <li><a href="#" title="Edit Track"><i class="fa fa-pencil fa-lg"></i></a></li>-->
-                            <li><a class='bookmark_popUp' href="/bookmark/createBookmark.php" title="Add Bookmark"><i class="fa fa-bookmark fa-lg"></i></a></li>
-                            <li><a class='track_popUp' href="/track/createTrack.php" title="Add Track"><i class="fa fa-folder-open fa-lg"></i></a></li>
-                          </div>
-                        </ul>
-                        <div id="tabs-1">
-                          <?php if ($formError) { ?>
-                                <div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
-                          <?php } ?>
-                          <div class="container-fluid">
-                                <div class="row-fluid">
-                                    <div class="span11" >
-                                        <div class="row-fluid">
-                                            <?php echo_formData($htmlTrack); ?>
-                                        </div><!--/row-->
-                                    </div><!--/span-->
-                                </div><!--/row-->
-                            </div>
-                        </div>
-                        <div id="tabs-2">
-                          <div class="container-fluid">
-                                <div class="row-fluid">
-                                        <div class="span12">
-                                                <div class="row-fluid">
-                                                        <?php echo_formData($htmlTrackFollow); ?>
-                                                        <p>Basic code in place. Complete back-end method to return the bookmarks being followed by current user.</p>
-                                                </div><!--/row-->
-                                        </div><!--/span-->
-                                </div><!--/row-->
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-<!--            </div>-->
-			<!-- /Body Content-->
+			<?php if ($formError) { ?>
+				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
+			<?php } ?>
 
-			<!-- Footer Content -->
-			<?php require_once('html/footer.php'); ?>
-			<!-- /Footer Content -->
+			<?php echo_formData($htmlTrack); ?>
+		</div><!--/row-->
+		<!-- /Body Content-->
+
+		<!-- Footer Content -->
+		<?php //require_once('html/footer.php'); ?>
+		<!-- /Footer Content -->
 
 	</body>
 </html>
