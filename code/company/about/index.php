@@ -72,7 +72,7 @@ $ignorePageLogin = TRUE;
 
 
 		<!-- Body Content-->
-		<div id="terms" class="main" >
+		<div id="terms" class="main bodyContent" >
 			<h3>About Tackster</h3>
 
 			<p>Tackster is a service that allows users to share bookmarks, images, and other interesting content that they wish to share. This content can be organized either individually, or by related Tracks (boards). Boards contain similar content, and users can comment on boards.  Users can follow boards, and this gives users the ability to see what others are sharing. See content that you like? Re-share the material on your dashboard!  Tackster allows the exploration of new interests based on sharing content, and privacy options let you choose how to share it. <a href="/">Start sharing today!</a></p>

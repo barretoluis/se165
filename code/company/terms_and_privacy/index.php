@@ -70,7 +70,7 @@ $ignorePageLogin = TRUE;
 		<!-- /Navigation Bar -->
 
 		<!-- Body Content-->
-		<div name="terms" class="main" >
+		<div name="terms" class="main bodyContent" >
             <h3>Terms & Privacy</h3>
 			<ul>
 				<li><a href="#terms">Terms & Condition of Use</a></li>
