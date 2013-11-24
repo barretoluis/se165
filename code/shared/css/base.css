@@ -336,3 +336,12 @@ input.sb_search:hover{
 #tabs .row-fluid .span11{
     width: 1000px;
 }
+.well table .fa{
+    color: #3E3E3E;
+}
+.well table .fa:hover{
+    color: #009900;
+}
+.well table td{
+    padding:5px 8px 10px 8px;
+}

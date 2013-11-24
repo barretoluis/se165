@@ -115,7 +115,7 @@ try {
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('.bmkUrl').colorbox({iframe:true, width:"80%", height:"85%", href:$(this).attr("href")});
+				$(".bmkUrl").colorbox({iframe:true, width:"50%", height:"95%", href:$(this).attr("href")});
 				return false;
 			});
 		</script>
