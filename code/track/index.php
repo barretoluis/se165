@@ -115,7 +115,7 @@ try {
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('.bmkUrl').colorbox({iframe:true, width:"80%", height:"85%", href:$(this).attr("href")});
+				$(".bmkUrl").colorbox({iframe:true, width:"50%", height:"95%", href:$(this).attr("href")});
 				return false;
 			});
 		</script>
@@ -150,13 +150,14 @@ try {
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
-
+                           
 			<p><?php
 			if (isset($_bookmarks) && count($_bookmarks) > 0) {
 				foreach ($_bookmarks as $_bmk) {
 					$_bmk['comment_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
+                                        //$_bmk['imageSrc'] = $_bookmarks['imageSrc'];
 					$html = '<div class="view" id="view">\n';
 					$html .= '	<div class="view-back">\n';
 					$html .= '		<span data-icon="b">' . $_bmk['comment_count'] . '</span>\n';
@@ -164,7 +165,8 @@ try {
 					$html .= '		<span data-icon="B">' . $_bmk['repin_count'] . '</span>\n';   //TODO: What is this for?
 					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
-					$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
+					//$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
+                                        $html .= '	<img src="' . $_bmk['bmk_image'] . '" style="min-height: 200px; min-width: 300px;"/>\n';
 					$html .= '</div>\n\n';
 
 					echo_formData($html);
@@ -173,7 +175,8 @@ try {
 			} else {
 				print("<p class='noSearchResults' style ='padding-left: 10px;'>You currently have no bookmarks in this Track.</p>");
 			}
-			?></p>
+                        ?></p>
+                        
 		</div>
 
 		<!-- /Body Content-->

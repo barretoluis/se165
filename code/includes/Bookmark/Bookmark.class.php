@@ -47,7 +47,7 @@ class Bookmark {
 	 * @return array Return user friendly error messages if any.
 	 *
 	 */
-	public function createBookmark($trackId, $url, $privacy, $description, $keyword = NULL) {
+	public function createBookmark($trackId, $url, $privacy, $description, $keyword = NULL, $imageSrc) {
 		if ($trackId == NULL || $url == NULL || $description == NULL) {
 			throw new MyException('One of the parameters was not provided for the bookmark.');
 		}
@@ -56,8 +56,8 @@ class Bookmark {
 		$this->setTrackId($trackId);
 
 		//let's make sure to tie the query to the uc_id
-		$query = "INSERT INTO bmk_entry (uc_id, t_id, url, privacy, keyword, description)
-					VALUES ('{$this->getUcId()}', '{$this->getTrackId()}', '{$url}', '{$privacy}', '{$keyword}', '{$description}')";
+		$query = "INSERT INTO bmk_entry (uc_id, t_id, url, privacy, keyword, description, bmk_image)
+					VALUES ('{$this->getUcId()}', '{$this->getTrackId()}', '{$url}', '{$privacy}', '{$keyword}', '{$description}', '{$imageSrc}')";
 
 		try {
 			//Construct DB object
