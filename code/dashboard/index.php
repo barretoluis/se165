@@ -168,7 +168,7 @@ EOF;
 
 				//open edit buttons in modal
 				$('.tabContent').on("click", ".editBtn", function() {
-					$.colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
+					$.colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href"), onClosed:function(){ location.reload(true); }});
 					return false;
 				});
 
