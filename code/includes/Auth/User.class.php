@@ -490,10 +490,13 @@ EOF;
 			}
 
 			//prep the DB query to insert a token
-			$query = "INSERT INTO tkn_password_reset (uc_id, token) VALUES ($this->ucId, '{$token}');";
+			$queryDelete = "DELETE FROM tkn_password_reset WHERE uc_id='{$this->ucId}';";
+			$query = "INSERT INTO tkn_password_reset (uc_id, token) VALUES ('$this->ucId', '{$token}');";
 
 			try {
 				$sqlObj = new DataBase();
+				$sqlObj->DoQuery($queryDelete);
+				time_nanosleep(0, 500000000); //let's make sure delete of old records is done
 				$sqlObj->DoQuery($query);
 				$sqlObj->destroy();
 				try {
@@ -504,7 +507,7 @@ EOF;
 
 				return TRUE;
 			} catch (MyException $e) {
-				throw new MyException('Not able to reset password. Please try again.');
+				throw new MyException('Not able to reset password. Please try again.' . $e->getMessage());
 
 				return FALSE;
 			}
