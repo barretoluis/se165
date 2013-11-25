@@ -8,6 +8,7 @@
   require_once __DIR__ . '\..\Configs\defineSalt.php';
  */
 require_once 'Utility/MyException.class.php';
+require_once 'Utility/EnvUtilities.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 require_once 'Configs/defineSalt.php';
@@ -171,6 +172,18 @@ class User {
 		return $sha512;
 	}
 
+	/**
+	 * Creates a hash of 128 characters in length based on a passphrase using a salt.
+	 * @param type $string This is the password that is input.
+	 * @return type This is a hashed numeric value to check against the input password.
+	 * @assert ('password') != 'password'
+	 */
+	private function createToken($seed) {
+		$passPhrase = SALT_TOKEN . $seed;
+		$sha512 = hash('sha512', $passPhrase);
+		return $sha512;
+	}
+
 	/** This function checks the a password against the current password in
 	 * the database. It will return TRUE or FALSE depending on the comparison
 	 * between the input password, after being hashed, and the stored hashed password.
@@ -201,13 +214,22 @@ class User {
 	 * @param type $email the email of the user
 	 * @assert ('tack@tackster.com', 'param2') != Exception
 	 */
-	public function sendResetEmail($email, $pwd) {
+	public function sendResetEmail($email, $url) {
+		$this->email = $email;
 		$to = array($this->email => $this->fname . " " . $this->lname);
-		$emailObj = new mandrillApi($to, "Password Successfuly reseted");
-		$htmlString = "<html>
-                    <h1>Your passwd was successfuly reset</hi>
-                    <p>Your new password is: $pwd</p>
-                    </html>";
+		$emailObj = new mandrillApi($to, "Reset Your Password");
+		$htmlString = <<<EOF
+<html>
+<link href="http://www.tackster.com/shared/css/base.css" rel="stylesheet" type="text/css">
+
+<p><b>Password Reset Request Recieved</b></p>
+<p>Your request to reset your password was successfully recieved. Please click on the link below to complete the reset. All requests will be canceled 15 minutes after we received it.</p>
+<p><a href="$url">Complete Reset by Clicking Here</a></p>
+
+<p>Or if the above link does not work for you. Please copy and paste the below link into your web browser.<br>
+$url</p>
+</html>
+EOF;
 		$emailObj->createEmail($htmlString);
 		$emailObj->sendEmail();
 	}
@@ -411,20 +433,84 @@ class User {
 	 * This function loads a user object and based on an email provided provides
 	 * the facility to reset a user's password.
 	 * @param type $email The email address of the user
+	 *
+	 * @return bool Return true on successful reset.
 	 */
 	public function resetPassword($email, $newPWD) {
 		if ($this->searchUser($email) == TRUE) {
 			$this->loadUser($email);
-			$sqlObj = new DataBase();
 			$newEncryptedPWD = $this->encryptPwd($newPWD);
-			$query = "UPDATE  `db_tackster`.`user_credentials` SET
+			$query = "UPDATE  `user_credentials` SET
                          `password` = '$newEncryptedPWD' WHERE
                          `user_credentials`.`email` = '$email'";
-			$sqlObj->DoQuery($query);
-			$sqlObj->destroy();
-			$this->sendResetEmail($email, $newPWD);
+			try {
+				$sqlObj = new DataBase();
+				$sqlObj->DoQuery($query);
+				$sqlObj->destroy();
+				//$this->sendResetEmail($email, $newPWD);
+
+				return TRUE;
+			} catch (MyException $e) {
+				throw new MyException('Not able to reset password. Please try again.');
+
+				return FALSE;
+			}
 		} else {
 			throw new MyException('User Profile not found');
+		}
+	}
+
+	/**
+	 * This function loads a user object and based on an email provided provides
+	 * the facility to reset a user's password.
+	 * @param type $email The email address of the user
+	 *
+	 * @return bool Return true on successful reset.
+	 */
+	public function resetPassGenToken($email) {
+		$resetUrl = NULL;
+
+		if ($this->searchUser($email) == TRUE) {
+
+			$Util = new EnvUtilities();
+			$token = $this->createToken($Util->RandomString(15));
+			$ucId = NULL;
+			//TODO: Should be in config file rather than hard coded
+			$resetUrl = "http://" . $_SERVER['SERVER_NAME'] . "/auth/forgotPassword.php?e=" . urlencode($email) . "&t=" . urlencode($token);
+
+			//do we even have a user account for this person
+			$_loadUser = $this->loadUser($email);
+			if (isset($_loadUser)) {
+				$this->ucId = $_loadUser['uc_id'];
+				$this->fname = $_loadUser['first'];
+				$this->lname = $_loadUser['last'];
+			} else {
+				throw new MyException('User account not in system. Try another email or username.');
+				return FALSE;
+			}
+
+			//prep the DB query to insert a token
+			$query = "INSERT INTO tkn_password_reset (uc_id, token) VALUES ($this->ucId, '{$token}');";
+
+			try {
+				$sqlObj = new DataBase();
+				$sqlObj->DoQuery($query);
+				$sqlObj->destroy();
+				try {
+					$this->sendResetEmail($email, $resetUrl);
+				} catch (MyException $e) {
+					throw new MyException($e->getMessage());
+				}
+
+				return TRUE;
+			} catch (MyException $e) {
+				throw new MyException('Not able to reset password. Please try again.');
+
+				return FALSE;
+			}
+		} else {
+			throw new MyException('User profile not found.');
+			return FALSE;
 		}
 	}
 

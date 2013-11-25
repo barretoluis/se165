@@ -64,6 +64,21 @@ class EnvUtilities {
 		echo $escapedString;
 	}
 
+	/**
+	 * Create a random string
+	 * @param int $size Size of string to return. Default is 10 characters.
+	 *
+	 */
+	function RandomString($size = 10) {
+		$size = (int) $size;
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$randstring = '';
+		for ($i = 0; $i < $size; $i++) {
+			$randstring = $characters[rand(0, strlen($characters))];
+		}
+		return $randstring;
+	}
+
 }
 
 /**

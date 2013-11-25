@@ -3,6 +3,7 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
+	'FacebookConnector/FacebookConnector.class.php'
 );
 
 
@@ -24,9 +25,61 @@ try {
 	header('HTTP/1.1 500 Internal Server Error', true, 500);
 	exit(0);
 }
+// DO NOT EDIT THIS BLOCK - END
 
+
+
+
+/*
+ * Page specific PHP code here
+ */
+header('Cache-Control: no-cache, no-store, must-revalidate'); // HTTP 1.1.
+header('Pragma: no-cache'); // HTTP 1.0.
+header('Expires: 0'); // Proxies.
+
+$_websiteErr = Array();
+$_websiteSuc = Array();
+$actionType = NULL;
+$resetEmail = NULL;
+$resetToken = NULL;
+$User = new User();
+
+// let's see what the user is trying to do
+if (isset($_POST['username'])) {
+	//form was submitted to reset the password
+	$actionType = 'tokenSend';
+	$resetEmail = $_POST['username'];
+} elseif (isset($_GET['e']) && $_GET['t']) {
+	//clicked on email link to reset the password
+	$actionType = 'tokenRecvd';
+	$resetEmail = $_GET['e'];
+	$resetToken = $_GET['t'];
+}
+
+
+if ($actionType == 'tokenSend') {
+	//user wants to request a password reset
+	try {
+		$User->resetPassGenToken($resetEmail);
+	} catch (MyException $e) {
+		array_push($_websiteErr, $e->getMessage());
+		$e->getMyExceptionMessage();
+	}
+}
+
+
+
+
+//format any errors
+if (count($_websiteErr) >= 1) {
+	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
+	foreach ($_websiteErr as $value) {
+		$errString .= "<li>" . $value . "</li>\n";
+	}
+	$errString .= '</ol></div>';
+	$_websiteErr = $errString;
+}
 ?><!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 	<head>
 		<title>Tackster | Forgot Password</title>
@@ -54,50 +107,37 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
+		<link rel="stylesheet" type="text/css" href="/shared/css/forgotPassStyle.css" />
 	</head>
 
 	<body>
 
-		<!-- Navigation Bar - DON'T use navbar.php as this navigation bar is specific to login.php alone -->
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a href="/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -9px 0px -9px 0px;"></a>
-					<div class="nav-collapse collapse">
-						<p class="navbar-text pull-right">
-							<a class="btn btn-success" href="/auth/register.php" role = "button" style=" margin: 0 -10px 0px 0">Sign Up</a>
-						</p>
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
+		<!-- Navigation Bar -->
+		<?php require_once('html/navbar.php'); ?>
 		<!-- /Navigation Bar -->
 
-                <!-- Body Content-->
-                <div class="forgotPassword">
-                    <h3>Forgot Password</h3>
-                    <div class="container">
-                        <div class="well">
-                            <table>
-                                 <tr>
-                                    <td>Enter Email:</td> <!-- Should they be allowed to change their email address?-->
-                                    <td>&nbsp;&nbsp;<input type = "email" name = "email" id = "email"/></td>
-                                 </tr>
+		<!-- LOGIN FORM  -->
+		<div class="container" style="margin-top: 80px;">
+			<section id="content">
+				<form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post" name="formLogin" id="formLogin">
+					<h1>Forgot Password</h1>
+					<?php
+					if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+						echo $_websiteErr;
+					}
+					?>
+					<div>
+						<input type="text" name="username" id="username" maxlength="40" placeholder="email" autofocus="">
+					</div>
+					<div>
+						<button class="btn btn-default" type="submit">Submit</button>
+					</div>
+				</form><!-- form -->
+				<p><br></p>
+			</section><!-- content -->
+		</div><!-- container -->
 
-                             </table>
-                             <p><button class="btn btn-success" type="submit" on-click="">Submit</button></p>
-                             <br/>
-                        </div>
-                    </div>
-		</div>
-		<!-- /Body Content-->
-
-                <!-- Footer Content -->
+		<!-- Footer Content -->
 		<?php require_once('html/footer.php'); ?>
 		<!-- /Footer Content -->
 	</body>
