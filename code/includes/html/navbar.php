@@ -78,7 +78,7 @@ if ($loggedIn) {
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="dropdown">
-							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px;">Tackster <b class="caret"></b></a>
+							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px; margin: 0 0 0 0;;"><img src="/shared/images/logo_tackster.png" style="margin: -20px 0px -20px 0px;"><b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">Dashboard</a></li>
 								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
@@ -248,7 +248,7 @@ if ($loggedIn) {
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="brand" href="/" style="color: #00B800">Tackster</a>
+				<a href="/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -9px 0px -9px 0px;"></a>
 				<div class="nav-collapse collapse">
 					<p class="navbar-text pull-right">
 						<a class="btn btn-default" href="/auth/login.php" role = "button" style=" margin: 0 -10px 0px 0">Login</a>

@@ -170,7 +170,7 @@ if (count($_websiteErr) >= 1) {
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="brand" href="/" style="color: #00B800">Tackster</a>
+					<a href="/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -9px 0px -9px 0px;"></a>
 					<div class="nav-collapse collapse">
 						<p class="navbar-text pull-right">
 							<a class="btn btn-success" href="/auth/register.php" role = "button" style=" margin: 0 -10px 0px 0">Sign Up</a>
