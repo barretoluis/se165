@@ -55,7 +55,7 @@ class Track {
 		$this->private = (isset($privacy)) ? $privacy : NULL;
 		$this->flag_default = (isset($flag_default)) ? $flag_default : NULL;
 
-		$query = "INSERT INTO  `db_tackster`.`track` (
+		$query = "INSERT INTO  `track` (
                     `id` ,
                     `uc_id`,
                     `title` ,
@@ -77,6 +77,44 @@ class Track {
 		}
 
 		return $trackId;
+	}
+
+	/**
+	 * This function updates a track based upon the passed data.
+	 * It then passes that data, via a query, into the database.
+	 * @param int		$ucId	The user credential ID.
+	 * @param int		$tid	The track ID.
+	 * @param string	$title	Title for the track.
+	 * @param string	$desc	Description of the track.
+	 * @param char		$privacy	T for private and F for public.
+	 * @param boolean	$isDefaultTrack	TRUE if this is being created as a default track.
+	 */
+	public function updateTrack($ucId, $tid, $title, $desc, $privacy) {
+		if ($ucId == NULL || $tid == NULL || $title == NULL || $desc == NULL || $privacy == NULL) {
+			throw new MyException('A required field was not provided for updating this track.');
+		}
+
+		$this->ucId = (isset($ucId)) ? (int) $ucId : NULL;
+		$this->trackId = (isset($tid)) ? (int) $tid : NULL;
+		$this->title = (isset($title)) ? $title : NULL;
+		$this->description = (isset($desc)) ? $desc : NULL;
+		$this->private = (isset($privacy)) ? $privacy : NULL;
+		$this->flag_default = (isset($flag_default)) ? $flag_default : NULL;
+
+		$query = "UPDATE `track` SET " .
+				"title='" . $this->title . "', " .
+				"description='" . $this->description . "', " .
+				"private='" . $this->private . "' " .
+				" WHERE id='" . $this->trackId . "' AND uc_id='" . $this->ucId . "'";
+
+		try {
+			$result = $this->sqlObj->DoQuery($query);
+			$this->sqlObj->destroy();
+			return TRUE;
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			return FALSE;
+		}
 	}
 
 	/**
@@ -118,6 +156,37 @@ class Track {
 		$trackName = (isset($resultSet[0]['title'])) ? $resultSet[0]['title'] : NULL;
 
 		return $trackName;
+	}
+
+	/**
+	 * Given the track ID, return all it's details.
+	 * @param int $trackId The id for the track.
+	 *
+	 * @return string Return the friendly name.
+	 */
+	public function returnMyTrackDetails($ucId, $trackId) {
+		if(!(isset($ucId) || isset($trackId))) {
+			throw new MyException('Please be sure to provide the User Credential ID or Track ID.');
+		}
+
+		$sqlObj = new DataBase();
+		$query = "SELECT * FROM `track` WHERE id='" . $trackId . "' AND uc_id='" . $ucId . "'";
+
+		try {
+			$sqlObj->DoQuery($query);
+			$resultSet = $sqlObj->GetData();
+			$sqlObj->destroy();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			return FALSE;
+		}
+
+		if(count($resultSet)>1) {
+			throw new MyException('More than one record was returned when only one should be found.');
+			return FALSE;
+		}
+
+		return $resultSet;
 	}
 
 	/**
