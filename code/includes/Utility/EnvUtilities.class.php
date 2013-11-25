@@ -73,7 +73,7 @@ class EnvUtilities {
 		$size = (int) $size;
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$randstring = '';
-		for ($i = 0; $i < $size; $i++) {
+		for ($i = 0; $i < $size-1; $i++) {
 			$randstring = $characters[rand(0, strlen($characters))];
 		}
 		return $randstring;
