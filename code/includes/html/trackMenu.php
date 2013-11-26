@@ -43,6 +43,7 @@ $_myTracks = array();
 $_followingTracks = array();
 $loggedIn = (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == TRUE) ? TRUE : FALSE;
 $userName = (isset($_SESSION['profile']['first'])) ? $_SESSION['profile']['first'] : "My Profile";
+$onTrackId = (isset($onTrackId)) ? (int) $onTrackId : NULL; //tid of track being viewed. Set on /track/index.php file
 $Track = new Track();
 
 //Get user's tracks if not available in session already
@@ -62,10 +63,12 @@ if (!isset($_SESSION['_myTracks']) || !isset($_SESSION['_followingTracks'])) {
 
 $defaultTrackId = $Track->returnDefaultTrackId($ucId);
 $defaultTrackName = $Track->returnTrackName($defaultTrackId);
-$htmlMyTrack = '<li class="private"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
+$isActiveClassName = ($onTrackId == $defaultTrackId) ? 'active' : NULL;
+$htmlMyTrack = '<li class="private ' . $isActiveClassName . '"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
 
 foreach ($_myTracks as $dbRow) {
 	$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
+	$isActiveClassName = ($dbRow['id'] == $onTrackId) ? 'active' : NULL;
 
 	//we don't want the default track in the list again
 	if ($dbRow['id'] != $defaultTrackId) {
@@ -73,9 +76,9 @@ foreach ($_myTracks as $dbRow) {
 			switch ($key) {
 				case 'id':
 					if ($isPrivate) {
-						$htmlMyTrack .= '<li class="private"><a href="/track/?tid=' . $value . '">';
+						$htmlMyTrack .= '<li class="private ' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
 					} else {
-						$htmlMyTrack .= '<li><a href="/track/?tid=' . $value . '">';
+						$htmlMyTrack .= '<li class="' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
 					}
 					break;
 
@@ -93,6 +96,7 @@ foreach ($_myTracks as $dbRow) {
 if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 	foreach ($_followingTracks as $dbRow) {
 		$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
+		$isActiveClassName = ($dbRow['id'] == $onTrackId) ? 'active' : NULL;
 
 		//we don't want the default track in the list again
 		if ($dbRow['id'] != $defaultTrackId) {
@@ -100,9 +104,9 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 				switch ($key) {
 					case 'id':
 						if ($isPrivate) {
-							$htmlFollowTrack .= '<li class="private"><a href="/track/?tid=' . $value . '">';
+							$htmlFollowTrack .= '<li class="private ' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
 						} else {
-							$htmlFollowTrack .= '<li><a href="/track/?tid=' . $value . '">';
+							$htmlFollowTrack .= '<li class="' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
 						}
 						break;
 
@@ -139,7 +143,7 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 		</ul>
 		<ul>
 			<?php
-			if($htmlFollowTrack) {
+			if ($htmlFollowTrack) {
 				echo '<li style="margin-left: 5px;"><b>Following Tracks</b></li>';
 			}
 			echo_formData($htmlFollowTrack);

@@ -37,6 +37,7 @@ try {
  */
 $ucId = $_SESSION['uc_id'];
 $trackId = (isset($_GET['tid'])) ? (int) $_GET['tid'] : NULL;
+$onTrackId = (isset($_GET['tid'])) ? (int) $_GET['tid']: NULL;	//tid of track you are currently viewing
 $Bookmark = new Bookmark();
 $Track = new track();
 
@@ -44,6 +45,7 @@ $Track = new track();
 if ($trackId == NULL) {
 	//let's get the default track id
 	$trackId = $Track->returnDefaultTrackId($ucId);
+	$onTrackId = $trackId;
 
 	//TODO: Add this code to main and do a one time check on login instead
 	//Create a default track for the user if one doesn't exist.
@@ -146,11 +148,11 @@ try {
 			<h3><?php echo_formData($trackName) ?>
                             <a id="deleteBtn" class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
                             <a id="editBtn" class="editBtn btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a>
-                        </h3> 
+                        </h3>
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
-                           
+
 			<p><?php
 			if (isset($_bookmarks) && count($_bookmarks) > 0) {
 				foreach ($_bookmarks as $_bmk) {
@@ -176,7 +178,7 @@ try {
 				print("<p class='noSearchResults' style ='padding-left: 10px;'>You currently have no bookmarks in this Track.</p>");
 			}
                         ?></p>
-                        
+
 		</div>
 
 		<!-- /Body Content-->
