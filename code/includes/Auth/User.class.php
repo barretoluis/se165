@@ -253,7 +253,7 @@ EOF;
 	 * Searches for a user by doing a query with the user credentials with the database.
 	 *
 	 * @param type $email The email of the user.
-	 * @return boolean  True if the user was found, False if the user was not found
+	 * @return int  -1 for false. Otherwise User ID.
 	 * @assert ('test@test.com') != FALSE
 	 * @assert ('notauser@random.org') == FALSE
 	 */
@@ -262,20 +262,54 @@ EOF;
 		//TODO: Look at bookmark class for sample try/catch block around DB code
 		$sqlObj = new DataBase();
 		$found = FALSE;
-		$query = "SELECT * FROM  `user_credentials` WHERE  `email`='$email'";
-		$sqlObj->DoQuery($query);
-		$resultset = $sqlObj->GetData();
 
-		$num = $sqlObj->getNumberOfRecords();
-		if ($num > 0) {
+		$query = "SELECT * FROM  `user_credentials` WHERE  `email`='$email'";
+
+		try {
+			$sqlObj->DoQuery($query);
+			$resultset = $sqlObj->GetData();
+
+			$num = $sqlObj->getNumberOfRecords();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+		if ($num == 1) {
 			$id = $resultset[0]['id'];
 			$found = $id;
 		} else {
-			$found = FALSE;
+			$found = -1;
 		}
 		$sqlObj->destroy();
 
 		return $found;
+	}
+
+	/**
+	 * Deletes token for resetting a password.
+	 * @param string $email Email for which a token was previously generated.
+	 * @return bool TRUE on successful delete
+	 *
+	 */
+	public function deleteResetPassToken($email) {
+		$sqlObj = new DataBase();
+		try {
+			$ucId = (int) $this->searchUser($email);
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		if ($ucId != -1) {
+			try {
+				$query = "DELETE FROM tkn_password_reset WHERE uc_id='{$ucId}';";
+				$sqlObj->DoQuery($query);
+				$sqlObj->destroy();
+			} catch (MyException $e) {
+				$e->getMyExceptionMessage();
+				return FALSE;
+			}
+		}
+
+		return TRUE;
 	}
 
 	/**
@@ -307,8 +341,8 @@ EOF;
 	 * Loads the user information based on the e-mail address that is provided. This queries the
 	 * database to retrieve all of the user credentials, such as first and last name.
 	 *
-	 * @param type $email The email address of the user
-	 * @return null The result of the query against the database. This will store the user data.
+	 * @param string $email The email address of the user
+	 * @return array The result of the query against the database. This will store the user data.
 	 * @throws MyException This exception is thrown in the case that there is a duplicate credential
 	 * email.
 	 *
@@ -321,6 +355,45 @@ EOF;
 
 		$sqlObj->DoQuery($query);
 		$result = $sqlObj->GetData();
+
+		//Let's make sure we're only returning one result
+		if (count($result) == 1) {
+			$result = $result[0]; //break the multi-dimensional array since this should only be 1 record
+		} elseif (count($result) > 1) {
+			$result = NULL;
+			throw new MyException('ERROR: We have duplicate records for User Credential email: {$email}.');
+		} else {
+			$result = NULL;
+		}
+
+		$sqlObj->destroy();
+
+		return $result;
+	}
+
+	/**
+	 * Loads the user information based on the e-mail address that is provided. This queries the
+	 * database to retrieve all of the token information for resetting a password.
+	 *
+	 * @param string $email The email address of the user
+	 * @return array The result of the query against the database. This will store the user data.
+	 * @throws MyException This exception is thrown in the case that there is a duplicate credential
+	 * email.
+	 *
+	 */
+	public function loadPassResetToken($email) {
+		//TODO: Look at bookmark class for sample try/catch block around DB code
+		$sqlObj = new DataBase();
+
+		$query = "SELECT uc_id, id, token, timestamp FROM tkn_password_reset WHERE uc_id='{$email}';";
+
+		try {
+			$sqlObj->DoQuery($query);
+			$result = $sqlObj->GetData();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			return NULL;
+		}
 
 		//Let's make sure we're only returning one result
 		if (count($result) == 1) {
@@ -433,21 +506,28 @@ EOF;
 	 * This function loads a user object and based on an email provided provides
 	 * the facility to reset a user's password.
 	 * @param type $email The email address of the user
-	 *
 	 * @return bool Return true on successful reset.
+	 * @throws MyException Returns error message and returns FALSE on exception.
 	 */
 	public function resetPassword($email, $newPWD) {
+		if($newPWD == NULL) {
+			throw new MyException('No password was provided.');
+			return FALSE;
+		} elseif($email == NULL) {
+			throw new MyException('No email was provided.');
+			return FALSE;
+		}
+
 		if ($this->searchUser($email) == TRUE) {
 			$this->loadUser($email);
 			$newEncryptedPWD = $this->encryptPwd($newPWD);
-			$query = "UPDATE  `user_credentials` SET
-                         `password` = '$newEncryptedPWD' WHERE
-                         `user_credentials`.`email` = '$email'";
+
+			$query = "UPDATE `user_credentials` SET `password` = '$newEncryptedPWD' WHERE `user_credentials`.`email` = '$email'";
+
 			try {
 				$sqlObj = new DataBase();
 				$sqlObj->DoQuery($query);
 				$sqlObj->destroy();
-				//$this->sendResetEmail($email, $newPWD);
 
 				return TRUE;
 			} catch (MyException $e) {
@@ -458,6 +538,7 @@ EOF;
 		} else {
 			throw new MyException('User Profile not found');
 		}
+		return FALSE;
 	}
 
 	/**

@@ -60,51 +60,68 @@ if (isset($_POST['username'])) {
 	$actionType = 'setPassword';
 	$resetPass = $_POST['password'];
 	$resetPassConf = $_POST['passwordConf'];
+	$resetEmail = $_POST['e'];
+	$resetToken = $_POST['t'];
 }
 
 
 if ($actionType == 'tokenSend') {
 //user wants to request a password reset
-	try {
-		if ($User->resetPassGenToken($resetEmail)) {
-			$actionType = 'tokenSendSuccess';
+	if ($resetEmail == NULL) {
+		$actionType = NULL;
+		array_push($_websiteErr, 'No email address was provided.');
+	} else {
+		try {
+			if ($User->resetPassGenToken($resetEmail)) {
+				$actionType = 'tokenSendSuccess';
+			}
+		} catch (MyException $e) {
+			array_push($_websiteErr, $e->getMessage());
+			$e->getMyExceptionMessage();
 		}
-	} catch (MyException $e) {
-		array_push($_websiteErr, $e->getMessage());
-		$e->getMyExceptionMessage();
 	}
 }
-
-
-//if ($actionType == 'tokenRecvd') {
-////user wants to request a password reset
-//	try {
-//		if ($User->resetPassword($resetEmail, $newPWD)) {
-//			$actionType = 'tokenRecvdSuccess';
-//		}
-//	} catch (MyException $e) {
-//		array_push($_websiteErr, $e->getMessage());
-//		$e->getMyExceptionMessage();
-//	}
-//}
 
 
 if ($actionType == 'setPassword') {
 //user wants to request a password reset
 //basic password validation
-	if ($resetPass != $resetPassConf) {
-		array_push($_websiteErr, 'The passwords do not match. Please try again.');
+	if (($resetPass != $resetPassConf) || $resetPass == NULL) {
+		$actionType = 'setPassword';
+		array_push($_websiteErr, 'The passwords do not match or are invalid. Please try again.');
 		$resetPassConf = NULL;
-	}
+	} else {
+		//let's reset the password
+		try {
+			try {
+				$_loadUser = $User->loadUser($resetEmail);
+				$_loadToken = $User->loadPassResetToken($_loadUser['uc_id']);
 
-	//let's reset the password
-	try {
+				//test if posted token and email match a token request in the system before we update the password
+				if (isset($_loadToken['uc_id']) && $_loadUser['uc_id'] == $_loadToken['uc_id']) {
 
-		$actionType = 'setPasswordSuccess';
-		array_push($_websiteSuc, 'Password reset successful. Please <a href="/auth/login.php">login here</a>.');
-	} catch (MyException $e) {
-		array_push($_websiteErr, $e->getMessage());
-		$e->getMyExceptionMessage();
+					//let's reset the password
+					if ($User->resetPassword($resetEmail, $resetPass)) {
+						$actionType = 'setPasswordSuccess';
+						array_push($_websiteSuc, 'Password reset successful. Please <a href="/auth/login.php">login here</a>.');
+						$User->deleteResetPassToken($resetEmail);
+					} else {
+						$actionType = 'setPassword';
+						throw new MyException('Was not able to reset the password. Please try again.');
+					}
+				} else {
+					$actionType = 'setPassword';
+					array_push($_websiteErr, 'We could not find your reset request. Please try <a href="/auth/forgotPassword.php">Forgot Password</a> again.');
+				}
+			} catch (MyException $e) {
+				$actionType = 'setPassword';
+				array_push($_websiteErr, $e->getMessage());
+				$e->getMyExceptionMessage();
+			}
+		} catch (MyException $e) {
+			array_push($_websiteErr, $e->getMessage());
+			$e->getMyExceptionMessage();
+		}
 	}
 }
 
@@ -159,8 +176,8 @@ if (count($_websiteErr) >= 1) {
 		<div class="container" style="margin-top: 80px;">
 			<section id="content">
 				<form action="<? echo $_SERVER['PHP_SELF']; ?>" method="post" name="formLogin" id="formLogin">
-					<input type="hidden" name="token" value="<?php echo_formData($resetToken); ?>">
-					<input type="hidden" name="email" value="<?php echo_formData($resetEmail); ?>">
+					<input type="hidden" name="t" value="<?php echo_formData($resetToken); ?>">
+					<input type="hidden" name="e" value="<?php echo_formData($resetEmail); ?>">
 					<h1>Forgot Password</h1>
 					<?php
 					if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
@@ -171,7 +188,7 @@ if (count($_websiteErr) >= 1) {
 						<div>
 							<p>Form submission received. Please expect an email shortly for completing the password reset process.</p>
 						</div>
-					<?php } elseif($actionType == 'setPasswordSuccess') { ?>
+					<?php } elseif ($actionType == 'setPasswordSuccess') { ?>
 						<div>
 							<p>Password successfully reset. <a href="/auth/login.php">Please login here.</a></p>
 						</div>
