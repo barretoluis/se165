@@ -56,6 +56,11 @@ div.formError {
 	text-align: left;
 }
 
+div.formError a {
+	float: none !important;
+	margin: 0 !important;
+}
+
 .footer {
 	clear: left;
 	padding-top: 15px;
@@ -337,7 +342,7 @@ input.sb_search:hover{
 }
 #icons .fa:hover{
     color: #fff;
-   /* border: hidden;*/
+	/* border: hidden;*/
 }
 /*#icons li :hover{
         border: 1px solid #3E3E3E;
