@@ -154,6 +154,37 @@ class Bookmark {
 
 		return $canView;
 	}
+        
+        /*
+         * Provided the user's ID, check to see if they are the owner of the bookmark.
+	 *
+	 * @param int $uc_id	The user's credential ID in the DB.
+	 * @param int $bmkId	The ID of the bookmark who's ownership should be checked.
+	 * @return boolean		TRUE if user is owner of the bookmark.
+	 * @assert (73, 13) == TRUE
+         * @assert (72, 13) == FALSE
+	 */
+        
+        public function isOwner($uc_id, $bmkId){
+            if ($uc_id == NULL || $bmkId == NULL) {
+			throw new MyException('One of the parameters was not provided for the bookmark.');
+		}
+                $isOwner = FALSE;
+                $this->setBmkId($bmkId);
+
+		try {
+			$this->returnBookmark($this->getBmkId());
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+                
+                $bmkUcId = (isset($this->_bookmarks[0]['uc_id'])) ? $this->_bookmarks[0]['uc_id'] : FALSE;
+                if ($bmkUcId == $this->getUcId()) {
+			$isOwner = TRUE;
+		}
+                return $isOwner;
+                
+        }
 
 	/**
 	 * Get all the bookmarks and their data for a given Track ID.
