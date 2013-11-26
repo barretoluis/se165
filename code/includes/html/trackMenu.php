@@ -64,7 +64,7 @@ if (!isset($_SESSION['_myTracks']) || !isset($_SESSION['_followingTracks'])) {
 $defaultTrackId = $Track->returnDefaultTrackId($ucId);
 $defaultTrackName = $Track->returnTrackName($defaultTrackId);
 $isActiveClassName = ($onTrackId == $defaultTrackId) ? 'active' : NULL;
-$htmlMyTrack = '<li class="private ' . $isActiveClassName . '"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
+$htmlMyTrack = '<li class="' . $isActiveClassName . ' private"><a href="/track/">' . $defaultTrackName . '</a>'; //default dashboard
 
 foreach ($_myTracks as $dbRow) {
 	$isPrivate = ($dbRow['private'] == "T") ? TRUE : FALSE;
@@ -76,7 +76,7 @@ foreach ($_myTracks as $dbRow) {
 			switch ($key) {
 				case 'id':
 					if ($isPrivate) {
-						$htmlMyTrack .= '<li class="private ' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
+						$htmlMyTrack .= '<li class="' . $isActiveClassName . ' private"><a href="/track/?tid=' . $value . '">';
 					} else {
 						$htmlMyTrack .= '<li class="' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
 					}
@@ -104,7 +104,7 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 				switch ($key) {
 					case 'id':
 						if ($isPrivate) {
-							$htmlFollowTrack .= '<li class="private ' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
+							$htmlFollowTrack .= '<li class="' . $isActiveClassName . ' private"><a href="/track/?tid=' . $value . '">';
 						} else {
 							$htmlFollowTrack .= '<li class="' . $isActiveClassName . '"><a href="/track/?tid=' . $value . '">';
 						}
