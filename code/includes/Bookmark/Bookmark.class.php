@@ -84,6 +84,42 @@ class Bookmark {
 
 		return $this->_errorMsgs;
 	}
+        
+        public function updateBookmark($bid, $tid, $url, $desc, $keyword, $privacy, $img) {
+		if ($bid == NULL || $tid == NULL || $url == NULL || $desc == NULL || $keyword == NULL || $img == NULL) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+
+		/*$this->ucId = (isset($ucId)) ? (int) $ucId : NULL;
+		$this->trackId = (isset($tid)) ? (int) $tid : NULL;
+		$this->title = (isset($title)) ? $title : NULL;
+		$this->description = (isset($desc)) ? $desc : NULL;
+		$this->private = (isset($privacy)) ? $privacy : NULL;
+		$this->flag_default = (isset($flag_default)) ? $flag_default : NULL;*/
+
+		$query = "UPDATE `bmk_entry` SET " .
+				"url='" . $url . "', " .
+				"description='" . $desc . "', " .
+				"keyword='" . $keyword . "', " .
+                                "bmk_image='" . $img . "', " .
+                                "t_id='" . $tid . "', " .
+                                "privacy='" . $privacy . "'" .
+                                
+				" WHERE id='" . $bid . "'";
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+			return TRUE;
+		} catch (MyException $e) {
+                        echo $echo;
+			$e->getMyExceptionMessage();
+                        
+			return FALSE;
+		}
+	}
 
 	/**
 	 * Return a bookmark and all it's data.
