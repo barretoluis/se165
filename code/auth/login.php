@@ -73,6 +73,17 @@ if (isset($_POST['username']) || isset($_POST['password'])) {
 			$e->getMyExceptionMessage();
 			array_push($_websiteErr, 'User / Password combination did not work.');
 		}
+
+		//test if new user account
+		try {
+			if($userObj->isNewUser($username)) {
+				$_SESSION['isNewUser'] = TRUE;
+			} else {
+				$_SESSION['isNewUser'] = FALSE;
+			}
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
 	}
 }
 

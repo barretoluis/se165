@@ -6,12 +6,14 @@
   require_once __DIR__ . '\..\DataBase.php';
   require_once __DIR__ . '\..\mandrillApi.php';
   require_once __DIR__ . '\..\Configs\defineSalt.php';
+  require_once __DIR__ . '\..\Configs\defineUser.php';
  */
 require_once 'Utility/MyException.class.php';
 require_once 'Utility/EnvUtilities.class.php';
 require_once 'DataBase.php';
 require_once 'mandrillApi.php';
 require_once 'Configs/defineSalt.php';
+require_once 'Configs/defineUser.php';
 
 /**
  * Description of user.
@@ -237,7 +239,7 @@ EOF;
 	public function sendConfEmail() {
 		$to = array($this->email => $this->fname . " " . $this->lname);
 		$emailObj = new mandrillApi($to, "Welcome to Tackster.com");
-		$htmlString =<<<EOF
+		$htmlString = <<<EOF
 <h3>Welcome to Tackster.com</h3>
 <p>You have now registered with <a href="http://www.tackster.com">Tackster.com</a>.
 We figure we should keep the greeting short and get you started right away!</p>
@@ -333,6 +335,38 @@ EOF;
 			$sqlObj->DoQuery($query);
 		}
 		$sqlObj->destroy();
+	}
+
+	/**
+	 * Checks to see if this is a new user.
+	 *
+	 * @param string $email The email address of the user
+	 * @return bool Return TRUE if new user.
+	 * @throws MyException This exception is thrown in the case that there is a duplicate credential
+	 * email.
+	 *
+	 */
+	public function isNewUser($email) {
+		$dayDuration = (int) DB_NEW_USER_TIME;
+		$sqlObj = new DataBase();
+		$query = "SELECT id AS uc_id FROM user_credentials WHERE email='{$email}' AND acct_created>= DATE_SUB(NOW(), INTERVAL {$dayDuration} DAY);";
+
+		try {
+			$sqlObj->DoQuery($query);
+			$result = $sqlObj->GetData();
+			$sqlObj->destroy();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			return FALSE;
+		}
+
+		//Let's make sure we're only returning one result
+		if (count($result) == 1) {
+			return TRUE;
+		} else {
+			throw new MyException('ERROR: We may have duplicate records for User Credential email: {$email}.');
+		}
+		return FALSE;
 	}
 
 	/**
@@ -508,10 +542,10 @@ EOF;
 	 * @throws MyException Returns error message and returns FALSE on exception.
 	 */
 	public function resetPassword($email, $newPWD) {
-		if($newPWD == NULL) {
+		if ($newPWD == NULL) {
 			throw new MyException('No password was provided.');
 			return FALSE;
-		} elseif($email == NULL) {
+		} elseif ($email == NULL) {
 			throw new MyException('No email was provided.');
 			return FALSE;
 		}
