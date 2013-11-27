@@ -84,18 +84,23 @@ class Bookmark {
 
 		return $this->_errorMsgs;
 	}
-        
+        /**
+	 * Update bookmark tuple on DB.
+	 *
+	 * @param type $bid The ID of the bookmark that will be updated.
+	 * @param type $url The URL of the destination bookmark.
+	 * @param type $privacy 1 if private or 0 for public access.
+	 * @param type $description The description of the bookmark.
+	 * @param type $keyword Comma separated list of keywords for the bookmark.
+         * @param type $img the source of the thunbnail of the bookmark.
+	 *
+	 * @return TRUE if transaction was successful, FALSE otherwise.
+	 *
+	 */
         public function updateBookmark($bid, $tid, $url, $desc, $keyword, $privacy, $img) {
 		if ($bid == NULL || $tid == NULL || $url == NULL || $desc == NULL || $keyword == NULL || $img == NULL) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-
-		/*$this->ucId = (isset($ucId)) ? (int) $ucId : NULL;
-		$this->trackId = (isset($tid)) ? (int) $tid : NULL;
-		$this->title = (isset($title)) ? $title : NULL;
-		$this->description = (isset($desc)) ? $desc : NULL;
-		$this->private = (isset($privacy)) ? $privacy : NULL;
-		$this->flag_default = (isset($flag_default)) ? $flag_default : NULL;*/
 
 		$query = "UPDATE `bmk_entry` SET " .
 				"url='" . $url . "', " .
@@ -120,6 +125,146 @@ class Bookmark {
 			return FALSE;
 		}
 	}
+        /**
+	 * Remove bookmark tuple on DB.
+	 *
+	 * @param type $bid The ID of the bookmark that will be removed.
+	 * 
+	 * @return TRUE if transaction was successful, FALSE otherwise.
+	 *
+	 */
+        public function removeBookmark($bid) {
+		if ($bid == NULL ) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+
+		$query = "DELETE from `bmk_entry`" .
+				" WHERE id='" . $bid . "'";
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+			return TRUE;
+		} catch (MyException $e) {
+                        echo $echo;
+			$e->getMyExceptionMessage();
+                        
+			return FALSE;
+		}
+	}
+        
+       
+        public function likeBookmark($bid, $like, $ucId) {
+		if ($bid == NULL || $ucId == NULL ) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+                //$like = 1;
+                $success = TRUE;
+
+		$query = "INSERT INTO bmk_activity (uc_id, be_id, likes)
+					VALUES ('{$ucId}', '{$bid}', '{$like}')";
+
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+			return $success;
+		} catch (MyException $e) {
+                        echo $e;
+			$e->getMyExceptionMessage();
+                        $success = FALSE;
+			return $success;
+		}
+	}
+        
+        public function dislikeBookmark($bid, $ucId) {
+		if ($bid == NULL || $ucId == NULL ) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+                //$like = 1;
+                $success = TRUE;
+
+		$query = "DELETE FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" .$ucId . "'";
+
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+			return $success;
+		} catch (MyException $e) {
+                        echo $e;
+			$e->getMyExceptionMessage();
+                        $success = FALSE;
+			return $success;
+		}
+	}
+        
+        /**
+	 * userLikesBookmark checks if user likes a bookmark or not.
+	 * @param int $bid For a given bookmark ID.
+         * @param int $ucId For a given user credential ID
+	 * @return True if user likes the given bookmark, FALSE otherwise.
+	 */
+         public function userLikesBookmark($bid, $ucId){
+            if ($bid == NULL || $ucId == NULL ) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+                $query = "SELECT likes FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" .$ucId . "'";
+                $userLikes = FALSE;
+                try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+                        $_bmkActivity = $sqlObj->GetData();
+                        if($_bmkActivity  != NULL){
+                            $userLikes = TRUE;
+                        }else{
+                            $userLikes = FALSE;
+                        }
+                       return $userLikes;
+		} catch (MyException $e) {
+                        echo $e;
+			$e->getMyExceptionMessage();
+                        $userLikes = FALSE;
+			return $userLikes;
+		}
+            
+        }
+        
+        public function getBookmarkLikesCount($bid)
+        {
+            if ($bid == NULL) {
+		throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+            $query = "SELECT count(likes) FROM bmk_activity WHERE be_id='" . $bid . "'";
+            try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+                        $_bmkActivity = $sqlObj->GetData();
+                        if($_bmkActivity > 1){
+                            $count = $_bmkActivity[0]['count'];
+                            echo "<script>alert('$count');</script>";
+                        }
+                        return $count;
+                            
+                       
+		} catch (MyException $e) {
+                        echo $e;
+			$e->getMyExceptionMessage();
+                        $count = 0;
+			return $count;
+		}
+            
+        }
 
 	/**
 	 * Return a bookmark and all it's data.

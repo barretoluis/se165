@@ -170,7 +170,7 @@ try {
 					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
 					//$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
-                                        $html .= '	<img src="' . $_bmk['bmk_image'] . '" style="min-height: 200px; min-width: 300px;"/>\n';
+                                        $html .= '	<img src="' . $_bmk['bmk_image'] . '" style="background:#fff; max-height: 200px; max-width: 300px;" />\n';
 					$html .= '</div>\n\n';
 
 					echo_formData($html);

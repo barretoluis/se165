@@ -48,12 +48,15 @@ $Bookmark = new Bookmark();
 $_websiteErr = Array();
 $ucId = $_SESSION['uc_id'];
 
+
 try {
 	$canViewBmk = $Bookmark->canViewBmk($ucId, $bmkId);
         $isOwner = $Bookmark->isOwner($ucId, $bmkId);
+        $isLiked = $Bookmark->userLikesBookmark($bmkId, $ucId);
 } catch (MyException $e) {
 	$canViewBmk = FALSE;
         $isOwner = FALSE;
+        $isLiked = FALSE;
 	array_push($_websiteErr, $e->getMessage());
 	$e->getMyExceptionMessage();
 }
@@ -193,10 +196,12 @@ if (count($_websiteErr) >= 1) {
 				<div class="well">
                                     <table style="float:right;">
                                     <tr>
-                                        <!-- <td><?php if($isOwner) { ?><a href="/bookmark/deleteBookmark.php/?bid=<?php echo $bmkId; ?>" title="Delete Bookmark"><i class="fa fa-trash-o fa-lg"></i></a><?php } ?></td> -->
+                                        <td><?php if($isOwner) { ?><a href="/bookmark/deleteBookmark.php/?bid=<?php echo $bmkId; ?>" title="Delete Bookmark"><i class="fa fa-trash-o fa-lg"></i></a><?php } ?></td>
                                         <td><?php if($isOwner) { ?><a href="/bookmark/editBookmark.php/?bid=<?php echo $bmkId; ?>" title="Edit Bookmark"><i class="fa fa-pencil fa-lg"></i></a><?php } ?></td>
                                         <td><a href="<?php echo $bmkUrl; ?>" title="Website" target="_blank"><i class="fa fa-external-link fa-lg"></i></a></td>
-                                        <td><a href="#" title="Like Bookmark"><i class="fa fa-heart fa-lg"></i></a></td>
+                                        <td><?php if(!$isLiked) { ?><a href="/bookmark/likeBookmark.php/?bid=<?php echo $bmkId; ?>" title="Like Bookmark"><i class="fa fa-heart fa-lg"></i></a><?php } 
+                                        else { ?> <a href="/bookmark/dislikeBookmark.php/?bid=<?php echo $bmkId; ?>" title="Like Bookmark"><i class="fa fa-heart fa-lg" style="opacity:0.2;"></i></a> <?php } ?>
+                                        </td>
                                         <td><a href="#" title="Follow Track"><i class="fa fa-eye fa-lg"></i></a></td>
                                     </tr>
                                     </table>
