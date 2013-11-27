@@ -163,8 +163,8 @@ class Bookmark {
                 //$like = 1;
                 $success = TRUE;
 
-		$query = "INSERT INTO bmk_activity (uc_id, be_id, likes)
-					VALUES ('{$ucId}', '{$bid}', '{$like}')";
+		$query = "INSERT INTO bmk_activity (be_id, `like`, uc_id)
+					VALUES ('{$bid}', '{$like}', '{$ucId}')";
 
 
 		try {
@@ -215,7 +215,7 @@ class Bookmark {
             if ($bid == NULL || $ucId == NULL ) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-                $query = "SELECT likes FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" .$ucId . "'";
+                $query = "SELECT 'like' FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" .$ucId . "'";
                 $userLikes = FALSE;
                 try {
 			//Construct DB object
@@ -243,7 +243,8 @@ class Bookmark {
             if ($bid == NULL) {
 		throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-            $query = "SELECT count(likes) as count FROM bmk_activity WHERE be_id='" . $bid . "'";
+            //$query = "SELECT count(likes) as count FROM bmk_activity WHERE be_id='" . $bid . "'";
+            $query = "SELECT like_count as count FROM v_returnBookmarkActivityCount_like WHERE be_id='" . $bid . "'";
             try {
 			//Construct DB object
 			$sqlObj = new DataBase();
