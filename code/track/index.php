@@ -159,7 +159,7 @@ try {
 			if (isset($_bookmarks) && count($_bookmarks) > 0) {
 				foreach ($_bookmarks as $_bmk) {
 					$_bmk['comment_count'] = 0; //TODO: Build code for showing bookmarks likes
-					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
+					$_bmk['like_count'] = $Bookmark->getBookmarkLikesCount($_bmk['id']); //TODO: Build code for showing bookmarks likes
 					$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
                                         //$_bmk['imageSrc'] = $_bookmarks['imageSrc'];
 					$html = '<div class="view" id="view">\n';

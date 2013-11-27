@@ -243,17 +243,16 @@ class Bookmark {
             if ($bid == NULL) {
 		throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-            $query = "SELECT count(likes) FROM bmk_activity WHERE be_id='" . $bid . "'";
+            $query = "SELECT count(likes) as count FROM bmk_activity WHERE be_id='" . $bid . "'";
             try {
 			//Construct DB object
 			$sqlObj = new DataBase();
                         $sqlObj->DoQuery($query);
 			$sqlObj->destroy();
                         $_bmkActivity = $sqlObj->GetData();
-                        if($_bmkActivity > 1){
-                            $count = $_bmkActivity[0]['count'];
-                            echo "<script>alert('$count');</script>";
-                        }
+                        if($_bmkActivity != NULL){
+                            $count = $_bmkActivity[0]["count"];
+                         }
                         return $count;
                             
                        
