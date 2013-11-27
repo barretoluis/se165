@@ -12,10 +12,6 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE DATABASE `db_tackster`
-    CHARACTER SET 'utf8'
-    COLLATE 'utf8_general_ci';
-
 USE `db_tackster`;
 
 #
@@ -36,7 +32,7 @@ CREATE TABLE `bmk_entry` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `uc_id` (`uc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=16384 PACK_KEYS=0 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=16384 PACK_KEYS=0 ROW_FORMAT=COMPACT;
 
 #
 # Structure for the `bmk_activity` table : 
@@ -48,13 +44,13 @@ CREATE TABLE `bmk_activity` (
   `be_id` bigint(20) NOT NULL COMMENT 'Bookmark entry ID',
   `uc_id` int(11) NOT NULL COMMENT 'ID of user who liked the bookmark',
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique record ID',
-  `likes` tinyint(4) DEFAULT NULL COMMENT 'Like flag: 1=yes',
+  `like` tinyint(4) DEFAULT NULL COMMENT 'Like flag: 1=yes',
   `repin` tinyint(4) DEFAULT NULL COMMENT 'Repin flag: 1=yes',
   PRIMARY KEY (`id`),
   KEY `be_id` (`be_id`),
   KEY `uc_id` (`uc_id`),
   CONSTRAINT `bmk_like_fk` FOREIGN KEY (`be_id`) REFERENCES `bmk_entry` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `bmk_comment` table : 
@@ -72,7 +68,7 @@ CREATE TABLE `bmk_comment` (
   KEY `be_id` (`be_id`),
   KEY `uc_id` (`uc_id`),
   CONSTRAINT `bmk_comment_fk` FOREIGN KEY (`be_id`) REFERENCES `bmk_entry` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `lkup_keyword` table : 
@@ -105,7 +101,7 @@ CREATE TABLE `user_credentials` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `email_2` (`email`),
   UNIQUE KEY `email_3` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `tkn_password_reset` table : 
@@ -122,7 +118,7 @@ CREATE TABLE `tkn_password_reset` (
   UNIQUE KEY `uc_id` (`uc_id`),
   KEY `token` (`token`(1)),
   CONSTRAINT `tkn_password_reset_fk` FOREIGN KEY (`uc_id`) REFERENCES `user_credentials` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `track` table : 
@@ -144,7 +140,7 @@ CREATE TABLE `track` (
   KEY `b_id` (`b_id`),
   KEY `keyword` (`keyword`(1)),
   CONSTRAINT `track_fk` FOREIGN KEY (`uc_id`) REFERENCES `user_credentials` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=313 DEFAULT CHARSET=utf8 PACK_KEYS=0 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 PACK_KEYS=0 ROW_FORMAT=COMPACT;
 
 #
 # Structure for the `track_activity` table : 
@@ -158,7 +154,7 @@ CREATE TABLE `track_activity` (
   `trck_id` bigint(22) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `trck_comment` table : 
@@ -194,7 +190,7 @@ CREATE TABLE `user_profile` (
   UNIQUE KEY `uc_id` (`uc_id`),
   UNIQUE KEY `uc_id_2` (`uc_id`),
   CONSTRAINT `user_profile_fk` FOREIGN KEY (`uc_id`) REFERENCES `user_credentials` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 #
 # Definition for the `delete_oldPassToken` procedure : 
@@ -206,8 +202,157 @@ CREATE DEFINER = 'tackster'@'%' PROCEDURE `delete_oldPassToken`()
     NOT DETERMINISTIC
     CONTAINS SQL
     SQL SECURITY DEFINER
-    COMMENT '敒潭敶漠摬琠歯湥⁳牦浯琠敨䐠⹂'
+    COMMENT '敄敬整漠摬琠歯湥⹳'
 BEGIN
-	DELETE LOW_PRIORITY FROM tkn_password_reset WHERE TIMESTAMPDIFF(MINUTE, `timestamp`, NOW()) > 30;
+	DELETE LOW_PRIORITY FROM tkn_password_reset WHERE TIMESTAMPDIFF(MINUTE, `timestamp`, NOW()) > 15;
 END;
 
+#
+# Definition for the `v_returnBookmarkActivityCount_like` view : 
+#
+
+DROP VIEW IF EXISTS `v_returnBookmarkActivityCount_like`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tackster`@`%` SQL SECURITY DEFINER VIEW v_returnBookmarkActivityCount_like AS 
+  select 
+    `ba`.`be_id` AS `be_id`,
+    count(`ba`.`like`) AS `like_count` 
+  from 
+    `bmk_activity` `ba` 
+  where 
+    (`ba`.`like` = 1) 
+  group by 
+    `ba`.`be_id`;
+
+#
+# Definition for the `v_returnBookmarkActivityCount_repin` view : 
+#
+
+DROP VIEW IF EXISTS `v_returnBookmarkActivityCount_repin`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tackster`@`%` SQL SECURITY DEFINER VIEW v_returnBookmarkActivityCount_repin AS 
+  select 
+    `ba`.`be_id` AS `be_id`,
+    count(`ba`.`repin`) AS `repin_count` 
+  from 
+    `bmk_activity` `ba` 
+  where 
+    (`ba`.`repin` = 1) 
+  group by 
+    `ba`.`be_id`;
+
+#
+# Definition for the `v_returnBookmarkComments` view : 
+#
+
+DROP VIEW IF EXISTS `v_returnBookmarkComments`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tackster`@`%` SQL SECURITY DEFINER VIEW v_returnBookmarkComments AS 
+  select 
+    `bc`.`be_id` AS `be_id`,
+    `bc`.`uc_id` AS `uc_id`,
+    `bc`.`id` AS `id`,
+    `uc`.`state` AS `state`,
+    `up`.`first` AS `first`,
+    `up`.`last` AS `last`,
+    `up`.`username` AS `username`,
+    `up`.`photo` AS `photo`,
+    `bc`.`comment` AS `comment` 
+  from 
+    ((`bmk_comment` `bc` join `user_profile` `up`) join `user_credentials` `uc`) 
+  where 
+    ((`bc`.`uc_id` = `up`.`uc_id`) and (`bc`.`uc_id` = `uc`.`id`) and ((`uc`.`state` = 'a') or (`uc`.`state` = 'p') or (`uc`.`state` = 'd'))) 
+  order by 
+    `bc`.`timestamp` desc;
+
+#
+# Definition for the `v_returnShortUserProfile` view : 
+#
+
+DROP VIEW IF EXISTS `v_returnShortUserProfile`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tackster`@`%` SQL SECURITY DEFINER VIEW v_returnShortUserProfile AS 
+  select 
+    `uc`.`id` AS `id`,
+    `uc`.`email` AS `email`,
+    `up`.`first` AS `first`,
+    `up`.`last` AS `last`,
+    `up`.`username` AS `username`,
+    `up`.`sex` AS `sex`,
+    `up`.`photo` AS `photo` 
+  from 
+    (`user_credentials` `uc` join `user_profile` `up`) 
+  where 
+    (`uc`.`id` = `up`.`uc_id`);
+
+#
+# Definition for the `v_searchKeyword_sortByLikeCount` view : 
+#
+
+DROP VIEW IF EXISTS `v_searchKeyword_sortByLikeCount`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tackster`@`%` SQL SECURITY DEFINER VIEW v_searchKeyword_sortByLikeCount AS 
+  select 
+    `be`.`uc_id` AS `uc_id`,
+    `be`.`id` AS `id`,
+    `be`.`keyword` AS `keyword`,
+    `be`.`description` AS `description`,
+    `be`.`url` AS `url`,
+    `be`.`privacy` AS `privacy`,
+    (
+  select 
+    `vlc`.`like_count` 
+  from 
+    `v_returnBookmarkActivityCount_like` `vlc` 
+  where 
+    (`vlc`.`be_id` = `be`.`id`)) AS `like_count` 
+  from 
+    `bmk_entry` `be` 
+  order by 
+    (
+  select 
+    `vlc`.`like_count` 
+  from 
+    `v_returnBookmarkActivityCount_like` `vlc` 
+  where 
+    (`vlc`.`be_id` = `be`.`id`)) desc;
+
+#
+# Definition for the `v_searchKeyword_sortByTimestamp` view : 
+#
+
+DROP VIEW IF EXISTS `v_searchKeyword_sortByTimestamp`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`tackster`@`%` SQL SECURITY DEFINER VIEW v_searchKeyword_sortByTimestamp AS 
+  select 
+    `be`.`uc_id` AS `uc_id`,
+    `be`.`t_id` AS `t_id`,
+    `be`.`id` AS `id`,
+    `be`.`keyword` AS `keyword`,
+    `be`.`description` AS `description`,
+    `be`.`url` AS `url`,
+    `be`.`privacy` AS `privacy`,
+    `be`.`timestamp` AS `timestamp` 
+  from 
+    `bmk_entry` `be` 
+  order by 
+    `be`.`timestamp` desc;
+
+#
+# Definition for the `delete_oldPassToken` Event : 
+#
+
+DROP EVENT IF EXISTS `delete_oldPassToken`;
+
+CREATE EVENT `delete_oldPassToken`
+  ON SCHEDULE EVERY 15 MINUTE STARTS '2013-09-25 22:28:13'
+  ON COMPLETION PRESERVE
+  ENABLE
+  COMMENT ''  DO
+call `delete_oldPassToken`();
+
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
