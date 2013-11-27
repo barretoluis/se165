@@ -78,15 +78,16 @@ if ($loggedIn) {
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="dropdown">
-							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px; margin: 0 0 0 0;;"><img src="/shared/images/logo_tackster.png" style="margin: -20px 0px -20px 0px;"><b class="caret"></b></a>
-							<ul class="dropdown-menu">
+<!--							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px; margin: 0 0 0 0;;"><img src="/shared/images/logo_tackster.png" style="margin: -20px 0px -20px 0px;"><b class="caret"></b></a>-->
+                                                        <a href="/dashboard/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -22px 0px -20px 20px;"></a>
+<!--							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">Dashboard</a></li>
 								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
 								<li style="padding-left: 10px;"><a href="/dashboard/#following">Following Tracks</a></li>
 								<li class="divider"></li>
 								<li><a class='track_popUp' href="/track/createTrack.php">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
-							</ul>
+							</ul>-->
 						</li>
 					</ul>
 				</div>
@@ -149,8 +150,8 @@ if ($loggedIn) {
                                   }
                                 </script>
 
-				<div class="searchbar">
-					<form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
+				<div class="searchbar">       
+                                                            <form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
 						<p>
 							<span class="sb_down"></span>
 							<input type="text" name="searchWord" id="searchWord" maxlength="40" class="sb_input" placeholder="Search">
@@ -173,7 +174,7 @@ if ($loggedIn) {
 						</ul>
 					</form>
 				</div>
-
+        
 				<!-- JavaScript to handle JQuery autocomplete-->
                 <script>
                 $(document).ready(function($){

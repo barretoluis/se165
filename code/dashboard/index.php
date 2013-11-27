@@ -217,7 +217,32 @@ EOF;
 				});
 			}
 		</script>
-
+                <script>
+                        $(function() {
+                            $(".searchSecretPopUp").delay(1000).fadeIn();
+                            $(".followSecretPopUp").delay(500).fadeIn();
+                            $(".myTracksSecretPopUp").delay(500).fadeIn();
+                            $(".searchSecretPopUp").hide(8000, function(){
+                                $(".allTracksSecretPopUp").delay(500).fadeIn();
+                                $(".allTracksSecretPopUp").hide(9000, function(){
+                                    $(".trackSecretPopUp").delay(500).fadeIn();
+                                    $(".trackSecretPopUp").hide(20000, function(){
+                                        $(".logoSecretPopUp").delay(500).fadeIn();
+                                        $(".logoSecretPopUp").hide(9000, function(){
+                                            $(".bookmarkSecretPopUp").delay(500).fadeIn();
+                                            $(".bookmarkSecretPopUp").hide(9000, function(){
+                                                $(".followSecretPopUp").delay(500).fadeIn();
+                                                $(".followSecretPopUp").hide(9000, function(){
+                                                    $(".myTracksSecretPopUp").delay(500).fadeIn();
+                                                    $(".myTracksSecretPopUp").hide(9000);
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                          });
+                </script>
 
 	</head>
 
@@ -230,22 +255,50 @@ EOF;
 
 		<!-- Body Content-->
 		<div class="main" id="main">
-			<div class="tab" id="tab">
-				<div id="quickMenu" class="quickMenuTab">
-					<div id="icons">
-						<a class='bookmark_popUp' href="/bookmark/createBookmark.php" title="Add Bookmark"><i class="fa fa-bookmark fa-lg"></i></a>
-						<a class='track_popUp' href="/track/createTrack.php" title="Add Track"><i class="fa fa-folder-open fa-lg"></i></a>
-					</div>
-				</div>
-				<div id='cssmenu'>
-					<ul>
-						<li class='active' id="myTrack"><a href="javascript:void(0)" onclick="getMyTrack('main'); document.getElementById('myTrack').className='active'; document.getElementById('followTrack').className='last';"><span>My Tracks</span></a></li>
-						<li class='last' id="followTrack"><a href="javascript:void(0)"  onclick="getFollowingTrack();  document.getElementById('myTrack').className='last'; document.getElementById('followTrack').className='active';"><span>Following Tracks</span></a></li>
-					</ul>
-				</div>
-				<div class="main tabContent" id="tabContent"></div>
-			</div>
-		</div>
+                    <div class="searchSecretPopUp" style="position: absolute; top: -20px; left: 350px;">
+                        <p class="triangle-isosceles top" style="width: 180px;"> Search for bookmarks here</p>
+                    </div>
+                    <div class="trackSecretPopUp" style="position: absolute; top: 30px; right: 55px;">
+                        <p class="triangle-isosceles top" style="width: 300px;"> Tracks are like folders that can hold various bookmarks. Add a new track here.</p>
+                    </div>
+                    <div class="allTracksSecretPopUp" style="position: absolute; top: 30px; right: 10px;">
+                        <p class="triangle-isosceles top" style="width: 100px;"> Click here to view all tracks.</p>
+                    </div>
+                    <div class="logoSecretPopUp" style="position: absolute; top: -20px; left: 10px;">
+                        <p class="triangle-isosceles top" style="width: 100px;"> Logo acts as a home button.</p>
+                    </div>
+                    <div class="bookmarkSecretPopUp" style="position: absolute; top: 30px; right: 90px;">
+                        <p class="triangle-isosceles top" style="width: 100px;"> Add a new bookmark!</p>
+                    </div>
+<!--                    <div class="followSecretPopUp" style="position: absolute; left: 200px;">
+                        <p class="triangle-isosceles top" style="width: 100px;"> Easy access to Following Tracks.</p>
+                    </div>
+                    <div class="myTracksSecretPopUp" style="position: absolute; top: 25px; left: 90px;">
+                        <p class="triangle-isosceles top" style="width: 200px;"> Shows all the Tracks that YOU created.</p>
+                    </div>-->
+                    
+                    <div class="tab" id="tab">
+			<div id="quickMenu" class="quickMenuTab">
+				<div id="icons">
+					<a class='bookmark_popUp' href="/bookmark/createBookmark.php" title="Add Bookmark"><i class="fa fa-bookmark fa-lg"></i></a>
+                        		<a class='track_popUp' href="/track/createTrack.php" title="Add Track"><i class="fa fa-folder-open fa-lg"></i></a>
+                                        <a title="Show all tracks" href="#sidr" id="allTracks">(tracks)</a>
+                                        <script>
+                                                $(document).ready(function() {
+                                                        $('#allTracks').sidr();
+                                                });
+                                        </script>
+                                </div>
+                        </div>
+			<div id='cssmenu'>
+                            <ul>
+                                    <li class='active' id="myTrack"><a href="javascript:void(0)" onclick="getMyTrack('main'); document.getElementById('myTrack').className='active'; document.getElementById('followTrack').className='last';"><span>My Tracks</span></a></li>
+                                    <li class='last' id="followTrack"><a href="javascript:void(0)"  onclick="getFollowingTrack();  document.getElementById('myTrack').className='last'; document.getElementById('followTrack').className='active';"><span>Following Tracks</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="main tabContent" id="tabContent"></div>
+                    </div>
+                </div>
 		<!-- /Body Content-->
 
 		<!-- Footer Content -->
