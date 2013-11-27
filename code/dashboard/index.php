@@ -41,6 +41,7 @@ $_myTracks = array();
 $_followingTracks = array();
 $ucId = $_SESSION['uc_id'];
 $isNewUser = (isset($_SESSION['isNewUser'])) ? $_SESSION['isNewUser'] : FALSE;
+$_SESSION['isNewUser'] = $isNewUser;	//let's not show the 1st time UI on page refreshes
 
 $Track = new Track();
 
