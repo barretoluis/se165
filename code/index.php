@@ -108,7 +108,7 @@ $homeImg	= "/shared/images/home{$randomInt}.jpg";
 							</dl>
 						</form>
 					<?php } ?>
-					<h1 class="heading">Explore, and Share your Interests</h1>
+					<h1 class="heading">Explore and Share Your Interests</h1>
 					<p class="subheading">Easier and a faster way to pin your brain</p>
 				</div><!-- /.container -->
 			</div>
