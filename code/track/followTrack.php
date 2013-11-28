@@ -30,5 +30,14 @@ try {
     $ucid = $_GET['ucid'];
     $tid = $_GET['tid'];
     $trackObj = new Track();
-    $trackObj->followTrack($ucid, $tid);
+    $status = $trackObj->followTrack($ucid, $tid);
+    if ($status)
+    {
+        echo "Track Added successfuly.";
+        header('Location:/dashboard/');
+    }
+    else
+    {
+        echo "Could not follow the track";
+    }
 ?>
