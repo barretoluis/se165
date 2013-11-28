@@ -278,6 +278,70 @@ class Track {
 
 		return $_resultSet;
 	}
+        
+        /**
+	 * Follow a track.
+	 * IMPORTANT: This method will stablish a relationship with a user and a track .
+	 *
+	 * @param type $ucId The user's credential ID
+	 * @param type $tid The Track's ID.
+	 * @return type True or False.
+	 * @throws MyException Throws an exception if the user id is less than one.
+	 */
+	public function followTrack($ucId, $tid) {
+            
+		$_resultSet = NULL;
+                $_records = NULL;
+                $_return = NULL;
+
+		$ucId = (int) $ucId; //cast as into to assure no SQL injection
+                $tid = (int) $tid;
+                $query = "SELECT `date` FROM `track_activity` WHERE `uc_id` = $ucId AND `trck_id` = $tid";
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+                        $_records = $sqlObj->getNumberOfRecords();
+			$_resultSet = $sqlObj->GetData();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		$sqlObj->destroy();
+                if ($_records > 0) {
+                        $date = $_resultSet[0]['date'];
+			throw new MyException('You are already following this Track since '.$date);
+                        $_return = FALSE;
+		}
+                else {
+                    $query = "INSERT INTO  `db_tackster`.`track_activity` (
+                                `id` ,
+                                `uc_id` ,
+                                `trck_id` ,
+                                `date`
+                                )
+                                VALUES (
+                                        NULL ,  '$ucId',  '$tid', 
+                                        CURRENT_TIMESTAMP
+                                );
+                                ";
+                    try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+                        } catch (MyException $e) {
+                            $e->getMyExceptionMessage();
+                        }
+                    $sqlObj->destroy();
+                    $_return = TRUE;
+                }
+		return $_return;
+	}
+        
 
 	/**
 	 * Get the tracks for the given user id.
