@@ -74,8 +74,8 @@ if ($canViewBmk) {
 			array_push($_websiteErr, $e->getMessage());
 		}
 
-//		$bmkUcId = $_bmkData[0]['uc_id'];
-//		$bmkTid = $_bmkData[0]['t_id'];
+		$bmkUcId = $_bmkData[0]['uc_id'];
+		$bmkTid = $_bmkData[0]['t_id'];
 		$bmkUrl = $_bmkData[0]['url'];
 		$bmkPriv = (isset($_bmkData[0]['privacy']) && $_bmkData[0]['privacy'] == 1) ? "Private" : "Share";
 		$bmkDesc = $_bmkData[0]['description'];
@@ -202,7 +202,7 @@ if (count($_websiteErr) >= 1) {
                                         <td><?php if(!$isLiked) { ?><a href="/bookmark/likeBookmark.php/?bid=<?php echo $bmkId; ?>" title="Like Bookmark"><i class="fa fa-heart fa-lg"></i></a><?php } 
                                         else { ?> <a href="/bookmark/dislikeBookmark.php/?bid=<?php echo $bmkId; ?>" title="Like Bookmark"><i class="fa fa-heart fa-lg" style="opacity:0.2;"></i></a> <?php } ?>
                                         </td>
-                                        <td><a href="#" title="Follow Track"><i class="fa fa-eye fa-lg"></i></a></td>
+                                        <td><a href="/track/followTrack.php/?ucid=<?php echo $bmkUcId?>&tid=<?php echo $bmkTid?>" title="Follow Track"><i class="fa fa-eye fa-lg"></i></a></td>
                                     </tr>
                                     </table>
                                    
