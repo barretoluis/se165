@@ -32,6 +32,7 @@ try {
 /*
  * Page specific PHP code here
  */
+$_websiteErr = Array(); //Error message to show end user
 $formAction = NULL;
 $formField = "disabled";
 $updateStatus = NULL;
@@ -46,23 +47,42 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "saveProfile") {
 	$nameLast = (isset($_POST['lname'])) ? $_POST['lname'] : NULL;
 	$nameUser = (isset($_POST['username'])) ? $_POST['username'] : NULL;
 	$userSex = (isset($_POST['gender'])) ? $_POST['gender'] : NULL;
+	//TODO: Temp fix implemented to resolve bug 65
+	//		Go back and remove email requirement from updteUser method.
+	//		Will need to do regression testing.
+	$_POST['email'] = $emailUser;
 
-//	throw new MyException(json_encode($_POST));
-
-	try {
-		$updateProfile = new User();
-		$updateStatus = $updateProfile->updateUser($_SESSION['uc_id'], $_POST);
-		if (isset($_POST))
-			unset($_POST); //no longer need the POST variables
-		$formStatus = "edit"; //updated successfully so show profile
-		header('Location: ' . $_SERVER['PHP_SELF'] . '');
-		exit();
-	} catch (MyException $e) {
-		$e->getMyExceptionMessage();
+	//let's make sure all fields data was provided in the form post
+	if (!$nameFirst || !$nameLast || !$nameUser || !$userSex || !$emailUser) {
+		$_POST['formAction'] = 'edit';
+		array_push($_websiteErr, 'Please complete all profile fields.');
+	} else {
+		try {
+			$updateProfile = new User();
+			$updateStatus = $updateProfile->updateUser($_SESSION['uc_id'], $_POST);
+			if (isset($_POST))
+				unset($_POST); //no longer need the POST variables
+			$formStatus = "edit"; //updated successfully so show profile
+			header('Location: ' . $_SERVER['PHP_SELF'] . '');
+			exit();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
 	}
 } elseif (isset($_POST['formAction']) && $_POST['formAction'] == "edit") {
 	$formAction = "edit";
 	$formField = "";
+}
+
+
+//format any errors
+if (count($_websiteErr) >= 1) {
+	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
+	foreach ($_websiteErr as $value) {
+		$errString .= "<li>" . $value . "</li>\n";
+	}
+	$errString .= '</ol></div>';
+	$_websiteErr = $errString;
 }
 ?><!DOCTYPE html>
 <html>
@@ -109,6 +129,11 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "saveProfile") {
 			<div class="container">
 				<div class="well">
 					<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="formProfileView" id="formProfileView">
+						<?php
+						if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+							echo $_websiteErr;
+						}
+						?>
 						<table>
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -128,7 +153,8 @@ if (isset($_POST['formAction']) && $_POST['formAction'] == "saveProfile") {
 							</tr>
 							<tr>
 								<td>&nbsp;&nbsp;&nbsp;Email:</td> <!-- Should they be allowed to change their email address?-->
-								<td><input type="email" name="email" id="email" value="<?PHP echo_formData($emailUser) ?>"  <?php echo $formField ?>/>
+								<?PHP /* <td><input type="email" name="email" id="email" value="<?PHP echo_formData($emailUser) ?>"  <?php echo $formField ?>/> */ ?>
+								<td><?PHP echo_formData($emailUser) ?>
 								</td>
 							</tr>
 							<tr>
