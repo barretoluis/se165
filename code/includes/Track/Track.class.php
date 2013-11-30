@@ -71,6 +71,11 @@ class Track {
 		try {
 			$trackId = $this->sqlObj->DoQuery($query);
 			$this->sqlObj->destroy();
+
+			//force the session to reset its tracks
+			if (isset($_SESSION['myTracks'])) {
+				unset($_SESSION['myTracks']);
+			}
 		} catch (MyException $e) {
 			$e->getMyExceptionMessage();
 			return -1;
@@ -110,6 +115,12 @@ class Track {
 		try {
 			$result = $this->sqlObj->DoQuery($query);
 			$this->sqlObj->destroy();
+
+			//force the session to reset its tracks
+			if (isset($_SESSION['myTracks'])) {
+				unset($_SESSION['myTracks']);
+			}
+
 			return TRUE;
 		} catch (MyException $e) {
 			$e->getMyExceptionMessage();
@@ -165,7 +176,7 @@ class Track {
 	 * @return string Return the friendly name.
 	 */
 	public function returnMyTrackDetails($ucId, $trackId) {
-		if(!(isset($ucId) || isset($trackId))) {
+		if (!(isset($ucId) || isset($trackId))) {
 			throw new MyException('Please be sure to provide the User Credential ID or Track ID.');
 		}
 
@@ -181,7 +192,7 @@ class Track {
 			return FALSE;
 		}
 
-		if(count($resultSet)>1) {
+		if (count($resultSet) > 1) {
 			throw new MyException('More than one record was returned when only one should be found.');
 			return FALSE;
 		}
@@ -278,8 +289,8 @@ class Track {
 
 		return $_resultSet;
 	}
-        
-        /**
+
+	/**
 	 * Follow a track.
 	 * IMPORTANT: This method will stablish a relationship with a user and a track .
 	 *
@@ -289,59 +300,57 @@ class Track {
 	 * @throws MyException Throws an exception if the user id is less than one.
 	 */
 	public function followTrack($ucId, $tid) {
-            
+
 		$_resultSet = NULL;
-                $_records = NULL;
-                $_return = NULL;
+		$_records = NULL;
+		$_return = NULL;
 
 		$ucId = (int) $ucId; //cast as into to assure no SQL injection
-                $tid = (int) $tid;
-                $query = "SELECT `date` FROM `track_activity` WHERE `uc_id` = $ucId AND `trck_id` = $tid";
+		$tid = (int) $tid;
+		$query = "SELECT `date` FROM `track_activity` WHERE `uc_id` = $ucId AND `trck_id` = $tid";
 		try {
 			//Construct DB object
 			$sqlObj = new DataBase();
 
 			//Execute query
 			$sqlObj->DoQuery($query);
-                        $_records = $sqlObj->getNumberOfRecords();
+			$_records = $sqlObj->getNumberOfRecords();
 			$_resultSet = $sqlObj->GetData();
 		} catch (MyException $e) {
 			$e->getMyExceptionMessage();
 		}
 
 		$sqlObj->destroy();
-                if ($_records > 0) {
-                        $date = $_resultSet[0]['date'];
-			throw new MyException('You are already following this Track since '.$date);
-                        $_return = FALSE;
-		}
-                else {
-                    $query = "INSERT INTO  `db_tackster`.`track_activity` (
+		if ($_records > 0) {
+			$date = $_resultSet[0]['date'];
+			throw new MyException('You are already following this Track since ' . $date);
+			$_return = FALSE;
+		} else {
+			$query = "INSERT INTO  `db_tackster`.`track_activity` (
                                 `id` ,
                                 `uc_id` ,
                                 `trck_id` ,
                                 `date`
                                 )
                                 VALUES (
-                                        NULL ,  '$ucId',  '$tid', 
+                                        NULL ,  '$ucId',  '$tid',
                                         CURRENT_TIMESTAMP
                                 );
                                 ";
-                    try {
-			//Construct DB object
-			$sqlObj = new DataBase();
+			try {
+				//Construct DB object
+				$sqlObj = new DataBase();
 
-			//Execute query
-			$sqlObj->DoQuery($query);
-                        } catch (MyException $e) {
-                            $e->getMyExceptionMessage();
-                        }
-                    $sqlObj->destroy();
-                    $_return = TRUE;
-                }
+				//Execute query
+				$sqlObj->DoQuery($query);
+			} catch (MyException $e) {
+				$e->getMyExceptionMessage();
+			}
+			$sqlObj->destroy();
+			$_return = TRUE;
+		}
 		return $_return;
 	}
-        
 
 	/**
 	 * Get the tracks for the given user id.
@@ -355,8 +364,8 @@ class Track {
 	public function returnFollowingTracks($ucId, $fields = NULL) {
 		return NULL;
 		if ($ucId < !1) {
-			throw new MyException('Sorry, you forgot to provide a 
-                            user id. I cannot retrieve any tracks without it. 
+			throw new MyException('Sorry, you forgot to provide a
+                            user id. I cannot retrieve any tracks without it.
                             Here\'s what you tried sending: "' . $ucId . '".');
 		}
 
@@ -364,11 +373,11 @@ class Track {
 		$_resultSet = NULL;
 
 		$ucId = (int) $ucId; //cast as into to assure no SQL injection
-		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId' 
+		$query = "SELECT {$fields} FROM `track` WHERE `uc_id`='$ucId'
                     AND flag_default != 1 ORDER BY title ASC";
-                //$query = "SELECT * FROM `track`"
+		//$query = "SELECT * FROM `track`"
 
-        	try {
+		try {
 			//Execute query
 			$this->sqlObj->DoQuery($query);
 
@@ -397,6 +406,11 @@ class Track {
 			$this->sqlObj->DoQuery($query);
 			$this->sqlObj->destroy();
 			$deleteSuccess = TRUE;
+
+			//force the session to reset its tracks
+			if (isset($_SESSION['myTracks'])) {
+				unset($_SESSION['myTracks']);
+			}
 		} catch (MyException $e) {
 			$deleteSuccess = FALSE;
 			$e->getMyExceptionMessage();
