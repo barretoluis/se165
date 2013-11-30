@@ -47,28 +47,33 @@ if ($fbLoginUrl == NULL && $loggedIn == FALSE) { //if a person already logged in
 
 //create a user
 if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']) && isset($_POST['lname'])) {
-	try {
-		$userObj = new user();
-		$fname = $_POST['fname'];
-		$lname = $_POST['lname'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+	//basic error checking
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			array_push($_websiteErr, 'Please provide a valid email address.');
+	} else {
+		try {
+			$userObj = new user();
+			$fname = $_POST['fname'];
+			$lname = $_POST['lname'];
+			$email = $_POST['email'];
+			$password = $_POST['password'];
 
-		$userArray = array('fname' => $fname, 'lname' => $lname,
-			'email' => $email,
-			'password' => $password,
-			'source' => 'I');
+			$userArray = array('fname' => $fname, 'lname' => $lname,
+				'email' => $email,
+				'password' => $password,
+				'source' => 'I');
 
-		if (!$userObj->createUser($userArray)) {
-			//we weren't successful in creating an account
-			throw new MyException('Was not able to register your account. Please try using a different email address or use forgot password to recover your credentials.');
-		} else {
-			header('Location: /auth/login.php');
-			exit();
+			if (!$userObj->createUser($userArray)) {
+				//we weren't successful in creating an account
+				throw new MyException('Was not able to register your account. Please try using a different email address or use forgot password to recover your credentials.');
+			} else {
+				header('Location: /auth/login.php');
+				exit();
+			}
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+			array_push($_websiteErr, $e->getMessage());
 		}
-	} catch (MyException $e) {
-		$e->getMyExceptionMessage();
-		array_push($_websiteErr, $e->getMessage());
 	}
 }
 

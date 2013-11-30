@@ -1,4 +1,5 @@
 /* Reset CSS */
+/* Causing issues for form errors
 html, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,7 +23,7 @@ body {
 	margin: 0 auto;
 	padding: 0;
 	position: relative;
-}
+}*/
 
 h1{ font-size:28px;}
 h2{ font-size:26px;}
