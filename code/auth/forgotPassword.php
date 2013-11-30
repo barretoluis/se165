@@ -67,9 +67,14 @@ if (isset($_POST['username'])) {
 
 if ($actionType == 'tokenSend') {
 //user wants to request a password reset
+	//basic error checking
+	if (!filter_var($resetEmail, FILTER_VALIDATE_EMAIL)) {
+		$resetEmail = NULL;
+	}
+
 	if ($resetEmail == NULL) {
 		$actionType = NULL;
-		array_push($_websiteErr, 'No email address was provided.');
+		array_push($_websiteErr, 'A valid email was not provided.');
 	} else {
 		try {
 			if ($User->resetPassGenToken($resetEmail)) {
