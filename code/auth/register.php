@@ -150,7 +150,7 @@ if (count($_websiteErr) >= 1) {
 					<p>Last Name:&nbsp;<input type="text" required="" id="lname" name ="lname"/></p>
                 </div>
                 <div>
-					<p>Email:&nbsp;<input type="text" required="" id="email" name ="email" /></p>
+					<p>Email:&nbsp;<input type="text" required="" id="email" name ="email" maxlength="40" /></p>
                 </div>
                 <div>
 					<p>Password:&nbsp;<input type="password" required="" id="password" name ="password" /></p>

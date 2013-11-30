@@ -93,7 +93,7 @@ $homeImg	= "/shared/images/home{$randomInt}.jpg";
 							</dl>
 							<dl class="form">
 								<dd>
-									<input type="text" name="email" class="textfield" required="" placeholder="Email">
+									<input type="text" name="email" maxlength="40" class="textfield" placeholder="Email">
 								</dd>
 							</dl>
 							<dl class="form">
