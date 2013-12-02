@@ -3,6 +3,7 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
+    'Bookmark/Bookmark.class.php'
 );
 
 
@@ -121,9 +122,10 @@ if (count($_websiteErr) >= 1) {
 
 			<?php
 			if ($formSubmitted == TRUE && isset($_bookmarks) == TRUE && count($_bookmarks) >= 1) {
+                                $Bookmark = new Bookmark();
 				foreach ($_bookmarks as $_bmk) {
-					$_bmk['comment_count'] = 0; //TODO: Build code for showing bookmarks likes
-					$_bmk['like_count'] = 0; //TODO: Build code for showing bookmarks likes
+					$_bmk['comment_count'] = $Bookmark->getBmkCommentCount($_bmk['id']);
+					$_bmk['like_count'] = $Bookmark->getBookmarkLikesCount($_bmk['id']);
 					$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$html = '<div class="view" id="view">\n';
 					$html .= '	<div class="view-back">\n';
