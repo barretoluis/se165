@@ -32,7 +32,7 @@ try {
 /*
  * Page specific PHP code here
  */
-$randomInt	= (int) rand(1, 5);
+$randomInt	= (int) rand(1, 6);
 $homeImg	= "/shared/images/home{$randomInt}.jpg";
 
 ?><!DOCTYPE html>
