@@ -84,15 +84,21 @@ class Bookmark {
 
 		return $this->_errorMsgs;
 	}
-        
+        /**
+	 * Create the standard comment and insert on DB.
+	 *
+	 * @param int $be_id The ID of the bookmark that contains the comment.
+	 * @param string $comment The comment made by the user.
+	 * @param int $uc_id User Credential ID.
+         * 
+	 * @return array Return user friendly error messages if any.
+	 *
+	 */
         public function createComment($be_id, $comment, $uc_id) {
 		if ($be_id == NULL || $comment == NULL || $uc_id == NULL) {
 			throw new MyException('One of the parameters was not provided for the bookmark.');
 		}
-
-		$success = FALSE;
-
-		//let's make sure to tie the query to the uc_id
+                //let's make sure to tie the query to the uc_id
 		$query = "INSERT INTO bmk_comment (be_id, comment, uc_id, timestamp)
 					VALUES ('{$be_id}', '{$comment}', '{$uc_id}', now())";
 
@@ -102,19 +108,14 @@ class Bookmark {
 
 			//Execute query
 			$sqlObj->DoQuery($query);
-                        $success = TRUE;
 		} catch (MyException $e) {
 			array_push($this->_errorMsgs, 'Was not able to create the bookmark. Please make sure required fields are filled in.');
 			$e->getMyExceptionMessage();
-                        
-                        
-		}
+                }
 
 		// Destroy the DB object
 		$sqlObj->destroy();
-                return $success;
-
-	}
+         }
         /**
 	 * Update bookmark tuple on DB.
 	 *
@@ -274,7 +275,7 @@ class Bookmark {
             if ($bid == NULL) {
 		throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-            //$query = "SELECT count(likes) as count FROM bmk_activity WHERE be_id='" . $bid . "'";
+            
             $query = "SELECT like_count as count FROM v_returnBookmarkActivityCount_like WHERE be_id='" . $bid . "'";
             try {
 			//Construct DB object
@@ -296,6 +297,30 @@ class Bookmark {
 			return $count;
 		}
             
+        }
+        
+        public function getBmkCommentCount($bid){
+            if ($bid == NULL) {
+		throw new MyException('A required field was not provided for updating this bookmark.');
+		}
+            $query = "SELECT count(id) as count FROM bmk_comment WHERE be_id='" . $bid . "'";
+            try {
+			//Construct DB object
+                        $count = 0;
+			$sqlObj = new DataBase();
+                        $sqlObj->DoQuery($query);
+			$sqlObj->destroy();
+                        $_bmkActivity = $sqlObj->GetData();
+                        if($_bmkActivity != NULL){
+                            $count = $_bmkActivity[0]["count"];
+                         }
+                } catch (MyException $e) {
+                        echo $e;
+			$e->getMyExceptionMessage();
+                        $count = 0;
+			return $count;
+		}
+                return $count;
         }
 
 	/**
