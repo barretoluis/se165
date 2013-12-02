@@ -102,42 +102,50 @@ if ($canViewBmk) {
 	}
 
 	if (count($_comments) > 0) {
+            $htmlComments .= '<div> <table class="table table-striped"> <tbody> <div class="text-info"> <h3>Comments </h3></div>';
 		foreach ($_comments as $_dbRecord) {
-			foreach ($_dbRecord as $key => $value) {
+                        $htmlComments .= '<tr><td>';
+                    foreach ($_dbRecord as $key => $value) {
+                            
 				switch ($key) {
 					case 'id':
-						$htmlComments .= '<div id="' . $value . '">\n';
+						$htmlComments .= '<div id="' . $value . '">';
 						break;
-
-					case 'username':
-						if ($value == NULL) {
-							$value = "Not Available";
-						}
-						$htmlComments .= '<div id="username">' . $value . '</div>\n';
-						break;
-
-					case 'photo':
+                                        /*case 'photo':
 						if ($value == NULL) {
 							$value = "/shared/images/profileBlank.png";
 						} else {
 							$value = "/shared/images/{$value}";
 						}
 						$htmlComments .= '<div id "photo"><img src="' . $value . '"></div>\n';
-						break;
+						break;*/
 
 					case 'comment':
-						$htmlComments .= '<div id="comment">' . $value . '</div>\n';
+						$htmlComments .= '<blockquote><p>' . $value . '</p></blockquote>';
+						break;
+                                        
+                                        case 'username':
+						if ($value == NULL) {
+							$value = "Not Available";
+						}
+						$htmlComments .= ' <small>Comment by:  <cite title="Source Title">' . $value . '</cite></small>';
+						break;
+                                        case 'timestamp':
+						$htmlComments .= '<div id="timestamp">' . $value . '</div>';
 						break;
 
 					default:
 						break;
 				}
+                                
 			}
+                        $htmlComments .= '</td></tr>';
 		}
 	} else {
 		$htmlComments = "Be the first to comment on this bookmark.";
 	}
-			$htmlComments .= '</div>\n';
+			//$htmlComments .= '</div>\n';
+                        $htmlComments .= '</tbody></table>';
 } else {
 	array_push($_websiteErr, "Either this bookmark does not exist or you do not have permissions to view it.");
 }
@@ -240,15 +248,29 @@ if (count($_websiteErr) >= 1) {
 					<?php
 					echo_formData($htmlComments);
 					?>
+                                    
+                                    <form class="form-horizontal" id="addComment2Bmk" name="addComment2Bmk" method="post" action="addComment2Bmk.php">
+                                        <input id="b_id" type="hidden" name="b_id" value="<?php echo_formData($bmkId);?>">
+                                        <table>
+                                            <tr>
+                                                <td><label>Comment: </label></td>
+                                                <td><textarea id="cmt" name="cmt" rows="3"></textarea></td>
+                                            </tr>
+                                            
+                                            
+                                        </table>
+                                       <button class="btn btn-success" type="submit" id="submit_id">Comment</button>
+                                   </form>
                     <!-- begin htmlcommentbox.com -->
-<!--                    <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+<!--                 <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
                     <link rel="stylesheet" type="text/css" href="//www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
-                    <script type="text/javascript" id="hcb"> /**/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=(hcb_user.PAGE || ""+window.location), h="//www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /**/ </script>-->
+                    <script type="text/javascript" id="hcb"> /**/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), 
+l=(hcb_user.PAGE || ""+window.location), h="//www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /**/ </script>-->
 					<!-- end htmlcommentbox.com -->
 				</div>
 			</div>
 		</div>
 
 		<!-- /Body Content-->
-	</body>
+        </body>
 </html>

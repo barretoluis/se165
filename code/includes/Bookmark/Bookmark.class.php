@@ -84,6 +84,37 @@ class Bookmark {
 
 		return $this->_errorMsgs;
 	}
+        
+        public function createComment($be_id, $comment, $uc_id) {
+		if ($be_id == NULL || $comment == NULL || $uc_id == NULL) {
+			throw new MyException('One of the parameters was not provided for the bookmark.');
+		}
+
+		$success = FALSE;
+
+		//let's make sure to tie the query to the uc_id
+		$query = "INSERT INTO bmk_comment (be_id, comment, uc_id, timestamp)
+					VALUES ('{$be_id}', '{$comment}', '{$uc_id}', now())";
+
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+                        $success = TRUE;
+		} catch (MyException $e) {
+			array_push($this->_errorMsgs, 'Was not able to create the bookmark. Please make sure required fields are filled in.');
+			$e->getMyExceptionMessage();
+                        
+                        
+		}
+
+		// Destroy the DB object
+		$sqlObj->destroy();
+                return $success;
+
+	}
         /**
 	 * Update bookmark tuple on DB.
 	 *
@@ -247,6 +278,7 @@ class Bookmark {
             $query = "SELECT like_count as count FROM v_returnBookmarkActivityCount_like WHERE be_id='" . $bid . "'";
             try {
 			//Construct DB object
+                        $count = 0;
 			$sqlObj = new DataBase();
                         $sqlObj->DoQuery($query);
 			$sqlObj->destroy();
