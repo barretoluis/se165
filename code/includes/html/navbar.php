@@ -78,16 +78,16 @@ if ($loggedIn) {
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="dropdown">
-<!--							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px; margin: 0 0 0 0;;"><img src="/shared/images/logo_tackster.png" style="margin: -20px 0px -20px 0px;"><b class="caret"></b></a>-->
-                                                        <a href="/dashboard/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -22px 0px -20px 20px;"></a>
-<!--							<ul class="dropdown-menu">
+							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px; margin: 0 0 0 0;;"><img src="/shared/images/logo_tackster.png" style="margin: -20px 0px -20px 0px;"><b class="caret"></b></a>
+<!--							<a href="/dashboard/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -22px 0px -20px 20px;"></a>-->
+							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">Dashboard</a></li>
 								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
 								<li style="padding-left: 10px;"><a href="/dashboard/#following">Following Tracks</a></li>
 								<li class="divider"></li>
 								<li><a class='track_popUp' href="/track/createTrack.php">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
-							</ul>-->
+							</ul>
 						</li>
 					</ul>
 				</div>
@@ -100,58 +100,58 @@ if ($loggedIn) {
 					});
 
 				</script>
-                                <script>
-                                    function checkPublicMarks(){
+				<script>
+					function checkPublicMarks(){
 
-                                    document.getElementById("ui_element").publicTracks.checked = true;
-                                    document.getElementById("ui_element").myTracks.checked = false;
-                                    uncheckTracks();
-                                    }
-                                    function checkMyTracks(){
-                                            document.getElementById("ui_element").myTracks.checked = true;
-                                            document.getElementById("ui_element").publicTracks.checked = false;
-                                            checkTracks();
-                                  }
-                                  function checkTracks(){
-                                      var tracksNum = <?php
-                                        if (isset($_SESSION['myTracks'])) {
-                                            echo count($_SESSION['myTracks']);
-                                        }
-                                        ?>;
+						document.getElementById("ui_element").publicTracks.checked = true;
+						document.getElementById("ui_element").myTracks.checked = false;
+						uncheckTracks();
+					}
+					function checkMyTracks(){
+						document.getElementById("ui_element").myTracks.checked = true;
+						document.getElementById("ui_element").publicTracks.checked = false;
+						checkTracks();
+					}
+					function checkTracks(){
+						var tracksNum = <?php
+	if (isset($_SESSION['myTracks'])) {
+		echo count($_SESSION['myTracks']);
+	}
+	?>;
 
-                                    if(tracksNum > 0){
-                                        for(var i = 0 ; i < tracksNum ; i++)
-                                        {
-                                            var trackID = "tid" + i;
-                                            document.getElementById(trackID).checked = true;
-                                        }
-                                    }
-//                                      document.getElementById("ui_element").publicTracks.checked = false;
-//                                      document.getElementById("ui_element").myTracks.checked = false;
-                                  }
-                                  function uncheckTracks(){
-                                    var tracksNum = <?php
-                                        if (isset($_SESSION['myTracks'])) {
-                                            echo count($_SESSION['myTracks']);
-                                        }
-                                        ?>;
+								if(tracksNum > 0){
+									for(var i = 0 ; i < tracksNum ; i++)
+									{
+										var trackID = "tid" + i;
+										document.getElementById(trackID).checked = true;
+									}
+								}
+								//                                      document.getElementById("ui_element").publicTracks.checked = false;
+								//                                      document.getElementById("ui_element").myTracks.checked = false;
+							}
+							function uncheckTracks(){
+								var tracksNum = <?php
+	if (isset($_SESSION['myTracks'])) {
+		echo count($_SESSION['myTracks']);
+	}
+	?>;
 
-                                    if(tracksNum > 0){
-                                        for(var i = 0 ; i < tracksNum ; i++)
-                                        {
-                                            var trackID = "tid" + i;
-                                            document.getElementById(trackID).checked = false;
-                                        }
-                                    }
-                                  }
-                                  function checkSingleTracks(){
-                                      document.getElementById("ui_element").publicTracks.checked = false;
-                                      document.getElementById("ui_element").myTracks.checked = false;
-                                  }
-                                </script>
+								if(tracksNum > 0){
+									for(var i = 0 ; i < tracksNum ; i++)
+									{
+										var trackID = "tid" + i;
+										document.getElementById(trackID).checked = false;
+									}
+								}
+							}
+							function checkSingleTracks(){
+								document.getElementById("ui_element").publicTracks.checked = false;
+								document.getElementById("ui_element").myTracks.checked = false;
+							}
+				</script>
 
 				<div class="searchbar">
-                                                            <form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
+					<form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
 						<p>
 							<span class="sb_down"></span>
 							<input type="text" name="searchWord" id="searchWord" maxlength="40" class="sb_input" placeholder="Search">
@@ -159,15 +159,15 @@ if ($loggedIn) {
 						</p>
 						<ul class="sb_dropdown" style="display:none;">
 							<li class="sb_filter">Filter your search</li>
-                                                        <li><input type="checkbox" name="publicTracks" id="publicTracks" value="1" checked onclick="checkPublicMarks();"><label for="public"><strong>Public Tracks</strong></label></li>
+							<li><input type="checkbox" name="publicTracks" id="publicTracks" value="1" checked onclick="checkPublicMarks();"><label for="public"><strong>Public Tracks</strong></label></li>
 							<li><input type="checkbox" name="myTracks" id="myTracks" value="1" onclick="checkMyTracks();"><label for="allMyTracks">My Tracks</label></li>
 							<?php
 							//Let's populate the search bar with the user's tracks
-                                                       $trackNum = 0;
+							$trackNum = 0;
 							if (isset($_SESSION['myTracks'])) {
 								foreach ($_SESSION['myTracks'] as $_record) {
 									echo_formData('<li><input type="checkbox" name="tid[]" id="tid' . $trackNum . '" value="' . $_record['id'] . '" onclick="checkSingleTracks();"><label for="' . $_record['title'] . '">' . $_record['title'] . '</label></li>');
-                                                                        $trackNum = $trackNum + 1;
+									$trackNum = $trackNum + 1;
 								}
 							}
 							?>
@@ -176,12 +176,12 @@ if ($loggedIn) {
 				</div>
 
 				<!-- JavaScript to handle JQuery autocomplete-->
-                <script>
-                $(document).ready(function($){
-                   $('#searchWord').autocomplete({source:'../search/autocomplete.php', minLength:1,
-                       position: { my : "right top", at: "right bottom" }});
-                });
-                </script>
+				<script>
+					$(document).ready(function($){
+						$('#searchWord').autocomplete({source:'../search/autocomplete.php', minLength:1,
+							position: { my : "right top", at: "right bottom" }});
+					});
+				</script>
 
 				<div>
 				</div>
