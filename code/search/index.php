@@ -122,7 +122,7 @@ if (count($_websiteErr) >= 1) {
 
 			<?php
 			if ($formSubmitted == TRUE && isset($_bookmarks) == TRUE && count($_bookmarks) >= 1) {
-                                $Bookmark = new Bookmark();
+				$Bookmark = new Bookmark();
 				foreach ($_bookmarks as $_bmk) {
 					$_bmk['comment_count'] = $Bookmark->getBmkCommentCount($_bmk['id']);
 					$_bmk['like_count'] = $Bookmark->getBookmarkLikesCount($_bmk['id']);
@@ -134,7 +134,8 @@ if (count($_websiteErr) >= 1) {
 					$html .= '		<span data-icon="B">' . $_bmk['repin_count'] . '</span>\n';   //TODO: What is this for?
 					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
-					$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
+					//$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
+					$html .= '	<img src="' . $_bmk['bmk_image'] . '" />\n';  //TODO: Pull reference from DB
 					$html .= '</div>\n\n';
 
 					echo_formData($html);
