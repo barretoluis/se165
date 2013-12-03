@@ -390,7 +390,61 @@ class Track {
 
 		return $_resultSet;
 	}
-
+        
+        /**
+	 * Get the tracks for the given user id.
+	 * IMPORTANT: This method will not return the user's default track.
+	 * TODO: To be implemented
+	 * @param type $ucId The user's credential ID
+	 * @param type $fields The specific fields that are going to be returned.
+	 * @return type Return's an array of all tracks for the given ucId.
+	 * @throws MyException Throws an exception if the user id is less than one.
+	 */
+	public function returnFollowingTracksv2($ucId) {
+		if ($ucId < !1) {
+			throw new MyException('Sorry, you forgot to provide a
+                            user id. I cannot retrieve any tracks without it.
+                            Here\'s what you tried sending: "' . $ucId . '".');
+		}
+		$_resultSet = NULL;
+                $_resultSet_1 = NULL;
+                $_tracks = NULL;
+                $counter = 0;
+		$ucId = (int) $ucId; //cast as into to assure no SQL injection
+		$query = "SELECT `trck_id` FROM `track_activity` WHERE `uc_id`=$ucId";
+                
+		try {
+			//Execute query
+			$this->sqlObj->DoQuery($query);
+			$_resultSet_1 = $this->sqlObj->GetData();
+                
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+                $sqlObj2 = new DataBase();
+                foreach($_resultSet_1 as $record) {
+                    $query = "SELECT * FROM `track` WHERE `id`= ".$record['trck_id'];
+                
+                    try {
+			//Execute query
+			$sqlObj2->DoQuery($query);
+			$_tracks = $sqlObj2->GetData();
+                
+                        } catch (MyException $e) {
+                            $e->getMyExceptionMessage();
+                        }
+                   $_resultSet[$counter] = $_tracks;
+                   $counter++;
+                }
+		$this->sqlObj->destroy();
+                
+                if($sqlObj2->getNumberOfRecords() < 1)
+                {
+                    $_resultSet = array("error" => 'No tracks found');
+                }
+                var_dump($_resultSet);
+		return $_resultSet;
+	}
 	/**
 	 * Deletes a track based on the trackID that is provided to the function as a parameter.
 	 * @param type $trackId the track id that is going to be deleted from the database.
