@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class KeywordManager | SE165 - Tackster</title>
+
+	<script type="text/javascript" src="resources/combined.js?1277292761"></script>
+	<script type="text/javascript" src="elementlist.js?1022670604"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-BaseFacebook.html">BaseFacebook</a></li>
+				<li><a href="class-Bookmark.html">Bookmark</a></li>
+				<li><a href="class-BookmarkTest.html">BookmarkTest</a></li>
+				<li><a href="class-DataBase.html">DataBase</a></li>
+				<li><a href="class-EnvUtilities.html">EnvUtilities</a></li>
+				<li><a href="class-Facebook.html">Facebook</a></li>
+				<li><a href="class-faceBookApi.html">faceBookApi</a></li>
+				<li><a href="class-FBAccessToken.html">FBAccessToken</a></li>
+				<li><a href="class-FBCode.html">FBCode</a></li>
+				<li><a href="class-FBGetCurrentURLFacebook.html">FBGetCurrentURLFacebook</a></li>
+				<li><a href="class-FBPublic.html">FBPublic</a></li>
+				<li><a href="class-FBPublicCookie.html">FBPublicCookie</a></li>
+				<li><a href="class-FBPublicGetAccessTokenFromCode.html">FBPublicGetAccessTokenFromCode</a></li>
+				<li><a href="class-FBPublicState.html">FBPublicState</a></li>
+				<li><a href="class-FBRecordMakeRequest.html">FBRecordMakeRequest</a></li>
+				<li><a href="class-FBRecordURL.html">FBRecordURL</a></li>
+				<li><a href="class-FBRewrite.html">FBRewrite</a></li>
+				<li class="active"><a href="class-KeywordManager.html">KeywordManager</a></li>
+				<li><a href="class-mandrillApi.html">mandrillApi</a></li>
+				<li><a href="class-PersistentFBPublic.html">PersistentFBPublic</a></li>
+				<li><a href="class-PHPSDKTestCase.html">PHPSDKTestCase</a></li>
+				<li><a href="class-SearchBookmark.html">SearchBookmark</a></li>
+				<li><a href="class-Track.html">Track</a></li>
+				<li><a href="class-TransientFacebook.html">TransientFacebook</a></li>
+				<li><a href="class-User.html">User</a></li>
+				<li><a href="class-UserTest.html">UserTest</a></li>
+			</ul>
+
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-FacebookApiException.html">FacebookApiException</a></li>
+				<li><a href="class-MyException.html">MyException</a></li>
+			</ul>
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-echo_formData.html">echo_formData</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class KeywordManager</h1>
+
+
+	<div class="description">
+	
+<p>This class implements Keyword Management. It allows Keyword creation, and
+allows querying of the database for keywords.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				Jerry Phul<br />
+		<b>Located at</b> <a href="source-class-KeywordManager.html#8-70" title="Go to source code">code/includes/Keyword/KeywordManager.class.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="getKeyword" id="_getKeyword">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getKeyword">#</a>
+		<code><a href="source-class-KeywordManager.html#19-51" title="Go to source code">getKeyword</a>( <span>word <var>$word</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Gets keywords from the keyword table. This function will primarily be used
+when an end user is typing a word and we wish to autocomplete or suggest
+words.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets keywords from the keyword table. This function will primarily be used
+when an end user is typing a word and we wish to autocomplete or suggest
+words.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$word</var></dt>
+					<dd><code>word</code><br>Takes the word to be searched.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>Returns up to 20 matching words as an array.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addKeyword" id="_addKeyword">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addKeyword">#</a>
+		<code><a href="source-class-KeywordManager.html#53-68" title="Go to source code">addKeyword</a>( <span>string <var>$keyword</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a new word to the keyword table. <b>NOTE: </b> Is currently not
+implemented.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a new word to the keyword table. <b>NOTE: </b> Is currently not
+implemented.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$keyword</var></dt>
+					<dd><code>string</code><br>$keyword The keyword to be added.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Return TRUE on success.<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-MyException.html">MyException</a></code></code><br>Error returned on any unsuccessful submission.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		SE165 - Tackster API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
