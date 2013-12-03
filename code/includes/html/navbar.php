@@ -56,7 +56,7 @@ if ($loggedIn) {
 			//Examples of how to assign the Colorbox event to elements
 			$(".track_popUp").colorbox({iframe:true, width:"70%", height:"60%", onClosed:function(){ location.reload(true); }});
 			$(".bookmark_popUp").colorbox({iframe:true, width:"70%", height:"95%", onClosed:function(){ location.reload(true); }});
-			$(".profile_popUp").colorbox({iframe:true, width:"50%", height:"70%"});
+			$(".profile_popUp").colorbox({iframe:true, width:"70%", height:"80%"});
 		});
 	</script>
 	<!--/Popups-->
@@ -150,7 +150,7 @@ if ($loggedIn) {
                                   }
                                 </script>
 
-				<div class="searchbar">       
+				<div class="searchbar">
                                                             <form action="/search/" method="post" name="ui_element" id="ui_element" class="sb_wrapper">
 						<p>
 							<span class="sb_down"></span>
@@ -174,7 +174,7 @@ if ($loggedIn) {
 						</ul>
 					</form>
 				</div>
-        
+
 				<!-- JavaScript to handle JQuery autocomplete-->
                 <script>
                 $(document).ready(function($){
