@@ -60,6 +60,13 @@ try {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
 
+		<script>
+			function closeModal() {
+				parent.jQuery.fn.colorbox.close();
+			}
+
+			setTimeout(closeModal, 5000);
+		</script>
 	</head>
 
 
@@ -68,6 +75,9 @@ try {
 		<div class="bookmark">
 			<h3>Form Successfully Received</h3>
 			<p>Your form was successfully received.</p>
+
+			<p>This window will close automatically. <a href="javascript:closeModal(); return TRUE;">Click here</a> to close now.</p>
+
 		</div>
 
 		<!-- /Body Content-->
