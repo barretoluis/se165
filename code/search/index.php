@@ -126,12 +126,12 @@ if (count($_websiteErr) >= 1) {
 				foreach ($_bookmarks as $_bmk) {
 					$_bmk['comment_count'] = $Bookmark->getBmkCommentCount($_bmk['id']);
 					$_bmk['like_count'] = $Bookmark->getBookmarkLikesCount($_bmk['id']);
-					$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
+					//$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
 					$html = '<div class="view" id="view">\n';
 					$html .= '	<div class="view-back">\n';
 					$html .= '		<span data-icon="b">' . $_bmk['comment_count'] . '</span>\n';
-					$html .= '		<span data-icon="h">' . $_bmk['like_count'] . '</span>\n';  //TODO: Repin count needed
-					$html .= '		<span data-icon="B">' . $_bmk['repin_count'] . '</span>\n';   //TODO: What is this for?
+					$html .= '		<span data-icon="h">' . $_bmk['like_count'] . '</span>\n';
+					//$html .= '		<span data-icon="B">' . $_bmk['repin_count'] . '</span>\n';   //TODO: What is this for?
 					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
 					//$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
