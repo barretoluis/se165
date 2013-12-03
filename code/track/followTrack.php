@@ -34,10 +34,12 @@ try {
     if ($status)
     {
         echo "Track Added successfuly.";
-        header('Location:/dashboard/');
+        
     }
     else
     {
         echo "Could not follow the track";
     }
+
 ?>
+
