@@ -226,7 +226,17 @@ if (count($_websiteErr) >= 1) {
 					}
 				} else {
 					?>
-					<p>SHRUTI CODE HERE - I need this window to close and refresh the parent.</p>
+					<script>
+						function closeModal() {
+							parent.jQuery.fn.colorbox.close();
+						}
+
+						setTimeout(closeModal, 3000);
+					</script>
+					<h3>Form Successfully Received</h3>
+					<p>Your form was successfully received.</p>
+
+					<p>This window will close automatically. <a href="javascript:closeModal(); return TRUE;">Click here</a> to close now.</p>
 					<?php
 				}
 				?>
