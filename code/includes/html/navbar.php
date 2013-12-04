@@ -79,7 +79,7 @@ if ($loggedIn) {
 					<ul class="nav">
 						<li class="dropdown">
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: #00B800; font-size: 20px; margin: 0 0 0 0;;"><img src="/shared/images/logo_tackster.png" style="margin: -20px 0px -20px 0px;"><b class="caret"></b></a>
-<!--							<a href="/dashboard/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -22px 0px -20px 20px;"></a>-->
+	<!--							<a href="/dashboard/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -22px 0px -20px 20px;"></a>-->
 							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">Dashboard</a></li>
 								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
@@ -119,35 +119,35 @@ if ($loggedIn) {
 	}
 	?>;
 
-								if(tracksNum > 0){
-									for(var i = 0 ; i < tracksNum ; i++)
-									{
-										var trackID = "tid" + i;
-										document.getElementById(trackID).checked = true;
-									}
-								}
-								//                                      document.getElementById("ui_element").publicTracks.checked = false;
-								//                                      document.getElementById("ui_element").myTracks.checked = false;
-							}
-							function uncheckTracks(){
-								var tracksNum = <?php
+			if(tracksNum > 0){
+				for(var i = 0 ; i < tracksNum ; i++)
+				{
+					var trackID = "tid" + i;
+					document.getElementById(trackID).checked = true;
+				}
+			}
+			//                                      document.getElementById("ui_element").publicTracks.checked = false;
+			//                                      document.getElementById("ui_element").myTracks.checked = false;
+		}
+		function uncheckTracks(){
+			var tracksNum = <?php
 	if (isset($_SESSION['myTracks'])) {
 		echo count($_SESSION['myTracks']);
 	}
 	?>;
 
-								if(tracksNum > 0){
-									for(var i = 0 ; i < tracksNum ; i++)
-									{
-										var trackID = "tid" + i;
-										document.getElementById(trackID).checked = false;
-									}
-								}
-							}
-							function checkSingleTracks(){
-								document.getElementById("ui_element").publicTracks.checked = false;
-								document.getElementById("ui_element").myTracks.checked = false;
-							}
+			if(tracksNum > 0){
+				for(var i = 0 ; i < tracksNum ; i++)
+				{
+					var trackID = "tid" + i;
+					document.getElementById(trackID).checked = false;
+				}
+			}
+		}
+		function checkSingleTracks(){
+			document.getElementById("ui_element").publicTracks.checked = false;
+			document.getElementById("ui_element").myTracks.checked = false;
+		}
 				</script>
 
 				<div class="searchbar">
@@ -265,3 +265,20 @@ if ($loggedIn) {
 	</div>
 
 <?php } ?>
+	
+<div id="scrollpage"></div>
+<script type = "text/javascript">
+	$('#scrollpage').click(function(ev){
+		ev.preventDefault();
+		$("html, body").animate({ scrollTop: 0 }, 600);
+	});
+
+	$(window).scroll(function(){
+		if( $(this).scrollTop() > 150 ) {
+			$('#scrollpage').fadeIn();
+		}
+		else {
+			$('#scrollpage').fadeOut();
+		}
+	});
+</script>

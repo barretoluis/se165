@@ -449,3 +449,15 @@ input.sb_search:hover{
 	border-width:0 15px 15px; /* vary these values to change the angle of the vertex */
 	border-color:#f3961c transparent;
 }
+
+/*Scroll to Top*/
+/*-------------*/
+#scrollpage {
+	background: url(/shared/images/up_arrow.png) no-repeat;
+	position: fixed;
+	height: 40px;
+	width: 40px;
+	bottom: 10px;
+	display: none;
+	right: 15px;
+}
