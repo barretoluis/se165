@@ -146,15 +146,15 @@ class Track {
 	}
         	/**
 	 * Returns an image pulled from a bookmark that is part of the track.
-	 * @param type $id Id of the track 
-	 * 
+	 * @param type $id Id of the track
+	 *
 	 *
 	 * @return type Returns URL of an Image.
 	 */
 	public function returnDefaultImage($t_id) {
 		$sqlObj = new DataBase();
-		$query = "SELECT  `bmk_image` 
-                            FROM  `bmk_entry` 
+		$query = "SELECT  `bmk_image`
+                            FROM  `bmk_entry`
                             WHERE  `t_id` = $t_id
                             LIMIT 0 , 1";
 		$sqlObj->DoQuery($query);
@@ -410,6 +410,7 @@ EOF;
 
 			$_resultSet = $this->sqlObj->GetData();
 		} catch (MyException $e) {
+			$_resultSet = NULL;
 			$e->getMyExceptionMessage();
 		}
 
