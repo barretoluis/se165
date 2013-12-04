@@ -179,6 +179,13 @@ EOF;
 					window.location = '/track/?tid=' + tid;
 				});
 
+				//attach event handler for tracks
+				$('.tabContent').on("click", ".track. .follow img", function() {
+					var tid = parseInt($(this).attr("tid"));
+					//alert($(this).attr("tid"));	//DEBUG
+					window.location = '/track/?t=f&tid=' + tid;
+				});
+
 				//open edit buttons in modal
 				$('.tabContent').on("click", ".editBtn", function() {
 					$.colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href"), onClosed:function(){ location.reload(true); }});

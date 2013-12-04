@@ -101,7 +101,7 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 		//we don't want the default track in the list again
 		if ($dbRow['id'] != $defaultTrackId) {
 			$htmlTrackFollow .=<<<EOF
-<div class="track" id="track">
+<div class="track follow" id="trackFollow">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
 	<img src="/shared/images/placeholder.jpg" tid="{$dbRow['id']}" />
 	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
@@ -121,26 +121,22 @@ EOF;
 			$(document).ready(function() {
 				$('.track img').click(function () {
 					var tid = parseInt($(this).attr("tid"));
-					window.location = '/track/?tid=' + tid;
+					window.location = '/track/?t=f&tid=' + tid;
 				});
 			});
-		</script>
 
 
-        <script>
-            $(function() {
+			$(function() {
 				$( "#tabs" ).tabs();
             });
-        </script>
-        <script>
-            $(function() {
+
+			$(function() {
 				$( document ).tooltip({
 					track: true
 				});
             });
-        </script>
-        <script>
-            $(function() {
+
+			$(function() {
 				$( "#menu" ).menu();
             });
 		</script>

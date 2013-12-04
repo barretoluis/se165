@@ -349,7 +349,8 @@ class Track {
 			$sqlObj->destroy();
 			$_return = TRUE;
 		}
-		if(isset($_SESSION['_followingTracks'])) unset($_SESSION['_followingTracks']);	//force the cache to reset
+		if (isset($_SESSION['_followingTracks']))
+			unset($_SESSION['_followingTracks']); //force the cache to reset
 		return $_return;
 	}
 
@@ -367,9 +368,7 @@ class Track {
 		$ucId = (int) $ucId;
 
 		if ($ucId < !1) {
-			throw new MyException('Sorry, you forgot to provide a
-                            user id. I cannot retrieve any tracks without it.
-                            Here\'s what you tried sending: "' . $ucId . '".');
+			throw new MyException('Sorry, you forgot to provide a user id. I cannot retrieve any tracks without it.');
 		}
 
 		$fields = ($fields != NULL) ? $fields : "*";
