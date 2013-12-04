@@ -3,7 +3,7 @@
  * Add additional include files to array if needed for this page.
  */
 $includeFilesAdditional = array(
-    'Bookmark/Bookmark.class.php'
+	'Bookmark/Bookmark.class.php'
 );
 
 
@@ -35,8 +35,7 @@ try {
  */
 $htmlHeadTitle = (isset($htmlHeadTitle)) ? $htmlHeadTitle : "Search Results";
 //check if errors already set in headerSearch.php
-$_websiteErr = (isset($_websiteErr)) ? $_websiteErr: Array(); //Error message to show end user
-
+$_websiteErr = (isset($_websiteErr)) ? $_websiteErr : Array(); //Error message to show end user
 //format any errors
 if (count($_websiteErr) >= 1) {
 	$errString = '<div class="formError"><p><b>We encountered the following issue with your request:</b></p><ol>';
@@ -96,8 +95,8 @@ if (count($_websiteErr) >= 1) {
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$(".bmkUrl").colorbox({iframe:true, width:"70%", height:"95%", href:$(this).attr("href")});
-//				return false;
+				$(".bmkUrl").colorbox({iframe:true, width:"675px", height:"95%", href:$(this).attr("href")});
+				return false;
 			});
 		</script>
 

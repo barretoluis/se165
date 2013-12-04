@@ -4,7 +4,7 @@
  */
 $includeFilesAdditional = array(
 	'Bookmark/Bookmark.class.php',
-        'Track/Track.class.php'
+	'Track/Track.class.php'
 );
 
 
@@ -27,19 +27,74 @@ try {
 	exit(0);
 }
 // DO NOT EDIT THIS BLOCK - END
-    $ucid = $_GET['ucid'];
-    $tid = $_GET['tid'];
-    $trackObj = new Track();
-    $status = $trackObj->followTrack($ucid, $tid);
-    if ($status)
-    {
-        echo "Track Added successfuly.";
-        
-    }
-    else
-    {
-        echo "Could not follow the track";
-    }
+$ucid = $_GET['ucid'];
+$tid = $_GET['tid'];
+$trackObj = new Track();
+$status = $trackObj->followTrack($ucid, $tid);
 
-?>
+if ($status) {
+	$msg = <<<EOF
+<h3>Now Following the Track</h3>
+<p>Your request was successfully received.</p>
 
+<p>This window will close automatically. <a href="javascript:closeModal(); return TRUE;">Click here</a> to close now.</p>
+EOF;
+} else {
+	$msg = <<<EOF
+<h3>Error Following the Track</h3>
+<p>Could not follow the Track.</p>
+
+<p>This window will close automatically. <a href="javascript:closeModal(); return TRUE;">Click here</a> to close now.</p>
+EOF;
+}
+?><!DOCTYPE html>
+<html>
+	<head>
+		<title>Tackster | Follow Track</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- Bootstrap -->
+		<link href="/framework/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="/framework/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+		<!-- Style Sheets -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+		<link href="/shared/css/base.css" rel="stylesheet" type="text/css">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="/framework/bootstrap/assets/js/html5shiv.js"></script>
+		<script src="/framework/bootstrap/assets/js/respond.min.js"></script>
+		<![endif]-->
+
+		<!-- JavaScript -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/framework/jquery/jquery.colorbox.js"></script>
+		<link href="/shared/css/colorbox.css" rel="stylesheet">
+		<script>
+			function closeModal() {
+				parent.jQuery.fn.colorbox.close();
+				//parent.jQuery.('.bmkUrl').colorbox.close();
+				//jQuery('.bmkUrl').colorbox.close();
+			}
+
+			setTimeout(closeModal, 3000);
+		</script>
+
+	</head>
+
+	<body>
+		<!-- Body Content-->
+		<div class="main">
+			<?php
+			echo_formData($msg);
+			?>
+		</div>
+
+	</body>
+</html>

@@ -117,7 +117,8 @@ if (isset($trackId) && $trackId > 0) {
 			if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
 				echo $_websiteErr;
 			} else {
-				echo_formData('<p>The track was deleted successfully.</p>');
+				echo_formData('<META http-equiv="refresh" content="4;URL=/dashboard">');
+				echo_formData('<p style="padding-left: 5px;">The track was deleted successfully. This page will automatically refresh or <a href="/dashboard/">click here to go to the Dashboard</a>.</p>');
 			}
 			?>
 
