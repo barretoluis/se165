@@ -76,7 +76,7 @@ $defaulttrackImage = $Track->returnDefaultImage($defaultTrackId);
 $htmlTrack .=<<<EOF
 <div class="track">
 	<div style="position: relative;"><div id="private"></div><div id="trackName">{$defaultTrackName}</div></div>
-	<img src= "$defaulttrackImage" tid="{$defaultTrackId}" />
+	<img src= "{$defaulttrackImage}" tid="{$defaultTrackId}" />
 
 </div><!--/track-->
 EOF;
