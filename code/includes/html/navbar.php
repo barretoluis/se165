@@ -54,9 +54,9 @@ if ($loggedIn) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//Examples of how to assign the Colorbox event to elements
-			$(".track_popUp").colorbox({iframe:true, width:"70%", height:"60%", onClosed:function(){ location.reload(true); }});
-			$(".bookmark_popUp").colorbox({iframe:true, width:"70%", height:"95%", onClosed:function(){ location.reload(true); }});
-			$(".profile_popUp").colorbox({iframe:true, width:"70%", height:"80%"});
+			$(".track_popUp").colorbox({iframe:true, width:"675px", height:"60%", onClosed:function(){ location.reload(true); }});
+			$(".bookmark_popUp").colorbox({iframe:true, width:"675px", height:"95%", onClosed:function(){ location.reload(true); }});
+			$(".profile_popUp").colorbox({iframe:true, width:"550px", height:"80%"});
 		});
 	</script>
 	<!--/Popups-->

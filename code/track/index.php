@@ -37,7 +37,8 @@ try {
  */
 $ucId = $_SESSION['uc_id'];
 $trackId = (isset($_GET['tid'])) ? (int) $_GET['tid'] : NULL;
-$onTrackId = (isset($_GET['tid'])) ? (int) $_GET['tid']: NULL;	//tid of track you are currently viewing
+$trackAud = (isset($_GET['t'])) ? substr($_GET['t'], 0, 1) : NULL;  //set the audience retrieving the track
+$onTrackId = (isset($_GET['tid'])) ? (int) $_GET['tid'] : NULL; //tid of track you are currently viewing
 $Bookmark = new Bookmark();
 $Track = new track();
 
@@ -62,7 +63,12 @@ $trackName = $Track->returnTrackName($trackId);
 
 //Get all the bookmarks associated with the track requested
 try {
-	$_bookmarks = $Bookmark->returnBmkDataByTrack($trackId);
+	if ($trackAud == 'f') {
+		$trackAud = 'follow';
+	} else {
+		$trackAud = 'user';
+	}
+	$_bookmarks = $Bookmark->returnBmkDataByTrack($trackId, $trackAud);
 } catch (MyException $e) {
 	$_bookmarks = NULL;
 	$e->getMyExceptionMessage();
@@ -81,7 +87,7 @@ try {
 
 		<!-- Style Sheets -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
-                <link href="/shared/css/base.css" rel="stylesheet" type="text/css">
+		<link href="/shared/css/base.css" rel="stylesheet" type="text/css">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -117,7 +123,7 @@ try {
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$(".bmkUrl").colorbox({iframe:true, width:"50%", height:"95%", href:$(this).attr("href")});
+				$(".bmkUrl").colorbox({iframe:true, width:"675px", height:"90%", href:$(this).attr("href")});
 				return false;
 			});
 		</script>
@@ -127,13 +133,13 @@ try {
 			});
 		</script>-->
 		<!--/Popups and onClick-->
-                <script>
-        //          $("#deleteBtn").confirm();
-//                    $(document).ready(function(){
-//                            $('.editBtn').colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
-//                            return false;
-//                    });
-                </script>
+		<script>
+			//          $("#deleteBtn").confirm();
+			//                    $(document).ready(function(){
+			//                            $('.editBtn').colorbox({iframe:true, width:"70%", height:"60%", href:$(this).attr("href")});
+			//                            return false;
+			//                    });
+		</script>
 	</head>
 
 
@@ -147,10 +153,10 @@ try {
 		<div id="bookmarks" class="main">
 			<h3><?php echo_formData($trackName) ?>
 				<?php /*
-                            <a id="deleteBtn" class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
-                            <a id="editBtn" class="editBtn btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a>
-				*/ ?>
-                        </h3>
+				  <a id="deleteBtn" class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
+				  <a id="editBtn" class="editBtn btn btn-default" href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+				 */ ?>
+			</h3>
 			<?php if ($formError) { ?>
 				<div class="formError"><h4>Form Error</h4><?php echo $formError ?></div>
 			<?php } ?>
@@ -161,7 +167,7 @@ try {
 					$_bmk['comment_count'] = $Bookmark->getBmkCommentCount($_bmk['id']);
 					$_bmk['like_count'] = $Bookmark->getBookmarkLikesCount($_bmk['id']);
 					//$_bmk['repin_count'] = 0; //TODO: Build code for showing bookmarks likes
-                                        //$_bmk['imageSrc'] = $_bookmarks['imageSrc'];
+					//$_bmk['imageSrc'] = $_bookmarks['imageSrc'];
 					$html = '<div class="view" id="view">\n';
 					$html .= '	<div class="view-back">\n';
 					$html .= '		<span data-icon="b">' . $_bmk['comment_count'] . '</span>\n';
@@ -170,16 +176,16 @@ try {
 					$html .= '		<a class="bmkUrl" id="bmkUrl" href="/bookmark/?bid=' . $_bmk['id'] . '" bid="' . $_bmk['id'] . '">&rarr;</a>\n';
 					$html .= '	</div>';
 					//$html .= '	<img src="/shared/images/4.jpg" />\n';  //TODO: Pull reference from DB
-                                        $html .= '	<img src="' . $_bmk['bmk_image'] . '" style="background:#fff; max-height: 200px; max-width: 300px;" />\n';
+					$html .= '	<img src="' . $_bmk['bmk_image'] . '" style="background:#fff; max-height: 200px; max-width: 300px;" />\n';
 					$html .= '</div>\n\n';
 
 					echo_formData($html);
 					flush();
 				}
 			} else {
-				print("<p class='noSearchResults' style ='padding-left: 10px;'>You currently have no bookmarks in this Track.</p>");
+				print("<p class='noSearchResults' style ='padding-left: 10px;'>You currently have no bookmarks in this Track. If you were following this Track, the publisher may have changed it to 'Private'.</p>");
 			}
-                        ?></p>
+			?></p>
 
 		</div>
 

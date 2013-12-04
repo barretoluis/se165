@@ -8,6 +8,7 @@
  * @author Jerry Phul
  */
 require_once 'DataBase.php';
+
 //require_once __DIR__ . '\..\DataBase.php';
 class Bookmark {
 
@@ -84,21 +85,22 @@ class Bookmark {
 
 		return $this->_errorMsgs;
 	}
-        /**
+
+	/**
 	 * Create the standard comment and insert on DB.
 	 *
 	 * @param int $be_id The ID of the bookmark that contains the comment.
 	 * @param string $comment The comment made by the user.
 	 * @param int $uc_id User Credential ID.
-         * 
+	 *
 	 * @return array Return user friendly error messages if any.
 	 *
 	 */
-        public function createComment($be_id, $comment, $uc_id) {
+	public function createComment($be_id, $comment, $uc_id) {
 		if ($be_id == NULL || $comment == NULL || $uc_id == NULL) {
 			throw new MyException('One of the parameters was not provided for the bookmark.');
 		}
-                //let's make sure to tie the query to the uc_id
+		//let's make sure to tie the query to the uc_id
 		$query = "INSERT INTO bmk_comment (be_id, comment, uc_id, timestamp)
 					VALUES ('{$be_id}', '{$comment}', '{$uc_id}', now())";
 
@@ -111,12 +113,13 @@ class Bookmark {
 		} catch (MyException $e) {
 			array_push($this->_errorMsgs, 'Was not able to create the bookmark. Please make sure required fields are filled in.');
 			$e->getMyExceptionMessage();
-                }
+		}
 
 		// Destroy the DB object
 		$sqlObj->destroy();
-         }
-        /**
+	}
+
+	/**
 	 * Update bookmark tuple on DB.
 	 *
 	 * @param type $bid The ID of the bookmark that will be updated.
@@ -124,12 +127,12 @@ class Bookmark {
 	 * @param type $privacy 1 if private or 0 for public access.
 	 * @param type $description The description of the bookmark.
 	 * @param type $keyword Comma separated list of keywords for the bookmark.
-         * @param type $img the source of the thunbnail of the bookmark.
+	 * @param type $img the source of the thunbnail of the bookmark.
 	 *
 	 * @return TRUE if transaction was successful, FALSE otherwise.
 	 *
 	 */
-        public function updateBookmark($bid, $tid, $url, $desc, $keyword, $privacy, $img) {
+	public function updateBookmark($bid, $tid, $url, $desc, $keyword, $privacy, $img) {
 		if ($bid == NULL || $tid == NULL || $url == NULL || $desc == NULL || $keyword == NULL || $img == NULL) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
@@ -138,35 +141,35 @@ class Bookmark {
 				"url='" . $url . "', " .
 				"description='" . $desc . "', " .
 				"keyword='" . $keyword . "', " .
-                                "bmk_image='" . $img . "', " .
-                                "t_id='" . $tid . "', " .
-                                "privacy='" . $privacy . "'" .
-                                
+				"bmk_image='" . $img . "', " .
+				"t_id='" . $tid . "', " .
+				"privacy='" . $privacy . "'" .
 				" WHERE id='" . $bid . "'";
 
 		try {
 			//Construct DB object
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
 			return TRUE;
 		} catch (MyException $e) {
-                        echo $echo;
+			echo $echo;
 			$e->getMyExceptionMessage();
-                        
+
 			return FALSE;
 		}
 	}
-        /**
+
+	/**
 	 * Remove bookmark tuple on DB.
 	 *
 	 * @param type $bid The ID of the bookmark that will be removed.
-	 * 
+	 *
 	 * @return TRUE if transaction was successful, FALSE otherwise.
 	 *
 	 */
-        public function removeBookmark($bid) {
-		if ($bid == NULL ) {
+	public function removeBookmark($bid) {
+		if ($bid == NULL) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
 
@@ -176,24 +179,23 @@ class Bookmark {
 		try {
 			//Construct DB object
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
 			return TRUE;
 		} catch (MyException $e) {
-                        echo $echo;
+			echo $echo;
 			$e->getMyExceptionMessage();
-                        
+
 			return FALSE;
 		}
 	}
-        
-       
-        public function likeBookmark($bid, $like, $ucId) {
-		if ($bid == NULL || $ucId == NULL ) {
+
+	public function likeBookmark($bid, $like, $ucId) {
+		if ($bid == NULL || $ucId == NULL) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-                //$like = 1;
-                $success = TRUE;
+		//$like = 1;
+		$success = TRUE;
 
 		$query = "INSERT INTO bmk_activity (be_id, `like`, uc_id)
 					VALUES ('{$bid}', '{$like}', '{$ucId}')";
@@ -202,126 +204,121 @@ class Bookmark {
 		try {
 			//Construct DB object
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
 			return $success;
 		} catch (MyException $e) {
-                        echo $e;
+			echo $e;
 			$e->getMyExceptionMessage();
-                        $success = FALSE;
+			$success = FALSE;
 			return $success;
 		}
 	}
-        
-        public function dislikeBookmark($bid, $ucId) {
-		if ($bid == NULL || $ucId == NULL ) {
+
+	public function dislikeBookmark($bid, $ucId) {
+		if ($bid == NULL || $ucId == NULL) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-                //$like = 1;
-                $success = TRUE;
+		//$like = 1;
+		$success = TRUE;
 
-		$query = "DELETE FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" .$ucId . "'";
+		$query = "DELETE FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" . $ucId . "'";
 
 
 		try {
 			//Construct DB object
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
 			return $success;
 		} catch (MyException $e) {
-                        echo $e;
+			echo $e;
 			$e->getMyExceptionMessage();
-                        $success = FALSE;
+			$success = FALSE;
 			return $success;
 		}
 	}
-        
-        /**
+
+	/**
 	 * userLikesBookmark checks if user likes a bookmark or not.
 	 * @param int $bid For a given bookmark ID.
-         * @param int $ucId For a given user credential ID
+	 * @param int $ucId For a given user credential ID
 	 * @return True if user likes the given bookmark, FALSE otherwise.
 	 */
-         public function userLikesBookmark($bid, $ucId){
-            if ($bid == NULL || $ucId == NULL ) {
+	public function userLikesBookmark($bid, $ucId) {
+		if ($bid == NULL || $ucId == NULL) {
 			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-                $query = "SELECT 'like' FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" .$ucId . "'";
-                $userLikes = FALSE;
-                try {
+		$query = "SELECT 'like' FROM bmk_activity WHERE be_id='" . $bid . "' AND uc_id='" . $ucId . "'";
+		$userLikes = FALSE;
+		try {
 			//Construct DB object
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
-                        $_bmkActivity = $sqlObj->GetData();
-                        if($_bmkActivity  != NULL){
-                            $userLikes = TRUE;
-                        }else{
-                            $userLikes = FALSE;
-                        }
-                       return $userLikes;
+			$_bmkActivity = $sqlObj->GetData();
+			if ($_bmkActivity != NULL) {
+				$userLikes = TRUE;
+			} else {
+				$userLikes = FALSE;
+			}
+			return $userLikes;
 		} catch (MyException $e) {
-                        echo $e;
+			echo $e;
 			$e->getMyExceptionMessage();
-                        $userLikes = FALSE;
+			$userLikes = FALSE;
 			return $userLikes;
 		}
-            
-        }
-        
-        public function getBookmarkLikesCount($bid)
-        {
-            if ($bid == NULL) {
-		throw new MyException('A required field was not provided for updating this bookmark.');
+	}
+
+	public function getBookmarkLikesCount($bid) {
+		if ($bid == NULL) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-            
-            $query = "SELECT like_count as count FROM v_returnBookmarkActivityCount_like WHERE be_id='" . $bid . "'";
-            try {
+
+		$query = "SELECT like_count as count FROM v_returnBookmarkActivityCount_like WHERE be_id='" . $bid . "'";
+		try {
 			//Construct DB object
-                        $count = 0;
+			$count = 0;
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
-                        $_bmkActivity = $sqlObj->GetData();
-                        if($_bmkActivity != NULL){
-                            $count = $_bmkActivity[0]["count"];
-                         }
-                        return $count;
-                            
-                       
+			$_bmkActivity = $sqlObj->GetData();
+			if ($_bmkActivity != NULL) {
+				$count = $_bmkActivity[0]["count"];
+			}
+			return $count;
 		} catch (MyException $e) {
-                        echo $e;
+			echo $e;
 			$e->getMyExceptionMessage();
-                        $count = 0;
+			$count = 0;
 			return $count;
 		}
-            
-        }
-        
-        public function getBmkCommentCount($bid){
-            if ($bid == NULL) {
-		throw new MyException('A required field was not provided for updating this bookmark.');
+	}
+
+	public function getBmkCommentCount($bid) {
+		if ($bid == NULL) {
+			throw new MyException('A required field was not provided for updating this bookmark.');
 		}
-            $query = "SELECT count(id) as count FROM bmk_comment WHERE be_id='" . $bid . "'";
-            try {
+		$query = "SELECT count(id) as count FROM bmk_comment WHERE be_id='" . $bid . "'";
+		try {
 			//Construct DB object
-                        $count = 0;
+			$count = 0;
 			$sqlObj = new DataBase();
-                        $sqlObj->DoQuery($query);
+			$sqlObj->DoQuery($query);
 			$sqlObj->destroy();
-                        $_bmkActivity = $sqlObj->GetData();
-                        if($_bmkActivity != NULL){
-                            $count = $_bmkActivity[0]["count"];
-                         }
-                } catch (MyException $e) {
-                        echo $e;
+			$_bmkActivity = $sqlObj->GetData();
+			if ($_bmkActivity != NULL) {
+				$count = $_bmkActivity[0]["count"];
+			}
+		} catch (MyException $e) {
+			echo $e;
 			$e->getMyExceptionMessage();
-                        $count = 0;
+			$count = 0;
 			return $count;
 		}
-                return $count;
-        }
+		return $count;
+	}
 
 	/**
 	 * Return a bookmark and all it's data.
@@ -364,7 +361,7 @@ class Bookmark {
 	 * @param int $bmkId	The ID of the bookmark who's permission should be checked.
 	 * @return boolean		TRUE if user has permissions to view the bookmark.
 	 * @assert (73, 13) == TRUE
-         * @assert (72, 13) == FALSE
+	 * @assert (72, 13) == FALSE
 	 */
 	public function canViewBmk($uc_id, $bmkId) {
 		if ($uc_id == NULL || $bmkId == NULL) {
@@ -392,37 +389,36 @@ class Bookmark {
 
 		return $canView;
 	}
-        
-        /*
-         * Provided the user's ID, check to see if they are the owner of the bookmark.
+
+	/*
+	 * Provided the user's ID, check to see if they are the owner of the bookmark.
 	 *
 	 * @param int $uc_id	The user's credential ID in the DB.
 	 * @param int $bmkId	The ID of the bookmark who's ownership should be checked.
 	 * @return boolean		TRUE if user is owner of the bookmark.
 	 * @assert (73, 13) == TRUE
-         * @assert (72, 13) == FALSE
+	 * @assert (72, 13) == FALSE
 	 */
-        
-        public function isOwner($uc_id, $bmkId){
-            if ($uc_id == NULL || $bmkId == NULL) {
+
+	public function isOwner($uc_id, $bmkId) {
+		if ($uc_id == NULL || $bmkId == NULL) {
 			throw new MyException('One of the parameters was not provided for the bookmark.');
 		}
-                $isOwner = FALSE;
-                $this->setBmkId($bmkId);
+		$isOwner = FALSE;
+		$this->setBmkId($bmkId);
 
 		try {
 			$this->returnBookmark($this->getBmkId());
 		} catch (MyException $e) {
 			$e->getMyExceptionMessage();
 		}
-                
-                $bmkUcId = (isset($this->_bookmarks[0]['uc_id'])) ? $this->_bookmarks[0]['uc_id'] : FALSE;
-                if ($bmkUcId == $this->getUcId()) {
+
+		$bmkUcId = (isset($this->_bookmarks[0]['uc_id'])) ? $this->_bookmarks[0]['uc_id'] : FALSE;
+		if ($bmkUcId == $this->getUcId()) {
 			$isOwner = TRUE;
 		}
-                return $isOwner;
-                
-        }
+		return $isOwner;
+	}
 
 	/**
 	 * Get all the bookmarks and their data for a given Track ID.
@@ -431,9 +427,9 @@ class Bookmark {
 	 *
 	 * @param int $trackId	The ID of the track to get bookmarks for.
 	 * @return array Returns an array of all bookmark data from the DB.
-         *
+	 *
 	 */
-	public function returnBmkDataByTrack($trackId) {
+	public function returnBmkDataByTrack($trackId, $audience = 'user') {
 		if ($trackId == NULL) {
 			throw new MyException('No track ID provided.');
 		}
@@ -442,7 +438,19 @@ class Bookmark {
 		$this->setTrackId($trackId);
 		$this->setBmkId(NULL); //Reset id since this will not be a single bookmark
 		//let's make sure to tie the query to the uc_id
-		$query = "SELECT * FROM bmk_entry WHERE t_id='" . $this->getTrackId() . "' AND uc_id='" . $this->getUcId() . "'";
+		if ($audience != 'user') {
+			$query =<<<EOF
+SELECT
+	be.*
+FROM
+	bmk_entry AS be
+WHERE
+	be.t_id=(SELECT id FROM track WHERE private='F' AND ID='{$this->getTrackId()}')
+    AND be.privacy=0
+EOF;
+		} else {
+			$query = "SELECT * FROM bmk_entry WHERE t_id='" . $this->getTrackId() . "' AND uc_id='" . $this->getUcId() . "'";
+		}
 
 		try {
 			//Construct DB object
