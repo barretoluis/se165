@@ -145,12 +145,11 @@ class Track {
 		return $resultSet;
 	}
         	/**
-	 * Searches for a track based on a term that is provided by the user.
-	 * @param type $term the word or phrase that will be used as part of the query to look for a track
-	 * with a title that is similar to that term
-	 * @param type $ucId the user id.
+	 * Returns an image pulled from a bookmark that is part of the track.
+	 * @param type $id Id of the track 
+	 * 
 	 *
-	 * @return type Returns the track that has been searched for.
+	 * @return type Returns URL of an Image.
 	 */
 	public function returnDefaultImage($t_id) {
 		$sqlObj = new DataBase();
@@ -161,7 +160,7 @@ class Track {
 		$sqlObj->DoQuery($query);
 		$resultSet = $sqlObj->GetData();
 		$sqlObj->destroy();
-		return $resultSet;
+		return $resultSet[0]['bmk_image'];
 	}
 	/**
 	 * Given the track ID, return it's friendly name.
