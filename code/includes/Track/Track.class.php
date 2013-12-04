@@ -144,7 +144,25 @@ class Track {
 		$sqlObj->destroy();
 		return $resultSet;
 	}
-
+        	/**
+	 * Searches for a track based on a term that is provided by the user.
+	 * @param type $term the word or phrase that will be used as part of the query to look for a track
+	 * with a title that is similar to that term
+	 * @param type $ucId the user id.
+	 *
+	 * @return type Returns the track that has been searched for.
+	 */
+	public function returnDefaultImage($t_id) {
+		$sqlObj = new DataBase();
+		$query = "SELECT  `bmk_image` 
+                            FROM  `bmk_entry` 
+                            WHERE  `t_id` = $t_id
+                            LIMIT 0 , 1";
+		$sqlObj->DoQuery($query);
+		$resultSet = $sqlObj->GetData();
+		$sqlObj->destroy();
+		return $resultSet;
+	}
 	/**
 	 * Given the track ID, return it's friendly name.
 	 * @param int $trackId The id for the track.
