@@ -48,7 +48,11 @@ if ($fbLoginUrl == NULL && $loggedIn == FALSE) { //if a person already logged in
 //create a user
 if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['fname']) && isset($_POST['lname'])) {
 	//basic error checking
-	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//	$pattern = '/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/';
+//	$emailValid = preg_match($pattern, $email);
+//	throw new MyException($emailValid);
+//	if (!$emailValid) {
+	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 			array_push($_websiteErr, 'Please provide a valid email address.');
 	} else {
 		try {
