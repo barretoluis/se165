@@ -123,7 +123,7 @@ try {
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$(".bmkUrl").colorbox({iframe:true, width:"675px", height:"90%", href:$(this).attr("href")});
+				$(".bmkUrl").colorbox({iframe:true, width:"675px", height:"90%", href:$(this).attr("href"), onClosed:function(){ location.reload(true); }});
 				return false;
 			});
 		</script>
