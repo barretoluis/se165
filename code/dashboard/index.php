@@ -61,6 +61,7 @@ if (!isset($_SESSION['_myTracks']) || !isset($_SESSION['_followingTracks'])) {
 	try {
 		$_myTracks = $Track->getMyTrack($_SESSION['uc_id'], 'id,title,private');
 		$_followingTracks = $Track->returnFollowingTracks($_SESSION['uc_id'], 'id,title,private');
+                $_followingTracks = $Track->returnFollowingTracks($_SESSION['uc_id']);
 	} catch (MyException $e) {
 		$e->getMyExceptionMessage();
 	}
