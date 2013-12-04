@@ -59,13 +59,14 @@ try {
 		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
+                <script src="/framework/jquery/jquery.colorbox.js"></script>
 
 		<script>
-			function closeModal() {
+                 function closeModal() {
 				parent.jQuery.fn.colorbox.close();
 			}
 
-			setTimeout(closeModal, 5000);
+			setTimeout(closeModal, 2000);
 		</script>
 	</head>
 
