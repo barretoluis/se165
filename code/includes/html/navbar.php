@@ -82,8 +82,8 @@ if ($loggedIn) {
 	<!--							<a href="/dashboard/" class="brand"><img src="/shared/images/logo_tackster.png" style="margin: -22px 0px -20px 20px;"></a>-->
 							<ul class="dropdown-menu">
 								<li><a href="/dashboard/">Dashboard</a></li>
-								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">My Tracks</a></li>
-								<li style="padding-left: 10px;"><a href="/dashboard/#following">Following Tracks</a></li>
+								<li style="padding-left: 10px;"><a id="simple-menu" href="#sidr">Show Tracks</a></li>
+<!--								<li style="padding-left: 10px;"><a Xid="simple-menu2" href="/dashboard/#following">Following Tracks</a></li>-->
 								<li class="divider"></li>
 								<li><a class='track_popUp' href="/track/createTrack.php">Add Tracks</a></li>
 								<li><a class='bookmark_popUp' href="/bookmark/createBookmark.php">Add Bookmark</a></li>
@@ -265,7 +265,7 @@ if ($loggedIn) {
 	</div>
 
 <?php } ?>
-	
+
 <div id="scrollpage"></div>
 <script type = "text/javascript">
 	$('#scrollpage').click(function(ev){
