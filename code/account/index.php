@@ -136,35 +136,35 @@ if (count($_websiteErr) >= 1) {
 						?>
 						<table>
 							<tr>
-								<td>&nbsp;&nbsp;&nbsp;First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td style="text-align: right; padding-right: 5px;">First Name:</td>
 								<td>
 									<input type = "text" name = "fname" id = "fname" value="<?PHP echo_formData($nameFirst) ?>" maxlength="20" <?php echo $formField ?>/>
 								</td>
 							</tr>
 							<tr>
-								<td>&nbsp;&nbsp;&nbsp;Last Name:</td>
+								<td style="text-align: right; padding-right: 5px;">Last Name:</td>
 								<td><input type="text" name="lname" id="lname" value="<?PHP echo_formData($nameLast) ?>" maxlength="20" <?php echo $formField ?>/>
 								</td>
 							</tr>
 							<tr>
-								<td>&nbsp;&nbsp;&nbsp;Username:</td>
+								<td style="text-align: right; padding-right: 5px;">Username:</td>
 								<td><input type="text" name="username" id="username" value="<?PHP echo_formData($nameUser) ?>" maxlength="20"  <?php echo $formField ?>/>
 								</td>
 							</tr>
 							<tr>
-								<td>&nbsp;&nbsp;&nbsp;Email:</td> <!-- Should they be allowed to change their email address?-->
+								<td style="text-align: right; padding-right: 5px;">Email:</td> <!-- Should they be allowed to change their email address?-->
 								<?PHP /* <td><input type="email" name="email" id="email" value="<?PHP echo_formData($emailUser) ?>"  <?php echo $formField ?>/> */ ?>
 								<td><?PHP echo_formData($emailUser) ?>
 								</td>
 							</tr>
 							<tr>
-								<td>&nbsp;&nbsp;&nbsp;Password:</td> <!--Should we give them an opportunity to change password? if not see it? -->
+								<td style="text-align: right; padding-right: 5px;">Password:</td> <!--Should we give them an opportunity to change password? if not see it? -->
 								<td>
 									<input type="password" name="password" id="password"  <?php echo $formField ?> placeholder="Enter New Password to Reset"/>
 								</td>
 							</tr>
 							<tr>
-								<td>&nbsp;&nbsp;&nbsp;Gender:</td>
+								<td style="text-align: right; padding-right: 5px;">Gender:</td>
 								<td>
                                     <label class="radio inline"><input type="radio" name="gender" value="m" <?php if ($userSex == "m") echo "checked"; ?> <?php echo $formField ?> > Male &nbsp;&nbsp;</label>
                                     <label class="radio inline"><input type="radio" name="gender" value="f" <?php if ($userSex == "f") echo "checked"; ?>  <?php echo $formField ?> > Female </label>
