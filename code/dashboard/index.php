@@ -72,10 +72,11 @@ if (!isset($_SESSION['_myTracks']) || !isset($_SESSION['_followingTracks'])) {
 //TODO: Make sure a default track cannot be deleted or edited
 $defaultTrackId = $Track->returnDefaultTrackId($ucId);
 $defaultTrackName = $Track->returnTrackName($defaultTrackId);
+$defaulttrackImage = $Track->returnDefaultImage($defaultTrackId);
 $htmlTrack .=<<<EOF
 <div class="track">
 	<div style="position: relative;"><div id="private"></div><div id="trackName">{$defaultTrackName}</div></div>
-	<img src= "/shared/images/placeholder.jpg" tid="{$defaultTrackId}" />
+	<img src= "$defaulttrackImage" tid="{$defaultTrackId}" />
 
 </div><!--/track-->
 EOF;
