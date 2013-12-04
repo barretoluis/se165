@@ -184,7 +184,7 @@ EOF;
 				});
 
 				//attach event handler for tracks
-				$('.tabContent').on("click", ".track. .follow img", function() {
+				$('.tabContent').on("click", ".follow img", function() {
 					var tid = parseInt($(this).attr("tid"));
 					//alert($(this).attr("tid"));	//DEBUG
 					window.location = '/track/?t=f&tid=' + tid;
