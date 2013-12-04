@@ -144,7 +144,8 @@ class Track {
 		$sqlObj->destroy();
 		return $resultSet;
 	}
-        	/**
+
+	/**
 	 * Returns an image pulled from a bookmark that is part of the track.
 	 * @param type $id Id of the track
 	 *
@@ -157,11 +158,24 @@ class Track {
                             FROM  `bmk_entry`
                             WHERE  `t_id` = $t_id
                             LIMIT 0 , 1";
-		$sqlObj->DoQuery($query);
-		$resultSet = $sqlObj->GetData();
-		$sqlObj->destroy();
+		try {
+			$sqlObj->DoQuery($query);
+			$resultSet = $sqlObj->GetData();
+			$sqlObj->destroy();
+
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		if(!isset($resultSet[0]['bmk_image']) ||
+			$resultSet[0]['bmk_image'] == NULL ||
+			$resultSet[0]['bmk_image'] == '') {
+			$resultSet[0]['bmk_image'] = '/shared/images/placeholder.jpg';
+		}
+
 		return $resultSet[0]['bmk_image'];
 	}
+
 	/**
 	 * Given the track ID, return it's friendly name.
 	 * @param int $trackId The id for the track.

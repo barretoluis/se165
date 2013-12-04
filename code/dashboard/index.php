@@ -83,8 +83,8 @@ EOF;
 
 foreach ($_myTracks as $dbRow) {
 	$isPrivate = ($dbRow['private'] == "T") ? '<div id="private"></div>' : '';
-        $tempTrackId = $dbRow['id'];
-        $trackImage = $Track->returnDefaultImage($tempTrackId);
+	$tempTrackId = $dbRow['id'];
+	$trackImage = $Track->returnDefaultImage($tempTrackId);
 
 	//we don't want the default track in the list again
 	if ($dbRow['id'] != $defaultTrackId) {
@@ -102,8 +102,8 @@ EOF;
 if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 	foreach ($_followingTracks as $dbRow) {
 		$isPrivate = ($dbRow['private'] == "T") ? '<div id="private"></div>' : '';
-                $tempTrackId = $dbRow['id'];
-                $trackImage = $Track->returnDefaultImage($tempTrackId);
+		$tempTrackId = $dbRow['id'];
+		$trackImage = $Track->returnDefaultImage($tempTrackId);
 		//we don't want the default track in the list again
 		if ($dbRow['id'] != $defaultTrackId) {
 			$htmlTrackFollow .=<<<EOF
@@ -165,16 +165,16 @@ EOF;
 			$(document).ready(function() {
 				//load default tab
 				getMyTrack();
-//				if(window.location.hash) {
-//					var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-//					if(hash=="following") {
-//						alert(hash);
-//						getFollowingTrack();
-//						document.getElementById('myTrack').className='last';
-//						document.getElementById('followTrack').className='active';					}
-//				} else {
-//					getMyTrack();
-//				}
+				//				if(window.location.hash) {
+				//					var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+				//					if(hash=="following") {
+				//						alert(hash);
+				//						getFollowingTrack();
+				//						document.getElementById('myTrack').className='last';
+				//						document.getElementById('followTrack').className='active';					}
+				//				} else {
+				//					getMyTrack();
+				//				}
 
 				//attach event handler for tracks
 				$('.tabContent').on("click", ".track img", function() {
