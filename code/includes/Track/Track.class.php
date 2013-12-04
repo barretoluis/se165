@@ -349,6 +349,7 @@ class Track {
 			$sqlObj->destroy();
 			$_return = TRUE;
 		}
+		if(isset($_SESSION['_followingTracks'])) unset($_SESSION['_followingTracks']);	//force the cache to reset
 		return $_return;
 	}
 
