@@ -144,7 +144,24 @@ class Track {
 		$sqlObj->destroy();
 		return $resultSet;
 	}
-
+        	/**
+	 * Returns an image pulled from a bookmark that is part of the track.
+	 * @param type $id Id of the track 
+	 * 
+	 *
+	 * @return type Returns URL of an Image.
+	 */
+	public function returnDefaultImage($t_id) {
+		$sqlObj = new DataBase();
+		$query = "SELECT  `bmk_image` 
+                            FROM  `bmk_entry` 
+                            WHERE  `t_id` = $t_id
+                            LIMIT 0 , 1";
+		$sqlObj->DoQuery($query);
+		$resultSet = $sqlObj->GetData();
+		$sqlObj->destroy();
+		return $resultSet[0]['bmk_image'];
+	}
 	/**
 	 * Given the track ID, return it's friendly name.
 	 * @param int $trackId The id for the track.
