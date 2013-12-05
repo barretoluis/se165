@@ -27,24 +27,32 @@ try {
 	exit(0);
 }
 // DO NOT EDIT THIS BLOCK - END
-$ucid = $_GET['ucid'];
-$tid = $_GET['tid'];
-$trackObj = new Track();
-$status = $trackObj->followTrack($ucid, $tid);
+$ucId = (isset($_SESSION['uc_id'])) ? (int) $_SESSION['uc_id'] : NULL;
+$tid = (isset($_GET['tid'])) ? (int) $_GET['tid'] : NULL;
+$bid = (isset($_GET['bid'])) ? (int) $_GET['bid'] : NULL;
+
+try {
+	$trackObj = new Track();
+	$status = $trackObj->followTrack($ucId, $tid);
+} catch (MyException $e) {
+	$status = FALSE;
+}
 
 if ($status) {
 	$msg = <<<EOF
 <h3>Now Following the Track</h3>
 <p>Your request was successfully received.</p>
-
-<p>This window will close automatically. <a href="javascript:closeModal(); return TRUE;">Click here</a> to close now.</p>
+<ul>
+	<li><a id="back" href="/bookmark/?bid={$bid}">Go back to Tack</a></li>
+</ul>
 EOF;
 } else {
 	$msg = <<<EOF
 <h3>Error Following the Track</h3>
-<p>Could not follow the Track.</p>
-
-<p>This window will close automatically. <a href="javascript:closeModal(); return TRUE;">Click here</a> to close now.</p>
+<p>You may already be following this track. If you are not, please try again later.</p>
+<ul>
+	<li><a id="back" href="/bookmark/?bid={$bid}">Go back to Tack</a></li>
+</ul>
 EOF;
 }
 ?><!DOCTYPE html>
@@ -77,6 +85,13 @@ EOF;
 		<script src="/framework/jquery/jquery.colorbox.js"></script>
 		<link href="/shared/css/colorbox.css" rel="stylesheet">
 		<script>
+			$(document).ready(function(){
+				$('a.back').click(function(){
+					parent.history.back();
+					return false;
+				});
+			});
+
 			function closeModal() {
 				parent.jQuery.fn.colorbox.close();
 				//parent.jQuery.('.bmkUrl').colorbox.close();
@@ -85,6 +100,7 @@ EOF;
 
 			setTimeout(closeModal, 3000);
 		</script>
+
 
 	</head>
 
