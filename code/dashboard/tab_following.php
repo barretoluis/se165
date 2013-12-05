@@ -109,8 +109,8 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 <div class="track follow" id="trackFollow">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
 	<img src="{$trackImage}" tid="{$dbRow['id']}" />
-	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Delete</a>
-	<a id="editBtn" class="btn btn-default" href="/track/createTrack.php?tid={$dbRow['id']}"><i class="fa fa-pencil fa-fw"></i> Edit</a></li></div>
+	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Unfollow</a>
+	</li></div>
 </div><!--/track-->\n
 EOF;
 		}
