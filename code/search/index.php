@@ -142,7 +142,7 @@ if (count($_websiteErr) >= 1) {
 					flush();
 				}
 			} elseif ($formSubmitted == TRUE) {
-				print("<p class='noSearchResults'>No search results were found.</p>");
+				print("<p class='noSearchResults' style='padding-left: 12px;'>No search results were found.</p>");
 			}
 			?>
 		</div>
