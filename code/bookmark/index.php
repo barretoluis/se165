@@ -208,7 +208,7 @@ if (count($_websiteErr) >= 1) {
 							<td><?php if (!$isLiked) { ?><a href="/bookmark/likeBookmark.php/?bid=<?php echo $bmkId; ?>" title="Like Bookmark"><i class="fa fa-heart fa-lg"></i></a><?php } else {
 	?> <a href="/bookmark/dislikeBookmark.php/?bid=<?php echo $bmkId; ?>" title="Like Bookmark"><i class="fa fa-heart fa-lg" style="opacity:0.2;"></i></a> <?php } ?>
 							</td>
-							<td><a href="/track/followTrack.php/?bid=<?php echo_formData($bmkId); ?>&tid=<?php echo_formData($bmkTid); ?>" title="Follow Track"><i class="fa fa-eye fa-lg"></i></a></td>
+							<td><?php if (!$isOwner) { ?><a href="/track/followTrack.php/?bid=<?php echo_formData($bmkId); ?>&tid=<?php echo_formData($bmkTid); ?>" title="Follow Track"><i class="fa fa-eye fa-lg"></i></a><?php } ?></td>
 						</tr>
 					</table>
 
