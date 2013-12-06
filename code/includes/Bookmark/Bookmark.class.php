@@ -447,9 +447,10 @@ FROM
 WHERE
 	be.t_id=(SELECT id FROM track WHERE private='F' AND ID='{$this->getTrackId()}')
     AND be.privacy=0
+	ORDER BY be.timestamp DESC
 EOF;
 		} else {
-			$query = "SELECT * FROM bmk_entry WHERE t_id='" . $this->getTrackId() . "' AND uc_id='" . $this->getUcId() . "'";
+			$query = "SELECT * FROM bmk_entry WHERE t_id='" . $this->getTrackId() . "' AND uc_id='" . $this->getUcId() . "' ORDER BY timestamp DESC";
 		}
 
 		try {
