@@ -43,6 +43,13 @@ $ucId = $_SESSION['uc_id'];
 $isNewUser = (isset($_SESSION['isNewUser'])) ? $_SESSION['isNewUser'] : FALSE;
 $_SESSION['isNewUser'] = $isNewUser; //let's not show the 1st time UI on page refreshes
 
+if(isset($_COOKIE['isNewUserMsgSeen']) && $_COOKIE['isNewUserMsgSeen'] == 1) {
+	$isNewUser = FALSE;
+} else {
+	setcookie("isNewUserMsgSeen", '1', time()+3600);  /* expire in 1 hour */
+}
+
+
 $Track = new Track();
 
 //let's get the default track id
