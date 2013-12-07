@@ -104,12 +104,14 @@ if (is_array($_followingTracks) && count($_followingTracks) > 0) {
 		$trackImage = $Track->returnDefaultImage($tempTrackId);
 
 		//we don't want the default track in the list again
+                //<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Unfollow</a>
 		if ($dbRow['id'] != $defaultTrackId) {
 			$htmlTrackFollow .=<<<EOF
 <div class="track follow" id="trackFollow">
 	<div style="position: relative;">{$isPrivate}<div id="trackName">{$dbRow['title']}</div></div>
 	<img src="{$trackImage}" tid="{$dbRow['id']}" />
-	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/deleteTrack.php?tid={$dbRow['id']}"><i class="fa fa-trash-o fa-lg"></i> Unfollow</a>
+	<div style="position: relative;"><a id="deleteBtn" class="btn btn-danger" href="/track/unFollowTrack.php?tid={$dbRow['id']}&uc_id={$_SESSION['uc_id']}"><i class="fa fa-trash-o fa-lg"></i> Unfollow</a>
+        
 	</li></div>
 </div><!--/track-->\n
 EOF;

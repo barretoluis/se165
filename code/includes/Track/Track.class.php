@@ -331,7 +331,7 @@ class Track {
 	 * @return type True or False.
 	 * @throws MyException Throws an exception if the user id is less than one.
 	 */
-	public function unFollowTrack($ucId, $tid) {
+	public function unFollowTrack($tid, $ucId) {
 
 		$_resultSet = NULL;
 		$_records = NULL;
