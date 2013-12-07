@@ -320,6 +320,68 @@ class Track {
 
 		return $_resultSet;
 	}
+        
+        
+        /**
+	 * unfollow a track.
+	 * IMPORTANT: This method will stablish a relationship with a user and a track .
+	 *
+	 * @param type $ucId The user's credential ID
+	 * @param type $tid The Track's ID.
+	 * @return type True or False.
+	 * @throws MyException Throws an exception if the user id is less than one.
+	 */
+	public function unFollowTrack($ucId, $tid) {
+
+		$_resultSet = NULL;
+		$_records = NULL;
+		$_return = NULL;
+
+		$ucId = (int) $ucId; //cast as into to assure no SQL injection
+		$tid = (int) $tid;
+		$query = "SELECT `id` FROM `track_activity` WHERE `uc_id` = $ucId AND `trck_id` = $tid";
+		try {
+			//Construct DB object
+			$sqlObj = new DataBase();
+
+			//Execute query
+			$sqlObj->DoQuery($query);
+			$_records = $sqlObj->getNumberOfRecords();
+			$_resultSet = $sqlObj->GetData();
+		} catch (MyException $e) {
+			$e->getMyExceptionMessage();
+		}
+
+		$sqlObj->destroy();
+		if ($_records < 1) {
+			//$date = $_resultSet[0]['date'];
+			throw new MyException('You are not following this track');
+			$_return = FALSE;
+		} else {
+                        $ID = $_resultSet[0]['id'];
+			$query = "DELETE FROM `db_tackster`.`track_activity` 
+                                  WHERE `track_activity`.`id` = ".$ID;
+			try {
+				//Construct DB object
+				$sqlObj = new DataBase();
+
+				//Execute query
+				$sqlObj->DoQuery($query);
+			} catch (MyException $e) {
+				$e->getMyExceptionMessage();
+			}
+			$sqlObj->destroy();
+			$_return = TRUE;
+		}
+		if (isset($_SESSION['_followingTracks']))
+			unset($_SESSION['_followingTracks']); //force the cache to reset
+		return $_return;
+	}
+        
+        
+        
+        
+        
 
 	/**
 	 * Follow a track.
