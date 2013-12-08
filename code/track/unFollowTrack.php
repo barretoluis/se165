@@ -34,22 +34,23 @@ $bid = (isset($_GET['bid'])) ? (int) $_GET['bid'] : NULL;
 try {
 	$trackObj = new Track();
 	$status = $trackObj->unfollowTrack($tid, $ucId);
-        
+
 } catch (MyException $e) {
 	$status = FALSE;
 }
 
 if ($status) {
 	$msg = <<<EOF
+<META http-equiv="refresh" content="4;URL=/dashboard">
 <h3>Now Unfollowing the Track</h3>
-<p>Your request was successfully received.</p>
-
+<p style="padding-left: 5px;">The track was deleted successfully. This page will automatically refresh or <a href="/dashboard/">click here to go to the Dashboard</a>.</p>
 EOF;
 } else {
 	$msg = <<<EOF
+<META http-equiv="refresh" content="4;URL=/dashboard">
 <h3>Error Unfollowing the Track</h3>
-<p>Couldn't unfollow the track. Please contact our Support team for more details</p>
-
+<p style="padding-left: 5px;">Couldn't unfollow the track. Please contact our Support team for more details.</p>
+<p style="padding-left: 5px;">This page will automatically refresh or <a href="/dashboard/">click here to go to the Dashboard</a>.</p>
 EOF;
 }
 ?><!DOCTYPE html>
