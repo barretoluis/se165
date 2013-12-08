@@ -56,7 +56,7 @@ EOF;
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title>Tackster | Unfollow Track</title>
+		<title>Tackster | Track | Unfollow Track</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -80,35 +80,34 @@ EOF;
 		<script src="/framework/jquery/jquery-1.10.2.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="/framework/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/framework/jquery/jquery.colorbox.js"></script>
-		<link href="/shared/css/colorbox.css" rel="stylesheet">
-		<script>
-			$(document).ready(function(){
-				$('a.back').click(function(){
-					parent.history.back();
-					return false;
-				});
-			});
-
-			function closeModal() {
-				parent.jQuery.fn.colorbox.close();
-				//parent.jQuery.('.bmkUrl').colorbox.close();
-				//jQuery('.bmkUrl').colorbox.close();
-			}
-
-			setTimeout(closeModal, 3000);
-		</script>
-
 
 	</head>
 
+
 	<body>
+		<!-- Navigation Bar -->
+		<?php require_once('html/navbar.php'); ?>
+		<!-- /Navigation Bar -->
+
+
 		<!-- Body Content-->
-		<div class="main">
+		<div class="main" >
+			<h3>Delete Track</h3>
 			<?php
-			echo_formData($msg);
+			if (count($_websiteErr) > 0 || $_websiteErr != NULL) {
+				echo $_websiteErr;
+			} else {
+				echo_formData('<META http-equiv="refresh" content="4;URL=/dashboard">');
+				echo_formData('<p style="padding-left: 5px;">The track was deleted successfully. This page will automatically refresh or <a href="/dashboard/">click here to go to the Dashboard</a>.</p>');
+			}
 			?>
-		</div>
+
+
+			<!-- /Body Content-->
+
+			<!-- Footer Content -->
+			<?php require_once('html/footer.php'); ?>
+			<!-- /Footer Content -->
 
 	</body>
 </html>
