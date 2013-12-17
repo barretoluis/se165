@@ -1,8 +1,7 @@
 function processUrl(url) {
-	resetData();
-
 	if(url.indexOf("http://") == -1 && url != "http://") {
 		url = "http://" + url;
+		resetData();
 		document.getElementById("url").value = url;
 	}
 
@@ -59,7 +58,7 @@ function getDescription(url) {
 		}
 	}
 
-	xmlhttp.open("GET",'getURLdes.php?url='+url,true);
+	xmlhttp.open("GET",'/bookmark/getURLdes.php?url='+url, true);
 	xmlhttp.send();
 }
 
@@ -96,7 +95,7 @@ function getImages(url){
 		}
 	}
 
-	xmlhttp.open("GET",'getURLpic.php?url='+url,true);
+	xmlhttp.open("GET",'/bookmark/getURLpic.php?url='+url,true);
 	xmlhttp.send();
 }
 
